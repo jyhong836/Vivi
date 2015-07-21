@@ -12,7 +12,7 @@
 
 @protocol VSClientController <NSObject, VSController>
 
-@property (nonatomic, weak) id<VSClientDelegate> connectionDelegate;
+@property (nonatomic, weak) id<VSClientDelegate> clientDelegate;
 @property (nonatomic) NSString* accountName;
 @property (nonatomic) NSString* accountPasswd;
 

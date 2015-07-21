@@ -11,7 +11,7 @@
 @protocol VSClientController;
 
 @protocol VSVivi <NSObject>
-@property (weak, nonatomic) NSObject<VSClientController> *clientController;
+@property (readonly, nonatomic) id<VSClientController> clientController;
 @property (readonly, nonatomic) BOOL isQuitting;
 
 @end

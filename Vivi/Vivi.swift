@@ -11,6 +11,13 @@ import ViviSwiften
 
 class Vivi: NSObject, VSVivi {
     
-    var clientController: NSObject?
+    var clientController: VSClientController?
     var isQuitting: Bool { get{return false;} }
+    
+    override init() {
+        super.init();
+        setSharedVivi(self);
+        // TODO do things to init controllers
+//        clientController!.
+    }
 }
