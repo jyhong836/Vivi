@@ -13,14 +13,14 @@ class ClientController: NSObject, VSClientController, VSClientDelegate {
     var clientDelegate: VSClientDelegate?
     var accountName: String!
     var accountPasswd: String!
-    var client: SWClientWrapper!
+    var client: SWClientAdapter!
     
     override init() {
         super.init()
         clientDelegate = self
-        client = SWClientWrapper()
+        client = SWClientAdapter()
     }
-    
+    // MARK: VSClientDelegate protocol
     func clientDidConnect(clientController: VSClientController!) {
         NSLog("Client connected [Swift]")
     }

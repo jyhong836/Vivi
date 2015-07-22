@@ -10,11 +10,12 @@
 
 // TODO change name to Adapter
 /*!
- * @brief A Objective-C wrapper for Swiften.
+ * @brief A Objective-C adapter for Swiften.
  */
-@interface SWClientWrapper : NSObject
+@interface SWClientAdapter : NSObject
 - (id)init;
 - (void)dealloc;
+
 - (void)run;
 - (void)runBackgroud;
 - (void)connect;

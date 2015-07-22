@@ -7,8 +7,13 @@
 //
 
 import Cocoa
+import ViviSwiften
 
 class ViewController: NSViewController {
+    
+    @IBOutlet weak var accountTextField: NSTextField!
+    @IBOutlet weak var passwdTextField: NSSecureTextField!
+    @IBOutlet weak var connectButton: NSButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +27,9 @@ class ViewController: NSViewController {
         }
     }
 
+    @IBAction func onButtonClicked(sender: NSButton) {
+        vivi.clientController.client.connect()
+    }
 
 }
 

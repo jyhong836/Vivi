@@ -24,8 +24,8 @@
 		CDE658C11B5E71F300290E34 /* VSControllerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658C01B5E71F300290E34 /* VSControllerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDE658C31B5E754B00290E34 /* VSSharedVivi.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658C21B5E754B00290E34 /* VSSharedVivi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDE658C61B5E76FC00290E34 /* VSSharedVivi.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE658C51B5E76FC00290E34 /* VSSharedVivi.m */; };
-		CDE658CC1B5E8B8000290E34 /* SWClientWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658CA1B5E8B8000290E34 /* SWClientWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CDE658CD1B5E8B8000290E34 /* SWClientWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDE658CB1B5E8B8000290E34 /* SWClientWrapper.mm */; };
+		CDE658CC1B5E8B8000290E34 /* SWClientAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658CA1B5E8B8000290E34 /* SWClientAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDE658CD1B5E8B8000290E34 /* SWClientAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDE658CB1B5E8B8000290E34 /* SWClientAdapter.mm */; };
 		CDE658D01B5EA70F00290E34 /* SWClient.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658CE1B5EA70F00290E34 /* SWClient.h */; };
 		CDE658D11B5EA70F00290E34 /* SWClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDE658CF1B5EA70F00290E34 /* SWClient.mm */; };
 		CDE658D31B5F376D00290E34 /* ClientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE658D21B5F376D00290E34 /* ClientController.swift */; };
@@ -108,8 +108,8 @@
 		CDE658C01B5E71F300290E34 /* VSControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSControllerProtocol.h; sourceTree = "<group>"; };
 		CDE658C21B5E754B00290E34 /* VSSharedVivi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSSharedVivi.h; sourceTree = "<group>"; };
 		CDE658C51B5E76FC00290E34 /* VSSharedVivi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSSharedVivi.m; sourceTree = "<group>"; };
-		CDE658CA1B5E8B8000290E34 /* SWClientWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWClientWrapper.h; sourceTree = "<group>"; };
-		CDE658CB1B5E8B8000290E34 /* SWClientWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWClientWrapper.mm; sourceTree = "<group>"; };
+		CDE658CA1B5E8B8000290E34 /* SWClientAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWClientAdapter.h; sourceTree = "<group>"; };
+		CDE658CB1B5E8B8000290E34 /* SWClientAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWClientAdapter.mm; sourceTree = "<group>"; };
 		CDE658CE1B5EA70F00290E34 /* SWClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWClient.h; sourceTree = "<group>"; };
 		CDE658CF1B5EA70F00290E34 /* SWClient.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWClient.mm; sourceTree = "<group>"; };
 		CDE658D21B5F376D00290E34 /* ClientController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientController.swift; sourceTree = "<group>"; };
@@ -247,8 +247,8 @@
 		CDE658C91B5E897300290E34 /* Swiften Adapter */ = {
 			isa = PBXGroup;
 			children = (
-				CDE658CA1B5E8B8000290E34 /* SWClientWrapper.h */,
-				CDE658CB1B5E8B8000290E34 /* SWClientWrapper.mm */,
+				CDE658CA1B5E8B8000290E34 /* SWClientAdapter.h */,
+				CDE658CB1B5E8B8000290E34 /* SWClientAdapter.mm */,
 				CDE658CE1B5EA70F00290E34 /* SWClient.h */,
 				CDE658CF1B5EA70F00290E34 /* SWClient.mm */,
 			);
@@ -262,7 +262,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDE658CC1B5E8B8000290E34 /* SWClientWrapper.h in Headers */,
+				CDE658CC1B5E8B8000290E34 /* SWClientAdapter.h in Headers */,
 				CDE658D01B5EA70F00290E34 /* SWClient.h in Headers */,
 				CDE658C31B5E754B00290E34 /* VSSharedVivi.h in Headers */,
 				CDE658BF1B5E70D600290E34 /* VSClientControllerProtocol.h in Headers */,
@@ -491,7 +491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDE658D11B5EA70F00290E34 /* SWClient.mm in Sources */,
-				CDE658CD1B5E8B8000290E34 /* SWClientWrapper.mm in Sources */,
+				CDE658CD1B5E8B8000290E34 /* SWClientAdapter.mm in Sources */,
 				CDE658C61B5E76FC00290E34 /* VSSharedVivi.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,6 +20,6 @@ namespace Swift
     {
         public:
         SWClient(const JID& jid, const SafeString& password, NetworkFactories* networkFactories, Storages* storages = NULL);
-        void handleConnected();
+        void onConnectedSlot();
     };
 }

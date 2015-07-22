@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, VSVivi {
         // Insert code here to initialize your application
         clientController = ClientController()
         clientController?.controllerDidLoad()
-        clientController?.client.connect()
+//        clientController?.client.connect()
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {

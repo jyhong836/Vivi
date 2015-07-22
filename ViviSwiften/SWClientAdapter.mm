@@ -6,12 +6,12 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
-#import "SWClientWrapper.h"
+#import "SWClientAdapter.h"
 #include <Swiften/Swiften.h>
 using namespace Swift;
 #import "SWClient.h"
 
-@implementation SWClientWrapper {
+@implementation SWClientAdapter {
     Client *client;
     SimpleEventLoop *eventLoop;
     BoostNetworkFactories *netFactories;
@@ -27,11 +27,23 @@ using namespace Swift;
     return self;
 }
 
+- (void)dealloc
+{
+    delete client;
+    delete eventLoop;
+    delete netFactories;
+}
+
+// MARK: Wrap the method of Swift::Client
+
 - (void)run
 {
     eventLoop->run();
 }
 
+/*!
+ * @brief Run SimpleEventLoop at global queue at background.
+ */
 - (void)runBackgroud
 {
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
@@ -41,14 +53,8 @@ using namespace Swift;
 
 - (void)connect
 {
+    NSLog(@"Connecting");
     client->connect();
-}
-
-- (void)dealloc
-{
-    delete client;
-    delete eventLoop;
-    delete netFactories;
 }
 
 @end

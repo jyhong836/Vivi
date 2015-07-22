@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "VSControllerProtocol.h"
 #import "VSClientDelegate.h"
-#import "SWClientWrapper.h"
+#import "SWClientAdapter.h"
 
 @protocol VSClientController <NSObject, VSController>
 
 @property (nonatomic) id<VSClientDelegate> clientDelegate;
 @property (nonatomic) NSString* accountName;
 @property (nonatomic) NSString* accountPasswd;
-@property (nonatomic) SWClientWrapper* client;
+@property (nonatomic) SWClientAdapter* client;
 
 @end

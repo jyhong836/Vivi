@@ -13,12 +13,11 @@
 
 Swift::SWClient::SWClient(const JID& jid, const SafeString& password, NetworkFactories* networkFactories, Storages* storages): Client(jid, password, networkFactories, storages)
 {
-    this->onConnected.connect(boost::bind(&SWClient::handleConnected, this));
+    this->onConnected.connect(boost::bind(&SWClient::onConnectedSlot, this));
 }
 
-void Swift::SWClient::handleConnected()
+void Swift::SWClient::onConnectedSlot()
 {
     // TODO: do something in Client
-    
     [vivi.clientController.clientDelegate clientDidConnect:vivi.clientController];
 }
