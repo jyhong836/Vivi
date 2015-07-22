@@ -17,5 +17,8 @@ FOUNDATION_EXPORT const unsigned char ViviSwiftenVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <ViviSwiften/PublicHeader.h>
 
 #import <ViviSwiften/VSViviProtocol.h>
+//#import <ViwiSwiften/VSClientDelegateProtocol.h>
 #import <ViviSwiften/VSClientControllerProtocol.h>
 #import <ViviSwiften/VSSharedVivi.h>
+#import <ViviSwiften/SWClientAdapter.h>
+#import <ViviSwiften/VSClientDelegateProtocol.h>

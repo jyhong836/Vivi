@@ -7,9 +7,9 @@
 //
 #import "VSSharedVivi.h"
 
-id<VSVivi> vivi;
+id<VSVivi> vivi = nil;
 
-void setSharedAdium(id<VSVivi> shared)
+void setSharedVivi(id<VSVivi> shared)
 {
     NSCAssert(vivi == nil, @"Attempt to set the shared AIAdium instance after it's already been set");
     NSCParameterAssert(shared != nil);

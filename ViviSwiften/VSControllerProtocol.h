@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @protocol VSController <NSObject>
+@required
 - (void)controllerDidLoad;
+@required
 - (void)controllerWillClose;
 @end
