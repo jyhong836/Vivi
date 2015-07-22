@@ -1,0 +1,25 @@
+//
+//  ViviSwiften.pch
+//  Vivi
+//
+//  Created by Junyuan Hong on 7/23/15.
+//  Copyright © 2015 Junyuan Hong. All rights reserved.
+//
+
+#ifndef ViviSwiften_pch
+#define ViviSwiften_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+/*!
+ * Everywhere need sharedVivi.
+ */
+#import "VSSharedVivi.h"
+
+/*!
+ * NSString* std_str2NSString(std::string)
+ */
+#define std_str2NSString(std_str) [NSString stringWithCString:(std_str).c_str() encoding:[NSString defaultCStringEncoding]]
+
+#endif /* ViviSwiften_pch */

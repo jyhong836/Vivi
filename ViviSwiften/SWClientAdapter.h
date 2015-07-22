@@ -23,7 +23,7 @@
   Password: (NSString*)passwd
  EventLoop: (SWEventLoop*)eventLoop;
 - (void)dealloc;
-- (NSString*)getAccount;
+- (SWAccount*)getAccount;
 
 - (void)connect;
 - (void)sendMessageTo: (SWAccount*)account

@@ -20,4 +20,10 @@
 - (id)init: (NSString *)account;
 - (void)dealloc;
 
+- (NSString*)getAccountString;
+- (NSString*)getFullAccountString;
+- (NSString*)getResourceString;
+- (NSString*)getNodeString;
+- (NSString*)getDomainString;
+
 @end

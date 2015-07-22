@@ -11,9 +11,7 @@ import ViviSwiften
 
 class ViewController: NSViewController {
     
-    @IBOutlet weak var accountTextField: NSTextField!
-    @IBOutlet weak var passwdTextField: NSSecureTextField!
-    @IBOutlet weak var connectButton: NSButton!
+    @IBOutlet weak var messageTextField: NSScrollView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +25,14 @@ class ViewController: NSViewController {
         }
     }
 
-    @IBAction func onButtonClicked(sender: NSButton) {
+    @IBAction func connectButton(sender: NSButton) {
         vivi.clientController.client.connect()
     }
 
+    @IBAction func sendMessageButton(sender: NSButton) {
+        // TODO: add send message code
+//        vivi.clientController.client.sendMessageTo(account, message: messageTextField)
+    }
+    
 }
 

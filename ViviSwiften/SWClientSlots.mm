@@ -7,7 +7,6 @@
 //
 
 #import "SWClientSlots.h"
-#import "VSSharedVivi.h"
 #import "VSClientControllerProtocol.h"
 #import "VSClientDelegateProtocol.h"
 
@@ -40,7 +39,9 @@ void SWClientSlots::onConnectedSlot()
 void SWClientSlots::onRosterReceivedSlot(ErrorPayload::ref err)
 {
     if (err) {
-        std::cerr << "Error receiving roster. Continuing anyway.";
+        // TODO: use NS Error Log instead
+//        std::cerr << "Error receiving roster. Continuing anyway.";
+        NSLog(@"Error receiving roster. Continuing anyway.");
     }
     // TODO: remove the test presence
     // Send initial available presence
@@ -49,7 +50,7 @@ void SWClientSlots::onRosterReceivedSlot(ErrorPayload::ref err)
 
 void SWClientSlots::onMessageReceivedSlot(Message::ref msg)
 {
-    NSString* fromAccount = [NSString stringWithCString: msg->getFrom().toString().c_str() encoding: [NSString defaultCStringEncoding]];
-    NSString* content = [NSString stringWithCString: msg->getBody().c_str() encoding: [NSString defaultCStringEncoding]];
+    NSString* fromAccount = std_str2NSString(msg->getFrom().toString());
+    NSString* content = std_str2NSString(msg->getBody());
     [vivi.clientController.clientDelegate clientDidReceiveMessage: clientAdapter fromAccount:fromAccount inContent:content];
 }

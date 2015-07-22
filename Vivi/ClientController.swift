@@ -41,6 +41,6 @@ class ClientController: NSObject, VSClientController, VSClientDelegate {
     }
     
     func controllerWillClose() {
-        
+        // TODO: disconnect client here.
     }
 }

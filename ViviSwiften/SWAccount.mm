@@ -26,4 +26,32 @@ using namespace Swift;
     delete jid;
 }
 
+// MARK: Wrap JID
+
+- (NSString*)getAccountString
+{
+    return std_str2NSString(jid->toBare().toString());
+}
+
+- (NSString*)getFullAccountString
+{
+    return std_str2NSString(jid->toString());
+}
+
+- (NSString*)getResourceString
+{
+    // TODO: test what if the getResource return empty?
+    return std_str2NSString(jid->getResource());
+}
+
+- (NSString*)getNodeString
+{
+    return std_str2NSString(jid->getNode());
+}
+
+- (NSString*)getDomainString
+{
+    return std_str2NSString(jid->getDomain());
+}
+
 @end

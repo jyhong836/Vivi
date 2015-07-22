@@ -43,10 +43,9 @@ using namespace Swift;
     delete client;
 }
 
-- (NSString*)getAccount
+- (SWAccount*)getAccount
 {
-    return [NSString stringWithCString:account.jid->toString().c_str()
-                              encoding:[NSString defaultCStringEncoding]];
+    return account;
 }
 
 // MARK: Wrap the method of Swift::Client
