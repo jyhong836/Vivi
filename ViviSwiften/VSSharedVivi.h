@@ -10,9 +10,16 @@
 #define VISharedVivi_h
 
 #import "VSViviProtocol.h"
-
+/*!
+ @brief Global shared VSVivi
+ */
 extern id<VSVivi> vivi;
 
+/*!
+ * @brief Set shared VSVivi
+ *
+ * Called once, after App loads. You have to init the controllers.
+ */
 void setSharedVivi(id<VSVivi> shared);
 
 #endif /* VISharedVivi_h */

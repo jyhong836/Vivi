@@ -11,12 +11,11 @@
 
 namespace Swift
 {
-//    class Client;
-//    class JID;
-//    class SafeString;
-//    class NetworkFactories;
-//    class Storages;
-    
+    /*!
+     * @brief C++ client inherit from Swift::Client.
+     *
+     * SWClient will connect the signals to class methods, and call VSClientDelegate in global VSVivi.
+     */
     class SWClient: public Swift::Client
     {
         public:

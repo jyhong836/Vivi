@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 
 // TODO change name to Adapter
+/*!
+ * @brief A Objective-C wrapper for Swiften.
+ */
 @interface SWClientWrapper : NSObject
 - (id)init;
 - (void)dealloc;
 - (void)run;
+- (void)runBackgroud;
 - (void)connect;
 
 @end

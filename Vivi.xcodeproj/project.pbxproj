@@ -24,11 +24,11 @@
 		CDE658C11B5E71F300290E34 /* VSControllerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658C01B5E71F300290E34 /* VSControllerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDE658C31B5E754B00290E34 /* VSSharedVivi.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658C21B5E754B00290E34 /* VSSharedVivi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDE658C61B5E76FC00290E34 /* VSSharedVivi.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE658C51B5E76FC00290E34 /* VSSharedVivi.m */; };
-		CDE658C81B5E7FAC00290E34 /* Vivi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE658C71B5E7FAC00290E34 /* Vivi.swift */; };
-		CDE658CC1B5E8B8000290E34 /* SWClientWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658CA1B5E8B8000290E34 /* SWClientWrapper.h */; };
+		CDE658CC1B5E8B8000290E34 /* SWClientWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658CA1B5E8B8000290E34 /* SWClientWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDE658CD1B5E8B8000290E34 /* SWClientWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDE658CB1B5E8B8000290E34 /* SWClientWrapper.mm */; };
 		CDE658D01B5EA70F00290E34 /* SWClient.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658CE1B5EA70F00290E34 /* SWClient.h */; };
 		CDE658D11B5EA70F00290E34 /* SWClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDE658CF1B5EA70F00290E34 /* SWClient.mm */; };
+		CDE658D31B5F376D00290E34 /* ClientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE658D21B5F376D00290E34 /* ClientController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,11 +108,11 @@
 		CDE658C01B5E71F300290E34 /* VSControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSControllerProtocol.h; sourceTree = "<group>"; };
 		CDE658C21B5E754B00290E34 /* VSSharedVivi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSSharedVivi.h; sourceTree = "<group>"; };
 		CDE658C51B5E76FC00290E34 /* VSSharedVivi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSSharedVivi.m; sourceTree = "<group>"; };
-		CDE658C71B5E7FAC00290E34 /* Vivi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vivi.swift; sourceTree = "<group>"; };
 		CDE658CA1B5E8B8000290E34 /* SWClientWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWClientWrapper.h; sourceTree = "<group>"; };
 		CDE658CB1B5E8B8000290E34 /* SWClientWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWClientWrapper.mm; sourceTree = "<group>"; };
 		CDE658CE1B5EA70F00290E34 /* SWClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWClient.h; sourceTree = "<group>"; };
 		CDE658CF1B5EA70F00290E34 /* SWClient.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWClient.mm; sourceTree = "<group>"; };
+		CDE658D21B5F376D00290E34 /* ClientController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,10 +185,10 @@
 			children = (
 				CD36855B1B5E659500DFC78A /* AppDelegate.swift */,
 				CD36855D1B5E659500DFC78A /* ViewController.swift */,
+				CDE658D21B5F376D00290E34 /* ClientController.swift */,
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
 				CD3685641B5E659500DFC78A /* Info.plist */,
-				CDE658C71B5E7FAC00290E34 /* Vivi.swift */,
 			);
 			path = Vivi;
 			sourceTree = "<group>";
@@ -465,7 +465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD36855E1B5E659500DFC78A /* ViewController.swift in Sources */,
-				CDE658C81B5E7FAC00290E34 /* Vivi.swift in Sources */,
+				CDE658D31B5F376D00290E34 /* ClientController.swift in Sources */,
 				CD36855C1B5E659500DFC78A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -888,6 +888,7 @@
 				CDE658A61B5E66D400290E34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CDE658AB1B5E66D400290E34 /* Build configuration list for PBXNativeTarget "ViviSwiftenTests" */ = {
 			isa = XCConfigurationList;
@@ -896,6 +897,7 @@
 				CDE658A81B5E66D400290E34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

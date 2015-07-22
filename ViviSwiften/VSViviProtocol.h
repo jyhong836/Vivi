@@ -10,7 +10,11 @@
 
 @protocol VSClientController;
 
+/*!
+ * @brief The core protocol of Vivi.
+ */
 @protocol VSVivi <NSObject>
+
 @property (readonly, nonatomic) id<VSClientController> clientController;
 @property (readonly, nonatomic) BOOL isQuitting;
 

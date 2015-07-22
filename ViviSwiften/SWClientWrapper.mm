@@ -9,7 +9,7 @@
 #import "SWClientWrapper.h"
 #include <Swiften/Swiften.h>
 using namespace Swift;
-#include "SWClient.h"
+#import "SWClient.h"
 
 @implementation SWClientWrapper {
     Client *client;
@@ -30,6 +30,13 @@ using namespace Swift;
 - (void)run
 {
     eventLoop->run();
+}
+
+- (void)runBackgroud
+{
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+        eventLoop->run();
+    });
 }
 
 - (void)connect
