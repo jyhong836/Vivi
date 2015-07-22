@@ -11,24 +11,33 @@ import ViviSwiften
 
 class ClientController: NSObject, VSClientController, VSClientDelegate {
     var clientDelegate: VSClientDelegate?
-    var accountName: String!
-    var accountPasswd: String!
+    var accountName: String! = "jyhong@xmpp.jp"
+    var accountPasswd: String! = "jyhong123"
     var client: SWClientAdapter!
+    var eventLoop: SWEventLoop! // TODO: add access control to eventLoop
     
     override init() {
         super.init()
         clientDelegate = self
-        client = SWClientAdapter()
+        eventLoop = SWEventLoop()
+        client = SWClientAdapter(accountName,
+            password: accountPasswd,
+            eventLoop: eventLoop)
     }
     // MARK: VSClientDelegate protocol
-    func clientDidConnect(clientController: VSClientController!) {
+    func clientDidConnect(client: SWClientAdapter!) {
         NSLog("Client connected [Swift]")
+    }
+    
+    func clientDidReceiveMessage(client: SWClientAdapter!, fromAccount account: String!, inContent content: String!) {
+        // TODO: removet the NSLog
+        NSLog("from: \(account) content: \(content)");
     }
     
     // MARK: VSControllerProtocol
     
     func controllerDidLoad() {
-        client.runBackgroud()
+        eventLoop.start()
     }
     
     func controllerWillClose() {

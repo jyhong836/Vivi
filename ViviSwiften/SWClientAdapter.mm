@@ -9,20 +9,31 @@
 #import "SWClientAdapter.h"
 #include <Swiften/Swiften.h>
 using namespace Swift;
-#import "SWClient.h"
+#import "SWClientSlots.h"
 
 @implementation SWClientAdapter {
-    Client *client;
-    SimpleEventLoop *eventLoop;
-    BoostNetworkFactories *netFactories;
+    SWClientSlots *client;
+    SWAccount* account;// FIXME: memory control for NSString
+    NSString* passwd; // FIXME: the password should be encrypted
 }
 
-- (id)init
+- (id)init: (NSString*)aAccount
+  Password: (NSString*)aPasswd
+ EventLoop: (SWEventLoop*)eventLoop
 {
     if (self = [super init]) {
-        eventLoop = new SimpleEventLoop();
-        netFactories = new BoostNetworkFactories(eventLoop);
-        client = new SWClient("jyhong@xmpp.jp","jyhong123",netFactories);
+        if (aAccount && aPasswd) {
+            account = [[SWAccount alloc] init: aAccount];
+            passwd = aPasswd;
+            client = new SWClientSlots(
+                              *account.jid,
+                                       [passwd cStringUsingEncoding:NSASCIIStringEncoding],
+                                       [eventLoop getNetworkFactories],
+                                       self);
+        } else {
+            // TODO: add alert for NULL account or password
+            return nil;
+        }
     }
     return self;
 }
@@ -30,31 +41,34 @@ using namespace Swift;
 - (void)dealloc
 {
     delete client;
-    delete eventLoop;
-    delete netFactories;
+}
+
+- (NSString*)getAccount
+{
+    return [NSString stringWithCString:account.jid->toString().c_str()
+                              encoding:[NSString defaultCStringEncoding]];
 }
 
 // MARK: Wrap the method of Swift::Client
-
-- (void)run
+/*!
+ * @brief Connect the client account to server.
+ */
+- (void)connect
 {
-    eventLoop->run();
+    client->connect();
 }
 
 /*!
- * @brief Run SimpleEventLoop at global queue at background.
+ * @brief Send message to specific account.
  */
-- (void)runBackgroud
+- (void)sendMessageTo: (SWAccount*)targetAccount
+              Message: (NSString*)message
 {
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
-        eventLoop->run();
-    });
-}
-
-- (void)connect
-{
-    NSLog(@"Connecting");
-    client->connect();
+    Message::ref swmsg;
+    swmsg->setFrom(*account.jid);
+    swmsg->setTo(*targetAccount.jid);
+    swmsg->setBody([message cStringUsingEncoding:NSASCIIStringEncoding]);
+    client->sendMessage(swmsg);
 }
 
 @end

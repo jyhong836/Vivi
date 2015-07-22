@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "VSControllerProtocol.h"
-#import "VSClientDelegate.h"
+#import "VSClientDelegateProtocol.h"
 #import "SWClientAdapter.h"
+#import "SWEventLoop.h"
 
 @protocol VSClientController <NSObject, VSController>
 
@@ -17,5 +18,6 @@
 @property (nonatomic) NSString* accountName;
 @property (nonatomic) NSString* accountPasswd;
 @property (nonatomic) SWClientAdapter* client;
+@property (nonatomic) SWEventLoop* eventLoop;
 
 @end

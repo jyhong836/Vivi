@@ -8,16 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
-// TODO change name to Adapter
+#import "SWEventLoop.h"
+#import "SWAccount.h"
+
 /*!
- * @brief A Objective-C adapter for Swiften.
+ * @brief A Objective-C adapter for Swift::Client.
+ * 
+ * One Client correspond to one JID(or SWAccount). When connect method
+ * called, the client will connect to server.
+ *
  */
 @interface SWClientAdapter : NSObject
-- (id)init;
+- (id)init: (NSString*)account
+  Password: (NSString*)passwd
+ EventLoop: (SWEventLoop*)eventLoop;
 - (void)dealloc;
+- (NSString*)getAccount;
 
-- (void)run;
-- (void)runBackgroud;
 - (void)connect;
+- (void)sendMessageTo: (SWAccount*)account
+              Message: (NSString*)message;
 
 @end
