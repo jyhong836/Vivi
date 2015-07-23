@@ -10,15 +10,24 @@
 
 #import <Foundation/Foundation.h>
 #import "SWClientAdapter.h"
-//@class SWClientAdapter;
+
+@class SWAccount;
 
 @protocol VSClientDelegate <NSObject>
 
+// TODO: change method to @optional
 //@optional
 - (void)clientDidConnect: (SWClientAdapter*)client;
+- (void)clientDidDisonnect: (SWClientAdapter*)client
+              errorMessage: (NSString*)errString;
 //@optional
 - (void)clientDidReceiveMessage: (SWClientAdapter*)client
-                    fromAccount: (NSString*)account
+                    fromAccount: (SWAccount*)account
                       inContent: (NSString*)content;
+- (void)clientDidReceivePresence: (SWClientAdapter*)client
+                     fromAccount: (SWAccount*)account
+                 currentPresence: (int)presenceType
+                     currentShow: (int)show
+                   currentStatus: (NSString*)status;
 
 @end

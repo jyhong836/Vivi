@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Swiften/Swiften.h>
 #import "SWClientAdapter.h"
+
+#ifndef __cplusplus
+#error include a C++ header in non-C++ file
+#else
+#import <Swiften/Swiften.h>
+
 
 namespace Swift
 {
@@ -28,7 +33,11 @@ namespace Swift
     private:
         SWClientAdapter* clientAdapter;
         void onConnectedSlot();
-        void onRosterReceivedSlot(ErrorPayload::ref err);
+        void onDisconnectedSlot(const boost::optional<ClientError> &err);
+        void onRosterReceivedSlot(RosterPayload::ref rosterPayload,ErrorPayload::ref err);
         void onMessageReceivedSlot(Message::ref msg);
+        void onPresenceReceivedSlot(Presence::ref pres);
     };
 }
+
+#endif // !define(__cplusplus)

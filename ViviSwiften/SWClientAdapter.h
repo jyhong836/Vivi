@@ -19,6 +19,8 @@
  *
  */
 @interface SWClientAdapter : NSObject
+@property (nonatomic) BOOL isConnected;
+
 - (id)init: (NSString*)account
   Password: (NSString*)passwd
  EventLoop: (SWEventLoop*)eventLoop;
@@ -26,7 +28,17 @@
 - (SWAccount*)getAccount;
 
 - (void)connect;
-- (void)sendMessageTo: (SWAccount*)account
+- (void)disconnect;
+- (void)sendMessageToAccount: (SWAccount*)account
               Message: (NSString*)message;
+
+- (BOOL)isAvailable;
+- (BOOL)isActive;
+
+- (void)setSoftwareName: (NSString*)name
+         currentVersion: (NSString*)version
+              currentOS: (NSString*)os;
+- (void)setSoftwareName: (NSString*)name
+         currentVersion: (NSString*)version;
 
 @end

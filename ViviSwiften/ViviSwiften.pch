@@ -22,4 +22,6 @@
  */
 #define std_str2NSString(std_str) [NSString stringWithCString:(std_str).c_str() encoding:[NSString defaultCStringEncoding]]
 
+#define NSString2std_str(nsstr) [(nsstr) cStringUsingEncoding: [NSString defaultCStringEncoding]]
+
 #endif /* ViviSwiften_pch */

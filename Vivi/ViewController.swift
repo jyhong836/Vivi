@@ -12,6 +12,7 @@ import ViviSwiften
 class ViewController: NSViewController {
     
     @IBOutlet weak var messageTextField: NSScrollView!
+    @IBOutlet weak var connectButton: NSButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ class ViewController: NSViewController {
 
     @IBAction func sendMessageButton(sender: NSButton) {
         // TODO: add send message code
-//        vivi.clientController.client.sendMessageTo(account, message: messageTextField)
+//        vivi.clientController.client.sendMessageToAccount(account, message: messageTextField)
     }
     
 }

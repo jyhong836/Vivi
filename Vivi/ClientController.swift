@@ -9,6 +9,16 @@
 import Cocoa
 import ViviSwiften
 
+// MARK: Swiften types
+enum SWPresenceType: Int32 {
+    case Available, Error, Probe, Subscribe, Subscribed, Unavailable, Unsubscribe, Unsubscribed
+}
+let SWPresenceTypeStringDict: [SWPresenceType: String] = [.Available: "Available", .Error: "Error", .Probe: "Probe", .Subscribe: "Subscribe", .Subscribed: "Subscribed", .Unavailable: "Unavailable", .Unsubscribe: "Unsubscribe", .Unsubscribed: "Unsubscribed"]
+enum SWPresenceShowType: Int32 {
+    case Online, Away, FFC, XA, DND, None
+}
+let SWPresenceShowTypeStringDict: [SWPresenceShowType: String] = [.Online: "Online", .Away: "Away", .FFC:"FFC", .XA: "XA", .DND: "DND", .None:"None"]
+
 class ClientController: NSObject, VSClientController, VSClientDelegate {
     var clientDelegate: VSClientDelegate?
     var accountName: String! = "jyhong@xmpp.jp"
@@ -24,14 +34,26 @@ class ClientController: NSObject, VSClientController, VSClientDelegate {
             password: accountPasswd,
             eventLoop: eventLoop)
     }
+    
     // MARK: VSClientDelegate protocol
+    
     func clientDidConnect(client: SWClientAdapter!) {
         NSLog("Client connected [Swift]")
     }
     
-    func clientDidReceiveMessage(client: SWClientAdapter!, fromAccount account: String!, inContent content: String!) {
+    func clientDidDisonnect(client: SWClientAdapter!, errorMessage errString: String!) {
+        NSLog("Client disconnected with err:\(errString)[Swift]")
+    }
+    
+    func clientDidReceiveMessage(client: SWClientAdapter!, fromAccount account: SWAccount!, inContent content: String!) {
         // TODO: removet the NSLog
-        NSLog("from: \(account) content: \(content)");
+        NSLog("msg from: \(account.getAccountString()) content: \(content) [Swift]")
+    }
+    
+    func clientDidReceivePresence(client: SWClientAdapter!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow show: Int32, currentStatus status: String!) {
+        let typeStr = SWPresenceTypeStringDict[SWPresenceType(rawValue: presenceType)!]
+        let showType = SWPresenceShowTypeStringDict[SWPresenceShowType(rawValue: show)!]
+        NSLog("pres from: \(account.getAccountString()) presence: \(typeStr!) show: \(showType!) status: \(status!) [Swift]")
     }
     
     // MARK: VSControllerProtocol
@@ -41,6 +63,8 @@ class ClientController: NSObject, VSClientController, VSClientDelegate {
     }
     
     func controllerWillClose() {
-        // TODO: disconnect client here.
+        if client.isConnected {
+            client.disconnect()
+        }
     }
 }

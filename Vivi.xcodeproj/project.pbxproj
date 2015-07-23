@@ -263,8 +263,8 @@
 		CDE658BD1B5E70A600290E34 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				CD0932171B5F9757007ACB22 /* VSClientDelegateProtocol.h */,
 				CDE658BB1B5E6FF500290E34 /* VSViviProtocol.h */,
+				CD0932171B5F9757007ACB22 /* VSClientDelegateProtocol.h */,
 				CDE658BE1B5E70D600290E34 /* VSClientControllerProtocol.h */,
 				CDE658C01B5E71F300290E34 /* VSControllerProtocol.h */,
 			);
