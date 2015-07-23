@@ -50,8 +50,13 @@ void SWClientSlots::onConnectedSlot()
 void SWClientSlots::onDisconnectedSlot(const boost::optional<ClientError> &err)
 {
     clientAdapter.isConnected = NO;
-    [vivi.clientController.clientDelegate clientDidDisonnect: clientAdapter
-                                                errorMessage: std_str2NSString(err->getErrorCode()->message())];
+    if (err) {
+        [GLOBAL_CLIENT_DELEGATE clientDidDisonnect: clientAdapter
+                                      errorMessage: std_str2NSString(err->getErrorCode()->message())];
+    } else {
+        [GLOBAL_CLIENT_DELEGATE clientDidDisonnect: clientAdapter
+                                      errorMessage: nil];
+    }
 }
 
 void SWClientSlots::onRosterReceivedSlot(RosterPayload::ref rosterPayload, ErrorPayload::ref err)

@@ -73,7 +73,8 @@ using namespace Swift;
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
               Message: (NSString*)message
 {
-    Message::ref swmsg;
+    // FIXME: Is this a right usage of boost::shared_ptr?
+    Message::ref swmsg = boost::make_shared<Message>();
     swmsg->setFrom(*account.jid);
     swmsg->setTo(*targetAccount.jid);
     swmsg->setBody([message cStringUsingEncoding:NSASCIIStringEncoding]);
