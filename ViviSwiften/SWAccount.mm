@@ -16,7 +16,6 @@ using namespace Swift;
 - (id)init: (NSString *)account
 {
     if (self = [super init]) {
-        jid = new JID([account cStringUsingEncoding:NSASCIIStringEncoding]);
         jid = new JID(NSString2std_str(account));
     }
     return self;
