@@ -24,13 +24,12 @@ Before starting to code, compile the Swiften lib firstly.
 
 + If you have not installed `libboost*` (check with `ls /usr/local/lib | grep boost`), run below in bash:
     ```bash
-    cd SwiftenXMPP
-    ./scon Swiften
+    ./setupSwiften.sh
     ```
 
 + If you have installed `libboost*`, still run the command above, and you need to add `/usr/local/include/boost` and  `/usr/local/lib/` to `Header Search Paths` and `Library Search Paths` in Xcode Building Settings.
 
-Read `SwiftXMPP/Documentation/BuildingOnUnix` for more details about compiling.
+Read `SwiftXMPP/Documentation/BuildingOnUnix` for more details about compiling Swiften.
 
 ##### Some Issues
 
