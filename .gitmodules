@@ -1,0 +1,3 @@
+[submodule "SwiftXMPP"]
+	path = SwiftXMPP
+	url = git://swift.im/swift
