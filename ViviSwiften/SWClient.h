@@ -11,6 +11,8 @@
 #import "SWEventLoop.h"
 #import "SWAccount.h"
 
+@protocol VSClientDelegate;
+
 /*!
  * @brief A Objective-C adapter for Swift::Client.
  * 
@@ -20,6 +22,8 @@
  */
 @interface SWClient : NSObject
 @property (nonatomic) BOOL isConnected;
+
+@property (readonly, nonatomic) id<VSClientDelegate> delegate;
 
 - (id)init: (NSString*)account
   Password: (NSString*)passwd

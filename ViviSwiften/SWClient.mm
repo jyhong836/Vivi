@@ -29,9 +29,9 @@ using namespace Swift;
             account = [[SWAccount alloc] init: aAccount];
             passwd = aPasswd;
             client = new SWClientAdapter(
-                              *account.jid,
-                                       [passwd cStringUsingEncoding:NSASCIIStringEncoding],
-                                       [eventLoop getNetworkFactories],
+                                         *account.jid,
+                                         [passwd cStringUsingEncoding:NSASCIIStringEncoding],
+                                         [eventLoop getNetworkFactories],
                                        self);
         } else {
             // TODO: add alert for NULL account or password

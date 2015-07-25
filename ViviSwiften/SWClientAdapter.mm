@@ -13,8 +13,6 @@
 
 using namespace Swift;
 
-#define GLOBAL_CLIENT_DELEGATE vivi.clientController.clientDelegate
-
 SWClientAdapter::SWClientAdapter(const JID& jid,
                              const SafeString& password,
                              NetworkFactories* networkFactories,
@@ -44,18 +42,18 @@ void SWClientAdapter::onConnectedSlot()
     swclient.isConnected = YES;
     sendPresence(Presence::create("onConnected presence"));
     
-    [vivi.clientController.clientDelegate clientDidConnect: swclient];
+    [swclient.delegate clientDidConnect: swclient];
 }
 
 void SWClientAdapter::onDisconnectedSlot(const boost::optional<ClientError> &err)
 {
     swclient.isConnected = NO;
     if (err) {
-        [GLOBAL_CLIENT_DELEGATE clientDidDisonnect: swclient
-                                      errorMessage: std_str2NSString(err->getErrorCode()->message())];
+        [swclient.delegate clientDidDisonnect: swclient
+                                 errorMessage: std_str2NSString(err->getErrorCode()->message())];
     } else {
-        [GLOBAL_CLIENT_DELEGATE clientDidDisonnect: swclient
-                                      errorMessage: nil];
+        [swclient.delegate clientDidDisonnect: swclient
+                                 errorMessage: nil];
     }
 }
 
@@ -76,16 +74,18 @@ void SWClientAdapter::onMessageReceivedSlot(Message::ref msg)
     SWAccount* account = [[SWAccount alloc] init: std_str2NSString(msg->getFrom().toString())];
     NSString* content = std_str2NSString(msg->getBody());
     // FIXME: do we really need to pass a SWAccount? or just str, for search.
-    [vivi.clientController.clientDelegate clientDidReceiveMessage: swclient fromAccount:account inContent:content];
+    [swclient.delegate clientDidReceiveMessage: swclient
+                                   fromAccount:account
+                                     inContent:content];
 }
 
 void SWClientAdapter::onPresenceReceivedSlot(Presence::ref pres)
 {
     SWAccount* account = [[SWAccount alloc] init: std_str2NSString(pres->getFrom().toString())];
     NSString* status = std_str2NSString(pres->getStatus());
-    [GLOBAL_CLIENT_DELEGATE clientDidReceivePresence: swclient
-                                         fromAccount: account
-                                     currentPresence: pres->getType()
-                                         currentShow: pres->getShow()
-                                       currentStatus: status];
+    [swclient.delegate clientDidReceivePresence: swclient
+                                    fromAccount: account
+                                currentPresence: pres->getType()
+                                    currentShow: pres->getShow()
+                                  currentStatus: status];
 }
