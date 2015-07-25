@@ -43,6 +43,9 @@ class ClientController: NSObject, VSClientController, VSClientDelegate {
         self.connectHandler = connectHandler;
         client.connect()
     }
+    func connect() {
+        client.connect()
+    }
     
     func clientDidConnect(client: SWClientAdapter!) {
         // TODO: remove the NSLog
