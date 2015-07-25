@@ -15,6 +15,8 @@ using namespace Swift;
     BoostNetworkFactories *netFactories;
 }
 
+@synthesize isStarted;
+
 - (id)init
 {
     if (self = [super init]) {
@@ -29,11 +31,15 @@ using namespace Swift;
  */
 - (void)start
 {
+    if (isStarted) {
+        return;
+    }
     // TODO: Own defined queue should be used in the future.
     dispatch_async(
                    dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
-        eventLoop->run();
+                       eventLoop->run();
     });
+    isStarted = YES;
 }
 
 - (BoostNetworkFactories *)getNetworkFactories
@@ -41,8 +47,15 @@ using namespace Swift;
     return netFactories;
 }
 
+- (void)stop
+{
+    eventLoop->stop();
+    isStarted = NO;
+}
+
 - (void)dealloc
 {
+    eventLoop->stop();
     delete eventLoop;
     delete netFactories;
 }

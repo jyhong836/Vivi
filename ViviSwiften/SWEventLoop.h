@@ -18,6 +18,8 @@ class BoostNetworkFactories;
 @interface SWEventLoop : NSObject
 - (id)init;
 - (void)start;
+- (void)stop;
+@property (readonly, nonatomic)BOOL isStarted;
 #ifdef __cplusplus
 - (Swift::BoostNetworkFactories *)getNetworkFactories;
 #else

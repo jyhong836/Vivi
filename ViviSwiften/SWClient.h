@@ -21,13 +21,14 @@
 
 @property (nonatomic) BOOL isConnected;
 
-@property (readonly, nonatomic) id<VSClientDelegate> delegate;
+@property (nonatomic) id<VSClientDelegate> delegate;
 
 - (id)init: (NSString*)account
   Password: (NSString*)passwd
  EventLoop: (SWEventLoop*)eventLoop;
 - (void)dealloc;
-- (SWAccount*)getAccount;
+//- (SWAccount*)getAccount;
+@property (readonly, nonatomic)SWAccount* account;
 
 - (void)connect;
 - (void)disconnect;

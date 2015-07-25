@@ -11,6 +11,7 @@
 @class SWEventLoop;
 @protocol VSController;
 
+// FIXME: should manager implement VSController
 @protocol VSClientManager <NSObject, VSController>
 
 @property (readonly, nonatomic) NSArray<SWClient*>* clientList;

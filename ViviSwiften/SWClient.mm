@@ -15,10 +15,11 @@ using namespace Swift;
 
 @implementation SWClient {
     SWClientAdapter *client;
-    SWAccount* account;// FIXME: memory control for NSString
+//    SWAccount* account;// FIXME: memory control for NSString
     NSString* passwd; // FIXME: the password should be encrypted
 }
 
+@synthesize account;
 @synthesize isConnected;
 
 - (id)init: (NSString*)aAccount
@@ -66,6 +67,7 @@ using namespace Swift;
  */
 - (void)disconnect
 {
+    // FIXME: Sometime will assert at BasicSessionStream::writeFooter()
     client->disconnect();
 }
 

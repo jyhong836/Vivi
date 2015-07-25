@@ -14,11 +14,6 @@
 #import <Foundation/Foundation.h>
 
 /*!
- * Everywhere need sharedVivi.
- */
-#import "VSSharedVivi.h"
-
-/*!
  * NSString* std_str2NSString(std::string)
  */
 #define std_str2NSString(std_str) [NSString stringWithCString:(std_str).c_str() encoding:[NSString defaultCStringEncoding]]

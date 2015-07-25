@@ -9,11 +9,13 @@
 @protocol VSClientManager;
 
 /*!
- * @brief The core protocol of Vivi.
+ * @brief The core protocol of Vivi. VSVivi should be singlton.
  */
 @protocol VSVivi <NSObject>
 
-@property (readonly, nonatomic) id<VSClientManager> clientController;
+@property (readonly, nonatomic) id<VSClientManager> clientManager;
 @property (readonly, nonatomic) BOOL isQuitting;
+
++ (id)getShared;
 
 @end

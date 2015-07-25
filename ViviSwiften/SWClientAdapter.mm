@@ -43,18 +43,21 @@ void SWClientAdapter::onConnectedSlot()
     swclient.isConnected = YES;
     sendPresence(Presence::create("onConnected presence"));
     
-    [swclient.delegate clientDidConnect: swclient];
+    if ([swclient.delegate respondsToSelector:@selector(clientDidConnect:)])
+        [swclient.delegate clientDidConnect: swclient];
 }
 
 void SWClientAdapter::onDisconnectedSlot(const boost::optional<ClientError> &err)
 {
     swclient.isConnected = NO;
-    if (err) {
-        [swclient.delegate clientDidDisonnect: swclient
-                                 errorMessage: std_str2NSString(err->getErrorCode()->message())];
-    } else {
-        [swclient.delegate clientDidDisonnect: swclient
-                                 errorMessage: nil];
+    if ([swclient.delegate respondsToSelector:@selector( clientDidDisconnect:errorCode:)]) {
+        if (err) {
+            [swclient.delegate clientDidDisconnect: swclient
+                                     errorCode: err->getType()];
+        } else {
+            [swclient.delegate clientDidDisconnect: swclient
+                                     errorCode: -1];
+        }
     }
 }
 
@@ -75,16 +78,18 @@ void SWClientAdapter::onMessageReceivedSlot(Message::ref msg)
     SWAccount* account = [[SWAccount alloc] init: std_str2NSString(msg->getFrom().toString())];
     NSString* content = std_str2NSString(msg->getBody());
     // FIXME: do we really need to pass a SWAccount? or just str, for search.
-    [swclient.delegate clientDidReceiveMessage: swclient
-                                   fromAccount:account
-                                     inContent:content];
+    if ([swclient.delegate respondsToSelector:@selector( clientDidReceiveMessage:fromAccount:inContent:)])
+        [swclient.delegate clientDidReceiveMessage: swclient
+                                       fromAccount: account
+                                         inContent: content];
 }
 
 void SWClientAdapter::onPresenceReceivedSlot(Presence::ref pres)
 {
     SWAccount* account = [[SWAccount alloc] init: std_str2NSString(pres->getFrom().toString())];
     NSString* status = std_str2NSString(pres->getStatus());
-    [swclient.delegate clientDidReceivePresence: swclient
+    if ([swclient.delegate respondsToSelector:@selector( clientDidReceivePresence:fromAccount:currentPresence:currentShow:currentStatus:)])
+        [swclient.delegate clientDidReceivePresence: swclient
                                     fromAccount: account
                                 currentPresence: pres->getType()
                                     currentShow: pres->getShow()
