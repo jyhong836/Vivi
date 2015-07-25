@@ -6,11 +6,7 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-#import <Foundation/Foundation.h>
-#import "SWClient.h"
-
+@class SWClient;
 @class SWAccount;
 
 @protocol VSClientDelegate <NSObject>

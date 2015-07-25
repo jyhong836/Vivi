@@ -6,11 +6,8 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-#import "SWEventLoop.h"
-#import "SWAccount.h"
-
+@class SWEventLoop;
+@class SWAccount;
 @protocol VSClientDelegate;
 
 /*!
@@ -21,6 +18,7 @@
  *
  */
 @interface SWClient : NSObject
+
 @property (nonatomic) BOOL isConnected;
 
 @property (readonly, nonatomic) id<VSClientDelegate> delegate;

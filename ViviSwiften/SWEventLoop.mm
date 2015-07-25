@@ -29,7 +29,9 @@ using namespace Swift;
  */
 - (void)start
 {
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+    // TODO: Own defined queue should be used in the future.
+    dispatch_async(
+                   dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
         eventLoop->run();
     });
 }

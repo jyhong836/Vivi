@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, VSVivi {
     
     // MARK: VSVivi implementation
     
-    var clientController: VSClientController?
+    var clientController: VSClientManager?
     var isQuitting: Bool = false
 
 }

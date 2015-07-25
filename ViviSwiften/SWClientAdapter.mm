@@ -8,17 +8,18 @@
 
 #import "SWClientAdapter.h"
 #import "SWAccount.h"
-#import "VSClientControllerProtocol.h"
+#import "SWClient.h"
+#import "VSClientManagerProtocol.h"
 #import "VSClientDelegateProtocol.h"
 
 using namespace Swift;
 
-SWClientAdapter::SWClientAdapter(const JID& jid,
+SWClientAdapter::SWClientAdapter(SWAccount* account,
                              const SafeString& password,
                              NetworkFactories* networkFactories,
                              SWClient* swclient,
                              Storages* storages):
-Client(jid, password, networkFactories, storages),
+Client(*account.jid, password, networkFactories, storages),
 swclient(swclient)
 {
     // MARK: Connect signals to slots

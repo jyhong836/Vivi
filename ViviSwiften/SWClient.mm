@@ -7,6 +7,8 @@
 //
 
 #import "SWClient.h"
+#import "SWEventLoop.h"
+#import "SWAccount.h"
 #include <Swiften/Swiften.h>
 using namespace Swift;
 #import "SWClientAdapter.h"
@@ -29,7 +31,7 @@ using namespace Swift;
             account = [[SWAccount alloc] init: aAccount];
             passwd = aPasswd;
             client = new SWClientAdapter(
-                                         *account.jid,
+                                         account,
                                          [passwd cStringUsingEncoding:NSASCIIStringEncoding],
                                          [eventLoop getNetworkFactories],
                                        self);

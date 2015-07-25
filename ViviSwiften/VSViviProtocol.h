@@ -6,16 +6,14 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-@protocol VSClientController;
+@protocol VSClientManager;
 
 /*!
  * @brief The core protocol of Vivi.
  */
 @protocol VSVivi <NSObject>
 
-@property (readonly, nonatomic) id<VSClientController> clientController;
+@property (readonly, nonatomic) id<VSClientManager> clientController;
 @property (readonly, nonatomic) BOOL isQuitting;
 
 @end

@@ -20,7 +20,7 @@ enum SWPresenceShowType: Int32 {
 }
 let SWPresenceShowTypeStringDict: [SWPresenceShowType: String] = [.Online: "Online", .Away: "Away", .FFC:"FFC", .XA: "XA", .DND: "DND", .None:"None"]
 
-class TSClientController: NSObject, VSClientController, VSClientDelegate {
+class TSClientController: NSObject, VSClientManager, VSClientDelegate {
     var clientDelegate: VSClientDelegate?
     var accountName: String! = "jyhong@xmpp.jp"
     var accountPasswd: String! = "jyhong123"

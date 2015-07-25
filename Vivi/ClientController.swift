@@ -1,5 +1,5 @@
 //
-//  VSClientController.swift
+//  VSClientManager.swift
 //  Vivi
 //
 //  Created by Junyuan Hong on 7/22/15.
@@ -19,7 +19,7 @@ enum SWPresenceShowType: Int32 {
 }
 let SWPresenceShowTypeStringDict: [SWPresenceShowType: String] = [.Online: "Online", .Away: "Away", .FFC:"FFC", .XA: "XA", .DND: "DND", .None:"None"]
 
-class ClientController: NSObject, VSClientController, VSClientDelegate {
+class ClientController: NSObject, VSClientManager, VSClientDelegate {
     var clientDelegate: VSClientDelegate?
     var accountName: String! = "jyhong@xmpp.jp"
     var accountPasswd: String! = "jyhong123"

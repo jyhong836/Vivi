@@ -6,8 +6,6 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @protocol VSController <NSObject>
 @required
 - (void)controllerDidLoad;

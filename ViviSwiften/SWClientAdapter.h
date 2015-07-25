@@ -6,14 +6,13 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "SWClient.h"
-
 #ifndef __cplusplus
-#error include a C++ header in non-C++ file
+#error "SWClientAdapter.h" is a C++ header, which shouldn't be included in non-C++ file
 #else
 #import <Swiften/Swiften.h>
 
+@class SWAccount;
+@class SWClient;
 
 namespace Swift
 {
@@ -25,7 +24,7 @@ namespace Swift
     class SWClientAdapter: public Swift::Client
     {
     public:
-        SWClientAdapter(const JID& jid,
+        SWClientAdapter(SWAccount* account,
                       const SafeString& password,
                       NetworkFactories* networkFactories,
                       SWClient* clientAdapter,
