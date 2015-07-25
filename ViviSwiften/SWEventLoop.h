@@ -15,7 +15,7 @@ class BoostNetworkFactories;
 #endif
 
 /*!
- * @brief SWEventLoop include the functions of SimpleEventLoop and BoostNetworkFactories.
+ * @brief SWEventLoop wraps the functions of SimpleEventLoop and BoostNetworkFactories.
  */
 @interface SWEventLoop : NSObject
 - (id)init;

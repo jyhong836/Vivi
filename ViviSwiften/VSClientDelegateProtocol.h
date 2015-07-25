@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import <Foundation/Foundation.h>
-#import "SWClientAdapter.h"
+#import "SWClient.h"
 
 @class SWAccount;
 
@@ -17,14 +17,14 @@
 
 // TODO: change method to @optional
 //@optional
-- (void)clientDidConnect: (SWClientAdapter*)client;
-- (void)clientDidDisonnect: (SWClientAdapter*)client
+- (void)clientDidConnect: (SWClient*)client;
+- (void)clientDidDisonnect: (SWClient*)client
               errorMessage: (NSString*)errString;
 //@optional
-- (void)clientDidReceiveMessage: (SWClientAdapter*)client
+- (void)clientDidReceiveMessage: (SWClient*)client
                     fromAccount: (SWAccount*)account
                       inContent: (NSString*)content;
-- (void)clientDidReceivePresence: (SWClientAdapter*)client
+- (void)clientDidReceivePresence: (SWClient*)client
                      fromAccount: (SWAccount*)account
                  currentPresence: (int)presenceType
                      currentShow: (int)show

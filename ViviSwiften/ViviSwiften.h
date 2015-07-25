@@ -20,5 +20,5 @@ FOUNDATION_EXPORT const unsigned char ViviSwiftenVersionString[];
 //#import <ViwiSwiften/VSClientDelegateProtocol.h>
 #import <ViviSwiften/VSClientControllerProtocol.h>
 #import <ViviSwiften/VSSharedVivi.h>
-#import <ViviSwiften/SWClientAdapter.h>
+#import <ViviSwiften/SWClient.h>
 #import <ViviSwiften/VSClientDelegateProtocol.h>

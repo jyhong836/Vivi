@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "VSControllerProtocol.h"
 #import "VSClientDelegateProtocol.h"
-#import "SWClientAdapter.h"
+#import "SWClient.h"
 #import "SWEventLoop.h"
 
 @protocol VSClientController <NSObject, VSController>
@@ -17,7 +17,7 @@
 @property (nonatomic) id<VSClientDelegate> clientDelegate;
 @property (nonatomic) NSString* accountName;
 @property (nonatomic) NSString* accountPasswd;
-@property (nonatomic) SWClientAdapter* client;
+@property (nonatomic) SWClient* client;
 @property (nonatomic) SWEventLoop* eventLoop;
 
 - (void)connectWithHandler: (void(^)(BOOL))connectHandler;

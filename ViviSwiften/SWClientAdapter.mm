@@ -1,109 +1,91 @@
 //
-//  SWClientAdapter.m
+//  SWClient.m
 //  Vivi
 //
-//  Created by Junyuan Hong on 7/21/15.
+//  Created by Junyuan Hong on 7/22/15.
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
 #import "SWClientAdapter.h"
-#include <Swiften/Swiften.h>
+#import "SWAccount.h"
+#import "VSClientControllerProtocol.h"
+#import "VSClientDelegateProtocol.h"
+
 using namespace Swift;
-#import "SWClientSlots.h"
 
-@implementation SWClientAdapter {
-    SWClientSlots *client;
-    SWAccount* account;// FIXME: memory control for NSString
-    NSString* passwd; // FIXME: the password should be encrypted
+#define GLOBAL_CLIENT_DELEGATE vivi.clientController.clientDelegate
+
+SWClientAdapter::SWClientAdapter(const JID& jid,
+                             const SafeString& password,
+                             NetworkFactories* networkFactories,
+                             SWClient* swclient,
+                             Storages* storages):
+Client(jid, password, networkFactories, storages),
+swclient(swclient)
+{
+    // MARK: Connect signals to slots
+    this->onConnected.connect(boost::bind(&SWClientAdapter::onConnectedSlot, this));
+    this->onMessageReceived.connect(boost::bind(&SWClientAdapter::onMessageReceivedSlot, this, _1));
+    this->onPresenceReceived.connect(boost::bind(&SWClientAdapter::onPresenceReceivedSlot, this, _1));
+    this->onDisconnected.connect(boost::bind(&SWClientAdapter::onDisconnectedSlot, this, _1));
 }
 
-@synthesize isConnected;
+// MARK: SLOTS
 
-- (id)init: (NSString*)aAccount
-  Password: (NSString*)aPasswd
- EventLoop: (SWEventLoop*)eventLoop
+void SWClientAdapter::onConnectedSlot()
 {
-    if (self = [super init]) {
-        isConnected = NO;
-        if (aAccount && aPasswd) {
-            account = [[SWAccount alloc] init: aAccount];
-            passwd = aPasswd;
-            client = new SWClientSlots(
-                              *account.jid,
-                                       [passwd cStringUsingEncoding:NSASCIIStringEncoding],
-                                       [eventLoop getNetworkFactories],
-                                       self);
-        } else {
-            // TODO: add alert for NULL account or password
-            return nil;
-        }
+    // TODO: do something in Client
+    GetRosterRequest::ref rosterRequest =
+    GetRosterRequest::create(getIQRouter());
+    rosterRequest->onResponse.connect(
+                                      bind(&SWClientAdapter::onRosterReceivedSlot, this, _1, _2));
+    rosterRequest->send();
+    
+    swclient.isConnected = YES;
+    sendPresence(Presence::create("onConnected presence"));
+    
+    [vivi.clientController.clientDelegate clientDidConnect: swclient];
+}
+
+void SWClientAdapter::onDisconnectedSlot(const boost::optional<ClientError> &err)
+{
+    swclient.isConnected = NO;
+    if (err) {
+        [GLOBAL_CLIENT_DELEGATE clientDidDisonnect: swclient
+                                      errorMessage: std_str2NSString(err->getErrorCode()->message())];
+    } else {
+        [GLOBAL_CLIENT_DELEGATE clientDidDisonnect: swclient
+                                      errorMessage: nil];
     }
-    return self;
 }
 
-- (void)dealloc
+void SWClientAdapter::onRosterReceivedSlot(RosterPayload::ref rosterPayload, ErrorPayload::ref err)
 {
-    delete client;
+    if (err) {
+        // TODO: use NS Error Log instead
+//        std::cerr << "Error receiving roster. Continuing anyway.";
+        NSLog(@"Error receiving roster. Continuing anyway.");
+    }
+    // TODO: remove the test presence
+    // Send initial available presence
+//    sendPresence(Presence::create("TEST presence"));
 }
 
-- (SWAccount*)getAccount
+void SWClientAdapter::onMessageReceivedSlot(Message::ref msg)
 {
-    return account;
+    SWAccount* account = [[SWAccount alloc] init: std_str2NSString(msg->getFrom().toString())];
+    NSString* content = std_str2NSString(msg->getBody());
+    // FIXME: do we really need to pass a SWAccount? or just str, for search.
+    [vivi.clientController.clientDelegate clientDidReceiveMessage: swclient fromAccount:account inContent:content];
 }
 
-// MARK: Wrap the method of Swift::Client
-/*!
- * @brief Connect the client account to the server.
- */
-- (void)connect
+void SWClientAdapter::onPresenceReceivedSlot(Presence::ref pres)
 {
-    client->connect();
+    SWAccount* account = [[SWAccount alloc] init: std_str2NSString(pres->getFrom().toString())];
+    NSString* status = std_str2NSString(pres->getStatus());
+    [GLOBAL_CLIENT_DELEGATE clientDidReceivePresence: swclient
+                                         fromAccount: account
+                                     currentPresence: pres->getType()
+                                         currentShow: pres->getShow()
+                                       currentStatus: status];
 }
-/*!
- * @brief Disconnect the client account from the server.
- */
-- (void)disconnect
-{
-    client->disconnect();
-}
-
-/*!
- * @brief Send message to specific account.
- */
-- (void)sendMessageToAccount: (SWAccount*)targetAccount
-              Message: (NSString*)message
-{
-    // FIXME: Is this a right usage of boost::shared_ptr?
-    Message::ref swmsg = boost::make_shared<Message>();
-    swmsg->setFrom(*account.jid);
-    swmsg->setTo(*targetAccount.jid);
-    swmsg->setBody([message cStringUsingEncoding:NSASCIIStringEncoding]);
-    client->sendMessage(swmsg);
-}
-
-- (BOOL)isAvailable
-{
-    return client->isAvailable();
-}
-
-- (BOOL)isActive
-{
-    return client->isActive();
-}
-
-- (void)setSoftwareName: (NSString*)name
-         currentVersion: (NSString*)version
-              currentOS: (NSString*)os
-{
-    NSString2std_str(name);
-    client->setSoftwareVersion(NSString2std_str(name), NSString2std_str(version), NSString2std_str(os));
-}
-
-- (void)setSoftwareName: (NSString*)name
-         currentVersion: (NSString*)version
-{
-    NSString2std_str(name);
-    client->setSoftwareVersion(NSString2std_str(name), NSString2std_str(version));
-}
-
-@end

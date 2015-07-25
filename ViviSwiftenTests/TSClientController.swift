@@ -24,14 +24,14 @@ class TSClientController: NSObject, VSClientController, VSClientDelegate {
     var clientDelegate: VSClientDelegate?
     var accountName: String! = "jyhong@xmpp.jp"
     var accountPasswd: String! = "jyhong123"
-    var client: SWClientAdapter!
+    var client: SWClient!
     var eventLoop: SWEventLoop! // TODO: add access control to eventLoop
     
     override init() {
         super.init()
         clientDelegate = self
         eventLoop = SWEventLoop()
-        client = SWClientAdapter(accountName,
+        client = SWClient(accountName,
             password: accountPasswd,
             eventLoop: eventLoop)
     }
@@ -45,14 +45,14 @@ class TSClientController: NSObject, VSClientController, VSClientDelegate {
     
     // MARK: VSClientDelegate protocol
     
-    func clientDidConnect(client: SWClientAdapter!) {
+    func clientDidConnect(client: SWClient!) {
         NSLog("Client connected [Swift]")
         if let conHandler = connectHandler {
             conHandler()
         }
     }
     
-    func clientDidDisonnect(client: SWClientAdapter!, errorMessage errString: String!) {
+    func clientDidDisonnect(client: SWClient!, errorMessage errString: String!) {
 //        if errString != nil && errString != "" {
 //            XCTFail("Client disconnected with err:\(errString)")
 //            if let clientEXC = clientTestExectiation {
@@ -61,7 +61,7 @@ class TSClientController: NSObject, VSClientController, VSClientDelegate {
 //        }
     }
     
-    func clientDidReceiveMessage(client: SWClientAdapter!, fromAccount account: SWAccount!, inContent content: String!) {
+    func clientDidReceiveMessage(client: SWClient!, fromAccount account: SWAccount!, inContent content: String!) {
         NSLog("msg from: \(account.getAccountString()) content: \(content) [Swift]")
         XCTAssert(true)
         if let clientEXC = clientTestExectiation {
@@ -69,7 +69,7 @@ class TSClientController: NSObject, VSClientController, VSClientDelegate {
         }
     }
     
-    func clientDidReceivePresence(client: SWClientAdapter!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow show: Int32, currentStatus status: String!) {
+    func clientDidReceivePresence(client: SWClient!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow show: Int32, currentStatus status: String!) {
         let typeStr = SWPresenceTypeStringDict[SWPresenceType(rawValue: presenceType)!]
         let showType = SWPresenceShowTypeStringDict[SWPresenceShowType(rawValue: show)!]
         NSLog("pres from: \(account.getAccountString()) presence: \(typeStr!) show: \(showType!) status: \(status!) [Swift]")
