@@ -42,8 +42,8 @@
 		CDF2122B1B629B3C0031913D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF2122A1B629B3C0031913D /* SystemConfiguration.framework */; };
 		CDF2122E1B629B490031913D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF2122C1B629B490031913D /* Security.framework */; };
 		CDF2122F1B629B490031913D /* SecurityInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF2122D1B629B490031913D /* SecurityInterface.framework */; };
-		CDF212311B629C6B0031913D /* libSwiften.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF212301B629C6B0031913D /* libSwiften.a */; };
-		CDF212331B629C8E0031913D /* libSwiften_Boost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF212321B629C8E0031913D /* libSwiften_Boost.a */; };
+		CDF212381B62A67A0031913D /* libSwiften.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF212361B62A67A0031913D /* libSwiften.a */; };
+		CDF212391B62A67A0031913D /* libSwiften_Boost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF212371B62A67A0031913D /* libSwiften_Boost.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,14 +129,13 @@
 		CDE658CE1B5EA70F00290E34 /* SWClientSlots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWClientSlots.h; sourceTree = "<group>"; };
 		CDE658CF1B5EA70F00290E34 /* SWClientSlots.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWClientSlots.mm; sourceTree = "<group>"; };
 		CDE658D21B5F376D00290E34 /* ClientController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientController.swift; sourceTree = "<group>"; };
-		CDF212241B629B050031913D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CDF212261B629B200031913D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		CDF212281B629B310031913D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		CDF2122A1B629B3C0031913D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CDF2122C1B629B490031913D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CDF2122D1B629B490031913D /* SecurityInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityInterface.framework; path = System/Library/Frameworks/SecurityInterface.framework; sourceTree = SDKROOT; };
-		CDF212301B629C6B0031913D /* libSwiften.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSwiften.a; path = SwiftXMPP/Swiften/libSwiften.a; sourceTree = "<group>"; };
-		CDF212321B629C8E0031913D /* libSwiften_Boost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSwiften_Boost.a; path = SwiftXMPP/3rdParty/Boost/libSwiften_Boost.a; sourceTree = "<group>"; };
+		CDF212361B62A67A0031913D /* libSwiften.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSwiften.a; path = "Libraries and Frameworks/libSwiften.a"; sourceTree = "<group>"; };
+		CDF212371B62A67A0031913D /* libSwiften_Boost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSwiften_Boost.a; path = "Libraries and Frameworks/libSwiften_Boost.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,8 +173,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDF212331B629C8E0031913D /* libSwiften_Boost.a in Frameworks */,
-				CDF212311B629C6B0031913D /* libSwiften.a in Frameworks */,
+				CDF212381B62A67A0031913D /* libSwiften.a in Frameworks */,
+				CDF212391B62A67A0031913D /* libSwiften_Boost.a in Frameworks */,
 				CDF2122E1B629B490031913D /* Security.framework in Frameworks */,
 				CDF2122F1B629B490031913D /* SecurityInterface.framework in Frameworks */,
 				CDF2122B1B629B3C0031913D /* SystemConfiguration.framework in Frameworks */,
@@ -190,14 +189,7 @@
 		CD36854F1B5E659500DFC78A = {
 			isa = PBXGroup;
 			children = (
-				CDF212321B629C8E0031913D /* libSwiften_Boost.a */,
-				CDF212301B629C6B0031913D /* libSwiften.a */,
-				CDF2122C1B629B490031913D /* Security.framework */,
-				CDF2122D1B629B490031913D /* SecurityInterface.framework */,
-				CDF2122A1B629B3C0031913D /* SystemConfiguration.framework */,
-				CDF212281B629B310031913D /* AppKit.framework */,
-				CDF212261B629B200031913D /* IOKit.framework */,
-				CDF212241B629B050031913D /* libz.tbd */,
+				CDF2123A1B62A69D0031913D /* Linked Libraries and Frameworks */,
 				CD36855A1B5E659500DFC78A /* Vivi */,
 				CD36856C1B5E659500DFC78A /* ViviTests */,
 				CD3685771B5E659500DFC78A /* ViviUITests */,
@@ -316,6 +308,36 @@
 				CD72B2CC1B5F7A9800BCFD2A /* SWAccount.mm */,
 			);
 			name = "Swiften Adapter";
+			sourceTree = "<group>";
+		};
+		CDF2123A1B62A69D0031913D /* Linked Libraries and Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CDF2123B1B62A7F70031913D /* Swiften Related */,
+				CDF2123C1B62A8100031913D /* Public Frameworks */,
+			);
+			name = "Linked Libraries and Frameworks";
+			sourceTree = "<group>";
+		};
+		CDF2123B1B62A7F70031913D /* Swiften Related */ = {
+			isa = PBXGroup;
+			children = (
+				CDF212361B62A67A0031913D /* libSwiften.a */,
+				CDF212371B62A67A0031913D /* libSwiften_Boost.a */,
+			);
+			name = "Swiften Related";
+			sourceTree = "<group>";
+		};
+		CDF2123C1B62A8100031913D /* Public Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CDF2122C1B629B490031913D /* Security.framework */,
+				CDF2122D1B629B490031913D /* SecurityInterface.framework */,
+				CDF2122A1B629B3C0031913D /* SystemConfiguration.framework */,
+				CDF212281B629B310031913D /* AppKit.framework */,
+				CDF212261B629B200031913D /* IOKit.framework */,
+			);
+			name = "Public Frameworks";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -808,8 +830,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SwiftXMPP/Swiften",
-					"$(PROJECT_DIR)/SwiftXMPP/3rdParty/Boost",
+					"$(PROJECT_DIR)/Libraries",
+					and,
+					Frameworks,
 				);
 				OTHER_CFLAGS = "$(SWIFTEN_C_FLAGS)";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
@@ -845,8 +868,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SwiftXMPP/Swiften",
-					"$(PROJECT_DIR)/SwiftXMPP/3rdParty/Boost",
+					"$(PROJECT_DIR)/Libraries",
+					and,
+					Frameworks,
 				);
 				OTHER_CFLAGS = "$(SWIFTEN_C_FLAGS)";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
