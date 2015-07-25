@@ -20,4 +20,12 @@
 @property (nonatomic) SWClientAdapter* client;
 @property (nonatomic) SWEventLoop* eventLoop;
 
+- (void)connectWithHandler: (void(^)(BOOL))connectHandler;
+- (void)connect;
+// MARK: Implement in future
+@optional
+- (void)connectToAccount: (SWAccount*)account;
+- (void)connectToAccount: (SWAccount*)account
+             withHandler: (void(^)(BOOL))connectHandler;
+
 @end

@@ -35,10 +35,21 @@ class ClientController: NSObject, VSClientController, VSClientDelegate {
             eventLoop: eventLoop)
     }
     
+    
     // MARK: VSClientDelegate protocol
     
+    private var connectHandler: ((Bool)->Void)? = nil
+    func connectWithHandler(connectHandler: (Bool)->Void) {
+        self.connectHandler = connectHandler;
+        client.connect()
+    }
+    
     func clientDidConnect(client: SWClientAdapter!) {
+        // TODO: remove the NSLog
         NSLog("Client connected [Swift]")
+        if let handler = connectHandler {
+            handler(true)
+        }
     }
     
     func clientDidDisonnect(client: SWClientAdapter!, errorMessage errString: String!) {

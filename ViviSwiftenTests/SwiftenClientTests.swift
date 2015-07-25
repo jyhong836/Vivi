@@ -7,9 +7,7 @@
 //
 
 import XCTest
-import ViviSwiften
-
-var clientTestExectiation: XCTestExpectation?
+@testable import ViviSwiften
 
 class SwiftenClientTests: XCTestCase {
 
@@ -40,14 +38,23 @@ class SwiftenClientTests: XCTestCase {
 //    }
     
     func testConnection() {
-        clientTestExectiation = self.expectationWithDescription("client connection")
-        vivi.clientController.client.connect()
+        var clientTestExectiation: XCTestExpectation? = self.expectationWithDescription("client connection")
+//        vivi.clientController.client.connect()
+        let clientCtrl = vivi.clientController as! TSClientController
+        clientCtrl.connectWithHandler({()->Void in
+            XCTAssert(true, "Client connected")
+            if let clientEXC = clientTestExectiation {
+                clientEXC.fulfill()
+                clientTestExectiation = nil
+            }
+        })
         waitForExpectationsWithTimeout(50, handler: nil)
+        
+        clientTestExectiation = self.expectationWithDescription("** wait for receiving a message **")
         vivi.clientController.client.sendMessageToAccount(SWAccount("jyhong1@xmpp.jp"), message: "hello")
     // ***********************************************************
     // MARK: *** You must send message to the account in hand. ***
     // ***********************************************************
-        clientTestExectiation = self.expectationWithDescription("** wait for receiving a message **")
         waitForExpectationsWithTimeout(50, handler: nil)
     }
 

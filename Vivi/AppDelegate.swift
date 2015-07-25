@@ -15,6 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, VSVivi {
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
+        setSharedVivi(self)
+        
         clientController = ClientController()
         clientController?.controllerDidLoad()
 //        clientController?.client.connect()
@@ -29,13 +31,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, VSVivi {
     
     var clientController: VSClientController?
     var isQuitting: Bool = false
-    
-    override init() {
-        super.init()
-        setSharedVivi(self)
-        // TODO: do things to init controllers
-        //        clientController!.
-    }
 
 }
 

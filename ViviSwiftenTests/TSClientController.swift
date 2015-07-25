@@ -36,23 +36,29 @@ class TSClientController: NSObject, VSClientController, VSClientDelegate {
             eventLoop: eventLoop)
     }
     
+    // MARK: For test
+    private var connectHandler: (()->Void)? = nil
+    func connectWithHandler(connectHandler: ()->Void) {
+        self.connectHandler = connectHandler;
+        client.connect()
+    }
+    
     // MARK: VSClientDelegate protocol
     
     func clientDidConnect(client: SWClientAdapter!) {
         NSLog("Client connected [Swift]")
-        XCTAssert(true, "Client connected")
-        if let clientEXC = clientTestExectiation {
-            clientEXC.fulfill()
+        if let conHandler = connectHandler {
+            conHandler()
         }
     }
     
     func clientDidDisonnect(client: SWClientAdapter!, errorMessage errString: String!) {
-        if errString != nil && errString != "" {
-            XCTFail("Client disconnected with err:\(errString)")
-            if let clientEXC = clientTestExectiation {
-                clientEXC.fulfill()
-            }
-        }
+//        if errString != nil && errString != "" {
+//            XCTFail("Client disconnected with err:\(errString)")
+//            if let clientEXC = clientTestExectiation {
+//                clientEXC.fulfill()
+//            }
+//        }
     }
     
     func clientDidReceiveMessage(client: SWClientAdapter!, fromAccount account: SWAccount!, inContent content: String!) {
