@@ -14,6 +14,8 @@
 		CD3685631B5E659500DFC78A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD3685611B5E659500DFC78A /* Main.storyboard */; };
 		CD36856E1B5E659500DFC78A /* ViviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD36856D1B5E659500DFC78A /* ViviTests.swift */; };
 		CD3685791B5E659500DFC78A /* ViviUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3685781B5E659500DFC78A /* ViviUITests.swift */; };
+		CD5E6F1E1B64DA5100E33502 /* libSwiften.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */; };
+		CD5E6F1F1B64DA7D00E33502 /* libSwiften.3.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CD72B2C91B5F6F5300BCFD2A /* SWEventLoop.h in Headers */ = {isa = PBXBuildFile; fileRef = CD72B2C71B5F6F5300BCFD2A /* SWEventLoop.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD72B2CA1B5F6F5300BCFD2A /* SWEventLoop.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */; };
 		CD72B2CD1B5F7A9800BCFD2A /* SWAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -38,8 +40,6 @@
 		CDF2122B1B629B3C0031913D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF2122A1B629B3C0031913D /* SystemConfiguration.framework */; };
 		CDF2122E1B629B490031913D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF2122C1B629B490031913D /* Security.framework */; };
 		CDF2122F1B629B490031913D /* SecurityInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF2122D1B629B490031913D /* SecurityInterface.framework */; };
-		CDF212381B62A67A0031913D /* libSwiften.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF212361B62A67A0031913D /* libSwiften.a */; };
-		CDF212391B62A67A0031913D /* libSwiften_Boost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF212371B62A67A0031913D /* libSwiften_Boost.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +74,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		CD5E6F191B64C32300E33502 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CD5E6F1F1B64DA7D00E33502 /* libSwiften.3.0.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD5E6F1B1B64C35900E33502 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CDE658AA1B5E66D400290E34 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -101,6 +120,7 @@
 		CD3685741B5E659500DFC78A /* ViviUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViviUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD3685781B5E659500DFC78A /* ViviUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViviUITests.swift; sourceTree = "<group>"; };
 		CD36857A1B5E659500DFC78A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSwiften.3.0.dylib; path = "Libraries and Frameworks/lib/libSwiften.3.0.dylib"; sourceTree = "<group>"; };
 		CD72B2C71B5F6F5300BCFD2A /* SWEventLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWEventLoop.h; sourceTree = "<group>"; };
 		CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWEventLoop.mm; sourceTree = "<group>"; };
 		CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAccount.h; sourceTree = "<group>"; };
@@ -126,8 +146,6 @@
 		CDF2122A1B629B3C0031913D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CDF2122C1B629B490031913D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CDF2122D1B629B490031913D /* SecurityInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityInterface.framework; path = System/Library/Frameworks/SecurityInterface.framework; sourceTree = SDKROOT; };
-		CDF212361B62A67A0031913D /* libSwiften.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSwiften.a; path = "Libraries and Frameworks/libSwiften.a"; sourceTree = "<group>"; };
-		CDF212371B62A67A0031913D /* libSwiften_Boost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSwiften_Boost.a; path = "Libraries and Frameworks/libSwiften_Boost.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,8 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDF212381B62A67A0031913D /* libSwiften.a in Frameworks */,
-				CDF212391B62A67A0031913D /* libSwiften_Boost.a in Frameworks */,
+				CD5E6F1E1B64DA5100E33502 /* libSwiften.3.0.dylib in Frameworks */,
 				CDF2122E1B629B490031913D /* Security.framework in Frameworks */,
 				CDF2122F1B629B490031913D /* SecurityInterface.framework in Frameworks */,
 				CDF2122B1B629B3C0031913D /* SystemConfiguration.framework in Frameworks */,
@@ -310,8 +327,7 @@
 		CDF2123B1B62A7F70031913D /* Swiften Related */ = {
 			isa = PBXGroup;
 			children = (
-				CDF212361B62A67A0031913D /* libSwiften.a */,
-				CDF212371B62A67A0031913D /* libSwiften_Boost.a */,
+				CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */,
 			);
 			name = "Swiften Related";
 			sourceTree = "<group>";
@@ -413,6 +429,7 @@
 				CD88E34E1B60D84E00E7E256 /* Sources */,
 				CD88E34F1B60D84E00E7E256 /* Frameworks */,
 				CD88E3501B60D84E00E7E256 /* Resources */,
+				CD5E6F1B1B64C35900E33502 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -432,6 +449,7 @@
 				CDE6588A1B5E66D400290E34 /* Frameworks */,
 				CDE6588B1B5E66D400290E34 /* Headers */,
 				CDE6588C1B5E66D400290E34 /* Resources */,
+				CD5E6F191B64C32300E33502 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -806,7 +824,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ViviSwiften/ViviSwiften.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SWIFTXMPP_DIR)",
+					"$(PROJECT_DIR)/\"Libraries and Frameworks\"/include",
 					"$(SWIFTXMPP_DIR)/3rdParty/Boost/src",
 				);
 				INFOPLIST_FILE = ViviSwiften/Info.plist;
@@ -814,11 +832,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/\"Libraries and Frameworks\"",
+					"$(PROJECT_DIR)/\"Libraries and Frameworks\"/lib",
 				);
 				OTHER_CFLAGS = "$(SWIFTEN_C_FLAGS)";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				OTHER_LDFLAGS = "$(SWIFTEN_LINKER_FLAGS)";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.ViviSwiften;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -842,7 +860,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ViviSwiften/ViviSwiften.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SWIFTXMPP_DIR)",
+					"$(PROJECT_DIR)/\"Libraries and Frameworks\"/include",
 					"$(SWIFTXMPP_DIR)/3rdParty/Boost/src",
 				);
 				INFOPLIST_FILE = ViviSwiften/Info.plist;
@@ -850,11 +868,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/\"Libraries and Frameworks\"",
+					"$(PROJECT_DIR)/\"Libraries and Frameworks\"/lib",
 				);
 				OTHER_CFLAGS = "$(SWIFTEN_C_FLAGS)";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				OTHER_LDFLAGS = "$(SWIFTEN_LINKER_FLAGS)";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.ViviSwiften;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

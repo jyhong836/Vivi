@@ -174,3 +174,6 @@ DerivedData
 *.app
 
 .idea/
+Libraries and Frameworks/include/Swiften/
+Libraries and Frameworks/bin/
+Libraries and Frameworks/lib/libSwiften*.dylib
