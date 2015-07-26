@@ -12,8 +12,6 @@ import ViviSwiften
 typealias ClientIndex = Int
 
 protocol VIClientManagerProtocol {
-    var clientList: [SWClient!]! { get }
-    
     static func getShared() -> VIClientManagerProtocol
     
     func addClient(withAccount account: SWAccount, andPasswd passwd: String!) -> ClientIndex?

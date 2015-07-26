@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import ViviSwiften
 
 class ViewController: NSViewController {
     
@@ -27,12 +26,10 @@ class ViewController: NSViewController {
     }
 
     @IBAction func connectButton(sender: NSButton) {
-        vivi.clientController.client.connect()
     }
 
     @IBAction func sendMessageButton(sender: NSButton) {
         // TODO: add send message code
-//        vivi.clientController.client.sendMessageToAccount(account, message: messageTextField)
     }
     
 }

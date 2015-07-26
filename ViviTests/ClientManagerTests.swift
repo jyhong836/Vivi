@@ -7,8 +7,11 @@
 //
 
 import XCTest
+@testable import Vivi
 
 class ClientManagerTests: XCTestCase {
+    
+    var clientManager = ClientManager.getShared()
 
     override func setUp() {
         super.setUp()

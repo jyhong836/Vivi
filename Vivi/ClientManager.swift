@@ -9,20 +9,18 @@
 import Cocoa
 import ViviSwiften
 
-class VIClientManager: VIClientManagerProtocol {
+class ClientManager: VIClientManagerProtocol {
     var clientList: [SWClient!]! = []
+    // FIXME: eventloop should be managed by ClientManager?
     let eventLoop = SWEventLoop()
     
-    private static var sharedClientManager: VIClientManager!
+    private static let sharedClientManager = ClientManager()
     
     private init() {
         // TODO: Add stored clients when inited
     }
     
     static func getShared() -> VIClientManagerProtocol {
-        if sharedClientManager == nil {
-            sharedClientManager = VIClientManager()
-        }
         return sharedClientManager
     }
     

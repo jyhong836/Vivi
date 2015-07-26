@@ -30,7 +30,7 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
     
     // MARK: Non-delay tests
     func testClient1AccountString() {
-        let client1 = SWClient(client1AccountString, password: client1PasswdString, eventLoop: eventLoop)
+        let client1 = SWClient(accountString: client1AccountString, password: client1PasswdString, eventLoop: eventLoop)
         let account = client1.account
         XCTAssertEqual(account.getAccountString(), "jyhong@xmpp.jp", "Account string \"\(account.getAccountString())\" not correspond to setting \"jyhong@xmpp.jp\"")
         XCTAssertEqual(account.getFullAccountString(), client1AccountString, "Account string \"\(account.getFullAccountString())\" not correspond to setting \"\(client1AccountString)\"")
@@ -70,7 +70,7 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         }
     }
     func testClient1Connect() {
-        let client1 = SWClient(client1AccountString, password: client1PasswdString, eventLoop: eventLoop)
+        let client1 = SWClient(accountString: client1AccountString, password: client1PasswdString, eventLoop: eventLoop)
         XCTAssertNil(client1.delegate, "delegate should be nil")
         
         client1.delegate = self
@@ -109,8 +109,8 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
     }
     
     func testTwoClientConnect() {
-        let client1 = SWClient(client1AccountString, password: client1PasswdString, eventLoop: eventLoop)
-        let client2 = SWClient(client2AccountString, password: client2PasswdString, eventLoop: eventLoop)
+        let client1 = SWClient(accountString: client1AccountString, password: client1PasswdString, eventLoop: eventLoop)
+        let client2 = SWClient(accountString: client2AccountString, password: client2PasswdString, eventLoop: eventLoop)
         
         client1.delegate = self
         client2.delegate = self
@@ -143,8 +143,8 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
     }
     
     func testTwoClientMsgExchange() {
-        let client1 = SWClient(client1AccountString, password: client1PasswdString, eventLoop: eventLoop)
-        let client2 = SWClient(client2AccountString, password: client2PasswdString, eventLoop: eventLoop)
+        let client1 = SWClient(accountString: client1AccountString, password: client1PasswdString, eventLoop: eventLoop)
+        let client2 = SWClient(accountString: client2AccountString, password: client2PasswdString, eventLoop: eventLoop)
         
         client1.delegate = self
         client2.delegate = self

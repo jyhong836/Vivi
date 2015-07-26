@@ -9,7 +9,6 @@
 #import "SWClientAdapter.h"
 #import "SWAccount.h"
 #import "SWClient.h"
-#import "VSClientManagerProtocol.h"
 #import "VSClientDelegateProtocol.h"
 
 using namespace Swift;

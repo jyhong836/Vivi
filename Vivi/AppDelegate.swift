@@ -10,27 +10,16 @@ import Cocoa
 import ViviSwiften
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, VSVivi {
+class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
-        setSharedVivi(self)
-        
-        clientController = ClientController()
-        clientController?.controllerDidLoad()
-//        clientController?.client.connect()
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
-        clientController?.controllerWillClose()
     }
     
-    // MARK: VSVivi implementation
-    
-    var clientController: VSClientManager?
-    var isQuitting: Bool = false
-
 }
 

@@ -9,15 +9,6 @@
 import Cocoa
 import ViviSwiften
 
-// MARK: Swiften types
-enum SWPresenceType: Int32 {
-    case Available, Error, Probe, Subscribe, Subscribed, Unavailable, Unsubscribe, Unsubscribed
-}
-let SWPresenceTypeStringDict: [SWPresenceType: String] = [.Available: "Available", .Error: "Error", .Probe: "Probe", .Subscribe: "Subscribe", .Subscribed: "Subscribed", .Unavailable: "Unavailable", .Unsubscribe: "Unsubscribe", .Unsubscribed: "Unsubscribed"]
-enum SWPresenceShowType: Int32 {
-    case Online, Away, FFC, XA, DND, None
-}
-let SWPresenceShowTypeStringDict: [SWPresenceShowType: String] = [.Online: "Online", .Away: "Away", .FFC:"FFC", .XA: "XA", .DND: "DND", .None:"None"]
 
 class ClientController: NSObject, VSClientManager, VSClientDelegate {
     var clientDelegate: VSClientDelegate?
@@ -28,7 +19,7 @@ class ClientController: NSObject, VSClientManager, VSClientDelegate {
     
     override init() {
         super.init()
-        clientDelegate = self
+//        clientDelegate = self
         eventLoop = SWEventLoop()
         client = SWClient(accountName,
             password: accountPasswd,
