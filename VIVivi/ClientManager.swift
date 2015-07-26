@@ -14,11 +14,11 @@ class ClientManager: VIClientManagerProtocol {
     // FIXME: eventloop should be managed by ClientManager?
     let eventLoop = SWEventLoop()
     
-    private static let sharedClientManager = ClientManager()
-    
-    private init() {
-        // TODO: Add stored clients when inited
-    }
+    static let sharedClientManager: ClientManager = {
+        let instance = ClientManager()
+        // init code here
+        return instance
+        }()
     
     static func getShared() -> VIClientManagerProtocol {
         return sharedClientManager
@@ -37,15 +37,36 @@ class ClientManager: VIClientManagerProtocol {
         return addClient(withClient: SWClient(accountString: account, password: passwd, eventLoop: eventLoop))
     }
     
-    func getClient(atIndex index: ClientIndex) -> SWClient? {
-        if index >= 0 && index < clientList.count {
-            return clientList[index]
-        } else {
-            return nil
-        }
+    func removeClientAtIndex(index: ClientIndex?) {
+        
     }
     
-    func indexOfClient(client: SWClient) -> ClientIndex? {
+    func removeClient(client: SWClient?) {
+        
+    }
+    
+    func getClientAtIndex(index: ClientIndex?) -> SWClient? {
+        if let i = index {
+            if index >= 0 && index < clientList.count {
+                return clientList[i]
+            } else {
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    func indexOfClient(client: SWClient?) -> ClientIndex? {
         return clientList.indexOf({c in c == client})
+    }
+    
+    func getClientCount() -> Int {
+        return clientList.count
+    }
+    
+    var maxClientCount: Int {
+        get {
+            return 5
+        }
     }
 }

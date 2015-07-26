@@ -9,7 +9,7 @@
 import XCTest
 import ViviSwiften
 
-class ViviTests: XCTestCase, VSVivi {
+class ViviTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

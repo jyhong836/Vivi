@@ -16,9 +16,6 @@
 		CD3685791B5E659500DFC78A /* ViviUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3685781B5E659500DFC78A /* ViviUITests.swift */; };
 		CD5E6F1E1B64DA5100E33502 /* libSwiften.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */; };
 		CD5E6F1F1B64DA7D00E33502 /* libSwiften.3.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		CD5E6F231B64E23C00E33502 /* VIClientManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E6F221B64E23C00E33502 /* VIClientManagerProtocol.swift */; };
-		CD5E6F261B64E6FD00E33502 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E6F251B64E6FD00E33502 /* ClientManager.swift */; };
-		CD5E6F281B64F05300E33502 /* ClientManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E6F271B64F05300E33502 /* ClientManagerTests.swift */; };
 		CD5E6F2A1B64F6E000E33502 /* SwiftenTypeDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */; };
 		CD72B2C91B5F6F5300BCFD2A /* SWEventLoop.h in Headers */ = {isa = PBXBuildFile; fileRef = CD72B2C71B5F6F5300BCFD2A /* SWEventLoop.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD72B2CA1B5F6F5300BCFD2A /* SWEventLoop.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */; };
@@ -36,6 +33,13 @@
 		CDE658CD1B5E8B8000290E34 /* SWClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDE658CB1B5E8B8000290E34 /* SWClient.mm */; };
 		CDE658D01B5EA70F00290E34 /* SWClientAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658CE1B5EA70F00290E34 /* SWClientAdapter.h */; };
 		CDE658D11B5EA70F00290E34 /* SWClientAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDE658CF1B5EA70F00290E34 /* SWClientAdapter.mm */; };
+		CDEE68361B6527A000D00EC7 /* VIVivi.h in Headers */ = {isa = PBXBuildFile; fileRef = CDEE68351B6527A000D00EC7 /* VIVivi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDEE68481B6527A000D00EC7 /* VIVivi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDEE68331B65279F00D00EC7 /* VIVivi.framework */; };
+		CDEE68491B6527A000D00EC7 /* VIVivi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDEE68331B65279F00D00EC7 /* VIVivi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CDEE68531B65284600D00EC7 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E6F251B64E6FD00E33502 /* ClientManager.swift */; };
+		CDEE68541B65285300D00EC7 /* VIClientManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E6F221B64E23C00E33502 /* VIClientManagerProtocol.swift */; };
+		CDEE68611B652BFA00D00EC7 /* VIVivi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDEE68331B65279F00D00EC7 /* VIVivi.framework */; };
+		CDEE68671B652C2600D00EC7 /* VIClientManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E6F271B64F05300E33502 /* VIClientManagerTests.swift */; };
 		CDF212271B629B200031913D /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF212261B629B200031913D /* IOKit.framework */; };
 		CDF212291B629B310031913D /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF212281B629B310031913D /* AppKit.framework */; };
 		CDF2122B1B629B3C0031913D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF2122A1B629B3C0031913D /* SystemConfiguration.framework */; };
@@ -72,6 +76,20 @@
 			remoteGlobalIDString = CDE6588D1B5E66D400290E34;
 			remoteInfo = ViviSwiften;
 		};
+		CDEE68461B6527A000D00EC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD3685501B5E659500DFC78A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDEE68321B65279F00D00EC7;
+			remoteInfo = VIVivi;
+		};
+		CDEE68621B652BFA00D00EC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD3685501B5E659500DFC78A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDEE68321B65279F00D00EC7;
+			remoteInfo = VIVivi;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -101,6 +119,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				CDE658A41B5E66D400290E34 /* ViviSwiften.framework in Embed Frameworks */,
+				CDEE68491B6527A000D00EC7 /* VIVivi.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,9 +142,9 @@
 		CD36857A1B5E659500DFC78A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSwiften.3.0.dylib; path = "Libraries and Frameworks/lib/libSwiften.3.0.dylib"; sourceTree = "<group>"; };
 		CD5E6F221B64E23C00E33502 /* VIClientManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VIClientManagerProtocol.swift; path = Protocols/VIClientManagerProtocol.swift; sourceTree = "<group>"; };
-		CD5E6F251B64E6FD00E33502 /* ClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
-		CD5E6F271B64F05300E33502 /* ClientManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientManagerTests.swift; sourceTree = "<group>"; };
-		CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftenTypeDefine.swift; sourceTree = "<group>"; };
+		CD5E6F251B64E6FD00E33502 /* ClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClientManager.swift; path = ../Vivi/ClientManager.swift; sourceTree = "<group>"; };
+		CD5E6F271B64F05300E33502 /* VIClientManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VIClientManagerTests.swift; path = ../ViviTests/VIClientManagerTests.swift; sourceTree = "<group>"; };
+		CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftenTypeDefine.swift; path = ../Vivi/SwiftenTypeDefine.swift; sourceTree = "<group>"; };
 		CD72B2C71B5F6F5300BCFD2A /* SWEventLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWEventLoop.h; sourceTree = "<group>"; };
 		CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWEventLoop.mm; sourceTree = "<group>"; };
 		CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAccount.h; sourceTree = "<group>"; };
@@ -144,6 +163,11 @@
 		CDE658CE1B5EA70F00290E34 /* SWClientAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWClientAdapter.h; sourceTree = "<group>"; };
 		CDE658CF1B5EA70F00290E34 /* SWClientAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = SWClientAdapter.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CDE658D21B5F376D00290E34 /* ClientController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ClientController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		CDEE68331B65279F00D00EC7 /* VIVivi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VIVivi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDEE68351B6527A000D00EC7 /* VIVivi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VIVivi.h; sourceTree = "<group>"; };
+		CDEE68371B6527A000D00EC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDEE685C1B652BFA00D00EC7 /* VIViviTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VIViviTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDEE68601B652BFA00D00EC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDF212261B629B200031913D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		CDF212281B629B310031913D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		CDF2122A1B629B3C0031913D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -157,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDE658A31B5E66D400290E34 /* ViviSwiften.framework in Frameworks */,
+				CDEE68481B6527A000D00EC7 /* VIVivi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +220,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDEE682F1B65279F00D00EC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDEE68591B652BFA00D00EC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDEE68611B652BFA00D00EC7 /* VIVivi.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -207,6 +247,8 @@
 				CDE6588F1B5E66D400290E34 /* ViviSwiften */,
 				CD88E3531B60D84E00E7E256 /* ViviSwiftenTests */,
 				CDF2123A1B62A69D0031913D /* Linked Libraries and Frameworks */,
+				CDEE68341B6527A000D00EC7 /* VIVivi */,
+				CDEE685D1B652BFA00D00EC7 /* VIViviTests */,
 				CD3685591B5E659500DFC78A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -219,6 +261,8 @@
 				CD3685741B5E659500DFC78A /* ViviUITests.xctest */,
 				CDE6588E1B5E66D400290E34 /* ViviSwiften.framework */,
 				CD88E3521B60D84E00E7E256 /* ViviSwiftenTests.xctest */,
+				CDEE68331B65279F00D00EC7 /* VIVivi.framework */,
+				CDEE685C1B652BFA00D00EC7 /* VIViviTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -228,10 +272,6 @@
 			children = (
 				CD36855B1B5E659500DFC78A /* AppDelegate.swift */,
 				CD36855D1B5E659500DFC78A /* ViewController.swift */,
-				CD5E6F251B64E6FD00E33502 /* ClientManager.swift */,
-				CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */,
-				CD5E6F241B64E50700E33502 /* Protocols */,
-				CDC49E421B5FEE0C00F5E6E6 /* Controller */,
 				CD5E6F2B1B64F78A00E33502 /* Removed */,
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
@@ -243,7 +283,6 @@
 		CD36856C1B5E659500DFC78A /* ViviTests */ = {
 			isa = PBXGroup;
 			children = (
-				CD5E6F271B64F05300E33502 /* ClientManagerTests.swift */,
 				CD36856D1B5E659500DFC78A /* ViviTests.swift */,
 				CD36856F1B5E659500DFC78A /* Info.plist */,
 			);
@@ -265,6 +304,7 @@
 				CD5E6F221B64E23C00E33502 /* VIClientManagerProtocol.swift */,
 			);
 			name = Protocols;
+			path = ../Vivi;
 			sourceTree = "<group>";
 		};
 		CD5E6F2B1B64F78A00E33502 /* Removed */ = {
@@ -283,13 +323,6 @@
 				CD88E3561B60D84E00E7E256 /* Info.plist */,
 			);
 			path = ViviSwiftenTests;
-			sourceTree = "<group>";
-		};
-		CDC49E421B5FEE0C00F5E6E6 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Controller;
 			sourceTree = "<group>";
 		};
 		CDC49E451B5FFC3C00F5E6E6 /* Support Files */ = {
@@ -334,6 +367,27 @@
 				CD72B2CC1B5F7A9800BCFD2A /* SWAccount.mm */,
 			);
 			name = "Swiften Adapter";
+			sourceTree = "<group>";
+		};
+		CDEE68341B6527A000D00EC7 /* VIVivi */ = {
+			isa = PBXGroup;
+			children = (
+				CDEE68351B6527A000D00EC7 /* VIVivi.h */,
+				CD5E6F251B64E6FD00E33502 /* ClientManager.swift */,
+				CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */,
+				CD5E6F241B64E50700E33502 /* Protocols */,
+				CDEE68371B6527A000D00EC7 /* Info.plist */,
+			);
+			path = VIVivi;
+			sourceTree = "<group>";
+		};
+		CDEE685D1B652BFA00D00EC7 /* VIViviTests */ = {
+			isa = PBXGroup;
+			children = (
+				CD5E6F271B64F05300E33502 /* VIClientManagerTests.swift */,
+				CDEE68601B652BFA00D00EC7 /* Info.plist */,
+			);
+			path = VIViviTests;
 			sourceTree = "<group>";
 		};
 		CDF2123A1B62A69D0031913D /* Linked Libraries and Frameworks */ = {
@@ -383,6 +437,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDEE68301B65279F00D00EC7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDEE68361B6527A000D00EC7 /* VIVivi.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -399,6 +461,7 @@
 			);
 			dependencies = (
 				CDE658A21B5E66D400290E34 /* PBXTargetDependency */,
+				CDEE68471B6527A000D00EC7 /* PBXTargetDependency */,
 			);
 			name = Vivi;
 			productName = Vivi;
@@ -479,12 +542,49 @@
 			productReference = CDE6588E1B5E66D400290E34 /* ViviSwiften.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		CDEE68321B65279F00D00EC7 /* VIVivi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDEE684E1B6527A000D00EC7 /* Build configuration list for PBXNativeTarget "VIVivi" */;
+			buildPhases = (
+				CDEE682E1B65279F00D00EC7 /* Sources */,
+				CDEE682F1B65279F00D00EC7 /* Frameworks */,
+				CDEE68301B65279F00D00EC7 /* Headers */,
+				CDEE68311B65279F00D00EC7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VIVivi;
+			productName = VIVivi;
+			productReference = CDEE68331B65279F00D00EC7 /* VIVivi.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CDEE685B1B652BFA00D00EC7 /* VIViviTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDEE68641B652BFA00D00EC7 /* Build configuration list for PBXNativeTarget "VIViviTests" */;
+			buildPhases = (
+				CDEE68581B652BFA00D00EC7 /* Sources */,
+				CDEE68591B652BFA00D00EC7 /* Frameworks */,
+				CDEE685A1B652BFA00D00EC7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDEE68631B652BFA00D00EC7 /* PBXTargetDependency */,
+			);
+			name = VIViviTests;
+			productName = VIViviTests;
+			productReference = CDEE685C1B652BFA00D00EC7 /* VIViviTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		CD3685501B5E659500DFC78A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Junyuan Hong";
 				TargetAttributes = {
@@ -503,6 +603,12 @@
 						CreatedOnToolsVersion = 7.0;
 					};
 					CDE6588D1B5E66D400290E34 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					CDEE68321B65279F00D00EC7 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					CDEE685B1B652BFA00D00EC7 = {
 						CreatedOnToolsVersion = 7.0;
 					};
 				};
@@ -525,6 +631,8 @@
 				CD3685731B5E659500DFC78A /* ViviUITests */,
 				CDE6588D1B5E66D400290E34 /* ViviSwiften */,
 				CD88E3511B60D84E00E7E256 /* ViviSwiftenTests */,
+				CDEE68321B65279F00D00EC7 /* VIVivi */,
+				CDEE685B1B652BFA00D00EC7 /* VIViviTests */,
 			);
 		};
 /* End PBXProject section */
@@ -567,6 +675,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDEE68311B65279F00D00EC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDEE685A1B652BFA00D00EC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -575,9 +697,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD36855E1B5E659500DFC78A /* ViewController.swift in Sources */,
-				CD5E6F261B64E6FD00E33502 /* ClientManager.swift in Sources */,
 				CD36855C1B5E659500DFC78A /* AppDelegate.swift in Sources */,
-				CD5E6F231B64E23C00E33502 /* VIClientManagerProtocol.swift in Sources */,
 				CD5E6F2A1B64F6E000E33502 /* SwiftenTypeDefine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -586,7 +706,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD5E6F281B64F05300E33502 /* ClientManagerTests.swift in Sources */,
 				CD36856E1B5E659500DFC78A /* ViviTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,6 +738,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDEE682E1B65279F00D00EC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDEE68531B65284600D00EC7 /* ClientManager.swift in Sources */,
+				CDEE68541B65285300D00EC7 /* VIClientManagerProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDEE68581B652BFA00D00EC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDEE68671B652C2600D00EC7 /* VIClientManagerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -641,6 +777,16 @@
 			isa = PBXTargetDependency;
 			target = CDE6588D1B5E66D400290E34 /* ViviSwiften */;
 			targetProxy = CDE658A11B5E66D400290E34 /* PBXContainerItemProxy */;
+		};
+		CDEE68471B6527A000D00EC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDEE68321B65279F00D00EC7 /* VIVivi */;
+			targetProxy = CDEE68461B6527A000D00EC7 /* PBXContainerItemProxy */;
+		};
+		CDEE68631B652BFA00D00EC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDEE68321B65279F00D00EC7 /* VIVivi */;
+			targetProxy = CDEE68621B652BFA00D00EC7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -741,6 +887,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Vivi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.Vivi;
@@ -753,6 +900,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Vivi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.Vivi;
@@ -906,6 +1054,73 @@
 			};
 			name = Release;
 		};
+		CDEE684A1B6527A000D00EC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = VIVivi/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.VIVivi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CDEE684B1B6527A000D00EC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = VIVivi/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.VIVivi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		CDEE68651B652BFA00D00EC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = VIViviTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.VIViviTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CDEE68661B652BFA00D00EC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = VIViviTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.VIViviTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -962,6 +1177,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		CDEE684E1B6527A000D00EC7 /* Build configuration list for PBXNativeTarget "VIVivi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDEE684A1B6527A000D00EC7 /* Debug */,
+				CDEE684B1B6527A000D00EC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CDEE68641B652BFA00D00EC7 /* Build configuration list for PBXNativeTarget "VIViviTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDEE68651B652BFA00D00EC7 /* Debug */,
+				CDEE68661B652BFA00D00EC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

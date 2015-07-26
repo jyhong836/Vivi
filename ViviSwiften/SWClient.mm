@@ -28,8 +28,8 @@ using namespace Swift;
 {
     if (self = [super init]) {
         isConnected = NO;
-        client = new SWClientAdapter(account,
-                                     NSString2std_str(passwd),
+        client = new SWClientAdapter(aAccount,
+                                     NSString2std_str(aPasswd),
                                      [eventLoop getNetworkFactories],
                                      self);
     }
@@ -47,7 +47,7 @@ using namespace Swift;
             passwd = aPasswd;
             client = new SWClientAdapter(
                                          account,
-                                         [passwd cStringUsingEncoding:NSASCIIStringEncoding],
+                                         NSString2std_str(passwd),
                                          [eventLoop getNetworkFactories],
                                        self);
         } else {

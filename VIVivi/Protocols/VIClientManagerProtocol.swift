@@ -14,9 +14,16 @@ typealias ClientIndex = Int
 protocol VIClientManagerProtocol {
     static func getShared() -> VIClientManagerProtocol
     
+    // FIXME: should not use index to access client?
     func addClient(withAccount account: SWAccount, andPasswd passwd: String!) -> ClientIndex?
     func addClient(withAccountName account: String!, andPasswd passwd: String!) -> ClientIndex?
     
-    func getClient(atIndex index: ClientIndex) -> SWClient?
-    func indexOfClient(client: SWClient) -> ClientIndex?
+    func removeClientAtIndex(index: ClientIndex?)
+    func removeClient(client: SWClient?)
+    
+    func getClientAtIndex(index: ClientIndex?) -> SWClient?
+    func indexOfClient(client: SWClient?) -> ClientIndex?
+    
+    func getClientCount() -> Int
+    var maxClientCount: Int { get }
 }
