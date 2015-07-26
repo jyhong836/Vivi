@@ -1,16 +1,15 @@
 //
-//  ViviTests.swift
-//  ViviTests
+//  ClientManagerTests.swift
+//  Vivi
 //
-//  Created by Junyuan Hong on 7/21/15.
+//  Created by Junyuan Hong on 7/26/15.
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
 import XCTest
-import ViviSwiften
 
-class ViviTests: XCTestCase, VSVivi {
-    
+class ClientManagerTests: XCTestCase {
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -21,4 +20,8 @@ class ViviTests: XCTestCase, VSVivi {
         super.tearDown()
     }
     
+    func testAddClientToManager() {
+        // TODO: Add test code here
+    }
+
 }

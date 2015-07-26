@@ -23,7 +23,10 @@
 
 @property (nonatomic) id<VSClientDelegate> delegate;
 
-- (id)init: (NSString*)account
+- (id)initWithAccount: (SWAccount*)aAccount
+  Password: (NSString*)aPasswd
+ EventLoop: (SWEventLoop*)eventLoop;
+- (id)initWithAccountString: (NSString*)aAccountString
   Password: (NSString*)passwd
  EventLoop: (SWEventLoop*)eventLoop;
 - (void)dealloc;

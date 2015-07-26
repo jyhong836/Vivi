@@ -662,7 +662,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="156.5" y="342.5"/>
+            <point key="canvasLocation" x="156" y="342"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">

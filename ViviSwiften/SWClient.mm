@@ -22,14 +22,28 @@ using namespace Swift;
 @synthesize account;
 @synthesize isConnected;
 
-- (id)init: (NSString*)aAccount
+- (id)initWithAccount: (SWAccount*)aAccount
   Password: (NSString*)aPasswd
  EventLoop: (SWEventLoop*)eventLoop
 {
     if (self = [super init]) {
         isConnected = NO;
-        if (aAccount && aPasswd) {
-            account = [[SWAccount alloc] init: aAccount];
+        client = new SWClientAdapter(account,
+                                     NSString2std_str(passwd),
+                                     [eventLoop getNetworkFactories],
+                                     self);
+    }
+    return self;
+}
+
+- (id)initWithAccountString: (NSString*)aAccountString
+  Password: (NSString*)aPasswd
+ EventLoop: (SWEventLoop*)eventLoop
+{
+    if (self = [super init]) {
+        isConnected = NO;
+        if (aAccountString && aPasswd) {
+            account = [[SWAccount alloc] init: aAccountString];
             passwd = aPasswd;
             client = new SWClientAdapter(
                                          account,
