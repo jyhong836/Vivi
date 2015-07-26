@@ -13,11 +13,6 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 #import <Foundation/Foundation.h>
 
-/*!
- * NSString* std_str2NSString(std::string)
- */
-#define std_str2NSString(std_str) [NSString stringWithCString:(std_str).c_str() encoding:[NSString defaultCStringEncoding]]
-
-#define NSString2std_str(nsstr) [(nsstr) cStringUsingEncoding: [NSString defaultCStringEncoding]]
+#import "Utils.h"
 
 #endif /* ViviSwiften_pch */

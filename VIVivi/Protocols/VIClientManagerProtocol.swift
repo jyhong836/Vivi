@@ -9,10 +9,10 @@
 import Cocoa
 import ViviSwiften
 
-typealias ClientIndex = Int
+public typealias ClientIndex = Int
 
 protocol VIClientManagerProtocol {
-    static func getShared() -> VIClientManagerProtocol
+//    static func getShared() -> VIClientManagerProtocol
     
     // FIXME: should not use index to access client?
     func addClient(withAccount account: SWAccount, andPasswd passwd: String!) -> ClientIndex?

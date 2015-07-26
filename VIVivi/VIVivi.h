@@ -15,5 +15,5 @@ FOUNDATION_EXPORT double VIViviVersionNumber;
 FOUNDATION_EXPORT const unsigned char VIViviVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <VIVivi/PublicHeader.h>
-
-
+//#import "VIVivi-Swift.h"
+//#import <VIVivi/ClientManager-Swift.h>
