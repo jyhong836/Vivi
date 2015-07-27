@@ -20,18 +20,14 @@
 @interface SWClient : NSObject
 
 @property (nonatomic) BOOL isConnected;
+@property (readonly, nonatomic)SWAccount* account;
 
 @property (nonatomic) id<VSClientDelegate> delegate;
 
 - (id)initWithAccount: (SWAccount*)aAccount
   Password: (NSString*)aPasswd
  EventLoop: (SWEventLoop*)eventLoop;
-- (id)initWithAccountString: (NSString*)aAccountString
-  Password: (NSString*)passwd
- EventLoop: (SWEventLoop*)eventLoop;
 - (void)dealloc;
-//- (SWAccount*)getAccount;
-@property (readonly, nonatomic)SWAccount* account;
 
 - (void)connect;
 - (void)disconnect;

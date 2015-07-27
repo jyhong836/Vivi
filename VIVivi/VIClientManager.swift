@@ -9,10 +9,14 @@
 import Cocoa
 import ViviSwiften
 
+public enum VIClientManagerError: ErrorType {
+    case AccountNameConfilct
+}
+
 public class VIClientManager: VIClientManagerProtocol {
-    var clientList: [SWClient!]! = []
+    private var clientList: [SWClient]! = []
     // FIXME: eventloop should be managed by VIClientManager?
-    let eventLoop = SWEventLoop()
+    private let eventLoop = SWEventLoop()
     
     public static let sharedClientManager: VIClientManager = {
         let instance = VIClientManager()
@@ -20,49 +24,51 @@ public class VIClientManager: VIClientManagerProtocol {
         return instance
         }()
     
-    public func addClient(withClient client: SWClient) -> ClientIndex? {
-        clientList.append(client)
-        return clientList.indexOf({c in c == client})
+    public func addClient(withAccount account: SWAccount, andPasswd passwd: String!) throws -> SWClient? {
+        let newClient = SWClient(account: account, password: passwd, eventLoop: eventLoop)
+        guard !clientList.contains( { (c: SWClient) -> Bool in
+            c.account.getAccountString() == account.getAccountString()
+        }) else {
+            throw VIClientManagerError.AccountNameConfilct
+        }
+        clientList.append(newClient)
+        return newClient
     }
     
-    public func addClient(withAccount account: SWAccount, andPasswd passwd: String!) -> ClientIndex? {
-        return addClient(withClient: SWClient(account: account, password: passwd, eventLoop: eventLoop))
-    }
-    
-    public func addClient(withAccountName account: String!, andPasswd passwd: String!) -> ClientIndex? {
-        return addClient(withClient: SWClient(accountString: account, password: passwd, eventLoop: eventLoop))
-    }
-    
-    public func removeClientAtIndex(index: ClientIndex?) {
-        
+    public func addClient(withAccountName account: String!, andPasswd passwd: String!) throws -> SWClient? {
+        return try self.addClient(withAccount: SWAccount(account), andPasswd: passwd)
     }
     
     public func removeClient(client: SWClient?) {
         
     }
     
-    public func getClientAtIndex(index: ClientIndex?) -> SWClient? {
-        if let i = index {
-            if index >= 0 && index < clientList.count {
-                return clientList[i]
-            } else {
-                return nil
-            }
-        }
+    public func removeAllClient() {
+        clientList.removeAll(keepCapacity: true)
+    }
+    
+    public func getClient(withAccountName name: String) -> SWClient? {
         return nil
     }
     
-    public func indexOfClient(client: SWClient?) -> ClientIndex? {
-        return clientList.indexOf({c in c == client})
-    }
-    
-    public func getClientCount() -> Int {
-        return clientList.count
-    }
-    
-    public var maxClientCount: Int {
-        get {
-            return 5
+    public func currentIndexOfClient(client: SWClient?) -> Int? {
+        if let c = client {
+            return clientList.indexOf(c)
+        } else {
+            return nil
         }
     }
+    
+    public func currentIndexOfClient(withAccountName name: String) -> Int? {
+        return nil
+    }
+    
+    public var clientCount: Int {
+        get {
+            return clientList.count
+        }
+    }
+    
+    public let maxClientCount: Int  = 5
+    
 }

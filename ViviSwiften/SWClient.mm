@@ -28,32 +28,12 @@ using namespace Swift;
 {
     if (self = [super init]) {
         isConnected = NO;
-        client = new SWClientAdapter(aAccount,
-                                     NSString2std_str(aPasswd),
+        account = aAccount;
+        passwd = aPasswd;
+        client = new SWClientAdapter(account,
+                                     NSString2std_str(passwd),
                                      [eventLoop getNetworkFactories],
                                      self);
-    }
-    return self;
-}
-
-- (id)initWithAccountString: (NSString*)aAccountString
-  Password: (NSString*)aPasswd
- EventLoop: (SWEventLoop*)eventLoop
-{
-    if (self = [super init]) {
-        isConnected = NO;
-        if (aAccountString && aPasswd) {
-            account = [[SWAccount alloc] init: aAccountString];
-            passwd = aPasswd;
-            client = new SWClientAdapter(
-                                         account,
-                                         NSString2std_str(passwd),
-                                         [eventLoop getNetworkFactories],
-                                       self);
-        } else {
-            // TODO: add alert for NULL account or password
-            return nil;
-        }
     }
     return self;
 }

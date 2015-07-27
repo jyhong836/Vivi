@@ -9,21 +9,17 @@
 import Cocoa
 import ViviSwiften
 
-public typealias ClientIndex = Int
-
 protocol VIClientManagerProtocol {
-//    static func getShared() -> VIClientManagerProtocol
-    
-    // FIXME: should not use index to access client?
-    func addClient(withAccount account: SWAccount, andPasswd passwd: String!) -> ClientIndex?
-    func addClient(withAccountName account: String!, andPasswd passwd: String!) -> ClientIndex?
-    
-    func removeClientAtIndex(index: ClientIndex?)
+    func addClient(withAccount account: SWAccount, andPasswd passwd: String!) throws -> SWClient?
+    func addClient(withAccountName account: String!, andPasswd passwd: String!) throws -> SWClient?
     func removeClient(client: SWClient?)
+    func removeAllClient()
     
-    func getClientAtIndex(index: ClientIndex?) -> SWClient?
-    func indexOfClient(client: SWClient?) -> ClientIndex?
+    func getClient(withAccountName name: String) -> SWClient?
     
-    func getClientCount() -> Int
+    func currentIndexOfClient(client: SWClient?) -> Int?
+    func currentIndexOfClient(withAccountName name: String) -> Int?
+    
+    var clientCount: Int { get }
     var maxClientCount: Int { get }
 }
