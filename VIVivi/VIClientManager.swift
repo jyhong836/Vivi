@@ -11,6 +11,9 @@ import ViviSwiften
 
 public enum VIClientManagerError: ErrorType {
     case AccountNameConfilct
+    case ClientPasswordUnconvertible
+    case ClientAccountNameUnconvertible
+    case TooManyClients
 }
 
 public class VIClientManager: VIClientManagerProtocol {
@@ -24,7 +27,16 @@ public class VIClientManager: VIClientManagerProtocol {
         return instance
         }()
     
-    public func addClient(withAccount account: SWAccount, andPasswd passwd: String!) throws -> SWClient? {
+    public func startClientLoop() {
+        eventLoop.start()
+    }
+    
+    deinit {
+        // TODO: Test if the evenLoop and VIClientManager will be deinit
+        eventLoop.stop()
+    }
+    
+    private func addClient(withAccount account: SWAccount, andPasswd passwd: String!) throws -> SWClient? {
         let newClient = SWClient(account: account, password: passwd, eventLoop: eventLoop)
         guard !clientList.contains( { (c: SWClient) -> Bool in
             c.account.getAccountString() == account.getAccountString()
@@ -36,18 +48,53 @@ public class VIClientManager: VIClientManagerProtocol {
     }
     
     public func addClient(withAccountName account: String!, andPasswd passwd: String!) throws -> SWClient? {
-        return try self.addClient(withAccount: SWAccount(account), andPasswd: passwd)
+        guard account.canBeConvertedToEncoding(NSString.defaultCStringEncoding()) else {
+            throw VIClientManagerError.ClientAccountNameUnconvertible
+        }
+        guard passwd.canBeConvertedToEncoding(NSString.defaultCStringEncoding()) else {
+            throw VIClientManagerError.ClientPasswordUnconvertible
+        }
+        guard clientCount < maxClientCount else {
+            throw VIClientManagerError.TooManyClients
+        }
+        return try self.addClient(withAccount: SWAccount(accountName: account), andPasswd: passwd)
     }
     
     public func removeClient(client: SWClient?) {
-        
+        if client == nil {
+            return
+        } else {
+            if let i = clientList.indexOf(client!) {
+                if client!.isActive() {
+                    client!.disconnectWithHandler({ () -> Void in
+                        clientList.removeAtIndex(i)
+                    })
+                }
+            }
+        }
     }
     
     public func removeAllClient() {
-        clientList.removeAll(keepCapacity: true)
+        for c in clientList {
+            removeClient(c)
+        }
+    }
+    
+    /// Force remove all clients, may cause to unexpected memory access error.
+    internal func forceRemoveAllClient() {
+        clientList.removeAll()
     }
     
     public func getClient(withAccountName name: String) -> SWClient? {
+        if !name.canBeConvertedToEncoding(NSString.defaultCStringEncoding()) {
+            return nil
+        }
+        let account = SWAccount(accountName: name)
+        for c in clientList {
+            if c.account.getAccountString() == account.getAccountString() {
+                return c
+            }
+        }
         return nil
     }
     
@@ -60,7 +107,7 @@ public class VIClientManager: VIClientManagerProtocol {
     }
     
     public func currentIndexOfClient(withAccountName name: String) -> Int? {
-        return nil
+        return currentIndexOfClient(getClient(withAccountName: name))
     }
     
     public var clientCount: Int {
@@ -69,6 +116,6 @@ public class VIClientManager: VIClientManagerProtocol {
         }
     }
     
+    // FIXME: Multi-client is unsafe when deleted
     public let maxClientCount: Int  = 5
-    
 }

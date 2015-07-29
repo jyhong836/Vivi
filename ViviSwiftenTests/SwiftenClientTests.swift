@@ -11,12 +11,10 @@ import XCTest
 
 class SwiftenClientTests: XCTestCase, VSClientDelegate {
     
-    let eventLoop: SWEventLoop! = SWEventLoop()
+    var eventLoop: SWEventLoop! = SWEventLoop()
     
-    let client1AccountString = "jyhong@xmpp.jp/testResource"
-    let client1PasswdString = "jyhong123"
-    let client2AccountString = "jyhong1@xmpp.jp/testResource"
-    let client2PasswdString = "jyhong123"
+    let clientAccountString = ["jyhong@xmpp.jp/testResource", "jyhong1@xmpp.jp/testResource"]
+    let clientPasswdString = ["jyhong123", "jyhong123"]
 
     override func setUp() {
         super.setUp()
@@ -28,15 +26,22 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         super.tearDown()
     }
     
+    private func createClient(index: Int) -> SWClient {
+        let c =  SWClient(account: SWAccount(accountName: clientAccountString[index]), password: clientPasswdString[index], eventLoop: eventLoop)
+        c.delegate = self
+        return c
+    }
+    
     // MARK: Non-delay tests
     func testClient1AccountString() {
-        let client1 = SWClient(accountString: client1AccountString, password: client1PasswdString, eventLoop: eventLoop)
+        let idx = 0
+        let client1 = createClient(idx)
         let account = client1.account
         XCTAssertEqual(account.getAccountString(), "jyhong@xmpp.jp", "Account string \"\(account.getAccountString())\" not correspond to setting \"jyhong@xmpp.jp\"")
-        XCTAssertEqual(account.getFullAccountString(), client1AccountString, "Account string \"\(account.getFullAccountString())\" not correspond to setting \"\(client1AccountString)\"")
-        XCTAssertEqual(account.getDomainString(), "xmpp.jp", "Account domain \"\(account.getDomainString())\" not correspond to setting \"xmpp.jp\"")
-        XCTAssertEqual(account.getResourceString(), "testResource", "Account resource \"\(account.getResourceString())\" not correspond to setting \"testResource\"")
-        XCTAssertEqual(account.getNodeString(), "jyhong", "Account resource \"\(account.getNodeString())\" not correspond to setting \"jyhong\"")
+        XCTAssertEqual(account.getFullAccountString(), clientAccountString[idx], "Account string does not correspond")
+        XCTAssertEqual(account.getDomainString(), "xmpp.jp", "Account domain not correspond to setting \"xmpp.jp\"")
+        XCTAssertEqual(account.getResourceString(), "testResource", "Account resource not correspond")
+        XCTAssertEqual(account.getNodeString(), "jyhong", "Account resource  not correspond")
         // TODO: Add test for password
     }
     
@@ -70,8 +75,7 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         }
     }
     func testClient1Connect() {
-        let client1 = SWClient(accountString: client1AccountString, password: client1PasswdString, eventLoop: eventLoop)
-        XCTAssertNil(client1.delegate, "delegate should be nil")
+        let client1 = createClient(0)
         
         client1.delegate = self
         
@@ -91,7 +95,7 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         
         client1.connect()
         waitForExpectationsWithTimeout(50, handler: nil)
-        XCTAssertTrue(client1.isConnected, "client1 should have been connected")
+        XCTAssertTrue(client1.isAvailable(), "client1 should have been connected")
         
         
         // test client disconnecting
@@ -105,12 +109,12 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         // FIXME: Client disconnect sometimes go wrong with EXC_BAD_ACCESS. Although can be fixed with check NSZombieEnabled.
         client1.disconnect()
         waitForExpectationsWithTimeout(50, handler: nil)
-        XCTAssertTrue(!client1.isConnected, "client1 should have been disconnected")
+        XCTAssertTrue(!client1.isAvailable(), "client1 should have been disconnected")
     }
     
     func testTwoClientConnect() {
-        let client1 = SWClient(accountString: client1AccountString, password: client1PasswdString, eventLoop: eventLoop)
-        let client2 = SWClient(accountString: client2AccountString, password: client2PasswdString, eventLoop: eventLoop)
+        let client1 = createClient(0)
+        let client2 = createClient(1)
         
         client1.delegate = self
         client2.delegate = self
@@ -143,8 +147,8 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
     }
     
     func testTwoClientMsgExchange() {
-        let client1 = SWClient(accountString: client1AccountString, password: client1PasswdString, eventLoop: eventLoop)
-        let client2 = SWClient(accountString: client2AccountString, password: client2PasswdString, eventLoop: eventLoop)
+        let client1 = createClient(0)
+        let client2 = createClient(1)
         
         client1.delegate = self
         client2.delegate = self
@@ -174,27 +178,79 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         
         eventLoop.start()
         
-        clientConnectExpectation = self.expectationWithDescription("test client1 connecting")
-        _clientDidConnect = {(c: SWClient!)->Void in
-            XCTAssertEqual(c, client1, "connected client not equal to expected")
-            clientConnectExpectation?.fulfill()
-        }
-        client1.connect()
-        waitForExpectationsWithTimeout(30, handler: nil)
-        
-        clientConnectExpectation = self.expectationWithDescription("test client2 connecting")
-        _clientDidConnect = {(c: SWClient!)->Void in
-            XCTAssertEqual(c, client2, "connected client not equal to expected")
-            clientConnectExpectation?.fulfill()
-        }
-        client2.connect()
-        waitForExpectationsWithTimeout(30, handler: nil)
+        connectToClient(client1)
+        connectToClient(client2)
         
         clientConnectExpectation = self.expectationWithDescription("test client1 and client2 message exchange")
         client1.sendMessageToAccount(client2.account, message: c1string)
         
         waitForExpectationsWithTimeout(20, handler: nil)
+        
     }
     
-//    optional func clientDidReceivePresence(client: SWClient!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow show: Int32, currentStatus status: AnyObject!)
+    var _clientDidReceivePresence: ((client: SWClient!, account: SWAccount!, presenceType: Int32, show: Int32, status: String!) -> Void)? = nil
+    func clientDidReceivePresence(client: SWClient!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow show: Int32, currentStatus status: String!) {
+        if let cb = _clientDidReceivePresence {
+            cb(client: client, account: account, presenceType: presenceType, show: show, status: status)
+        }
+    }
+    
+    func connectToClient(client: SWClient) {
+        let clientConnectExpectation = self.expectationWithDescription("Fail to connect to \(client.account.getFullAccountString())")
+        _clientDidConnect = {(c: SWClient!)->Void in
+            XCTAssertEqual(c, client, "connected client not equal to expected")
+            print("connected to \(client.account.getFullAccountString())")
+            clientConnectExpectation.fulfill()
+        }
+        client.connect()
+        waitForExpectationsWithTimeout(30, handler: nil)
+    }
+    
+    // Not validate test
+//    func testDeleteOneClient() {
+//        var client1:SWClient? = createClient(0)
+//        client1?.delegate = self
+//        client1?.connectWithHandler({ () -> Void in
+//            NSLog("connected to %@", client1?.account.getFullAccountString())
+//        })
+//        client1?.disconnectWithHandler({ () -> Void in
+//            client1 = nil
+//        })
+//    }
+//    
+//    func testDelete() {
+//        var client1:SWClient? = createClient(0)
+//        var client2:SWClient? = createClient(1)
+//        client1?.delegate = self
+//        client2?.delegate = self
+//        eventLoop.start()
+//        
+//        connectToClient(client2!)
+//        connectToClient(client1!)
+//        
+//        var expect: XCTestExpectation!
+//        _clientDidDisconnect = {
+//            (c: SWClient!, e: Int32)->Void in
+//            if c == client1 {
+//                expect.fulfill()
+//            } else if c == client2 {
+//                expect.fulfill()
+//            }
+//        }
+//        
+//        client1?.disconnect()
+//        expect = self.expectationWithDescription("Client not succss disconnect")
+//        waitForExpectationsWithTimeout(20, handler: nil)
+//        
+//        client2?.disconnect()
+//        expect = self.expectationWithDescription("Client not succss disconnect")
+//        waitForExpectationsWithTimeout(20, handler: nil)
+//
+//        XCTAssertFalse(client1!.isActive(), "Client is not disconnected correctly.")
+//        XCTAssertFalse(client2!.isActive(), "Client is not disconnected correctly.")
+//        
+//        client1 = nil
+//        // FIXME: client2 is not released indead.
+//        client2 = nil
+//    }
 }

@@ -10,6 +10,8 @@
 @class SWAccount;
 @protocol VSClientDelegate;
 
+typedef void (^ConnectionHandler)(void);
+
 /*!
  * @brief A Objective-C adapter for Swift::Client.
  * 
@@ -19,22 +21,42 @@
  */
 @interface SWClient : NSObject
 
-@property (nonatomic) BOOL isConnected;
 @property (readonly, nonatomic)SWAccount* account;
 
 @property (nonatomic) id<VSClientDelegate> delegate;
+/// Set through connectWithHandler.
+@property (readonly, nonatomic) ConnectionHandler connectHandler;
+/// Set through disconnectWithHandler.
+@property (readonly, nonatomic) ConnectionHandler disconnectHandler;
+- (void)setConnectHandlerToNil;
+- (void)setDisconnectHandlerToNil;
 
+/*!
+ * @brief Init SWClient with SWAccount
+ *
+ * @param password must be convertible to ASCII C String, or raise Exception.
+ */
 - (id)initWithAccount: (SWAccount*)aAccount
-  Password: (NSString*)aPasswd
- EventLoop: (SWEventLoop*)eventLoop;
-- (void)dealloc;
+             password: (NSString*)aPasswd
+            eventLoop: (SWEventLoop*)aEventLoop;
+//- (void)dealloc;
 
 - (void)connect;
+/// Connect and invoke handler when success. Handler will be invoked after delegate.
+- (void)connectWithHandler: (ConnectionHandler)handler;
 - (void)disconnect;
+/// Connect and invoke handler when success. Handler will be invoked after delegate.
+- (void)disconnectWithHandler: (ConnectionHandler)handler;
 - (void)sendMessageToAccount: (SWAccount*)account
               Message: (NSString*)message;
 
+/// Checks whether the client is connected to the server, and stanzas can be sent.
 - (BOOL)isAvailable;
+/*!
+ * @brief Checks whether the client is active.
+ *
+ * A client is active when it is connected or connecting to the server.
+ */
 - (BOOL)isActive;
 
 - (void)setSoftwareName: (NSString*)name

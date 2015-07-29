@@ -16,7 +16,10 @@
 #else
 @property (readonly, nonatomic) void* jid;
 #endif
-- (id)init: (NSString *)account;
+/*! 
+ * @param accountName must be convertible to ASCII C String, or raise Exception.
+ */
+- (id)initWithAccountName: (NSString *)account;
 - (void)dealloc;
 
 - (NSString*)getAccountString;

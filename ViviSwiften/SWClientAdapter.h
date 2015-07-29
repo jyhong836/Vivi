@@ -29,8 +29,10 @@ namespace Swift
                       NetworkFactories* networkFactories,
                       SWClient* clientAdapter,
                       Storages* storages = NULL);
+        ~SWClientAdapter();
     private:
-        SWClient* swclient;
+        /// Never free swclient inside SWClientAdapter
+        SWClient* __weak swclient;
         void onConnectedSlot();
         void onDisconnectedSlot(const boost::optional<ClientError> &err);
         void onRosterReceivedSlot(RosterPayload::ref rosterPayload,ErrorPayload::ref err);

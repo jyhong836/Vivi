@@ -25,7 +25,7 @@ class ClientManagerTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-        clientMgr.removeAllClient()
+        clientMgr.forceRemoveAllClient()
     }
     
     // MARK: test adding client
@@ -33,9 +33,7 @@ class ClientManagerTests: XCTestCase {
     func addClientWithName(index: Int) throws -> SWClient? {
         return try clientMgr.addClient(withAccountName: clientAccountString[index], andPasswd: clientPasswdString[index])
     }
-    func addClientWithAccount(index: Int) throws -> SWClient? {
-        return try clientMgr.addClient(withAccount: SWAccount(clientAccountString[index]), andPasswd: clientPasswdString[index])
-    }
+    
     func assertAddedClientNotNil(client1: SWClient?, expectedClientCount: Int, expectedCurrentIndex: Int, message: String) -> Bool {
         XCTAssertNotNil(
             client1,
@@ -100,49 +98,99 @@ class ClientManagerTests: XCTestCase {
         addClientWithMethod(method: addClientWithName)
     }
     
-    func testAddClientWithAccount() {
-        addClientWithMethod(method: addClientWithAccount)
-    }
-    
     func testIndexNil() {
         XCTAssertNil(clientMgr.currentIndexOfClient(nil), "Index for nil client should be nil")
     }
     
-    func testRemoveClient() {
-        
+    func stubAddClient(index: Int) -> (Bool, SWClient?) {
+        do {
+            let client1 = try addClientWithName(0)
+            if client1 == nil || clientMgr.currentIndexOfClient(client1) == nil {
+                return (false, nil)
+            } else {
+                return (true, client1)
+            }
+        } catch {
+            XCTFail("Unexpected ERROR")
+            return (false, nil)
+        }
     }
     
-    func testAccessClient() {
-//        XCTAssertEqual(0, clientManager.getClientCount(), "client count is not zero at begining!")
-//        let idx1 = clientManager.addClient(withAccountName: client1AccountString, andPasswd: client1PasswdString)
-//        XCTAssertEqual(1, clientManager.getClientCount(), "client count should be 1 after add one client but get \(clientManager.getClientCount())!")
-//        XCTAssertNotNil(idx1, "client index should not be nil")
-//        XCTAssertEqual(0, idx1!, "index of client1 not equal to expected")
-//        let client1 = clientManager.getClientAtIndex(idx1!)
-//        XCTAssertNotNil(client1, "added client1 should be accessable")
-//        let idx1r = clientManager.indexOfClient(client1!)
-//        XCTAssertEqual(idx1!, idx1r!, "access client return wrong index")
-//        
-//        let account2 = SWAccount(client2AccountString)
-//        var idx2: ClientIndex? = 2
-//        
-//        var client2 = clientManager.getClientAtIndex(idx2!)
-//        XCTAssertNil(client2, "access not added client with index \(idx2) should return nil")
-//        
-//        idx2 = clientManager.addClient(withAccount: account2, andPasswd: client1PasswdString)
-//        client2 = clientManager.getClientAtIndex(idx2)
-//        XCTAssertEqual(idx2!, clientManager.indexOfClient(client2)!, "access client return wrong index")
-//        
-//        clientManager.removeClient(client1)
-//        XCTAssertEqual(clientManager.indexOfClient(client2)!, 0, "index of client2 is not moved to expected")
-//        XCTAssertNil(clientManager.indexOfClient(client1), "index of client1 should not be accessable now!")
-//        
-//        XCTAssertNil(clientManager.indexOfClient(nil), "index of nil client should be nil")
-//        XCTAssertNil(clientManager.getClientAtIndex(nil), "nil index should access nil")
+    // TODO: Remove client is aync now. Use new method to test it.
+//    func testARemoveAllClient() {
+//        let (success, client) = stubAddClient(0)
+//        if success {
+//            clientMgr.removeAllClient()
+//            XCTAssertNil(clientMgr.currentIndexOfClient(client))
+//            XCTAssertEqual(clientMgr.clientCount, 0, "Client count error after remove one client")
+//        } else {
+//            XCTFail("Fail to add client")
+//        }
+//    }
+
+//    func testRemoveClient() {
+//        let (success, client) = stubAddClient(0)
+//        if success {
+//            clientMgr.removeClient(client)
+//            XCTAssertNil(clientMgr.currentIndexOfClient(client))
+//            XCTAssertEqual(clientMgr.clientCount, 0, "Client count error after remove one client")
+//        } else {
+//            XCTFail("Fail to add client")
+//        }
+//    }
+    
+    func testGetClient() {
+        let i: Int = 0
+        let (success, client) = stubAddClient(i)
+        if success {
+            let c = clientMgr.getClient(withAccountName: clientAccountString[i])
+            XCTAssertNotNil(c, "Cannot get client with string")
+            if c != nil {
+                XCTAssertEqual(client!, c!, "Get wrong client")
+            }
+            XCTAssertNil(clientMgr.getClient(withAccountName: "非ASCII"), "Can return nil for non-ascii string")
+        } else {
+            XCTFail("Fail to add client")
+        }
     }
     
     func testInvalidPasswordCharacter() {
-//        let idx1 = clientManager.addClient(withAccountName: client1AccountString, andPasswd: "测试中文密码")
-//        XCTAssertNil(idx1, "index should be nil for invalid passed character")
+        var hasCatchError = false
+        do {
+            try clientMgr.addClient(withAccountName: clientAccountString[0], andPasswd: "测试中文密码")
+        }catch VIClientManagerError.ClientPasswordUnconvertible {
+            hasCatchError = true
+        } catch {
+            XCTFail("Unknown ERROR")
+        }
+        XCTAssertTrue(hasCatchError, "Client can't throw ClientPasswordUnconvertible Error")
+    }
+    
+    func testInvalidAccountCharacter() {
+        var hasCatchError = false
+        do {
+            try clientMgr.addClient(withAccountName: "测试中文账号", andPasswd: "测试中文密码")
+        }catch VIClientManagerError.ClientAccountNameUnconvertible {
+            hasCatchError = true
+        } catch {
+            XCTFail("Unknown ERROR")
+        }
+        XCTAssertTrue(hasCatchError, "Client can't throw ClientAccountNameUnconvertible Error")
+    }
+    
+    func testAddTooManyClient() {
+        var hasCatchError = false
+        do {
+            for i in 1 ... clientMgr.maxClientCount + 1 {
+                try clientMgr.addClient(withAccountName: "c\(i)", andPasswd: "p")
+            }
+        } catch VIClientManagerError.TooManyClients {
+            hasCatchError = true
+        } catch {
+            XCTFail("Unexpected Error")
+        }
+        XCTAssertTrue(hasCatchError, "AddClient didn't throw TooManyClients ERROR")
+        
+        XCTAssertEqual(clientMgr.clientCount, clientMgr.maxClientCount, "ClientManager didn't control the max number of clients")
     }
 }

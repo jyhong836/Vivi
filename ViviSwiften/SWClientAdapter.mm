@@ -28,6 +28,12 @@ swclient(swclient)
     this->onDisconnected.connect(boost::bind(&SWClientAdapter::onDisconnectedSlot, this, _1));
 }
 
+SWClientAdapter::~SWClientAdapter()
+{
+    // FIXME: Deconstruct SWClientAdapter.
+//    NSLog(@"** Deconstruct SWClientAdapter **");
+}
+
 // MARK: SLOTS
 
 void SWClientAdapter::onConnectedSlot()
@@ -39,16 +45,18 @@ void SWClientAdapter::onConnectedSlot()
                                       bind(&SWClientAdapter::onRosterReceivedSlot, this, _1, _2));
     rosterRequest->send();
     
-    swclient.isConnected = YES;
     sendPresence(Presence::create("onConnected presence"));
     
     if ([swclient.delegate respondsToSelector:@selector(clientDidConnect:)])
         [swclient.delegate clientDidConnect: swclient];
+    if (swclient.connectHandler) {
+        swclient.connectHandler();
+        [swclient setConnectHandlerToNil];
+    }
 }
 
 void SWClientAdapter::onDisconnectedSlot(const boost::optional<ClientError> &err)
 {
-    swclient.isConnected = NO;
     if ([swclient.delegate respondsToSelector:@selector( clientDidDisconnect:errorCode:)]) {
         if (err) {
             [swclient.delegate clientDidDisconnect: swclient
@@ -57,6 +65,10 @@ void SWClientAdapter::onDisconnectedSlot(const boost::optional<ClientError> &err
             [swclient.delegate clientDidDisconnect: swclient
                                      errorCode: -1];
         }
+    }
+    if (swclient.disconnectHandler) {
+        swclient.disconnectHandler();
+        [swclient setDisconnectHandlerToNil];
     }
 }
 
@@ -74,7 +86,7 @@ void SWClientAdapter::onRosterReceivedSlot(RosterPayload::ref rosterPayload, Err
 
 void SWClientAdapter::onMessageReceivedSlot(Message::ref msg)
 {
-    SWAccount* account = [[SWAccount alloc] init: std_str2NSString(msg->getFrom().toString())];
+    SWAccount* account = [[SWAccount alloc] initWithAccountName: std_str2NSString(msg->getFrom().toString())];
     NSString* content = std_str2NSString(msg->getBody());
     // FIXME: do we really need to pass a SWAccount? or just str, for search.
     if ([swclient.delegate respondsToSelector:@selector( clientDidReceiveMessage:fromAccount:inContent:)])
@@ -85,7 +97,7 @@ void SWClientAdapter::onMessageReceivedSlot(Message::ref msg)
 
 void SWClientAdapter::onPresenceReceivedSlot(Presence::ref pres)
 {
-    SWAccount* account = [[SWAccount alloc] init: std_str2NSString(pres->getFrom().toString())];
+    SWAccount* account = [[SWAccount alloc] initWithAccountName: std_str2NSString(pres->getFrom().toString())];
     NSString* status = std_str2NSString(pres->getStatus());
     if ([swclient.delegate respondsToSelector:@selector( clientDidReceivePresence:fromAccount:currentPresence:currentShow:currentStatus:)])
         [swclient.delegate clientDidReceivePresence: swclient

@@ -14,34 +14,47 @@ using namespace Swift;
 #import "SWClientAdapter.h"
 
 @implementation SWClient {
-    SWClientAdapter *client;
+    boost::shared_ptr<SWClientAdapter> client;
 //    SWAccount* account;// FIXME: memory control for NSString
     NSString* passwd; // FIXME: the password should be encrypted
 }
 
 @synthesize account;
-@synthesize isConnected;
+@synthesize connectHandler;
+- (void)setConnectHandlerToNil
+{
+    connectHandler = nil;
+}
+@synthesize disconnectHandler;
+- (void)setDisconnectHandlerToNil
+{
+    disconnectHandler = nil;
+}
 
 - (id)initWithAccount: (SWAccount*)aAccount
-  Password: (NSString*)aPasswd
- EventLoop: (SWEventLoop*)eventLoop
+             password: (NSString*)aPasswd
+            eventLoop: (SWEventLoop*)aEventLoop
 {
     if (self = [super init]) {
-        isConnected = NO;
         account = aAccount;
         passwd = aPasswd;
-        client = new SWClientAdapter(account,
-                                     NSString2std_str(passwd),
-                                     [eventLoop getNetworkFactories],
-                                     self);
+        client = boost::make_shared<SWClientAdapter>(
+                                                     account,
+                                                     NSString2std_str(passwd),
+                                                     [aEventLoop getNetworkFactories],
+                                                     self);
+        connectHandler = nil;
     }
     return self;
 }
 
-- (void)dealloc
-{
-    delete client;
-}
+//- (void)dealloc
+//{
+//    NSLog(@"delete SWClient %@", [account getAccountString]);
+//    if (client->isActive()) {
+//        client->disconnect();
+//    }
+//}
 
 - (SWAccount*)getAccount
 {
@@ -56,6 +69,13 @@ using namespace Swift;
 {
     client->connect();
 }
+
+- (void)connectWithHandler: (ConnectionHandler)handler
+{
+    client->connect();
+    connectHandler = handler;
+}
+
 /*!
  * @brief Disconnect the client account from the server.
  */
@@ -63,6 +83,12 @@ using namespace Swift;
 {
     // FIXME: Sometime will assert at BasicSessionStream::writeFooter()
     client->disconnect();
+}
+
+- (void)disconnectWithHandler: (ConnectionHandler)handler
+{
+    client->disconnect();
+    disconnectHandler = handler;
 }
 
 /*!

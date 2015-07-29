@@ -10,7 +10,6 @@ import Cocoa
 import ViviSwiften
 
 protocol VIClientManagerProtocol {
-    func addClient(withAccount account: SWAccount, andPasswd passwd: String!) throws -> SWClient?
     func addClient(withAccountName account: String!, andPasswd passwd: String!) throws -> SWClient?
     func removeClient(client: SWClient?)
     func removeAllClient()

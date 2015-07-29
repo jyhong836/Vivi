@@ -13,7 +13,7 @@ using namespace Swift;
 
 @synthesize jid;
 
-- (id)init: (NSString *)account
+- (id)initWithAccountName: (NSString *)account
 {
     if (self = [super init]) {
         jid = new JID(NSString2std_str(account));
