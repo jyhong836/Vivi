@@ -174,7 +174,6 @@
 		CDE658CB1B5E8B8000290E34 /* SWClient.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWClient.mm; sourceTree = "<group>"; };
 		CDE658CE1B5EA70F00290E34 /* SWClientAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWClientAdapter.h; sourceTree = "<group>"; };
 		CDE658CF1B5EA70F00290E34 /* SWClientAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = SWClientAdapter.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		CDE658D21B5F376D00290E34 /* ClientController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ClientController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CDEE68691B65311600D00EC7 /* Utils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Utils.mm; sourceTree = "<group>"; };
 		CDEE686B1B6531AF00D00EC7 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		CDEE68A11B6545D800D00EC7 /* ViviInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViviInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -286,7 +285,6 @@
 			children = (
 				CD36855B1B5E659500DFC78A /* AppDelegate.swift */,
 				CD36855D1B5E659500DFC78A /* ViewController.swift */,
-				CD5E6F2B1B64F78A00E33502 /* Removed */,
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
 				CD3685641B5E659500DFC78A /* Info.plist */,
@@ -319,14 +317,6 @@
 			);
 			name = Protocols;
 			path = ../Vivi;
-			sourceTree = "<group>";
-		};
-		CD5E6F2B1B64F78A00E33502 /* Removed */ = {
-			isa = PBXGroup;
-			children = (
-				CDE658D21B5F376D00290E34 /* ClientController.swift */,
-			);
-			name = Removed;
 			sourceTree = "<group>";
 		};
 		CD88E3531B60D84E00E7E256 /* ViviSwiftenTests */ = {
