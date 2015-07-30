@@ -9,7 +9,9 @@
 #import "SWClientAdapter.h"
 #import "SWAccount.h"
 #import "SWClient.h"
+#import "SWXMPPRoster.h"
 #import "VSClientDelegateProtocol.h"
+#import "VSXMPPRosterDelegate.h"
 
 using namespace Swift;
 
@@ -21,11 +23,18 @@ SWClientAdapter::SWClientAdapter(SWAccount* account,
 Client(*account.jid, password, networkFactories, storages),
 swclient(swclient)
 {
-    // MARK: Connect signals to slots
+    // Connect signals to client slots
     this->onConnected.connect(boost::bind(&SWClientAdapter::onConnectedSlot, this));
     this->onMessageReceived.connect(boost::bind(&SWClientAdapter::onMessageReceivedSlot, this, _1));
     this->onPresenceReceived.connect(boost::bind(&SWClientAdapter::onPresenceReceivedSlot, this, _1));
     this->onDisconnected.connect(boost::bind(&SWClientAdapter::onDisconnectedSlot, this, _1));
+    
+    // Connect signals to roster slots
+    this->getRoster()->onJIDAdded.connect(boost::bind(&SWClientAdapter::rosterOnJIDAddedSlot, this, _1));
+    this->getRoster()->onJIDRemoved.connect(boost::bind(&SWClientAdapter::rosterOnJIDRemovedSlot, this, _1));
+    this->getRoster()->onJIDUpdated.connect(boost::bind(&SWClientAdapter::rosterOnJIDUpdatedSlot, this, _1, _2, _3));
+    this->getRoster()->onRosterCleared.connect(boost::bind(&SWClientAdapter::rosterOnRosterClearedSlot, this));
+    this->getRoster()->onInitialRosterPopulated.connect(boost::bind(&SWClientAdapter::rosterOnInitialRosterPopulatedSlot, this));
 }
 
 SWClientAdapter::~SWClientAdapter()
@@ -39,12 +48,13 @@ SWClientAdapter::~SWClientAdapter()
 void SWClientAdapter::onConnectedSlot()
 {
     // TODO: do something in Client
-    GetRosterRequest::ref rosterRequest = GetRosterRequest::create(getIQRouter());
-    rosterRequest->onResponse.connect(bind(&SWClientAdapter::onRosterReceivedSlot, this, _1, _2));
-    rosterRequest->send();
+//    GetRosterRequest::ref rosterRequest = GetRosterRequest::create(getIQRouter());
+//    rosterRequest->onResponse.connect(bind(&SWClientAdapter::onRosterReceivedSlot, this, _1, _2));
+//    rosterRequest->send();
+    requestRoster();
     
     // TODO: remove the test presence
-    sendPresence(Presence::create("onConnected presence"));
+    sendPresence(Presence::create(""));
     
     if ([swclient.delegate respondsToSelector:@selector(clientDidConnect:)])
         [swclient.delegate clientDidConnect: swclient];
@@ -71,17 +81,17 @@ void SWClientAdapter::onDisconnectedSlot(const boost::optional<ClientError> &err
     }
 }
 
-void SWClientAdapter::onRosterReceivedSlot(RosterPayload::ref rosterPayload, ErrorPayload::ref err)
-{
-    if (err) {
-        // TODO: use NS Error Log instead
-//        std::cerr << "Error receiving roster. Continuing anyway.";
-        NSLog(@"Error receiving roster. Continuing anyway.");
-    }
-    // TODO: remove the test presence
-    // Send initial available presence
-//    sendPresence(Presence::create("TEST presence"));
-}
+//void SWClientAdapter::onRosterReceivedSlot(RosterPayload::ref rosterPayload, ErrorPayload::ref err)
+//{
+//    if (err) {
+//        // TODO: use NS Error Log instead
+////        std::cerr << "Error receiving roster. Continuing anyway.";
+//        NSLog(@"Error receiving roster. Continuing anyway.");
+//    }
+//    // TODO: remove the test presence
+//    // Send initial available presence
+////    sendPresence(Presence::create("TEST presence"));
+//}
 
 void SWClientAdapter::onMessageReceivedSlot(Message::ref msg)
 {
@@ -104,4 +114,36 @@ void SWClientAdapter::onPresenceReceivedSlot(Presence::ref pres)
                                 currentPresence: pres->getType()
                                     currentShow: pres->getShow()
                                   currentStatus: status];
+}
+
+
+void SWClientAdapter::rosterOnJIDAddedSlot(const JID& jid)
+{
+    if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidAddAccount:)])
+        [swclient.roster.delegate rosterDidAddAccount: [[SWAccount alloc] initWithAccountName: std_str2NSString(jid.toString())]];
+}
+
+void SWClientAdapter::rosterOnJIDRemovedSlot(const JID& jid)
+{
+    if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidRemoveAccount:)])
+        [swclient.roster.delegate rosterDidRemoveAccount: [[SWAccount alloc] initWithAccountName: std_str2NSString(jid.toString())]];
+}
+
+void SWClientAdapter::rosterOnJIDUpdatedSlot(const JID&, const std::string&, const std::vector<std::string>&)
+{
+    if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidUpdate)])
+        // TODO: Complete rosterOnJIDUpdatedSlot param passing
+        [swclient.roster.delegate rosterDidUpdate];
+}
+
+void SWClientAdapter::rosterOnRosterClearedSlot()
+{
+    if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidClear)])
+        [swclient.roster.delegate rosterDidClear];
+}
+
+void SWClientAdapter::rosterOnInitialRosterPopulatedSlot()
+{
+    if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidInitialize)])
+        [swclient.roster.delegate rosterDidInitialize];
 }

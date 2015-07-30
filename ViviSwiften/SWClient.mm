@@ -9,6 +9,7 @@
 #import "SWClient.h"
 #import "SWEventLoop.h"
 #import "SWAccount.h"
+#import "SWXMPPRoster.h"
 #include <Swiften/Swiften.h>
 using namespace Swift;
 #import "SWClientAdapter.h"
@@ -20,6 +21,8 @@ using namespace Swift;
 }
 
 @synthesize account;
+@synthesize roster;
+
 @synthesize connectHandler;
 - (void)setConnectHandlerToNil
 {
@@ -44,6 +47,7 @@ using namespace Swift;
                                                      [aEventLoop getNetworkFactories],
                                                      self);
         connectHandler = nil;
+        roster = [[SWXMPPRoster alloc] init: client->getRoster()];
     }
     return self;
 }

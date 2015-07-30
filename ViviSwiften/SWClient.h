@@ -8,6 +8,7 @@
 
 @class SWEventLoop;
 @class SWAccount;
+@class SWXMPPRoster;
 @protocol VSClientDelegate;
 
 typedef void (^ConnectionHandler)(void);
@@ -22,8 +23,9 @@ typedef void (^ConnectionHandler)(void);
 @interface SWClient : NSObject
 
 @property (readonly, nonatomic)SWAccount* account;
+@property (readonly, nonatomic)SWXMPPRoster* roster;
 
-@property (nonatomic) id<VSClientDelegate> delegate;
+@property (weak, nonatomic) id<VSClientDelegate> delegate;
 /// Set through connectWithHandler.
 @property (readonly, nonatomic) ConnectionHandler connectHandler;
 /// Set through disconnectWithHandler.

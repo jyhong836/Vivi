@@ -10,7 +10,7 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, VSClientDelegate {
+class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, VSClientDelegate, VSXMPPRosterDelegate {
     
     @IBOutlet weak var messageTextField: NSScrollView!
     @IBOutlet weak var connectButton: NSButton!
@@ -29,11 +29,12 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         
         // TODO: remove test code with account
         do {
-            if let c = try clientMgr.addClient(withAccountName: "jyhong@xmpp.jp", andPasswd: "jyhong123") {
+            if let c = try clientMgr.addClient(withAccountName: "jyhong@xmpp.jp/Vivi", andPasswd: "jyhong123") {
                 clientMgr.startClientLoop()
                 clients.append(c)
                 currentClient = c
                 c.delegate = self
+                c.roster.delegate = self
             }
         } catch {
             NSLog("Unexpected error")
@@ -91,6 +92,12 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     func clientDidReceiveMessage(client: SWClient!, fromAccount account: SWAccount!, inContent content: String!) {
         NSLog("client(\(client.account.getFullAccountString())) did receive message from \(account.getFullAccountString()): \(content)")
+    }
+    
+    // MARK: Implementations for VSXMPPRosterDelegate
+    
+    func rosterDidInitialize() {
+        currentClient?.roster.getItems()
     }
 }
 

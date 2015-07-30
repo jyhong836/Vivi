@@ -38,6 +38,13 @@ namespace Swift
         void onRosterReceivedSlot(RosterPayload::ref rosterPayload,ErrorPayload::ref err);
         void onMessageReceivedSlot(Message::ref msg);
         void onPresenceReceivedSlot(Presence::ref pres);
+        
+    private:
+        void rosterOnJIDAddedSlot(const JID& jid);
+        void rosterOnJIDRemovedSlot(const JID& jid);
+        void rosterOnJIDUpdatedSlot(const JID&, const std::string&, const std::vector<std::string>&);
+        void rosterOnRosterClearedSlot();
+        void rosterOnInitialRosterPopulatedSlot();
     };
 }
 

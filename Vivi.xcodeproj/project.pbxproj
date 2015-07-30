@@ -25,6 +25,10 @@
 		CD88E35E1B60DA0E00E7E256 /* SwiftenClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD88E35D1B60DA0E00E7E256 /* SwiftenClientTests.swift */; };
 		CDB990E91B664E5D00598C51 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB990E81B664E5D00598C51 /* TestUtils.swift */; };
 		CDC2EE931B674F4200872623 /* SwiftenTypeDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */; };
+		CDC2EE951B6A412B00872623 /* VIChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2EE941B6A412B00872623 /* VIChat.swift */; };
+		CDC2EE971B6A435800872623 /* VSXMPPRosterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = CDC2EE961B6A435800872623 /* VSXMPPRosterDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDC2EE9A1B6A444D00872623 /* SWXMPPRoster.h in Headers */ = {isa = PBXBuildFile; fileRef = CDC2EE981B6A444D00872623 /* SWXMPPRoster.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDC2EE9B1B6A444D00872623 /* SWXMPPRoster.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDC2EE991B6A444D00872623 /* SWXMPPRoster.mm */; };
 		CDC49E441B5FF91500F5E6E6 /* ViviSwiften.pch in Headers */ = {isa = PBXBuildFile; fileRef = CDC49E431B5FF91400F5E6E6 /* ViviSwiften.pch */; };
 		CDE658911B5E66D400290E34 /* ViviSwiften.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658901B5E66D400290E34 /* ViviSwiften.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDE658A31B5E66D400290E34 /* ViviSwiften.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE6588E1B5E66D400290E34 /* ViviSwiften.framework */; };
@@ -165,6 +169,10 @@
 		CD88E3561B60D84E00E7E256 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD88E35D1B60DA0E00E7E256 /* SwiftenClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftenClientTests.swift; sourceTree = "<group>"; };
 		CDB990E81B664E5D00598C51 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
+		CDC2EE941B6A412B00872623 /* VIChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIChat.swift; sourceTree = "<group>"; };
+		CDC2EE961B6A435800872623 /* VSXMPPRosterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSXMPPRosterDelegate.h; sourceTree = "<group>"; };
+		CDC2EE981B6A444D00872623 /* SWXMPPRoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWXMPPRoster.h; sourceTree = "<group>"; };
+		CDC2EE991B6A444D00872623 /* SWXMPPRoster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWXMPPRoster.mm; sourceTree = "<group>"; };
 		CDC49E431B5FF91400F5E6E6 /* ViviSwiften.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViviSwiften.pch; sourceTree = "<group>"; };
 		CDE6588E1B5E66D400290E34 /* ViviSwiften.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViviSwiften.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE658901B5E66D400290E34 /* ViviSwiften.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ViviSwiften.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -357,6 +365,7 @@
 			children = (
 				CD0932171B5F9757007ACB22 /* VSClientDelegateProtocol.h */,
 				CDE658C01B5E71F300290E34 /* VSControllerProtocol.h */,
+				CDC2EE961B6A435800872623 /* VSXMPPRosterDelegate.h */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -372,6 +381,8 @@
 				CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */,
 				CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */,
 				CD72B2CC1B5F7A9800BCFD2A /* SWAccount.mm */,
+				CDC2EE981B6A444D00872623 /* SWXMPPRoster.h */,
+				CDC2EE991B6A444D00872623 /* SWXMPPRoster.mm */,
 			);
 			name = "Swiften Adapter";
 			sourceTree = "<group>";
@@ -383,6 +394,7 @@
 				CD5E6F251B64E6FD00E33502 /* VIClientManager.swift */,
 				CD5E6F241B64E50700E33502 /* Protocols */,
 				CDEE68A51B6545D800D00EC7 /* Info.plist */,
+				CDC2EE941B6A412B00872623 /* VIChat.swift */,
 			);
 			path = ViviInterface;
 			sourceTree = "<group>";
@@ -437,7 +449,9 @@
 				CDE658D01B5EA70F00290E34 /* SWClientAdapter.h in Headers */,
 				CD72B2C91B5F6F5300BCFD2A /* SWEventLoop.h in Headers */,
 				CDEE686C1B6531AF00D00EC7 /* Utils.h in Headers */,
+				CDC2EE971B6A435800872623 /* VSXMPPRosterDelegate.h in Headers */,
 				CD72B2CD1B5F7A9800BCFD2A /* SWAccount.h in Headers */,
+				CDC2EE9A1B6A444D00872623 /* SWXMPPRoster.h in Headers */,
 				CD0932181B5F9757007ACB22 /* VSClientDelegateProtocol.h in Headers */,
 				CDC49E441B5FF91500F5E6E6 /* ViviSwiften.pch in Headers */,
 				CDE658C11B5E71F300290E34 /* VSControllerProtocol.h in Headers */,
@@ -742,6 +756,7 @@
 				CDE658D11B5EA70F00290E34 /* SWClientAdapter.mm in Sources */,
 				CD72B2CE1B5F7A9800BCFD2A /* SWAccount.mm in Sources */,
 				CDE658CD1B5E8B8000290E34 /* SWClient.mm in Sources */,
+				CDC2EE9B1B6A444D00872623 /* SWXMPPRoster.mm in Sources */,
 				CDEE686A1B65311600D00EC7 /* Utils.mm in Sources */,
 				CD72B2CA1B5F6F5300BCFD2A /* SWEventLoop.mm in Sources */,
 				CDC2EE931B674F4200872623 /* SwiftenTypeDefine.swift in Sources */,
@@ -754,6 +769,7 @@
 			files = (
 				CDEE68BE1B65460C00D00EC7 /* VIClientManager.swift in Sources */,
 				CDEE68C01B65461600D00EC7 /* VIClientManagerProtocol.swift in Sources */,
+				CDC2EE951B6A412B00872623 /* VIChat.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

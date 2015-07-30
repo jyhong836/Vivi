@@ -19,8 +19,10 @@ FOUNDATION_EXPORT const unsigned char ViviSwiftenVersionString[];
 // MARK: Vivi protocols
 #import <ViviSwiften/VSClientDelegateProtocol.h>
 #import <ViviSwiften/VSControllerProtocol.h>
+#import <ViviSwiften/VSXMPPRosterDelegate.h>
 
 // MARK: Swiften wrappers
 #import <ViviSwiften/SWClient.h>
 #import <ViviSwiften/SWEventLoop.h>
 #import <ViviSwiften/SWAccount.h>
+#import <ViviSwiften/SWXMPPRoster.h>

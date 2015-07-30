@@ -5,9 +5,10 @@
 //  Created by Junyuan Hong on 7/22/15.
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
-
 #ifdef __cplusplus
-#import <Swiften/Swiften.h>
+namespace Swift {
+    class JID;
+}
 #endif
 
 @interface SWAccount : NSObject

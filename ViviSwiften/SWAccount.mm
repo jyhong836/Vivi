@@ -7,6 +7,7 @@
 //
 
 #import "SWAccount.h"
+#import <Swiften/Swiften.h>
 using namespace Swift;
 
 @implementation SWAccount
