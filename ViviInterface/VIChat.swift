@@ -11,11 +11,23 @@ import ViviSwiften
 
 public class VIChat {
     
-    internal var account: SWAccount!
-    public var lastMessage: String = ""
+    public var owner: SWAccount!
+    public var buddy: SWAccount!
+    public var lastMessage: String = "" {
+        willSet {
+            NSLog("Set last msg: \(newValue)")
+            // TODO: store data to file
+        }
+    }
+    public var lastMessageTime: NSDate? {
+        willSet {
+            NSLog("Set last time: \(newValue)")
+        }
+    }
     
-    public init(account: SWAccount) {
-        self.account = account
+    public init(owner: SWAccount, buddy: SWAccount) {
+        self.owner = owner
+        self.buddy = buddy
     }
     
 }

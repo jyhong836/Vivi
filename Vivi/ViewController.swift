@@ -10,7 +10,7 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, VSClientDelegate, VSXMPPRosterDelegate {
+class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate {
     
     @IBOutlet weak var messageTextField: NSScrollView!
     @IBOutlet weak var connectButton: NSButton!
@@ -35,6 +35,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
                 currentClient = c
                 c.delegate = self
                 c.roster.delegate = self
+                (c.chatListController as! VIChatListController).chatDelegate = self
             }
         } catch {
             NSLog("Unexpected error")
@@ -62,7 +63,11 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     // MARK: Implementations for NSTableViewDataSource
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return 2
+        if let c = currentClient {
+            return (c.chatListController as! VIChatListController).chatList.count
+        } else {
+            return 0
+        }
     }
     
     // MARK: Implementations for NSTableViewDelegate
@@ -70,7 +75,12 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let col = tableColumn {
             let cell = tableView.makeViewWithIdentifier(col.identifier, owner: self) as! NSTableCellView
-            cell.textField?.stringValue = "hi"
+            if let c = currentClient {
+                let chatList = (c.chatListController as! VIChatListController).chatList
+                cell.textField?.stringValue = chatList[row].buddy.getAccountString()
+            } else {
+                cell.textField?.stringValue = "Unknown user"
+            }
             return cell
         }
         return nil
@@ -97,7 +107,21 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     // MARK: Implementations for VSXMPPRosterDelegate
     
     func rosterDidInitialize() {
-        currentClient?.roster.getItems()
+        currentClient?.roster.printItems()
+    }
+    
+    // MARK: Implementations for VIChatDelegate
+    
+    func chatWillStart(chat: VIChat) {
+        tableView.reloadData()
+    }
+    
+    func chatDidReceiveMessage(chat: VIChat) {
+//        tableView.reloadDataForRowIndexes(<#T##rowIndexes: NSIndexSet##NSIndexSet#>, columnIndexes: 0)
+    }
+    
+    func chatDidSendMessage(chat: VIChat) {
+        //        tableView.reloadDataForRowIndexes(<#T##rowIndexes: NSIndexSet##NSIndexSet#>, columnIndexes: 0)
     }
 }
 

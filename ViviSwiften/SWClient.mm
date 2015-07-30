@@ -10,6 +10,7 @@
 #import "SWEventLoop.h"
 #import "SWAccount.h"
 #import "SWXMPPRoster.h"
+#import "VSChatListControllerProtocol.h"
 #include <Swiften/Swiften.h>
 using namespace Swift;
 #import "SWClientAdapter.h"
@@ -106,6 +107,10 @@ using namespace Swift;
     swmsg->setFrom(*account.jid);
     swmsg->setTo(*targetAccount.jid);
     swmsg->setBody([message cStringUsingEncoding:NSASCIIStringEncoding]);
+    [_chatListController clientDidSendMessage: self
+                                           to: targetAccount
+                                      message: message
+                                    timestamp: [NSDate date]];
     client->sendMessage(swmsg);
 }
 

@@ -22,10 +22,13 @@ using namespace Swift;
     return self;
 }
 
-- (void)getItems
+- (void)printItems
 {
     for (auto &item: roster->getItems()) {
-        NSLog(@"name: %s, id: %s", item.getName().c_str(), item.getJID().toString().c_str());
+        NSLog(@"name: \"%s\", id: \"%s\"", item.getName().c_str(), item.getJID().toString().c_str());
+        for (auto &group: item.getGroups()) {
+            NSLog(@"group: \"%s\"", group.c_str());
+        }
     }
 }
 

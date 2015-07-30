@@ -6,7 +6,6 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
-import Cocoa
 import ViviSwiften
 
 protocol VIClientManagerProtocol {

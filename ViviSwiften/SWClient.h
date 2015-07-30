@@ -10,6 +10,7 @@
 @class SWAccount;
 @class SWXMPPRoster;
 @protocol VSClientDelegate;
+@protocol VSChatListControllerProtocol;
 
 typedef void (^ConnectionHandler)(void);
 
@@ -22,10 +23,11 @@ typedef void (^ConnectionHandler)(void);
  */
 @interface SWClient : NSObject
 
-@property (readonly, nonatomic)SWAccount* account;
-@property (readonly, nonatomic)SWXMPPRoster* roster;
+@property (readonly, nonatomic) SWAccount* account;
+@property (readonly, nonatomic) SWXMPPRoster* roster;
 
-@property (weak, nonatomic) id<VSClientDelegate> delegate;
+@property (nonatomic) id<VSChatListControllerProtocol> chatListController;
+@property (nonatomic) id<VSClientDelegate> delegate;
 /// Set through connectWithHandler.
 @property (readonly, nonatomic) ConnectionHandler connectHandler;
 /// Set through disconnectWithHandler.

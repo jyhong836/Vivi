@@ -11,6 +11,7 @@
 #import "SWClient.h"
 #import "SWXMPPRoster.h"
 #import "VSClientDelegateProtocol.h"
+#import "VSChatListControllerProtocol.h"
 #import "VSXMPPRosterDelegate.h"
 
 using namespace Swift;
@@ -97,11 +98,22 @@ void SWClientAdapter::onMessageReceivedSlot(Message::ref msg)
 {
     SWAccount* account = [[SWAccount alloc] initWithAccountName: std_str2NSString(msg->getFrom().toString())];
     NSString* content = std_str2NSString(msg->getBody());
+    
+    // TODO: convert the timestamp
+    NSDate *date = [NSDate date];
+//    double unixTimeStamp = msg->getTimestamp() - boost::gregorian::date(1970,1,1);
+//    NSTimeInterval _interval=unixTimeStamp;
+//    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+    
     // FIXME: do we really need to pass a SWAccount? or just str, for search.
     if ([swclient.delegate respondsToSelector:@selector( clientDidReceiveMessage:fromAccount:inContent:)])
         [swclient.delegate clientDidReceiveMessage: swclient
                                        fromAccount: account
                                          inContent: content];
+    [swclient.chatListController clientDidReceivedMessage: swclient
+                                                     from: account
+                                                  message: content
+                                                timestamp: date];
 }
 
 void SWClientAdapter::onPresenceReceivedSlot(Presence::ref pres)

@@ -16,6 +16,9 @@ public enum VIClientManagerError: ErrorType {
     case TooManyClients
 }
 
+/**
+ * Manager for clients. Client should only be created through VIClientManager.
+ */
 public class VIClientManager: VIClientManagerProtocol {
     private var clientList: [SWClient]! = []
     // FIXME: eventloop should be managed by VIClientManager?
@@ -27,6 +30,7 @@ public class VIClientManager: VIClientManagerProtocol {
         return instance
         }()
     
+    /// Must be called for starting Swiften EventLoop.
     public func startClientLoop() {
         eventLoop.start()
     }
@@ -43,10 +47,17 @@ public class VIClientManager: VIClientManagerProtocol {
         }) else {
             throw VIClientManagerError.AccountNameConfilct
         }
+        
+        newClient.chatListController = VIChatListController()
+        
         clientList.append(newClient)
         return newClient
     }
     
+    /**
+        - Throws: VIClientManagerError: (AccountNameConfilct, ClientPasswordUnconvertible, ClientAccountNameUnconvertible, TooManyClients).
+        - Returns: Successfully added client or nil.
+    */
     public func addClient(withAccountName account: String!, andPasswd passwd: String!) throws -> SWClient? {
         guard account.canBeConvertedToEncoding(NSString.defaultCStringEncoding()) else {
             throw VIClientManagerError.ClientAccountNameUnconvertible

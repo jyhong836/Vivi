@@ -17,7 +17,7 @@ namespace Swift {
 
 @interface SWXMPPRoster : NSObject
 
-@property (weak, nonatomic) id<VSXMPPRosterDelegate> delegate;
+@property (nonatomic) id<VSXMPPRosterDelegate> delegate;
 
 #ifdef __cplusplus
 - (id)init: (Swift::XMPPRoster*)aRoster;
@@ -25,6 +25,6 @@ namespace Swift {
 - (id)init: (void*)roster;
 #endif
 
-- (void)getItems;
+- (void)printItems;
 
 @end
