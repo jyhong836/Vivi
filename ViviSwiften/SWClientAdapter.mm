@@ -39,12 +39,11 @@ SWClientAdapter::~SWClientAdapter()
 void SWClientAdapter::onConnectedSlot()
 {
     // TODO: do something in Client
-    GetRosterRequest::ref rosterRequest =
-    GetRosterRequest::create(getIQRouter());
-    rosterRequest->onResponse.connect(
-                                      bind(&SWClientAdapter::onRosterReceivedSlot, this, _1, _2));
+    GetRosterRequest::ref rosterRequest = GetRosterRequest::create(getIQRouter());
+    rosterRequest->onResponse.connect(bind(&SWClientAdapter::onRosterReceivedSlot, this, _1, _2));
     rosterRequest->send();
     
+    // TODO: remove the test presence
     sendPresence(Presence::create("onConnected presence"));
     
     if ([swclient.delegate respondsToSelector:@selector(clientDidConnect:)])

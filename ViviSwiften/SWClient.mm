@@ -72,8 +72,8 @@ using namespace Swift;
 
 - (void)connectWithHandler: (ConnectionHandler)handler
 {
-    client->connect();
     connectHandler = handler;
+    client->connect();
 }
 
 /*!
