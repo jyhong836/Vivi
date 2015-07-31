@@ -48,7 +48,7 @@ public class VIClientManager: VIClientManagerProtocol {
             throw VIClientManagerError.AccountNameConfilct
         }
         
-        newClient.chatListController = VIChatListController()
+        newClient.chatListController = VIChatListController(owner: newClient.account)
         
         clientList.append(newClient)
         return newClient

@@ -31,11 +31,10 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        tableView.reloadData()
         
         // TODO: remove test code with account
         do {
-            if let c = try clientMgr.addClient(withAccountName: "jyhong@xmpp.jp/Vivi", andPasswd: "jyhong123") {
+            if let c = try clientMgr.addClient(withAccountName: SWClientFactory.clientAccountString[0], andPasswd: SWClientFactory.clientPasswdString[0]) {
                 clientMgr.startClientLoop()
                 clients.append(c)
                 currentClient = c

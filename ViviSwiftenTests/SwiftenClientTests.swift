@@ -11,11 +11,22 @@ import XCTest
 
 class SwiftenClientTests: XCTestCase, VSClientDelegate {
     
-    var eventLoop: SWEventLoop! = SWEventLoop()
+    var clientAccountString: [String] {
+        get {
+            return SWClientFactory.clientAccountString
+        }
+    }
+    var clientPasswdString: [String] {
+        get {
+            return SWClientFactory.clientPasswdString
+        }
+    }
+    var eventLoop: SWEventLoop {
+        get {
+            return SWClientFactory.eventLoop
+        }
+    }
     
-    let clientAccountString = ["jyhong@xmpp.jp/testResource", "jyhong1@xmpp.jp/testResource"]
-    let clientPasswdString = ["jyhong123", "jyhong123"]
-
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -27,7 +38,7 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
     }
     
     private func createClient(index: Int) -> SWClient {
-        let c =  SWClient(account: SWAccount(accountName: clientAccountString[index]), password: clientPasswdString[index], eventLoop: eventLoop)
+        let c =  SWClientFactory.createClient(index)
         c.delegate = self
         return c
     }
