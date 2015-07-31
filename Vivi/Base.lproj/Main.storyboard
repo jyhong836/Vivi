@@ -651,10 +651,10 @@
             </objects>
             <point key="canvasLocation" x="177.5" y="-77"/>
         </scene>
-        <!--Window Controller-->
+        <!--Main Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" userLabel="Main Window Controller" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="515" y="263" width="650" height="450"/>
@@ -669,10 +669,10 @@
             </objects>
             <point key="canvasLocation" x="156" y="342"/>
         </scene>
-        <!--Window Controller-->
+        <!--Preference Window Controller-->
         <scene sceneID="3lX-nI-tSf">
             <objects>
-                <windowController id="PXN-58-Ze9" sceneMemberID="viewController">
+                <windowController id="PXN-58-Ze9" userLabel="Preference Window Controller" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="Hnw-FX-NhU">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -711,7 +711,7 @@
                             <splitView arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zsc-JA-ckX">
                                 <rect key="frame" x="0.0" y="0.0" width="650" height="450"/>
                                 <subviews>
-                                    <customView id="o8d-Ct-cxH" userLabel="Contact View">
+                                    <customView id="o8d-Ct-cxH" userLabel="Session View">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="450"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
@@ -721,7 +721,7 @@
                                                     <constraint firstAttribute="width" constant="160" id="ilg-nh-HIE"/>
                                                 </constraints>
                                                 <connections>
-                                                    <segue destination="wCD-lF-Pb2" kind="embed" id="8ZA-lF-ehQ"/>
+                                                    <segue destination="wCD-lF-Pb2" kind="embed" identifier="SessionViewSegue" id="FUX-sL-9jT"/>
                                                 </connections>
                                             </containerView>
                                         </subviews>
@@ -767,6 +767,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="chatView" destination="R3h-kS-2Cc" id="LMv-Wr-IT6"/>
+                        <outlet property="sesConView" destination="SeZ-t9-alR" id="d4x-3b-FZ0"/>
+                        <outlet property="sessionView" destination="o8d-Ct-cxH" id="d2T-zt-Cdb"/>
                         <outlet property="tableView" destination="zaB-TU-6Mx" id="KEq-AV-flq"/>
                     </connections>
                 </viewController>
@@ -840,10 +843,10 @@
             </objects>
             <point key="canvasLocation" x="371.5" y="1700"/>
         </scene>
-        <!--Contact View Controller-->
+        <!--Session View Controller-->
         <scene sceneID="BvB-ij-g87">
             <objects>
-                <viewController id="wCD-lF-Pb2" userLabel="Contact View Controller" sceneMemberID="viewController">
+                <viewController id="wCD-lF-Pb2" userLabel="Session View Controller" customClass="SessionViewController" customModule="Vivi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="cag-Fb-Ff0" userLabel="Contact View">
                         <rect key="frame" x="0.0" y="0.0" width="160" height="450"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -900,8 +903,8 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <outlet property="dataSource" destination="XfG-lQ-9wD" id="bki-hs-haa"/>
-                                                <outlet property="delegate" destination="XfG-lQ-9wD" id="dDP-bj-Vm4"/>
+                                                <outlet property="dataSource" destination="wCD-lF-Pb2" id="brW-6i-PAI"/>
+                                                <outlet property="delegate" destination="wCD-lF-Pb2" id="C7d-2r-j8z"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -919,7 +922,7 @@
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="lQE-nI-L8M" userLabel="Client Control View">
                                 <rect key="frame" x="0.0" y="391" width="160" height="60"/>
                                 <connections>
-                                    <segue destination="eau-pW-G7o" kind="embed" id="bnk-qc-y04"/>
+                                    <segue destination="eau-pW-G7o" kind="embed" identifier="ClientViewSegue" id="bnk-qc-y04"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -934,16 +937,19 @@
                             <constraint firstItem="lQE-nI-L8M" firstAttribute="leading" secondItem="0u1-8W-vI3" secondAttribute="leading" id="vXY-EM-AeL"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="sessionTableView" destination="zaB-TU-6Mx" id="B3U-nw-Ov1"/>
+                    </connections>
                 </viewController>
                 <customObject id="lT7-KQ-ZZc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-187" y="1700"/>
         </scene>
-        <!--Client Control View Controller-->
+        <!--Client View Controller-->
         <scene sceneID="94d-bE-q9x">
             <objects>
-                <viewController id="eau-pW-G7o" userLabel="Client Control View Controller" sceneMemberID="viewController">
-                    <view key="view" id="W9F-8T-eKq" userLabel="Client Control View">
+                <viewController id="eau-pW-G7o" userLabel="Client View Controller" customClass="ClientViewController" customModule="Vivi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="W9F-8T-eKq" userLabel="Client View">
                         <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -964,6 +970,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="loginButtonClicked:" target="eau-pW-G7o" id="bNa-e9-Bg8"/>
+                                </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Cx-Qe-OBe" userLabel="Lock Button">
                                 <rect key="frame" x="99" y="20" width="20" height="20"/>

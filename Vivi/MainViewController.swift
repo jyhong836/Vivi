@@ -10,16 +10,22 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class MainViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate {
-    
-    @IBOutlet weak var messageTextField: NSScrollView!
-    @IBOutlet weak var connectButton: NSButton!
+class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate {
 
+    @IBOutlet weak var sesConView: NSView!
+    @IBOutlet weak var sessionView: NSView!
+    @IBOutlet weak var chatView: NSView!
 //    @IBOutlet weak var tableView: NSTableView!
+    
+    weak var sessionViewController: SessionViewController?
     
     let clientMgr = VIClientManager.sharedClientManager
     var clients: [SWClient] = []
-    weak var currentClient: SWClient? = nil
+    var currentClient: SWClient? = nil {
+        didSet {
+            sessionViewController?.currentClient = currentClient
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,43 +53,24 @@ class MainViewController: NSViewController, NSTableViewDelegate, NSTableViewData
         // Update the view, if already loaded.
         }
     }
-
-    // MARK: IBAction
-    @IBAction func connectButton(sender: NSButton) {
-        if let c = currentClient {
-            c.connect()
-            NSLog("Client(\(c.account.getFullAccountString())) connecting")
+    
+    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "SessionViewSegue" {
+            sessionViewController = segue.destinationController as? SessionViewController
+            sessionViewController?.currentClient = currentClient
         }
     }
+
+    // MARK: IBAction
+//    @IBAction func connectButton(sender: NSButton) {
+//        if let c = currentClient {
+//            c.connect()
+//            NSLog("Client(\(c.account.getFullAccountString())) connecting")
+//        }
+//    }
 
     @IBAction func sendMessageButton(sender: NSButton) {
         // TODO: add send message code
-    }
-    
-    // MARK: Implementations for NSTableViewDataSource
-    
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        if let c = currentClient {
-            return (c.chatListController as! VIChatListController).chatList.count
-        } else {
-            return 0
-        }
-    }
-    
-    // MARK: Implementations for NSTableViewDelegate
-    
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        if let col = tableColumn {
-            let cell = tableView.makeViewWithIdentifier(col.identifier, owner: self) as! NSTableCellView
-            if let c = currentClient {
-                let chatList = (c.chatListController as! VIChatListController).chatList
-                cell.textField?.stringValue = chatList[row].buddy.getAccountString()
-            } else {
-                cell.textField?.stringValue = "Unknown user"
-            }
-            return cell
-        }
-        return nil
     }
     
     // MARK: Implementations for VSClientDelegate
@@ -113,7 +100,7 @@ class MainViewController: NSViewController, NSTableViewDelegate, NSTableViewData
     // MARK: Implementations for VIChatDelegate
     
     func chatWillStart(chat: VIChat) {
-//        tableView.reloadData()
+        sessionViewController?.sessionTableView.reloadData()
     }
     
     func chatDidReceiveMessage(chat: VIChat) {

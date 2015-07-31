@@ -18,46 +18,90 @@ public class VIChatListController: VSChatListControllerProtocol {
     
     public var chatDelegate: VIChatDelegate?
     
-    public var chatList: [VIChat] = []
+    var chatList: [VIChat] = []
     
+    public var chatCount: Int {
+        get {
+            return chatList.count
+        }
+    }
+    
+    /// Called when client did receive a message from an account.
+    /// This will add a new chat when the chat has not been established.
+    /// Or update chat and put it to the index 0 of chat list.
     @objc public func clientDidReceivedMessage(receiver: SWClient!, from sender: SWAccount!, message: String!, timestamp: NSDate!) {
-        var lastchat = updateChatList(receiver, buddy: sender, message: message, timestamp: timestamp)
+        let lastchat = updateChatList(receiver, buddy: sender, message: message, timestamp: timestamp)
+        if let delegate = chatDelegate {
+            delegate.chatDidReceiveMessage(lastchat)
+        }
+    }
+    
+    /// Called when client did send a message to an account.
+    /// This will add a new chat when the chat has not been established.
+    /// Or update chat and put it to the index 0 of chat list.
+    @objc public func clientDidSendMessage(sender: SWClient!, to receiver: SWAccount!, message: String!, timestamp: NSDate!) {
+        let lastchat = updateChatList(sender, buddy: receiver, message: message, timestamp: timestamp)
+        if let delegate = chatDelegate {
+            delegate.chatDidSendMessage(lastchat)
+        }
+    }
+    
+    /// Update relevent chat with new message.
+    /// If no chat is relevent to buddy, new chat will be created.
+    /// Updated or new created chat will be placed at index 0 of chat list.
+    func updateChatList(owner: SWClient, buddy: SWAccount, message: String, timestamp: NSDate) -> VIChat {
+        var lastchat: VIChat? = nil
+        for i in 0 ..< chatList.count {
+            if chatList[i].buddy.getFullAccountString() == buddy.getFullAccountString() {
+                lastchat = chatList[i]
+                chatList.removeAtIndex(i)
+                break
+            }
+        }
         if let chat = lastchat {
-            chat.lastMessage = message
-            chat.lastMessageTime = timestamp
             chatList.insert(chat, atIndex: 0)
         } else {
-            lastchat = VIChat(owner: receiver.account, buddy: sender)
+            lastchat = VIChat(owner: owner.account, buddy: buddy)
             chatList.insert(lastchat!, atIndex: 0)
             if let delegate = chatDelegate {
                 delegate.chatWillStart(lastchat!)
             }
         }
-        if let delegate = chatDelegate {
-            delegate.chatDidReceiveMessage(lastchat!)
-        }
+        lastchat!.lastMessage = message
+        lastchat!.lastMessageTime = timestamp
+        return lastchat!
     }
     
-    @objc public func clientDidSendMessage(sender: SWClient!, to receiver: SWAccount!, message: String!, timestamp: NSDate!) {
-        let chat = updateChatList(sender, buddy: receiver, message: message, timestamp: timestamp)
-        if chat == nil {
-            NSLog("WARN: Send message from not exist chat")
-        } else if let delegate = chatDelegate {
-            chatList.insert(chat!, atIndex: 0)
-            delegate.chatDidSendMessage(chat!)
-        }
-    }
-    
-    /// Update relevent chat, and remove it from chatList, return for using.
-    private func updateChatList(owner: SWClient, buddy: SWAccount, message: String, timestamp: NSDate) -> VIChat? {
-        var lastChat: VIChat? = nil
+    public func getChatWithBuddy(buddy: SWAccount) -> VIChat? {
+        var chat: VIChat? = nil
         for i in 0 ..< chatList.count {
-            if chatList[i].owner.getFullAccountString() == buddy.getFullAccountString() {
-                lastChat = chatList[i]
-                chatList.removeAtIndex(i)
+            if chatList[i].buddy.getFullAccountString() == buddy.getFullAccountString() {
+                chat = chatList[i]
+                break
             }
         }
-        return lastChat
+        return chat
+    }
+    
+    public func addChatWithBuddy(owner: SWClient, buddy: SWAccount) -> VIChat {
+        if let chat = getChatWithBuddy(buddy) {
+            return chat
+        } else {
+            let newChat = VIChat(owner: owner.account, buddy: buddy)
+            chatList.insert(newChat, atIndex: 0)
+            if let delegate = chatDelegate {
+                delegate.chatWillStart(newChat)
+            }
+            return newChat
+        }
+    }
+    
+    public func getChatAtIndex(index: Int) -> VIChat? {
+        if index >= 0 && index < chatList.count {
+            return chatList[index]
+        } else {
+            return nil
+        }
     }
     
 //    private func sortChatList() {
