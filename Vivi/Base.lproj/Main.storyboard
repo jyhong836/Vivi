@@ -703,7 +703,7 @@
         <!--Main View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" userLabel="Main View Controller" customClass="ViewController" customModule="Vivi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" userLabel="Main View Controller" customClass="MainViewController" customModule="Vivi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl" userLabel="Main View">
                         <rect key="frame" x="0.0" y="0.0" width="650" height="450"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -855,7 +855,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="50" rowSizeStyle="automatic" viewBased="YES" id="zaB-TU-6Mx">
-                                            <rect key="frame" x="0.0" y="0.0" width="158" height="388"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="158" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -993,7 +993,7 @@
                         <subviews>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cG-T7-Ikp">
                                 <rect key="frame" x="6" y="32" width="477" height="62"/>
-                                <clipView key="contentView" id="3Th-Xg-hiA">
+                                <clipView key="contentView" copiesOnScroll="NO" id="3Th-Xg-hiA">
                                     <rect key="frame" x="1" y="1" width="475" height="60"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -1002,10 +1002,10 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="475" height="60"/>
-                                            <size key="maxSize" width="475" height="10000000"/>
+                                            <size key="maxSize" width="477" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <size key="minSize" width="475" height="60"/>
-                                            <size key="maxSize" width="475" height="10000000"/>
+                                            <size key="maxSize" width="477" height="10000000"/>
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1063,20 +1063,20 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMP-dd-plq">
-                                <rect key="frame" x="6" y="0.0" width="477" height="290"/>
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMP-dd-plq">
+                                <rect key="frame" x="0.0" y="0.0" width="489" height="290"/>
                                 <clipView key="contentView" id="ai7-18-sGf">
-                                    <rect key="frame" x="1" y="1" width="475" height="288"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="489" height="290"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="hhx-YX-5Dc">
-                                            <rect key="frame" x="0.0" y="0.0" width="482" height="288"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="496" height="290"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="475" height="288"/>
+                                            <size key="minSize" width="489" height="290"/>
                                             <size key="maxSize" width="653" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="475" height="288"/>
+                                            <size key="minSize" width="489" height="290"/>
                                             <size key="maxSize" width="653" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -1087,7 +1087,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="J6Z-yW-dX7">
-                                    <rect key="frame" x="460" y="1" width="16" height="288"/>
+                                    <rect key="frame" x="473" y="0.0" width="16" height="290"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -1097,7 +1097,7 @@
                             <constraint firstItem="rBT-9z-q3O" firstAttribute="top" secondItem="4Ge-Hu-069" secondAttribute="top" constant="20" symbolic="YES" id="afU-or-8YO"/>
                             <constraint firstAttribute="bottom" secondItem="DMP-dd-plq" secondAttribute="bottom" id="cR1-hb-beq"/>
                             <constraint firstItem="DMP-dd-plq" firstAttribute="top" secondItem="4Ge-Hu-069" secondAttribute="top" constant="60" id="pFm-Mt-EYh"/>
-                            <constraint firstItem="DMP-dd-plq" firstAttribute="leading" secondItem="4Ge-Hu-069" secondAttribute="leading" constant="6" id="rwv-l7-M7R"/>
+                            <constraint firstItem="DMP-dd-plq" firstAttribute="leading" secondItem="4Ge-Hu-069" secondAttribute="leading" id="rwv-l7-M7R"/>
                             <constraint firstItem="DMP-dd-plq" firstAttribute="centerX" secondItem="4Ge-Hu-069" secondAttribute="centerX" id="xuA-5q-x93"/>
                         </constraints>
                     </view>

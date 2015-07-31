@@ -10,7 +10,7 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate {
+class MainViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate {
     
     @IBOutlet weak var messageTextField: NSScrollView!
     @IBOutlet weak var connectButton: NSButton!
