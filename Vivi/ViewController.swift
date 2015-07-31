@@ -15,7 +15,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     @IBOutlet weak var messageTextField: NSScrollView!
     @IBOutlet weak var connectButton: NSButton!
 
-    @IBOutlet weak var tableView: NSTableView!
+//    @IBOutlet weak var tableView: NSTableView!
     
     let clientMgr = VIClientManager.sharedClientManager
     var clients: [SWClient] = []
@@ -25,7 +25,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tableView.reloadData()
+//        tableView.reloadData()
         
         // TODO: remove test code with account
         do {
@@ -113,7 +113,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     // MARK: Implementations for VIChatDelegate
     
     func chatWillStart(chat: VIChat) {
-        tableView.reloadData()
+//        tableView.reloadData()
     }
     
     func chatDidReceiveMessage(chat: VIChat) {
