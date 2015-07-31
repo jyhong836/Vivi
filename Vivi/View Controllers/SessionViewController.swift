@@ -51,7 +51,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             let cell = tableView.makeViewWithIdentifier(col.identifier, owner: self) as! NSTableCellView
             if let c = currentClient {
                 let chatListController = (c.chatListController as! VIChatListController)
-                cell.textField?.stringValue = chatListController.getChatAtIndex(row)!.buddy.getAccountString()
+                cell.textField?.stringValue = chatListController.chatAtIndex(row)!.buddy.getAccountString()
             } else {
                 cell.textField?.stringValue = "Unknown user"
             }

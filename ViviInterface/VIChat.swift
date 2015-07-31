@@ -9,7 +9,11 @@
 import Foundation
 import ViviSwiften
 
-public class VIChat {
+public func == (lhs: VIChat, rhs: VIChat) -> Bool {
+    return lhs.owner == rhs.owner && lhs.buddy == rhs.buddy
+}
+
+public class VIChat: Equatable {
     
     public var owner: SWAccount!
     public var buddy: SWAccount!

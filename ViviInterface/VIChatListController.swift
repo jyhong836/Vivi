@@ -88,11 +88,11 @@ public class VIChatListController: VSChatListControllerProtocol {
         return chat
     }
     
-    public func addChatWithBuddy(owner: SWClient, buddy: SWAccount) -> VIChat {
+    public func addChatWithBuddy(buddy: SWAccount) -> VIChat {
         if let existedChat = getChatWithBuddy(buddy) {
             return existedChat
         } else {
-            let newChat = VIChat(owner: owner.account, buddy: buddy)
+            let newChat = VIChat(owner: owner, buddy: buddy)
             chatList.insert(newChat, atIndex: 0)
             if let delegate = chatDelegate {
                 delegate.chatWillStart(newChat)
@@ -101,7 +101,7 @@ public class VIChatListController: VSChatListControllerProtocol {
         }
     }
     
-    public func getChatAtIndex(index: Int) -> VIChat? {
+    public func chatAtIndex(index: Int) -> VIChat? {
         if index >= 0 && index < chatList.count {
             return chatList[index]
         } else {
