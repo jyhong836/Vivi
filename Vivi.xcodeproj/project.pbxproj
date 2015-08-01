@@ -34,6 +34,8 @@
 		CD88E35E1B60DA0E00E7E256 /* SwiftenClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD88E35D1B60DA0E00E7E256 /* SwiftenClientTests.swift */; };
 		CD8C647B1B6BE0F700945529 /* AvaterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C647A1B6BE0F700945529 /* AvaterButton.swift */; };
 		CD8C647D1B6C6C3B00945529 /* SessionTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */; };
+		CD8C647F1B6C83D200945529 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C647E1B6C83D200945529 /* InputViewController.swift */; };
+		CD8C64811B6C84E900945529 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C64801B6C84E900945529 /* ChatViewController.swift */; };
 		CDB990E91B664E5D00598C51 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB990E81B664E5D00598C51 /* TestUtils.swift */; };
 		CDC2EE931B674F4200872623 /* SwiftenTypeDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */; };
 		CDC2EE951B6A412B00872623 /* VIChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2EE941B6A412B00872623 /* VIChat.swift */; };
@@ -188,6 +190,8 @@
 		CD88E35D1B60DA0E00E7E256 /* SwiftenClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftenClientTests.swift; sourceTree = "<group>"; };
 		CD8C647A1B6BE0F700945529 /* AvaterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvaterButton.swift; sourceTree = "<group>"; };
 		CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTableCellView.swift; sourceTree = "<group>"; };
+		CD8C647E1B6C83D200945529 /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		CD8C64801B6C84E900945529 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		CDB990E81B664E5D00598C51 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		CDC2EE941B6A412B00872623 /* VIChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIChat.swift; sourceTree = "<group>"; };
 		CDC2EE961B6A435800872623 /* VSXMPPRosterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSXMPPRosterDelegate.h; sourceTree = "<group>"; };
@@ -315,10 +319,10 @@
 				CD36855B1B5E659500DFC78A /* AppDelegate.swift */,
 				CD36855D1B5E659500DFC78A /* MainViewController.swift */,
 				CD8C647A1B6BE0F700945529 /* AvaterButton.swift */,
+				CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */,
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
 				CD3685641B5E659500DFC78A /* Info.plist */,
-				CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */,
 			);
 			path = Vivi;
 			sourceTree = "<group>";
@@ -346,6 +350,8 @@
 			children = (
 				CD4C3A531B6B489B00C283E6 /* SessionViewController.swift */,
 				CD4C3A571B6BAA2B00C283E6 /* ClientViewController.swift */,
+				CD8C64801B6C84E900945529 /* ChatViewController.swift */,
+				CD8C647E1B6C83D200945529 /* InputViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -760,9 +766,11 @@
 				CD8C647B1B6BE0F700945529 /* AvaterButton.swift in Sources */,
 				CD36855E1B5E659500DFC78A /* MainViewController.swift in Sources */,
 				CD8C647D1B6C6C3B00945529 /* SessionTableCellView.swift in Sources */,
+				CD8C647F1B6C83D200945529 /* InputViewController.swift in Sources */,
 				CD4C3A5E1B6BC5F000C283E6 /* SWClientFactory.swift in Sources */,
 				CD36855C1B5E659500DFC78A /* AppDelegate.swift in Sources */,
 				CD4C3A541B6B489B00C283E6 /* SessionViewController.swift in Sources */,
+				CD8C64811B6C84E900945529 /* ChatViewController.swift in Sources */,
 				CD4C3A581B6BAA2B00C283E6 /* ClientViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

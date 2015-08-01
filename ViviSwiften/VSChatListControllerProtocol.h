@@ -14,6 +14,10 @@
 @property (readonly, nonatomic) SWAccount* owner;
 
 @required
+- (void)clientWillSendMessageTo: (SWAccount*)receiver
+                        message: (NSString*)message
+                      timestamp: (NSDate*)date;
+@required
 - (void)clientDidSendMessageTo: (SWAccount*)receiver
                        message: (NSString*)message
                      timestamp: (NSDate*)date;

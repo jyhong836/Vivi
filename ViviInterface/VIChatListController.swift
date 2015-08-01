@@ -19,6 +19,13 @@ public class VIChatListController: VSChatListControllerProtocol {
     public var chatDelegate: VIChatDelegate?
     
     var chatList: [VIChat] = []
+    public var selectedChatIndex: Int = -1 {
+        didSet {
+            if selectedChatIndex >= 0 && selectedChatIndex < chatList.count {
+                chatDelegate?.chatIsSelected(chatList[selectedChatIndex])
+            }
+        }
+    }
     @objc public var owner: SWAccount!
     
     public var chatCount: Int {
@@ -38,6 +45,14 @@ public class VIChatListController: VSChatListControllerProtocol {
         let lastchat = updateChatList(withBuddy: sender, message: message, timestamp: timestamp)
         if let delegate = chatDelegate {
             delegate.chatDidReceiveMessage(lastchat)
+        }
+    }
+    
+    @objc public func clientWillSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!) {
+        // FIXME: should I add not sended message to chat list?
+        let lastchat = updateChatList(withBuddy: receiver, message: message, timestamp: date)
+        if let delegate = chatDelegate {
+            delegate.chatWillSendMessage(lastchat)
         }
     }
     

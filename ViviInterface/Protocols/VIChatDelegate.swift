@@ -13,6 +13,10 @@ public protocol VIChatDelegate {
     /// New message is stored in chat.lastMessage
     func chatDidSendMessage(chat: VIChat)
     
-    /// New chat will start. This just created chat will not include any message or timestamp.
+    func chatWillSendMessage(chat: VIChat)
+    
+    /// New chat will start. This creats chat, but will not include any message or timestamp.
     func chatWillStart(chat: VIChat)
+    
+    func chatIsSelected(chat: VIChat)
 }

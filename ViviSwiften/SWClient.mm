@@ -107,10 +107,17 @@ using namespace Swift;
     swmsg->setFrom(*account.jid);
     swmsg->setTo(*targetAccount.jid);
     swmsg->setBody([message cStringUsingEncoding:NSASCIIStringEncoding]);
-    [_chatListController clientDidSendMessageTo: targetAccount
+    [_chatListController clientWillSendMessageTo: targetAccount
                                         message: message
                                       timestamp: [NSDate date]];
-    client->sendMessage(swmsg);
+    if (client->isAvailable()) {
+        client->sendMessage(swmsg);
+        [_chatListController clientDidSendMessageTo: targetAccount
+                                             message: message
+                                           timestamp: [NSDate date]];
+    } else {
+        // FIXME: Process when send message at disconnection
+    }
 }
 
 - (BOOL)isAvailable

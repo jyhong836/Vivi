@@ -14,7 +14,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     
     @IBOutlet weak var sessionTableView: NSTableView!
     
-    weak var clientViewController: ClientViewController?
+    var clientViewController: ClientViewController?
     
     var currentClient: SWClient? = nil {
         didSet {
@@ -61,6 +61,13 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             return cell
         }
         return nil
+    }
+    
+    func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet {
+        if proposedSelectionIndexes.count == 1 {
+            (currentClient?.chatListController as! VIChatListController).selectedChatIndex = proposedSelectionIndexes.lastIndex
+        }
+        return proposedSelectionIndexes
     }
     
 }

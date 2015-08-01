@@ -18,6 +18,7 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
 //    @IBOutlet weak var tableView: NSTableView!
     
     weak var sessionViewController: SessionViewController?
+    weak var chatViewController: ChatViewController?
     
     let clientMgr = VIClientManager.sharedClientManager
     var clients: [SWClient] = []
@@ -43,7 +44,7 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
                 (c.chatListController as! VIChatListController).chatDelegate = self
                 
                 // TODO: remove test code
-//                (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "jyhong1@xmpp.jp"))
+                (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "jyhong1@xmpp.jp"))
             }
         } catch {
             NSLog("Unexpected error")
@@ -57,9 +58,16 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "SessionViewSegue" {
-            sessionViewController = segue.destinationController as? SessionViewController
-            sessionViewController?.currentClient = currentClient
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "SessionViewSegue":
+                sessionViewController = segue.destinationController as? SessionViewController
+                sessionViewController?.currentClient = currentClient
+            case "ChatViewSegue":
+                chatViewController = segue.destinationController as? ChatViewController
+                chatViewController?.currentClient = currentClient
+            default: break
+            }
         }
     }
 
@@ -70,10 +78,6 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
 //            NSLog("Client(\(c.account.getFullAccountString())) connecting")
 //        }
 //    }
-
-    @IBAction func sendMessageButton(sender: NSButton) {
-        // TODO: add send message code
-    }
     
     // MARK: Implementations for VSClientDelegate
     
@@ -114,8 +118,17 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
 //        tableView.reloadDataForRowIndexes(<#T##rowIndexes: NSIndexSet##NSIndexSet#>, columnIndexes: 0)
     }
     
+    func chatWillSendMessage(chat: VIChat) {
+        
+    }
+    
     func chatDidSendMessage(chat: VIChat) {
         //        tableView.reloadDataForRowIndexes(<#T##rowIndexes: NSIndexSet##NSIndexSet#>, columnIndexes: 0)
+    }
+    
+    func chatIsSelected(chat: VIChat) {
+        chatViewController?.currentChat = chat
+        chatViewController?.view.hidden = false
     }
 }
 
