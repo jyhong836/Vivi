@@ -12,7 +12,10 @@
 @protocol VSClientDelegate;
 @protocol VSChatListControllerProtocol;
 
-typedef void (^ConnectionHandler)(void);
+#import "ViviSwiftenDefines.h"
+
+typedef void (^VSConnectionHandler)(void);
+typedef void (^VSSendMessageHandler)(VSClientErrorType);
 
 /*!
  * @brief A Objective-C adapter for Swift::Client.
@@ -29,9 +32,9 @@ typedef void (^ConnectionHandler)(void);
 @property (nonatomic) id<VSChatListControllerProtocol> chatListController;
 @property (nonatomic) id<VSClientDelegate> delegate;
 /// Set through connectWithHandler.
-@property (readonly, nonatomic) ConnectionHandler connectHandler;
+@property (readonly, nonatomic) VSConnectionHandler connectHandler;
 /// Set through disconnectWithHandler.
-@property (readonly, nonatomic) ConnectionHandler disconnectHandler;
+@property (readonly, nonatomic) VSConnectionHandler disconnectHandler;
 - (void)setConnectHandlerToNil;
 - (void)setDisconnectHandlerToNil;
 
@@ -47,12 +50,15 @@ typedef void (^ConnectionHandler)(void);
 
 - (void)connect;
 /// Connect and invoke handler when success. Handler will be invoked after delegate.
-- (void)connectWithHandler: (ConnectionHandler)handler;
+- (void)connectWithHandler: (VSConnectionHandler)handler;
 - (void)disconnect;
 /// Connect and invoke handler when success. Handler will be invoked after delegate.
-- (void)disconnectWithHandler: (ConnectionHandler)handler;
-- (void)sendMessageToAccount: (SWAccount*)account
-              Message: (NSString*)message;
+- (void)disconnectWithHandler: (VSConnectionHandler)handler;
+- (void)sendMessageToAccount: (SWAccount*)targetAccount
+                     Message: (NSString*)message;
+- (void)sendMessageToAccount: (SWAccount*)targetAccount
+                     Message: (NSString*)message
+                     handler: (VSSendMessageHandler)handler;
 
 /// Checks whether the client is connected to the server, and stanzas can be sent.
 - (BOOL)isAvailable;

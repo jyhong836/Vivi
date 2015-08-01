@@ -75,7 +75,7 @@ using namespace Swift;
     client->connect();
 }
 
-- (void)connectWithHandler: (ConnectionHandler)handler
+- (void)connectWithHandler: (VSConnectionHandler)handler
 {
     connectHandler = handler;
     client->connect();
@@ -90,33 +90,68 @@ using namespace Swift;
     client->disconnect();
 }
 
-- (void)disconnectWithHandler: (ConnectionHandler)handler
+- (void)disconnectWithHandler: (VSConnectionHandler)handler
 {
     client->disconnect();
     disconnectHandler = handler;
 }
 
-/*!
- * @brief Send message to specific account.
- */
-- (void)sendMessageToAccount: (SWAccount*)targetAccount
-              Message: (NSString*)message
+- (Message::ref)createSwiftMessage: (SWAccount*)targetAccount
+                           Message: (NSString*)message
 {
     // FIXME: Is this a right usage of boost::shared_ptr?
     Message::ref swmsg = boost::make_shared<Message>();
     swmsg->setFrom(*account.jid);
     swmsg->setTo(*targetAccount.jid);
     swmsg->setBody([message cStringUsingEncoding:NSASCIIStringEncoding]);
+    return swmsg;
+}
+
+/*!
+ * @brief Send message to specific account.
+ */
+- (void)sendMessageToAccount: (SWAccount*)targetAccount
+                     Message: (NSString*)message
+{
+    Message::ref swmsg = [self createSwiftMessage: targetAccount
+                                          Message: message];
     [_chatListController clientWillSendMessageTo: targetAccount
-                                        message: message
-                                      timestamp: [NSDate date]];
+                                         message: message
+                                       timestamp: [NSDate date]];
     if (client->isAvailable()) {
         client->sendMessage(swmsg);
         [_chatListController clientDidSendMessageTo: targetAccount
                                              message: message
                                            timestamp: [NSDate date]];
     } else {
-        // FIXME: Process when send message at disconnection
+        [_chatListController clientFailSendMessageTo: targetAccount
+                                             message: message
+                                           timestamp: [NSDate date]
+                                               error: VSClientErrorTypeClientUnavaliable];
+    }
+}
+
+- (void)sendMessageToAccount: (SWAccount*)targetAccount
+                     Message: (NSString*)message
+                     handler: (VSSendMessageHandler)handler
+{
+    Message::ref swmsg = [self createSwiftMessage: targetAccount
+                                          Message: message];
+    [_chatListController clientWillSendMessageTo: targetAccount
+                                         message: message
+                                       timestamp: [NSDate date]];
+    if (client->isAvailable()) {
+        client->sendMessage(swmsg);
+        [_chatListController clientDidSendMessageTo: targetAccount
+                                            message: message
+                                          timestamp: [NSDate date]];
+        handler(VSClientErrorTypeNone);
+    } else {
+        [_chatListController clientFailSendMessageTo: targetAccount
+                                             message: message
+                                           timestamp: [NSDate date]
+                                               error: VSClientErrorTypeClientUnavaliable];
+        handler(VSClientErrorTypeClientUnavaliable);
     }
 }
 

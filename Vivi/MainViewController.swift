@@ -123,7 +123,15 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     }
     
     func chatDidSendMessage(chat: VIChat) {
-        //        tableView.reloadDataForRowIndexes(<#T##rowIndexes: NSIndexSet##NSIndexSet#>, columnIndexes: 0)
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            sessionViewController?.sessionTableView.reloadData()
+        })
+    }
+    
+    func chatFailSendMessage(chat: VIChat, error: VSClientErrorType) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            sessionViewController?.sessionTableView.reloadData()
+        })
     }
     
     func chatIsSelected(chat: VIChat) {

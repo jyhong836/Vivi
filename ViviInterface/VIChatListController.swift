@@ -66,6 +66,14 @@ public class VIChatListController: VSChatListControllerProtocol {
         }
     }
     
+    @objc public func clientFailSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!, error: VSClientErrorType) {
+        // TODO: Add process for not sended message
+        let lastchat = updateChatList(withBuddy: receiver, message: message, timestamp: date)
+        if let delegate = chatDelegate {
+            delegate.chatFailSendMessage(lastchat, error: error)
+        }
+    }
+    
     /// Update relevent chat with new message.
     /// If no chat is relevent to buddy, new chat will be created.
     /// Updated or new created chat will be placed at index 0 of chat list.

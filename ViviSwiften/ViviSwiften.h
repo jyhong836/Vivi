@@ -27,3 +27,5 @@ FOUNDATION_EXPORT const unsigned char ViviSwiftenVersionString[];
 #import <ViviSwiften/SWEventLoop.h>
 #import <ViviSwiften/SWAccount.h>
 #import <ViviSwiften/SWXMPPRoster.h>
+
+#import <ViviSwiften/ViviSwiftenDefines.h>

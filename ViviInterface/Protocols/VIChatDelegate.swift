@@ -6,12 +6,16 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
+import ViviSwiften
+
 public protocol VIChatDelegate {
     /// New message is stored in chat.lastMessage.
     func chatDidReceiveMessage(chat: VIChat)
     
-    /// New message is stored in chat.lastMessage
+    /// New message is stored in chat.lastMessage.
     func chatDidSendMessage(chat: VIChat)
+    /// New message is stored in chat.lastMessage, but not sended.
+    func chatFailSendMessage(chat: VIChat, error: VSClientErrorType)
     
     func chatWillSendMessage(chat: VIChat)
     

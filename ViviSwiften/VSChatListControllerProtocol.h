@@ -6,6 +6,8 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
+#import "ViviSwiftenDefines.h"
+
 @class SWClient;
 @class SWAccount;
 
@@ -21,6 +23,11 @@
 - (void)clientDidSendMessageTo: (SWAccount*)receiver
                        message: (NSString*)message
                      timestamp: (NSDate*)date;
+@required
+- (void)clientFailSendMessageTo: (SWAccount*)receiver
+                        message: (NSString*)message
+                      timestamp: (NSDate*)date
+                          error: (VSClientErrorType)error;
 @required
 - (void)clientDidReceivedMessageFrom: (SWAccount*)sender
                              message: (NSString*)message
