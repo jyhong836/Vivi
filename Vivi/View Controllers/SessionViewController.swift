@@ -48,10 +48,13 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let col = tableColumn {
-            let cell = tableView.makeViewWithIdentifier(col.identifier, owner: self) as! NSTableCellView
+            let cell = tableView.makeViewWithIdentifier(col.identifier, owner: self) as! SessionTableCellView
             if let c = currentClient {
                 let chatListController = (c.chatListController as! VIChatListController)
                 cell.textField?.stringValue = chatListController.chatAtIndex(row)!.buddy.getAccountString()
+                cell.textField?.toolTip = cell.textField?.stringValue
+                cell.lastMessageTextField.stringValue = (chatListController.chatAtIndex(row)!.lastMessage)
+                cell.lastMessageTextField.toolTip = cell.lastMessageTextField.stringValue
             } else {
                 cell.textField?.stringValue = "Unknown user"
             }

@@ -13,6 +13,8 @@ class ClientViewController: NSViewController {
     
     var currentClient: SWClient?
 
+    @IBOutlet weak var avaterButton: NSButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.

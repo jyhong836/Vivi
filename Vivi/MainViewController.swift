@@ -41,6 +41,9 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
                 c.delegate = self
                 c.roster.delegate = self
                 (c.chatListController as! VIChatListController).chatDelegate = self
+                
+                // TODO: remove test code
+//                (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "jyhong1@xmpp.jp"))
             }
         } catch {
             NSLog("Unexpected error")
@@ -99,10 +102,15 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     // MARK: Implementations for VIChatDelegate
     
     func chatWillStart(chat: VIChat) {
-        sessionViewController?.sessionTableView.reloadData()
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            sessionViewController?.sessionTableView.reloadData()
+        })
     }
     
     func chatDidReceiveMessage(chat: VIChat) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            sessionViewController?.sessionTableView.reloadData()
+        })
 //        tableView.reloadDataForRowIndexes(<#T##rowIndexes: NSIndexSet##NSIndexSet#>, columnIndexes: 0)
     }
     
