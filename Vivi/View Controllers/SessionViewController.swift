@@ -65,9 +65,19 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     
     func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet {
         if proposedSelectionIndexes.count == 1 {
+            // FIXME: ! Should use delegate to pass this message
             (currentClient?.chatListController as! VIChatListController).selectedChatIndex = proposedSelectionIndexes.lastIndex
         }
         return proposedSelectionIndexes
+    }
+    
+    // MARK: API for chat update
+    /// Called when any session is updated.
+    func sessionDidUpdate() {
+        // TODO: Add more process and seperate functions.
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.sessionTableView.reloadData()
+        })
     }
     
 }

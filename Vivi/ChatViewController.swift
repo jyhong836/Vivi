@@ -33,4 +33,9 @@ class ChatViewController: NSViewController {
         }
     }
     
+    func chatDidUpdate(chat: VIChat) {
+        if chat == currentChat {
+            // TODO: do something
+        }
+    }
 }

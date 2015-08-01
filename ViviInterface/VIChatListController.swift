@@ -42,7 +42,7 @@ public class VIChatListController: VSChatListControllerProtocol {
     /// This will add a new chat when the chat has not been established.
     /// Or update chat and put it to the index 0 of chat list.
     @objc public func clientDidReceivedMessageFrom( sender: SWAccount!, message: String!, timestamp: NSDate!) {
-        let lastchat = updateChatList(withBuddy: sender, message: message, timestamp: timestamp)
+        let lastchat = updateChatList(withBuddy: sender, message: message, timestamp: timestamp, direction: .From)
         if let delegate = chatDelegate {
             delegate.chatDidReceiveMessage(lastchat)
         }
@@ -50,7 +50,7 @@ public class VIChatListController: VSChatListControllerProtocol {
     
     @objc public func clientWillSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!) {
         // FIXME: should I add not sended message to chat list?
-        let lastchat = updateChatList(withBuddy: receiver, message: message, timestamp: date)
+        let lastchat = updateChatList(withBuddy: receiver, message: message, timestamp: date, direction: .To)
         if let delegate = chatDelegate {
             delegate.chatWillSendMessage(lastchat)
         }
@@ -60,7 +60,7 @@ public class VIChatListController: VSChatListControllerProtocol {
     /// This will add a new chat when the chat has not been established.
     /// Or update chat and put it to the index 0 of chat list.
     @objc public func clientDidSendMessageTo(receiver: SWAccount!, message: String!, timestamp: NSDate!) {
-        let lastchat = updateChatList(withBuddy: receiver, message: message, timestamp: timestamp)
+        let lastchat = updateChatList(withBuddy: receiver, message: message, timestamp: timestamp, direction: .To)
         if let delegate = chatDelegate {
             delegate.chatDidSendMessage(lastchat)
         }
@@ -68,7 +68,7 @@ public class VIChatListController: VSChatListControllerProtocol {
     
     @objc public func clientFailSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!, error: VSClientErrorType) {
         // TODO: Add process for not sended message
-        let lastchat = updateChatList(withBuddy: receiver, message: message, timestamp: date)
+        let lastchat = updateChatList(withBuddy: receiver, message: message, timestamp: date, direction: .FailTo)
         if let delegate = chatDelegate {
             delegate.chatFailSendMessage(lastchat, error: error)
         }
@@ -77,7 +77,7 @@ public class VIChatListController: VSChatListControllerProtocol {
     /// Update relevent chat with new message.
     /// If no chat is relevent to buddy, new chat will be created.
     /// Updated or new created chat will be placed at index 0 of chat list.
-    func updateChatList(withBuddy buddy: SWAccount, message: String, timestamp: NSDate) -> VIChat {
+    func updateChatList(withBuddy buddy: SWAccount, message: String, timestamp: NSDate, direction: VIChatMessageDirection) -> VIChat {
         var lastchat: VIChat? = nil
         for i in 0 ..< chatList.count {
             if chatList[i].buddy.getFullAccountString() == buddy.getFullAccountString() {
@@ -95,8 +95,7 @@ public class VIChatListController: VSChatListControllerProtocol {
                 delegate.chatWillStart(lastchat!)
             }
         }
-        lastchat!.lastMessage = message
-        lastchat!.lastMessageTime = timestamp
+        lastchat?.addMessage(message, timestamp: timestamp, direction: direction)
         return lastchat!
     }
     

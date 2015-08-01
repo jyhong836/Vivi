@@ -25,6 +25,7 @@
 		CD4C3A5E1B6BC5F000C283E6 /* SWClientFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A5B1B6BC43D00C283E6 /* SWClientFactory.swift */; };
 		CD5E6F1E1B64DA5100E33502 /* libSwiften.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */; };
 		CD5E6F1F1B64DA7D00E33502 /* libSwiften.3.0.dylib in Copy Libraries */ = {isa = PBXBuildFile; fileRef = CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		CD60BA4F1B6D304E008E077A /* ChatMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */; };
 		CD72B2C91B5F6F5300BCFD2A /* SWEventLoop.h in Headers */ = {isa = PBXBuildFile; fileRef = CD72B2C71B5F6F5300BCFD2A /* SWEventLoop.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD72B2CA1B5F6F5300BCFD2A /* SWEventLoop.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */; };
 		CD72B2CD1B5F7A9800BCFD2A /* SWAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -181,6 +182,7 @@
 		CD5E6F251B64E6FD00E33502 /* VIClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VIClientManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD5E6F271B64F05300E33502 /* VIClientManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = VIClientManagerTests.swift; path = ../ViviTests/VIClientManagerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftenTypeDefine.swift; sourceTree = "<group>"; };
+		CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageViewController.swift; sourceTree = "<group>"; };
 		CD72B2C71B5F6F5300BCFD2A /* SWEventLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWEventLoop.h; sourceTree = "<group>"; };
 		CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWEventLoop.mm; sourceTree = "<group>"; };
 		CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAccount.h; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				CD4C3A571B6BAA2B00C283E6 /* ClientViewController.swift */,
 				CD8C64801B6C84E900945529 /* ChatViewController.swift */,
 				CD8C647E1B6C83D200945529 /* InputViewController.swift */,
+				CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -771,6 +774,7 @@
 				CD36855E1B5E659500DFC78A /* MainViewController.swift in Sources */,
 				CD8C647D1B6C6C3B00945529 /* SessionTableCellView.swift in Sources */,
 				CD8C647F1B6C83D200945529 /* InputViewController.swift in Sources */,
+				CD60BA4F1B6D304E008E077A /* ChatMessageViewController.swift in Sources */,
 				CD4C3A5E1B6BC5F000C283E6 /* SWClientFactory.swift in Sources */,
 				CD36855C1B5E659500DFC78A /* AppDelegate.swift in Sources */,
 				CD4C3A541B6B489B00C283E6 /* SessionViewController.swift in Sources */,
