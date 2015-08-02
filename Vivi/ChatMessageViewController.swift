@@ -24,6 +24,7 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        messageTableView.selectionHighlightStyle = NSTableViewSelectionHighlightStyle.None
     }
     
     // MARK: API for update chat table view
@@ -79,5 +80,14 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         }
         cell?.textField?.stringValue = (currentChat?.messageAtIndex(row)?.content)!
         return cell
+    }
+    
+    func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        return true
+    }
+    
+    let minTableViewRowHeight = 50
+    func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        return CGFloat(minTableViewRowHeight)
     }
 }
