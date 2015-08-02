@@ -1157,12 +1157,16 @@
                                                             <rect key="frame" x="1" y="1" width="484" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="wg3-qF-lwV">
-                                                                    <rect key="frame" x="2" y="21" width="96" height="17"/>
+                                                                <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Vv-5X-pMT">
+                                                                    <rect key="frame" x="3" y="15" width="115" height="30"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="axesIndependently" image="InMessageBuble" id="jcE-jE-Tix"/>
+                                                                </imageView>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wg3-qF-lwV">
+                                                                    <rect key="frame" x="13" y="21" width="96" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="96" id="ZjY-xG-oAu"/>
                                                                     </constraints>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="In Message" drawsBackground="YES" id="UVz-96-KfY">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="In Message" id="UVz-96-KfY">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1181,8 +1185,12 @@
                                                             <rect key="frame" x="1" y="63" width="484" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
+                                                                <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YKF-yy-qXg">
+                                                                    <rect key="frame" x="365" y="17" width="116" height="26"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="axesIndependently" image="OutMessageBuble" id="aBP-VJ-Drh"/>
+                                                                </imageView>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rBj-iU-ZKe">
-                                                                    <rect key="frame" x="383" y="21" width="100" height="17"/>
+                                                                    <rect key="frame" x="366" y="21" width="100" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="96" id="PpI-0S-kbK"/>
                                                                     </constraints>
@@ -1195,7 +1203,7 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="rBj-iU-ZKe" firstAttribute="centerY" secondItem="lOY-ec-Rwo" secondAttribute="centerY" id="4wc-xC-GCQ"/>
-                                                                <constraint firstAttribute="trailing" secondItem="rBj-iU-ZKe" secondAttribute="trailing" constant="3" id="caw-XU-Bya"/>
+                                                                <constraint firstAttribute="trailing" secondItem="rBj-iU-ZKe" secondAttribute="trailing" constant="20" id="caw-XU-Bya"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="rBj-iU-ZKe" id="sEJ-Qu-Dih"/>
@@ -1242,7 +1250,9 @@
     </scenes>
     <resources>
         <image name="Enter" width="32" height="32"/>
+        <image name="InMessageBuble" width="39" height="30"/>
         <image name="Lock" width="32" height="32"/>
         <image name="Male User Head" width="64" height="64"/>
+        <image name="OutMessageBuble" width="39" height="26"/>
     </resources>
 </document>
