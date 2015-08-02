@@ -13,11 +13,11 @@ public protocol VIChatDelegate {
     func chatDidReceiveMessage(chat: VIChat)
     
     /// New message is stored in chat.lastMessage.
-    func chatDidSendMessage(chat: VIChat)
+    func chatDidSendMessage(chat: VIChat, updatedIndex index: Int)
     /// New message is stored in chat.lastMessage, but not sended.
-    func chatFailSendMessage(chat: VIChat, error: VSClientErrorType)
+    func chatFailSendMessage(chat: VIChat, updatedIndex index: Int, error: VSClientErrorType)
     
-    func chatWillSendMessage(chat: VIChat)
+    func chatWillSendMessage(chat: VIChat, updatedIndex index: Int)
     
     /// New chat will start. This creats chat, but will not include any message or timestamp.
     func chatWillStart(chat: VIChat)

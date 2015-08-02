@@ -70,14 +70,6 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             }
         }
     }
-
-    // MARK: IBAction
-//    @IBAction func connectButton(sender: NSButton) {
-//        if let c = currentClient {
-//            c.connect()
-//            NSLog("Client(\(c.account.getFullAccountString())) connecting")
-//        }
-//    }
     
     // MARK: Implementations for VSClientDelegate
     
@@ -116,17 +108,20 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
 //        tableView.reloadDataForRowIndexes(<#T##rowIndexes: NSIndexSet##NSIndexSet#>, columnIndexes: 0)
     }
     
-    func chatWillSendMessage(chat: VIChat) {
-        
+    // TODO: Wrap the three delegate into one?
+    func chatWillSendMessage(chat: VIChat, updatedIndex index: Int) {
+        sessionViewController?.sessionDidUpdate()
+        chatViewController?.chatDidUpdate(chat, updateMessageAtIndex: index)
     }
     
-    func chatDidSendMessage(chat: VIChat) {
+    func chatDidSendMessage(chat: VIChat, updatedIndex index: Int) {
         sessionViewController?.sessionDidUpdate()
-        chatViewController?.chatDidUpdate(chat)
+        chatViewController?.chatDidUpdate(chat, updateMessageAtIndex: index)
     }
     
-    func chatFailSendMessage(chat: VIChat, error: VSClientErrorType) {
+    func chatFailSendMessage(chat: VIChat, updatedIndex index: Int, error: VSClientErrorType) {
         sessionViewController?.sessionDidUpdate()
+        chatViewController?.chatDidUpdate(chat, updateMessageAtIndex: index)
     }
     
     func chatIsSelected(chat: VIChat) {

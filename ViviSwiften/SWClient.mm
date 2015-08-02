@@ -115,18 +115,19 @@ using namespace Swift;
 {
     Message::ref swmsg = [self createSwiftMessage: targetAccount
                                           Message: message];
+    NSDate* timestamp = [NSDate date]; // FIXME: timestamp should be provided by Swiften
     [_chatListController clientWillSendMessageTo: targetAccount
                                          message: message
-                                       timestamp: [NSDate date]];
+                                       timestamp: timestamp];
     if (client->isAvailable()) {
         client->sendMessage(swmsg);
         [_chatListController clientDidSendMessageTo: targetAccount
-                                             message: message
-                                           timestamp: [NSDate date]];
+                                            message: message
+                                          timestamp: timestamp];
     } else {
         [_chatListController clientFailSendMessageTo: targetAccount
                                              message: message
-                                           timestamp: [NSDate date]
+                                           timestamp: timestamp
                                                error: VSClientErrorTypeClientUnavaliable];
     }
 }
@@ -137,19 +138,20 @@ using namespace Swift;
 {
     Message::ref swmsg = [self createSwiftMessage: targetAccount
                                           Message: message];
+    NSDate* timestamp = [NSDate date]; // FIXME: timestamp should be provided by Swiften
     [_chatListController clientWillSendMessageTo: targetAccount
                                          message: message
-                                       timestamp: [NSDate date]];
+                                       timestamp: timestamp];
     if (client->isAvailable()) {
         client->sendMessage(swmsg);
         [_chatListController clientDidSendMessageTo: targetAccount
                                             message: message
-                                          timestamp: [NSDate date]];
+                                          timestamp: timestamp];
         handler(VSClientErrorTypeNone);
     } else {
         [_chatListController clientFailSendMessageTo: targetAccount
                                              message: message
-                                           timestamp: [NSDate date]
+                                           timestamp: timestamp
                                                error: VSClientErrorTypeClientUnavaliable];
         handler(VSClientErrorTypeClientUnavaliable);
     }

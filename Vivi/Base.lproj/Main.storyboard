@@ -1153,7 +1153,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="InMessageCellView" id="OS5-WE-eac" userLabel="In Message Cell View">
+                                                        <tableCellView identifier="InMessageCellView" id="OS5-WE-eac" userLabel="In Message Cell View" customClass="MessageTableCellView" customModule="Vivi" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="484" height="61"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1177,7 +1177,7 @@
                                                                 <outlet property="textField" destination="wg3-qF-lwV" id="omn-xQ-AQb"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="OutMessageCellView" id="lOY-ec-Rwo" userLabel="Out Message Cell View">
+                                                        <tableCellView identifier="OutMessageCellView" id="lOY-ec-Rwo" userLabel="Out Message Cell View" customClass="MessageTableCellView" customModule="Vivi" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="64" width="484" height="62"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1226,6 +1226,10 @@
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
+                                            <connections>
+                                                <outlet property="dataSource" destination="ZTq-eb-EqD" id="ziE-6i-VC8"/>
+                                                <outlet property="delegate" destination="ZTq-eb-EqD" id="nm3-wK-AOp"/>
+                                            </connections>
                                         </tableView>
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>

@@ -38,11 +38,14 @@ public class VIChatListController: VSChatListControllerProtocol {
         self.owner = owner
     }
     
+    // MARK: Delegate for client actions
+    
     /// Called when client did receive a message from an account.
     /// This will add a new chat when the chat has not been established.
     /// Or update chat and put it to the index 0 of chat list.
-    @objc public func clientDidReceivedMessageFrom( sender: SWAccount!, message: String!, timestamp: NSDate!) {
-        let lastchat = updateChatList(withBuddy: sender, message: message, timestamp: timestamp, direction: .From)
+    @objc public func clientDidReceivedMessageFrom(sender: SWAccount!, message: String!, timestamp: NSDate!) {
+        let lastchat = updateChatList(withBuddy: sender)
+        lastchat.addMessage(message, timestamp: timestamp, direction: .From)
         if let delegate = chatDelegate {
             delegate.chatDidReceiveMessage(lastchat)
         }
@@ -50,9 +53,10 @@ public class VIChatListController: VSChatListControllerProtocol {
     
     @objc public func clientWillSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!) {
         // FIXME: should I add not sended message to chat list?
-        let lastchat = updateChatList(withBuddy: receiver, message: message, timestamp: date, direction: .To)
+        let lastchat = updateChatList(withBuddy: receiver)
+        let updatedIndex = lastchat.updateMessage(message, timestamp: date, direction: .WillTo)
         if let delegate = chatDelegate {
-            delegate.chatWillSendMessage(lastchat)
+            delegate.chatWillSendMessage(lastchat, updatedIndex: updatedIndex) // TODO: pass index
         }
     }
     
@@ -60,29 +64,31 @@ public class VIChatListController: VSChatListControllerProtocol {
     /// This will add a new chat when the chat has not been established.
     /// Or update chat and put it to the index 0 of chat list.
     @objc public func clientDidSendMessageTo(receiver: SWAccount!, message: String!, timestamp: NSDate!) {
-        let lastchat = updateChatList(withBuddy: receiver, message: message, timestamp: timestamp, direction: .To)
+        let lastchat = updateChatList(withBuddy: receiver)
+        let updatedIndex = lastchat.updateMessage(message, timestamp: timestamp, direction: .To)
         if let delegate = chatDelegate {
-            delegate.chatDidSendMessage(lastchat)
+            delegate.chatDidSendMessage(lastchat, updatedIndex: updatedIndex) // TODO: pass index
         }
     }
     
     @objc public func clientFailSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!, error: VSClientErrorType) {
         // TODO: Add process for not sended message
-        let lastchat = updateChatList(withBuddy: receiver, message: message, timestamp: date, direction: .FailTo)
+        let lastchat = updateChatList(withBuddy: receiver)
+        let updatedIndex = lastchat.updateMessage(message, timestamp: date, direction: .To)
         if let delegate = chatDelegate {
-            delegate.chatFailSendMessage(lastchat, error: error)
+            delegate.chatFailSendMessage(lastchat, updatedIndex: updatedIndex, error: error) // TODO: pass index
         }
     }
     
     /// Update relevent chat with new message.
     /// If no chat is relevent to buddy, new chat will be created.
     /// Updated or new created chat will be placed at index 0 of chat list.
-    func updateChatList(withBuddy buddy: SWAccount, message: String, timestamp: NSDate, direction: VIChatMessageDirection) -> VIChat {
+    func updateChatList(withBuddy buddy: SWAccount) -> VIChat {
         var lastchat: VIChat? = nil
         for i in 0 ..< chatList.count {
             if chatList[i].buddy.getFullAccountString() == buddy.getFullAccountString() {
                 lastchat = chatList[i]
-                chatList.removeAtIndex(i)
+                chatList.removeAtIndex(i) // FIXME: this is not efficient
                 break
             }
         }
@@ -95,9 +101,10 @@ public class VIChatListController: VSChatListControllerProtocol {
                 delegate.chatWillStart(lastchat!)
             }
         }
-        lastchat?.addMessage(message, timestamp: timestamp, direction: direction)
         return lastchat!
     }
+    
+    // MARK: API for aceess and set element
     
     public func getChatWithBuddy(buddy: SWAccount) -> VIChat? {
         var chat: VIChat? = nil

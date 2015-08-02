@@ -26,6 +26,7 @@
 		CD5E6F1E1B64DA5100E33502 /* libSwiften.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */; };
 		CD5E6F1F1B64DA7D00E33502 /* libSwiften.3.0.dylib in Copy Libraries */ = {isa = PBXBuildFile; fileRef = CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CD60BA4F1B6D304E008E077A /* ChatMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */; };
+		CD60BA511B6DB30F008E077A /* MessageTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD60BA501B6DB30F008E077A /* MessageTableCellView.swift */; };
 		CD72B2C91B5F6F5300BCFD2A /* SWEventLoop.h in Headers */ = {isa = PBXBuildFile; fileRef = CD72B2C71B5F6F5300BCFD2A /* SWEventLoop.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD72B2CA1B5F6F5300BCFD2A /* SWEventLoop.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */; };
 		CD72B2CD1B5F7A9800BCFD2A /* SWAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -183,6 +184,7 @@
 		CD5E6F271B64F05300E33502 /* VIClientManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = VIClientManagerTests.swift; path = ../ViviTests/VIClientManagerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftenTypeDefine.swift; sourceTree = "<group>"; };
 		CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageViewController.swift; sourceTree = "<group>"; };
+		CD60BA501B6DB30F008E077A /* MessageTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableCellView.swift; sourceTree = "<group>"; };
 		CD72B2C71B5F6F5300BCFD2A /* SWEventLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWEventLoop.h; sourceTree = "<group>"; };
 		CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWEventLoop.mm; sourceTree = "<group>"; };
 		CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAccount.h; sourceTree = "<group>"; };
@@ -287,6 +289,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD0F93C21B6DBEAF000817CB /* UI Assets */ = {
+			isa = PBXGroup;
+			children = (
+				CD8C647A1B6BE0F700945529 /* AvaterButton.swift */,
+				CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */,
+				CD60BA501B6DB30F008E077A /* MessageTableCellView.swift */,
+			);
+			name = "UI Assets";
+			sourceTree = "<group>";
+		};
 		CD36854F1B5E659500DFC78A = {
 			isa = PBXGroup;
 			children = (
@@ -322,8 +334,7 @@
 				CD4C3A521B6B483500C283E6 /* View Controllers */,
 				CD36855B1B5E659500DFC78A /* AppDelegate.swift */,
 				CD36855D1B5E659500DFC78A /* MainViewController.swift */,
-				CD8C647A1B6BE0F700945529 /* AvaterButton.swift */,
-				CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */,
+				CD0F93C21B6DBEAF000817CB /* UI Assets */,
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
 				CD3685641B5E659500DFC78A /* Info.plist */,
@@ -770,6 +781,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD60BA511B6DB30F008E077A /* MessageTableCellView.swift in Sources */,
 				CD8C647B1B6BE0F700945529 /* AvaterButton.swift in Sources */,
 				CD36855E1B5E659500DFC78A /* MainViewController.swift in Sources */,
 				CD8C647D1B6C6C3B00945529 /* SessionTableCellView.swift in Sources */,
