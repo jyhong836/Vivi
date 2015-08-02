@@ -13,7 +13,13 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
 
     @IBOutlet weak var messageTableView: NSTableView!
     
-    var currentChat: VIChat?
+    var currentChat: VIChat? {
+        didSet {
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.messageTableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
