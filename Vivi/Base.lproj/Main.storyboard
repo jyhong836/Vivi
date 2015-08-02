@@ -885,7 +885,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Y8s-LE-ZPU">
-                                                                    <rect key="frame" x="49" y="28" width="105" height="17"/>
+                                                                    <rect key="frame" x="49" y="30" width="105" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Buddy" usesSingleLineMode="YES" id="HNx-37-4aJ">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -895,14 +895,6 @@
                                                                         </allowedInputSourceLocales>
                                                                     </textFieldCell>
                                                                 </textField>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UWk-sv-plD">
-                                                                    <rect key="frame" x="3" y="5" width="40" height="40"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="40" id="SiU-f5-AHq"/>
-                                                                        <constraint firstAttribute="width" constant="40" id="drB-Fq-Kgj"/>
-                                                                    </constraints>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Male User Head" id="MXZ-1R-WpW"/>
-                                                                </imageView>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hZy-Gr-wL9">
                                                                     <rect key="frame" x="49" y="5" width="105" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Latest Message" id="tkh-4M-l7h">
@@ -911,19 +903,25 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
+                                                                <imageView translatesAutoresizingMaskIntoConstraints="NO" id="bCY-YT-pVg">
+                                                                    <rect key="frame" x="11" y="9" width="32" height="32"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="32" id="HLB-Mc-oee"/>
+                                                                    </constraints>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSUserGuest" id="3PM-vg-g6k"/>
+                                                                </imageView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="UWk-sv-plD" firstAttribute="leading" secondItem="osE-c2-l1e" secondAttribute="leading" constant="3" id="Xdn-qH-eIv"/>
-                                                                <constraint firstItem="Y8s-LE-ZPU" firstAttribute="top" secondItem="UWk-sv-plD" secondAttribute="top" id="YY3-Q7-1wc"/>
-                                                                <constraint firstItem="UWk-sv-plD" firstAttribute="centerY" secondItem="osE-c2-l1e" secondAttribute="centerY" id="eha-Va-bC4"/>
-                                                                <constraint firstItem="Y8s-LE-ZPU" firstAttribute="leading" secondItem="UWk-sv-plD" secondAttribute="trailing" constant="8" id="nBJ-GM-CVK"/>
+                                                                <constraint firstItem="bCY-YT-pVg" firstAttribute="leading" secondItem="osE-c2-l1e" secondAttribute="leading" constant="11" id="0s8-xP-od2"/>
+                                                                <constraint firstItem="bCY-YT-pVg" firstAttribute="centerY" secondItem="osE-c2-l1e" secondAttribute="centerY" id="GKG-Cx-Oy4"/>
+                                                                <constraint firstItem="Y8s-LE-ZPU" firstAttribute="leading" secondItem="bCY-YT-pVg" secondAttribute="trailing" constant="8" symbolic="YES" id="Myh-Hm-DkZ"/>
+                                                                <constraint firstItem="Y8s-LE-ZPU" firstAttribute="top" secondItem="osE-c2-l1e" secondAttribute="top" constant="3" id="U0V-hh-jmi"/>
+                                                                <constraint firstItem="hZy-Gr-wL9" firstAttribute="top" secondItem="Y8s-LE-ZPU" secondAttribute="bottom" constant="8" symbolic="YES" id="hx4-Ia-zv2"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Y8s-LE-ZPU" secondAttribute="trailing" constant="3" id="nmG-uu-FWC"/>
                                                                 <constraint firstItem="hZy-Gr-wL9" firstAttribute="trailing" secondItem="Y8s-LE-ZPU" secondAttribute="trailing" id="r0n-IU-yyF"/>
                                                                 <constraint firstItem="hZy-Gr-wL9" firstAttribute="leading" secondItem="Y8s-LE-ZPU" secondAttribute="leading" id="wTc-sa-8pX"/>
-                                                                <constraint firstItem="hZy-Gr-wL9" firstAttribute="bottom" secondItem="UWk-sv-plD" secondAttribute="bottom" id="ysd-yD-Pcc"/>
                                                             </constraints>
                                                             <connections>
-                                                                <outlet property="avaterImageView" destination="UWk-sv-plD" id="Cs5-Ti-6ns"/>
                                                                 <outlet property="lastMessageTextField" destination="hZy-Gr-wL9" id="XT2-Z7-FzL"/>
                                                                 <outlet property="textField" destination="Y8s-LE-ZPU" id="ajo-Eb-Hrc"/>
                                                             </connections>
@@ -988,7 +986,7 @@
                                     <constraint firstAttribute="width" secondItem="Dkh-5M-qmJ" secondAttribute="height" multiplier="1:1" id="p40-RJ-fQA"/>
                                     <constraint firstAttribute="height" constant="36" id="ui4-nH-lE4"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Male User Head" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="aL5-fB-EWk">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSUser" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="aL5-fB-EWk">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -998,7 +996,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="VGr-fY-7O5"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Enter" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="ctl-Fq-JLR">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFollowLinkFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="ctl-Fq-JLR">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1011,7 +1009,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="lzH-qJ-aBa"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Lock" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="5Gx-o7-AOC">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSLockLockedTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="5Gx-o7-AOC">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1157,14 +1155,15 @@
                                                             <rect key="frame" x="1" y="1" width="484" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Vv-5X-pMT">
+                                                                <imageView translatesAutoresizingMaskIntoConstraints="NO" id="5Vv-5X-pMT" userLabel="In Buble">
                                                                     <rect key="frame" x="3" y="15" width="115" height="30"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="axesIndependently" image="InMessageBuble" id="jcE-jE-Tix"/>
                                                                 </imageView>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wg3-qF-lwV">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="wg3-qF-lwV">
                                                                     <rect key="frame" x="13" y="21" width="96" height="17"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="96" id="ZjY-xG-oAu"/>
+                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="9Bm-wP-bkd"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="ZjY-xG-oAu"/>
                                                                     </constraints>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="In Message" id="UVz-96-KfY">
                                                                         <font key="font" metaFont="system"/>
@@ -1174,8 +1173,12 @@
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="wg3-qF-lwV" firstAttribute="leading" secondItem="OS5-WE-eac" secondAttribute="leading" constant="2" id="76J-aH-Ss0"/>
+                                                                <constraint firstItem="wg3-qF-lwV" firstAttribute="leading" secondItem="OS5-WE-eac" secondAttribute="leading" constant="15" id="76J-aH-Ss0"/>
                                                                 <constraint firstItem="wg3-qF-lwV" firstAttribute="centerY" secondItem="OS5-WE-eac" secondAttribute="centerY" id="9SN-N9-7Ip"/>
+                                                                <constraint firstItem="5Vv-5X-pMT" firstAttribute="leading" secondItem="OS5-WE-eac" secondAttribute="leading" constant="3" id="MOx-Hp-5w2"/>
+                                                                <constraint firstItem="5Vv-5X-pMT" firstAttribute="top" secondItem="OS5-WE-eac" secondAttribute="top" constant="15" id="Nom-th-FGV"/>
+                                                                <constraint firstAttribute="bottom" secondItem="5Vv-5X-pMT" secondAttribute="bottom" constant="15" id="oIk-Vd-qlA"/>
+                                                                <constraint firstItem="5Vv-5X-pMT" firstAttribute="width" secondItem="wg3-qF-lwV" secondAttribute="height" multiplier="115:17" id="tcj-I2-8vg"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="wg3-qF-lwV" id="omn-xQ-AQb"/>
@@ -1185,16 +1188,13 @@
                                                             <rect key="frame" x="1" y="63" width="484" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YKF-yy-qXg">
-                                                                    <rect key="frame" x="365" y="17" width="116" height="26"/>
+                                                                <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YKF-yy-qXg" userLabel="Out Buble">
+                                                                    <rect key="frame" x="236" y="17" width="240" height="26"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="axesIndependently" image="OutMessageBuble" id="aBP-VJ-Drh"/>
                                                                 </imageView>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rBj-iU-ZKe">
-                                                                    <rect key="frame" x="366" y="21" width="100" height="17"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="96" id="PpI-0S-kbK"/>
-                                                                    </constraints>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" title="Out Message" id="tNt-OV-lIj">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBj-iU-ZKe">
+                                                                    <rect key="frame" x="248" y="22" width="213" height="17"/>
+                                                                    <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" title="Out Message" id="tNt-OV-lIj">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1202,10 +1202,13 @@
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="rBj-iU-ZKe" firstAttribute="centerY" secondItem="lOY-ec-Rwo" secondAttribute="centerY" id="4wc-xC-GCQ"/>
-                                                                <constraint firstAttribute="trailing" secondItem="rBj-iU-ZKe" secondAttribute="trailing" constant="20" id="caw-XU-Bya"/>
+                                                                <constraint firstItem="rBj-iU-ZKe" firstAttribute="top" secondItem="lOY-ec-Rwo" secondAttribute="top" constant="21" id="1bF-Uu-AJQ"/>
+                                                                <constraint firstAttribute="trailing" secondItem="rBj-iU-ZKe" secondAttribute="trailing" constant="25" id="3gc-Vn-dOF"/>
+                                                                <constraint firstAttribute="trailing" secondItem="YKF-yy-qXg" secondAttribute="trailing" constant="8" id="hxV-JX-UHH"/>
+                                                                <constraint firstItem="YKF-yy-qXg" firstAttribute="top" secondItem="lOY-ec-Rwo" secondAttribute="top" constant="17" id="tDi-5s-eWO"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="outBubleImageView" destination="YKF-yy-qXg" id="bzY-TS-u0D"/>
                                                                 <outlet property="textField" destination="rBj-iU-ZKe" id="sEJ-Qu-Dih"/>
                                                             </connections>
                                                         </tableCellView>
@@ -1229,6 +1232,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d0L-37-5qp">
+                                <rect key="frame" x="281" y="313" width="38" height="17"/>
+                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" title="Label" placeholderString="" id="fIS-qs-qlm">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="brm-06-HPC" firstAttribute="top" secondItem="4Ge-Hu-069" secondAttribute="top" constant="60" id="8f9-eR-1xZ"/>
@@ -1249,10 +1260,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Enter" width="32" height="32"/>
         <image name="InMessageBuble" width="39" height="30"/>
-        <image name="Lock" width="32" height="32"/>
-        <image name="Male User Head" width="64" height="64"/>
+        <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
+        <image name="NSLockLockedTemplate" width="10" height="14"/>
+        <image name="NSUser" width="32" height="32"/>
+        <image name="NSUserGuest" width="32" height="32"/>
         <image name="OutMessageBuble" width="39" height="26"/>
     </resources>
 </document>

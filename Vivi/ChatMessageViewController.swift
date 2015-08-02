@@ -79,6 +79,9 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
             }
         }
         cell?.textField?.stringValue = (currentChat?.messageAtIndex(row)?.content)!
+//        cell?.setFrameSize(NSSize(width: CGFloat(160), height: CGFloat(17.0)))
+//        cell?.setFrameSize(NSSize(width: CGFloat((currentChat?.messageAtIndex(row)?.content.lengthOfBytesUsingEncoding(NSString.defaultCStringEncoding()))!), height: CGFloat(17.0)))
+//        cell?.needsDisplay = true
         return cell
     }
     
