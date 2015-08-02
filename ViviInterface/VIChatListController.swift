@@ -54,9 +54,11 @@ public class VIChatListController: VSChatListControllerProtocol {
     @objc public func clientWillSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!) {
         // FIXME: should I add not sended message to chat list?
         let lastchat = updateChatList(withBuddy: receiver)
-        let updatedIndex = lastchat.updateMessage(message, timestamp: date, direction: .WillTo)
+        lastchat.addMessage(message, timestamp: date, direction: .WillTo)
+//        let updatedIndex = lastchat.updateMessage(message, timestamp: date, direction: .WillTo)
         if let delegate = chatDelegate {
-            delegate.chatWillSendMessage(lastchat, updatedIndex: updatedIndex) // TODO: pass index
+//            delegate.chatWillSendMessage(lastchat, updatedIndex: updatedIndex) // TODO: pass index
+            delegate.chatWillSendMessage(lastchat, updatedIndex: -1) // TODO: pass index
         }
     }
     
@@ -67,7 +69,7 @@ public class VIChatListController: VSChatListControllerProtocol {
         let lastchat = updateChatList(withBuddy: receiver)
         let updatedIndex = lastchat.updateMessage(message, timestamp: timestamp, direction: .To)
         if let delegate = chatDelegate {
-            delegate.chatDidSendMessage(lastchat, updatedIndex: updatedIndex) // TODO: pass index
+            delegate.chatDidSendMessage(lastchat, updatedIndex: updatedIndex)
         }
     }
     
@@ -76,7 +78,7 @@ public class VIChatListController: VSChatListControllerProtocol {
         let lastchat = updateChatList(withBuddy: receiver)
         let updatedIndex = lastchat.updateMessage(message, timestamp: date, direction: .To)
         if let delegate = chatDelegate {
-            delegate.chatFailSendMessage(lastchat, updatedIndex: updatedIndex, error: error) // TODO: pass index
+            delegate.chatFailSendMessage(lastchat, updatedIndex: updatedIndex, error: error)
         }
     }
     

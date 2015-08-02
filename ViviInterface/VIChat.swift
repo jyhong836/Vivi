@@ -69,27 +69,37 @@ public class VIChat: Equatable {
     
     // MARK: Arrary storage
     private(set) var messageArray: [VIChatMessage] = []
+    private(set) var holdOnMessageArray: [(message: VIChatMessage, mainIndex: Int)] = []
     
     /// Add a new message to message array
     public func addMessage(content: String, timestamp: NSDate, direction: VIChatMessageDirection) {
-        // TODO: Add message to file storage.
-        messageArray.append( VIChatMessage(content: content, timestamp: timestamp, direction: direction) )
+        // TODO: Save message to file storage.
+        let msg = VIChatMessage(content: content, timestamp: timestamp, direction: direction)
+        messageArray.append(msg)
+        if direction == .WillTo {
+            holdOnMessageArray.append( (msg, messageArray.count - 1) )
+        }
     }
     
     /// Update or add a new message, and return updated message index or -1 (new message)
     func updateMessage(content: String, timestamp: NSDate, direction: VIChatMessageDirection) -> Int {
-        let index = messageArray.indexOf { (msg) -> Bool in
-            msg.content == content && msg.timestamp.compare(timestamp) == .OrderedSame
+        let index = holdOnMessageArray.indexOf { ( msgTuple ) -> Bool in
+            msgTuple.message.content == content && msgTuple.message.timestamp.compare(timestamp) == .OrderedSame
         }
         if let i = index {
-            updateMessageAtIndex(Int(i), content: content, timestamp: timestamp, direction: direction)
-            return Int(i)
+            let mainIndex = holdOnMessageArray[i].mainIndex
+            updateMessageAtIndex(mainIndex, content: content, timestamp: timestamp, direction: direction)
+            if direction != .WillTo {
+                holdOnMessageArray.removeAtIndex(i)
+            }
+            return mainIndex
         } else {
             addMessage(content, timestamp: timestamp, direction: direction)
             return -1
         }
     }
     
+    /// Update properties of message at index
     public func updateMessageAtIndex(index: Int, content: String? = nil, timestamp: NSDate? = nil, direction: VIChatMessageDirection? = nil) {
         if index >= 0 && index < messageCount {
             if let cnt = content {
