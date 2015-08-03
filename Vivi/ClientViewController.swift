@@ -14,6 +14,7 @@ class ClientViewController: NSViewController {
     var currentClient: SWClient?
 
     @IBOutlet weak var avaterButton: NSButton!
+    @IBOutlet weak var connectButton: NSButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,9 @@ class ClientViewController: NSViewController {
     
     @IBAction func loginButtonClicked(sender: AnyObject) {
         if let c = currentClient {
-            c.connect()
+            c.connectWithHandler({ () -> Void in
+                // FIXME: Here need error parameter
+            })
         }
     }
 }

@@ -178,7 +178,6 @@ using namespace Swift;
 - (void)setSoftwareName: (NSString*)name
          currentVersion: (NSString*)version
 {
-    NSString2std_str(name);
     client->setSoftwareVersion(NSString2std_str(name), NSString2std_str(version));
 }
 

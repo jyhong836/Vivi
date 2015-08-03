@@ -854,17 +854,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="160" height="242"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="lQE-nI-L8M" userLabel="Client Control View">
+                                <rect key="frame" x="0.0" y="183" width="160" height="60"/>
+                                <connections>
+                                    <segue destination="eau-pW-G7o" kind="embed" identifier="ClientViewSegue" id="bnk-qc-y04"/>
+                                </connections>
+                            </containerView>
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1ZY-BA-HO8">
+                                <rect key="frame" x="6" y="159" width="148" height="22"/>
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="Ka9-Nh-ukZ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </searchFieldCell>
+                            </searchField>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="52" horizontalPageScroll="10" verticalLineScroll="52" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0u1-8W-vI3">
-                                <rect key="frame" x="0.0" y="0.0" width="160" height="182"/>
-                                <clipView key="contentView" id="IZ5-J0-F00">
-                                    <rect key="frame" x="1" y="1" width="158" height="180"/>
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="157"/>
+                                <clipView key="contentView" drawsBackground="NO" id="IZ5-J0-F00">
+                                    <rect key="frame" x="1" y="1" width="158" height="155"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="50" viewBased="YES" id="zaB-TU-6Mx">
-                                            <rect key="frame" x="0.0" y="0.0" width="158" height="0.0"/>
+                                        <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="50" viewBased="YES" id="zaB-TU-6Mx">
+                                            <rect key="frame" x="0.0" y="0.0" width="158" height="155"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="cell" width="155.03125" minWidth="50" maxWidth="1000" id="woy-zX-tFF">
@@ -935,33 +950,31 @@
                                             </connections>
                                         </tableView>
                                     </subviews>
-                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="zah-PD-2zL">
+                                <scroller key="horizontalScroller" hidden="YES" appearanceType="vibrantLight" verticalHuggingPriority="750" horizontal="YES" id="zah-PD-2zL">
                                     <rect key="frame" x="-100" y="-100" width="237" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Nlk-wM-Xgg">
+                                <scroller key="verticalScroller" hidden="YES" appearanceType="vibrantLight" verticalHuggingPriority="750" horizontal="NO" id="Nlk-wM-Xgg">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="lQE-nI-L8M" userLabel="Client Control View">
-                                <rect key="frame" x="0.0" y="183" width="160" height="60"/>
-                                <connections>
-                                    <segue destination="eau-pW-G7o" kind="embed" identifier="ClientViewSegue" id="bnk-qc-y04"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="0u1-8W-vI3" firstAttribute="top" secondItem="cag-Fb-Ff0" secondAttribute="top" constant="60" id="294-Te-T2O"/>
+                            <constraint firstItem="0u1-8W-vI3" firstAttribute="top" secondItem="cag-Fb-Ff0" secondAttribute="top" constant="85" id="294-Te-T2O"/>
+                            <constraint firstItem="zaB-TU-6Mx" firstAttribute="top" secondItem="1ZY-BA-HO8" secondAttribute="bottom" constant="3" id="A3a-gM-X9P"/>
                             <constraint firstItem="lQE-nI-L8M" firstAttribute="trailing" secondItem="0u1-8W-vI3" secondAttribute="trailing" id="U9Y-yV-YWe"/>
-                            <constraint firstItem="0u1-8W-vI3" firstAttribute="top" secondItem="lQE-nI-L8M" secondAttribute="bottom" constant="1" id="W9D-NM-xLW"/>
+                            <constraint firstItem="0u1-8W-vI3" firstAttribute="top" secondItem="lQE-nI-L8M" secondAttribute="bottom" constant="26" id="W9D-NM-xLW"/>
                             <constraint firstAttribute="trailing" secondItem="0u1-8W-vI3" secondAttribute="trailing" id="lt9-Bj-Ow3"/>
                             <constraint firstItem="lQE-nI-L8M" firstAttribute="top" secondItem="cag-Fb-Ff0" secondAttribute="top" constant="-1" id="q8e-pW-UkY"/>
+                            <constraint firstItem="1ZY-BA-HO8" firstAttribute="top" secondItem="lQE-nI-L8M" secondAttribute="bottom" constant="2" id="rYY-t3-Tqa"/>
                             <constraint firstItem="0u1-8W-vI3" firstAttribute="leading" secondItem="cag-Fb-Ff0" secondAttribute="leading" id="tTw-2F-ILW"/>
+                            <constraint firstAttribute="trailing" secondItem="1ZY-BA-HO8" secondAttribute="trailing" constant="6" id="tt5-8P-jVB"/>
                             <constraint firstAttribute="bottom" secondItem="0u1-8W-vI3" secondAttribute="bottom" id="vTL-v7-sBR"/>
                             <constraint firstItem="lQE-nI-L8M" firstAttribute="leading" secondItem="0u1-8W-vI3" secondAttribute="leading" id="vXY-EM-AeL"/>
+                            <constraint firstItem="1ZY-BA-HO8" firstAttribute="leading" secondItem="cag-Fb-Ff0" secondAttribute="leading" constant="6" id="vlz-7a-qD9"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1028,6 +1041,7 @@
                     </view>
                     <connections>
                         <outlet property="avaterButton" destination="Dkh-5M-qmJ" id="uAa-53-4jO"/>
+                        <outlet property="connectButton" destination="dgn-bD-CAb" id="gdR-Ir-gWQ"/>
                     </connections>
                 </viewController>
                 <customObject id="K1S-DI-AuK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

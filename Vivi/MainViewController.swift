@@ -39,9 +39,15 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
                 clientMgr.startClientLoop()
                 clients.append(c)
                 currentClient = c
+                
                 c.delegate = self
                 c.roster.delegate = self
                 (c.chatListController as! VIChatListController).chatDelegate = self
+                if let infoDict = NSBundle.mainBundle().localizedInfoDictionary {
+                    let appName = infoDict[String(kCFBundleNameKey)] as! String
+                    let appVer = infoDict[String(kCFBundleVersionKey)] as! String
+                    c.setSoftwareName(appName, currentVersion: appVer)
+                }
                 
                 // TODO: remove test code
                 (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "jyhong1@xmpp.jp"))
