@@ -9,7 +9,7 @@
 import Cocoa
 import ViviInterface
 
-class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, MessageTableCellViewDelegate {
 
     @IBOutlet weak var messageTableView: NSTableView!
     
@@ -24,7 +24,6 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        messageTableView.selectionHighlightStyle = NSTableViewSelectionHighlightStyle.None
     }
     
     // MARK: API for update chat table view
@@ -78,10 +77,12 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
                 break
             }
         }
-        cell?.textField?.stringValue = (currentChat?.messageAtIndex(row)?.content)!
-//        cell?.setFrameSize(NSSize(width: CGFloat(160), height: CGFloat(17.0)))
-//        cell?.setFrameSize(NSSize(width: CGFloat((currentChat?.messageAtIndex(row)?.content.lengthOfBytesUsingEncoding(NSString.defaultCStringEncoding()))!), height: CGFloat(17.0)))
-//        cell?.needsDisplay = true
+        if let cl = cell {
+            cl.textField?.stringValue = (currentChat?.messageAtIndex(row)?.content)!
+            cl.cellRow = row
+            cl.delegate = self
+            cellHeightList.insert(cl.cellHeight, atIndex: row)
+        }
         return cell
     }
     
@@ -89,9 +90,19 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         return true
     }
     
-    let minTableViewRowHeight = 50
+    let minTableViewRowHeight = 60
     func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return CGFloat(minTableViewRowHeight)
+        if row >= 0 && row < cellHeightList.count {
+            return cellHeightList[row]
+        } else {
+            return CGFloat(minTableViewRowHeight)
+        }
     }
     
+    // MARK: Implementation for MessageTableCellViewDelegate
+    var cellHeightList: [CGFloat] = []
+    func cellDidChangeHeight(row: Int, height: CGFloat) {
+        cellHeightList[row] = height
+        messageTableView.noteHeightOfRowsWithIndexesChanged(NSIndexSet(index: row))
+    }
 }

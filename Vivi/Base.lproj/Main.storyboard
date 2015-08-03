@@ -897,7 +897,7 @@
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hZy-Gr-wL9">
                                                                     <rect key="frame" x="49" y="5" width="105" height="17"/>
-                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Latest Message" id="tkh-4M-l7h">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Latest Message" usesSingleLineMode="YES" id="tkh-4M-l7h">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1134,7 +1134,7 @@
                                     <rect key="frame" x="1" y="1" width="487" height="288"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="60" viewBased="YES" id="ZWo-vN-myc" userLabel="Message Table View">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="60" viewBased="YES" id="ZWo-vN-myc" userLabel="Message Table View">
                                             <rect key="frame" x="0.0" y="0.0" width="487" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1155,15 +1155,15 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="InMessageCellView" id="OS5-WE-eac" userLabel="In Message Cell View" customClass="MessageTableCellView" customModule="Vivi" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="484" height="60"/>
+                                                            <rect key="frame" x="1" y="1" width="484" height="36"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="249" verticalCompressionResistancePriority="749" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Vv-5X-pMT" userLabel="In Buble">
-                                                                    <rect key="frame" x="8" y="17" width="327" height="26"/>
+                                                                    <rect key="frame" x="8" y="0.0" width="327" height="26"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="axesIndependently" image="InMessageBuble" id="jcE-jE-Tix"/>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wg3-qF-lwV">
-                                                                    <rect key="frame" x="18" y="21" width="309" height="17"/>
+                                                                    <rect key="frame" x="18" y="6" width="309" height="17"/>
                                                                     <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="In Message" id="UVz-96-KfY">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1174,25 +1174,26 @@
                                                             <constraints>
                                                                 <constraint firstItem="wg3-qF-lwV" firstAttribute="leading" secondItem="OS5-WE-eac" secondAttribute="leading" constant="20" id="5Md-zV-kK6"/>
                                                                 <constraint firstItem="5Vv-5X-pMT" firstAttribute="width" secondItem="wg3-qF-lwV" secondAttribute="width" constant="22" id="DOs-6N-llv"/>
-                                                                <constraint firstItem="wg3-qF-lwV" firstAttribute="top" secondItem="OS5-WE-eac" secondAttribute="top" constant="22" id="P1T-5Q-XaY"/>
-                                                                <constraint firstItem="5Vv-5X-pMT" firstAttribute="top" secondItem="OS5-WE-eac" secondAttribute="top" constant="17" id="QVK-vX-Fnp"/>
+                                                                <constraint firstItem="wg3-qF-lwV" firstAttribute="top" secondItem="OS5-WE-eac" secondAttribute="top" constant="13" id="P1T-5Q-XaY"/>
+                                                                <constraint firstItem="5Vv-5X-pMT" firstAttribute="top" secondItem="OS5-WE-eac" secondAttribute="top" constant="10" id="QVK-vX-Fnp"/>
                                                                 <constraint firstItem="5Vv-5X-pMT" firstAttribute="leading" secondItem="OS5-WE-eac" secondAttribute="leading" constant="8" id="jaM-xa-qWY"/>
                                                                 <constraint firstItem="5Vv-5X-pMT" firstAttribute="height" secondItem="wg3-qF-lwV" secondAttribute="height" constant="9" id="mGU-Ln-Q3v"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="bubleImageView" destination="5Vv-5X-pMT" id="ECt-Kl-Ppc"/>
                                                                 <outlet property="textField" destination="wg3-qF-lwV" id="omn-xQ-AQb"/>
                                                             </connections>
                                                         </tableCellView>
                                                         <tableCellView identifier="OutMessageCellView" id="lOY-ec-Rwo" userLabel="Out Message Cell View" customClass="MessageTableCellView" customModule="Vivi" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="63" width="484" height="60"/>
+                                                            <rect key="frame" x="1" y="39" width="484" height="36"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="249" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YKF-yy-qXg" userLabel="Out Buble">
-                                                                    <rect key="frame" x="149" y="17" width="327" height="26"/>
+                                                                    <rect key="frame" x="149" y="0.0" width="327" height="26"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="axesIndependently" image="OutMessageBuble" id="aBP-VJ-Drh"/>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBj-iU-ZKe">
-                                                                    <rect key="frame" x="157" y="21" width="309" height="17"/>
+                                                                    <rect key="frame" x="157" y="6" width="309" height="17"/>
                                                                     <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" title="Out Message" id="tNt-OV-lIj">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1201,15 +1202,15 @@
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="rBj-iU-ZKe" firstAttribute="top" secondItem="lOY-ec-Rwo" secondAttribute="top" constant="22" id="1bF-Uu-AJQ"/>
+                                                                <constraint firstItem="rBj-iU-ZKe" firstAttribute="top" secondItem="lOY-ec-Rwo" secondAttribute="top" constant="13" id="1bF-Uu-AJQ"/>
                                                                 <constraint firstAttribute="trailing" secondItem="rBj-iU-ZKe" secondAttribute="trailing" constant="20" id="3gc-Vn-dOF"/>
                                                                 <constraint firstItem="YKF-yy-qXg" firstAttribute="width" secondItem="rBj-iU-ZKe" secondAttribute="width" constant="22" id="Cu8-3o-agD"/>
                                                                 <constraint firstAttribute="trailing" secondItem="YKF-yy-qXg" secondAttribute="trailing" constant="8" id="hxV-JX-UHH"/>
-                                                                <constraint firstItem="YKF-yy-qXg" firstAttribute="top" secondItem="lOY-ec-Rwo" secondAttribute="top" constant="17" id="tDi-5s-eWO"/>
+                                                                <constraint firstItem="YKF-yy-qXg" firstAttribute="top" secondItem="lOY-ec-Rwo" secondAttribute="top" constant="10" id="tDi-5s-eWO"/>
                                                                 <constraint firstItem="YKF-yy-qXg" firstAttribute="height" secondItem="rBj-iU-ZKe" secondAttribute="height" constant="9" id="vuu-Ki-L0p"/>
                                                             </constraints>
                                                             <connections>
-                                                                <outlet property="outBubleImageView" destination="YKF-yy-qXg" id="bzY-TS-u0D"/>
+                                                                <outlet property="bubleImageView" destination="YKF-yy-qXg" id="cgK-yF-qux"/>
                                                                 <outlet property="textField" destination="rBj-iU-ZKe" id="sEJ-Qu-Dih"/>
                                                             </connections>
                                                         </tableCellView>
