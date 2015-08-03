@@ -103,7 +103,7 @@ using namespace Swift;
     Message::ref swmsg = boost::make_shared<Message>();
     swmsg->setFrom(*account.jid);
     swmsg->setTo(*targetAccount.jid);
-    swmsg->setBody([message cStringUsingEncoding:NSASCIIStringEncoding]);
+    swmsg->setBody(NSString2std_str(message));
     return swmsg;
 }
 

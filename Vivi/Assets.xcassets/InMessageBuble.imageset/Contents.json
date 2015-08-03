@@ -10,7 +10,7 @@
         },
         "cap-insets" : {
           "bottom" : 14,
-          "top" : 15,
+          "top" : 10,
           "right" : 19,
           "left" : 19
         }
@@ -29,7 +29,7 @@
         },
         "cap-insets" : {
           "bottom" : 27,
-          "top" : 26,
+          "top" : 24,
           "right" : 39,
           "left" : 38
         }
@@ -48,7 +48,7 @@
         },
         "cap-insets" : {
           "bottom" : 55,
-          "top" : 55,
+          "top" : 52,
           "right" : 78,
           "left" : 77
         }
