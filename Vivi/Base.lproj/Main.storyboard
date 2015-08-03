@@ -1253,7 +1253,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="InMessageBuble" width="39" height="30"/>
+        <image name="InMessageBuble" width="39" height="25"/>
         <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
         <image name="NSLockLockedTemplate" width="10" height="14"/>
         <image name="NSUser" width="32" height="32"/>

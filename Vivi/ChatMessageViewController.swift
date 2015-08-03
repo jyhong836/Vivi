@@ -93,4 +93,5 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return CGFloat(minTableViewRowHeight)
     }
+    
 }
