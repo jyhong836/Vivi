@@ -45,6 +45,8 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
 //                self.messageTableView.beginUpdates()
                 self.messageTableView.insertRowsAtIndexes(NSIndexSet(index: self.messageTableView.numberOfRows), withAnimation: NSTableViewAnimationOptions.EffectNone)
 //                self.messageTableView.endUpdates()
+                self.messageTableView.noteHeightOfRowsWithIndexesChanged(NSIndexSet(index: self.messageTableView.numberOfRows - 1))
+                self.messageTableView.scrollRowToVisible(self.messageTableView.numberOfRows - 1)
             })
         } else {
             assert(false, "Tend to update an chat when currentChat is not set up")
@@ -99,7 +101,7 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         return true
     }
     
-    let minTableViewRowHeight = 60
+    let defaultRowHeight = CGFloat(36)
     func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         var cell: MessageTableCellView? = messageCellViewForDir(currentChat?.messageAtIndex(row)!.direction, inTableView: tableView)
         if let cl = cell {
@@ -107,6 +109,6 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
             cell!.layoutSubtreeIfNeeded()
             return cell!.frame.height
         }
-        return CGFloat(minTableViewRowHeight)
+        return defaultRowHeight
     }
 }

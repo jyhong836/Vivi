@@ -1190,6 +1190,7 @@
                                                                 <constraint firstItem="5Vv-5X-pMT" firstAttribute="width" secondItem="wg3-qF-lwV" secondAttribute="width" constant="22" id="DOs-6N-llv"/>
                                                                 <constraint firstItem="wg3-qF-lwV" firstAttribute="top" secondItem="OS5-WE-eac" secondAttribute="top" constant="13" id="P1T-5Q-XaY"/>
                                                                 <constraint firstItem="5Vv-5X-pMT" firstAttribute="top" secondItem="OS5-WE-eac" secondAttribute="top" constant="10" id="QVK-vX-Fnp"/>
+                                                                <constraint firstAttribute="height" secondItem="5Vv-5X-pMT" secondAttribute="height" constant="10" id="UXR-ra-YBJ"/>
                                                                 <constraint firstItem="5Vv-5X-pMT" firstAttribute="leading" secondItem="OS5-WE-eac" secondAttribute="leading" constant="8" id="jaM-xa-qWY"/>
                                                                 <constraint firstItem="5Vv-5X-pMT" firstAttribute="height" secondItem="wg3-qF-lwV" secondAttribute="height" constant="9" id="mGU-Ln-Q3v"/>
                                                             </constraints>
@@ -1206,7 +1207,7 @@
                                                                     <rect key="frame" x="149" y="0.0" width="327" height="26"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="axesIndependently" image="OutMessageBuble" id="aBP-VJ-Drh"/>
                                                                 </imageView>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBj-iU-ZKe">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBj-iU-ZKe">
                                                                     <rect key="frame" x="157" y="6" width="309" height="17"/>
                                                                     <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" title="Out Message" id="tNt-OV-lIj">
                                                                         <font key="font" metaFont="system"/>
