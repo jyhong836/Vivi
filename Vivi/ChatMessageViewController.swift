@@ -43,6 +43,10 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         if currentChat != nil {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.messageTableView.insertRowsAtIndexes(NSIndexSet(index: self.messageTableView.numberOfRows), withAnimation: NSTableViewAnimationOptions.SlideUp)
+                if self.messageTableView.numberOfRows == 1 {
+                    // WARN: Do not remove this. Here is to reload data for avoiding the draw error occur when too heigh cell view is loaded
+                    self.messageTableView.reloadData()
+                }
             })
         } else {
             assert(false, "Tend to update an chat when currentChat is not set up")
@@ -81,13 +85,20 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
             cl.textField?.stringValue = (currentChat?.messageAtIndex(row)?.content)!
             cl.cellRow = row
             cl.delegate = self
-            cellHeightList.insert(cl.cellHeight, atIndex: row)
         }
         return cell
     }
     
     func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
         return true
+    }
+    
+    func tableView(tableView: NSTableView, didAddRowView rowView: NSTableRowView, forRow row: Int) {
+        cellHeightList.insert(60, atIndex: row)
+    }
+    
+    func tableView(tableView: NSTableView, didRemoveRowView rowView: NSTableRowView, forRow row: Int) {
+        cellHeightList.removeAtIndex(row)
     }
     
     let minTableViewRowHeight = 60
