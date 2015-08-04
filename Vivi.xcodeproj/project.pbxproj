@@ -39,6 +39,7 @@
 		CD8C647F1B6C83D200945529 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C647E1B6C83D200945529 /* InputViewController.swift */; };
 		CD8C64811B6C84E900945529 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C64801B6C84E900945529 /* ChatViewController.swift */; };
 		CDB990E91B664E5D00598C51 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB990E81B664E5D00598C51 /* TestUtils.swift */; };
+		CDC174941B7102610081F6D4 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC174931B7102610081F6D4 /* MainWindowController.swift */; };
 		CDC2EE931B674F4200872623 /* SwiftenTypeDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */; };
 		CDC2EE951B6A412B00872623 /* VIChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2EE941B6A412B00872623 /* VIChat.swift */; };
 		CDC2EE971B6A435800872623 /* VSXMPPRosterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = CDC2EE961B6A435800872623 /* VSXMPPRosterDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -198,6 +199,7 @@
 		CD8C647E1B6C83D200945529 /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		CD8C64801B6C84E900945529 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		CDB990E81B664E5D00598C51 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
+		CDC174931B7102610081F6D4 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		CDC2EE941B6A412B00872623 /* VIChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIChat.swift; sourceTree = "<group>"; };
 		CDC2EE961B6A435800872623 /* VSXMPPRosterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSXMPPRosterDelegate.h; sourceTree = "<group>"; };
 		CDC2EE981B6A444D00872623 /* SWXMPPRoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWXMPPRoster.h; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
 				CD3685641B5E659500DFC78A /* Info.plist */,
+				CDC174931B7102610081F6D4 /* MainWindowController.swift */,
 			);
 			path = Vivi;
 			sourceTree = "<group>";
@@ -783,6 +786,7 @@
 			files = (
 				CD60BA511B6DB30F008E077A /* MessageTableCellView.swift in Sources */,
 				CD8C647B1B6BE0F700945529 /* AvaterButton.swift in Sources */,
+				CDC174941B7102610081F6D4 /* MainWindowController.swift in Sources */,
 				CD36855E1B5E659500DFC78A /* MainViewController.swift in Sources */,
 				CD8C647D1B6C6C3B00945529 /* SessionTableCellView.swift in Sources */,
 				CD8C647F1B6C83D200945529 /* InputViewController.swift in Sources */,
@@ -998,6 +1002,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Vivi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.Vivi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1011,6 +1016,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Vivi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.Vivi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1112,6 +1118,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/\"Libraries and Frameworks\"/lib",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CFLAGS = "$(SWIFTEN_C_FLAGS)";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = "";
@@ -1148,6 +1155,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/\"Libraries and Frameworks\"/lib",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CFLAGS = "$(SWIFTEN_C_FLAGS)";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = "";
