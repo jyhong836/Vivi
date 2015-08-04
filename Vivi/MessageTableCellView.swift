@@ -13,20 +13,20 @@ class MessageTableCellView: NSTableCellView {
     @IBOutlet weak var bubleImageView: NSImageView!
     
     let imageViewSpacing = CGFloat(10.0)
-    var delegate: MessageTableCellViewDelegate?
-    var cellRow: Int = -1
-    var cellHeight: CGFloat = 60.0 {
-        didSet {
-            if cellHeight != oldValue {
-                delegate?.cellDidChangeHeight(cellRow, height: cellHeight)
-            }
-        }
-    }
+//    var delegate: MessageTableCellViewDelegate?
+//    var cellRow: Int = -1
+//    var cellHeight: CGFloat = 60.0 {
+//        didSet {
+////            if cellHeight != oldValue {
+////                delegate?.cellDidChangeHeight(cellRow, height: cellHeight)
+////            }
+//        }
+//    }
     
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)
 
         // Drawing code here.
-        cellHeight = bubleImageView.frame.height + imageViewSpacing
+//        cellHeight = bubleImageView.frame.height + imageViewSpacing
     }
 }

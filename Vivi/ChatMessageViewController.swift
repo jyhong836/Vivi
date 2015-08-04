@@ -9,7 +9,7 @@
 import Cocoa
 import ViviInterface
 
-class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, MessageTableCellViewDelegate {
+class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
 
     @IBOutlet weak var messageTableView: NSTableView!
     
@@ -42,11 +42,9 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     func chatDidAddMessage() {
         if currentChat != nil {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.messageTableView.insertRowsAtIndexes(NSIndexSet(index: self.messageTableView.numberOfRows), withAnimation: NSTableViewAnimationOptions.SlideUp)
-                if self.messageTableView.numberOfRows == 1 {
-                    // WARN: Do not remove this. Here is to reload data for avoiding the draw error occur when too heigh cell view is loaded
-                    self.messageTableView.reloadData()
-                }
+//                self.messageTableView.beginUpdates()
+                self.messageTableView.insertRowsAtIndexes(NSIndexSet(index: self.messageTableView.numberOfRows), withAnimation: NSTableViewAnimationOptions.EffectNone)
+//                self.messageTableView.endUpdates()
             })
         } else {
             assert(false, "Tend to update an chat when currentChat is not set up")
@@ -65,10 +63,15 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     
     // MARK: Implementations for NSTableViewDelegate
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var cell: MessageTableCellView?
-        if let dir = currentChat?.messageAtIndex(row)!.direction {
-            switch dir {
+    func configureCell(cell: MessageTableCellView, row: Int) -> MessageTableCellView {
+        cell.textField?.stringValue = (currentChat?.messageAtIndex(row)?.content)!
+        return cell
+    }
+    
+    func messageCellViewForDir(dir: VIChatMessageDirection?, inTableView tableView: NSTableView) -> MessageTableCellView? {
+        var cell: MessageTableCellView? = nil
+        if let _dir = dir {
+            switch _dir {
             case .From:
                 cell = tableView.makeViewWithIdentifier("InMessageCellView", owner: self) as? MessageTableCellView
             case .To:
@@ -81,10 +84,13 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
                 break
             }
         }
+        return cell
+    }
+    
+    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        var cell: MessageTableCellView? = messageCellViewForDir(currentChat?.messageAtIndex(row)!.direction, inTableView: tableView)
         if let cl = cell {
-            cl.textField?.stringValue = (currentChat?.messageAtIndex(row)?.content)!
-            cl.cellRow = row
-            cl.delegate = self
+            cell = configureCell(cl, row: row)
         }
         return cell
     }
@@ -93,27 +99,14 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         return true
     }
     
-    func tableView(tableView: NSTableView, didAddRowView rowView: NSTableRowView, forRow row: Int) {
-        cellHeightList.insert(60, atIndex: row)
-    }
-    
-    func tableView(tableView: NSTableView, didRemoveRowView rowView: NSTableRowView, forRow row: Int) {
-        cellHeightList.removeAtIndex(row)
-    }
-    
     let minTableViewRowHeight = 60
     func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        if row >= 0 && row < cellHeightList.count {
-            return cellHeightList[row]
-        } else {
-            return CGFloat(minTableViewRowHeight)
+        var cell: MessageTableCellView? = messageCellViewForDir(currentChat?.messageAtIndex(row)!.direction, inTableView: tableView)
+        if let cl = cell {
+            cell = configureCell(cl, row: row)
+            cell!.layoutSubtreeIfNeeded()
+            return cell!.frame.height
         }
-    }
-    
-    // MARK: Implementation for MessageTableCellViewDelegate
-    var cellHeightList: [CGFloat] = []
-    func cellDidChangeHeight(row: Int, height: CGFloat) {
-        cellHeightList[row] = height
-        messageTableView.noteHeightOfRowsWithIndexesChanged(NSIndexSet(index: row))
+        return CGFloat(minTableViewRowHeight)
     }
 }

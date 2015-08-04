@@ -31,7 +31,6 @@
 		CD72B2CA1B5F6F5300BCFD2A /* SWEventLoop.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */; };
 		CD72B2CD1B5F7A9800BCFD2A /* SWAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD72B2CE1B5F7A9800BCFD2A /* SWAccount.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD72B2CC1B5F7A9800BCFD2A /* SWAccount.mm */; };
-		CD7326EF1B6FAB0100241C73 /* MessageTableCellViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7326EE1B6FAB0100241C73 /* MessageTableCellViewDelegate.swift */; };
 		CD88E3551B60D84E00E7E256 /* ViviSwiftenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD88E3541B60D84E00E7E256 /* ViviSwiftenTests.swift */; };
 		CD88E3571B60D84E00E7E256 /* ViviSwiften.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE6588E1B5E66D400290E34 /* ViviSwiften.framework */; };
 		CD88E35E1B60DA0E00E7E256 /* SwiftenClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD88E35D1B60DA0E00E7E256 /* SwiftenClientTests.swift */; };
@@ -190,7 +189,6 @@
 		CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWEventLoop.mm; sourceTree = "<group>"; };
 		CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAccount.h; sourceTree = "<group>"; };
 		CD72B2CC1B5F7A9800BCFD2A /* SWAccount.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWAccount.mm; sourceTree = "<group>"; };
-		CD7326EE1B6FAB0100241C73 /* MessageTableCellViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableCellViewDelegate.swift; sourceTree = "<group>"; };
 		CD88E3521B60D84E00E7E256 /* ViviSwiftenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViviSwiftenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD88E3541B60D84E00E7E256 /* ViviSwiftenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViviSwiftenTests.swift; sourceTree = "<group>"; };
 		CD88E3561B60D84E00E7E256 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -297,7 +295,6 @@
 				CD8C647A1B6BE0F700945529 /* AvaterButton.swift */,
 				CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */,
 				CD60BA501B6DB30F008E077A /* MessageTableCellView.swift */,
-				CD7326EE1B6FAB0100241C73 /* MessageTableCellViewDelegate.swift */,
 			);
 			name = "UI Assets";
 			sourceTree = "<group>";
@@ -788,7 +785,6 @@
 				CD8C647B1B6BE0F700945529 /* AvaterButton.swift in Sources */,
 				CD36855E1B5E659500DFC78A /* MainViewController.swift in Sources */,
 				CD8C647D1B6C6C3B00945529 /* SessionTableCellView.swift in Sources */,
-				CD7326EF1B6FAB0100241C73 /* MessageTableCellViewDelegate.swift in Sources */,
 				CD8C647F1B6C83D200945529 /* InputViewController.swift in Sources */,
 				CD60BA4F1B6D304E008E077A /* ChatMessageViewController.swift in Sources */,
 				CD4C3A5E1B6BC5F000C283E6 /* SWClientFactory.swift in Sources */,
