@@ -335,12 +335,11 @@
 			children = (
 				CD4C3A521B6B483500C283E6 /* View Controllers */,
 				CD36855B1B5E659500DFC78A /* AppDelegate.swift */,
-				CD36855D1B5E659500DFC78A /* MainViewController.swift */,
+				CDC174931B7102610081F6D4 /* MainWindowController.swift */,
 				CD0F93C21B6DBEAF000817CB /* UI Assets */,
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
 				CD3685641B5E659500DFC78A /* Info.plist */,
-				CDC174931B7102610081F6D4 /* MainWindowController.swift */,
 			);
 			path = Vivi;
 			sourceTree = "<group>";
@@ -366,11 +365,9 @@
 		CD4C3A521B6B483500C283E6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CD4C3A531B6B489B00C283E6 /* SessionViewController.swift */,
-				CD4C3A571B6BAA2B00C283E6 /* ClientViewController.swift */,
-				CD8C64801B6C84E900945529 /* ChatViewController.swift */,
-				CD8C647E1B6C83D200945529 /* InputViewController.swift */,
-				CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */,
+				CD36855D1B5E659500DFC78A /* MainViewController.swift */,
+				CDC174971B7114E80081F6D4 /* Session View */,
+				CDC174981B7114F20081F6D4 /* Chat View */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -394,6 +391,25 @@
 				CD88E3561B60D84E00E7E256 /* Info.plist */,
 			);
 			path = ViviSwiftenTests;
+			sourceTree = "<group>";
+		};
+		CDC174971B7114E80081F6D4 /* Session View */ = {
+			isa = PBXGroup;
+			children = (
+				CD4C3A531B6B489B00C283E6 /* SessionViewController.swift */,
+				CD4C3A571B6BAA2B00C283E6 /* ClientViewController.swift */,
+			);
+			name = "Session View";
+			sourceTree = "<group>";
+		};
+		CDC174981B7114F20081F6D4 /* Chat View */ = {
+			isa = PBXGroup;
+			children = (
+				CD8C64801B6C84E900945529 /* ChatViewController.swift */,
+				CD8C647E1B6C83D200945529 /* InputViewController.swift */,
+				CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */,
+			);
+			name = "Chat View";
 			sourceTree = "<group>";
 		};
 		CDC49E451B5FFC3C00F5E6E6 /* Support Files */ = {
