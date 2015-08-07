@@ -16,6 +16,11 @@ public enum VIClientManagerError: ErrorType {
     case TooManyClients
 }
 
+public protocol VIClientManagerDelegate {
+    func managerDidAddClient(client: SWClient?)
+    func managerDidRemoveClient(client: SWClient?)
+}
+
 /**
  * Manager for clients. Client should only be created through VIClientManager.
  */
@@ -23,6 +28,7 @@ public class VIClientManager: VIClientManagerProtocol {
     private var clientList: [SWClient]! = []
     // FIXME: eventloop should be managed by VIClientManager?
     private let eventLoop = SWEventLoop()
+    public var delegate: VIClientManagerDelegate?
     
     public static let sharedClientManager: VIClientManager = {
         let instance = VIClientManager()
@@ -40,6 +46,52 @@ public class VIClientManager: VIClientManagerProtocol {
         eventLoop.stop()
     }
     
+    public let clientManagerDefaults: [String: AnyObject] = [
+        "account": "",
+        "password": "password",
+        "domain": "server name",
+        "port": Int(5222),
+        "enabled": NSOffState
+    ];
+    
+    public func loadFromDefaults(defaults: NSUserDefaults) {
+        let accountName = defaults.objectForKey("account") as! String
+        let passwd = defaults.objectForKey("password") as! String
+        do {
+            try addClient(withAccountName: accountName, andPasswd: passwd)
+        } catch VIClientManagerError.AccountNameConfilct {
+            defaults.setObject(NSOffState, forKey: "enabled")
+            let alert = NSAlert()
+            alert.addButtonWithTitle("OK")
+            alert.messageText = "There exists an conflicted accout, please change your account or use the existed account."
+            alert.runModal()
+        } catch VIClientManagerError.ClientAccountNameUnconvertible {
+            defaults.setObject(NSOffState, forKey: "enabled")
+            let alert = NSAlert()
+            alert.addButtonWithTitle("OK")
+            // FIXME: add format control
+            alert.messageText = "Account name include illegal characters, please change your account."
+            alert.runModal()
+        } catch VIClientManagerError.ClientPasswordUnconvertible {
+            defaults.setObject(NSOffState, forKey: "enabled")
+            let alert = NSAlert()
+            alert.addButtonWithTitle("OK")
+            // FIXME: add format control
+            alert.messageText = "Account password include illegal characters, please change your account."
+            alert.runModal()
+        } catch VIClientManagerError.TooManyClients {
+            defaults.setObject(NSOffState, forKey: "enabled")
+            let alert = NSAlert()
+            alert.addButtonWithTitle("OK")
+            alert.messageText = "There are too many clients."
+            alert.runModal()
+        } catch {
+            defaults.setObject(NSOffState, forKey: "enabled")
+            NSLog("Unknown error occured when add client")
+        }
+        defaults.setObject(NSOnState, forKey: "enabled")
+    }
+    
     private func addClient(withAccount account: SWAccount, andPasswd passwd: String!) throws -> SWClient? {
         let newClient = SWClient(account: account, password: passwd, eventLoop: eventLoop)
         guard !clientList.contains( { (c: SWClient) -> Bool in
@@ -51,6 +103,7 @@ public class VIClientManager: VIClientManagerProtocol {
         newClient.chatListController = VIChatListController(owner: newClient.account)
         
         clientList.append(newClient)
+        delegate?.managerDidAddClient(newClient)
         return newClient
     }
     
@@ -78,7 +131,8 @@ public class VIClientManager: VIClientManagerProtocol {
             if let i = clientList.indexOf(client!) {
                 if client!.isActive() {
                     client!.disconnectWithHandler({ () -> Void in
-                        clientList.removeAtIndex(i)
+                        self.clientList.removeAtIndex(i)
+                        self.delegate?.managerDidRemoveClient(client)
                     })
                 }
             }

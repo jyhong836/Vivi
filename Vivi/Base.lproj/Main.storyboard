@@ -689,11 +689,116 @@
         <!--Preference View Controller-->
         <scene sceneID="SnW-Jh-bOa">
             <objects>
-                <viewController id="5Xu-ai-OtS" userLabel="Preference View Controller" sceneMemberID="viewController">
+                <viewController id="5Xu-ai-OtS" userLabel="Preference View Controller" customClass="PreferenceViewController" customModule="Vivi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="KVp-uM-MbR" userLabel="Preference View">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HO1-ck-TIU" userLabel="Account Text Field">
+                                <rect key="frame" x="211" y="183" width="96" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="tk7-Bo-LuX">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="accountEdited:" target="5Xu-ai-OtS" id="4SU-hS-dXI"/>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5x3-Pl-FjD">
+                                <rect key="frame" x="136" y="186" width="56" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="gQC-TF-gdq">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kKz-aB-H4E">
+                                <rect key="frame" x="136" y="134" width="65" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Password" id="vSQ-pu-D6j">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nU6-Y0-eWB" userLabel="Domain Text Field">
+                                <rect key="frame" x="211" y="84" width="96" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="fCn-hw-PwY">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <allowedInputSourceLocales>
+                                        <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                    </allowedInputSourceLocales>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="domainEdited:" target="5Xu-ai-OtS" id="Oo4-RK-KLe"/>
+                                </connections>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lqd-01-8gE" userLabel="Port Text Field">
+                                <rect key="frame" x="211" y="39" width="96" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="dX3-2w-39t">
+                                    <numberFormatter key="formatter" formatterBehavior="default10_4" localizesFormat="NO" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" id="mTh-Cf-Leq">
+                                        <real key="minimum" value="1"/>
+                                        <real key="maximum" value="65536"/>
+                                    </numberFormatter>
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="portEdited:" target="5Xu-ai-OtS" id="o9v-BA-n1R"/>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sgK-Ix-E3T">
+                                <rect key="frame" x="136" y="87" width="52" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Domain" id="BKY-kX-6wa">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ebl-fs-xih">
+                                <rect key="frame" x="138" y="42" width="30" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Port" id="y0r-p2-s6h">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6c2-92-dZv" userLabel="Password Text Field">
+                                <rect key="frame" x="211" y="132" width="96" height="22"/>
+                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="mci-ut-etg">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <allowedInputSourceLocales>
+                                        <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                    </allowedInputSourceLocales>
+                                </secureTextFieldCell>
+                                <connections>
+                                    <action selector="passwordEdited:" target="5Xu-ai-OtS" id="ZsY-6E-obz"/>
+                                </connections>
+                            </secureTextField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GxU-1a-bFF">
+                                <rect key="frame" x="209" y="9" width="64" height="18"/>
+                                <buttonCell key="cell" type="check" title="Enable" bezelStyle="regularSquare" imagePosition="left" inset="2" id="7xj-3m-Rhc">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="enableChecked:" target="5Xu-ai-OtS" id="pGt-QD-h5z"/>
+                                </connections>
+                            </button>
+                        </subviews>
                     </view>
+                    <connections>
+                        <outlet property="accountTextField" destination="HO1-ck-TIU" id="52G-Tx-E3B"/>
+                        <outlet property="domainTextField" destination="nU6-Y0-eWB" id="1YL-dm-Ysy"/>
+                        <outlet property="enableButton" destination="GxU-1a-bFF" id="qa8-TK-fm8"/>
+                        <outlet property="passwordTextField" destination="6c2-92-dZv" id="NBr-hA-c2C"/>
+                        <outlet property="portTextField" destination="lqd-01-8gE" id="3NQ-9T-n7P"/>
+                    </connections>
                 </viewController>
                 <customObject id="CaX-9l-NTe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1048,6 +1153,7 @@
                     <connections>
                         <outlet property="avaterButton" destination="Dkh-5M-qmJ" id="uAa-53-4jO"/>
                         <outlet property="connectButton" destination="dgn-bD-CAb" id="gdR-Ir-gWQ"/>
+                        <outlet property="lockButton" destination="3Cx-Qe-OBe" id="OpC-nV-Elr"/>
                     </connections>
                 </viewController>
                 <customObject id="K1S-DI-AuK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1147,7 +1253,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="60" viewBased="YES" id="ZWo-vN-myc" userLabel="Message Table View">
-                                            <rect key="frame" x="0.0" y="0.0" width="487" height="288"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="487" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>

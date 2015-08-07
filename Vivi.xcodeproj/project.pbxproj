@@ -38,6 +38,7 @@
 		CD8C647D1B6C6C3B00945529 /* SessionTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */; };
 		CD8C647F1B6C83D200945529 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C647E1B6C83D200945529 /* InputViewController.swift */; };
 		CD8C64811B6C84E900945529 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C64801B6C84E900945529 /* ChatViewController.swift */; };
+		CDB561541B74FABB002FC599 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB561531B74FABB002FC599 /* PreferenceViewController.swift */; };
 		CDB990E91B664E5D00598C51 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB990E81B664E5D00598C51 /* TestUtils.swift */; };
 		CDC174941B7102610081F6D4 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC174931B7102610081F6D4 /* MainWindowController.swift */; };
 		CDC2EE931B674F4200872623 /* SwiftenTypeDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */; };
@@ -198,6 +199,7 @@
 		CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTableCellView.swift; sourceTree = "<group>"; };
 		CD8C647E1B6C83D200945529 /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		CD8C64801B6C84E900945529 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		CDB561531B74FABB002FC599 /* PreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
 		CDB990E81B664E5D00598C51 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		CDC174931B7102610081F6D4 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		CDC2EE941B6A412B00872623 /* VIChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIChat.swift; sourceTree = "<group>"; };
@@ -333,9 +335,10 @@
 		CD36855A1B5E659500DFC78A /* Vivi */ = {
 			isa = PBXGroup;
 			children = (
-				CD4C3A521B6B483500C283E6 /* View Controllers */,
+				CD4C3A521B6B483500C283E6 /* Main Window View Controllers */,
 				CD36855B1B5E659500DFC78A /* AppDelegate.swift */,
 				CDC174931B7102610081F6D4 /* MainWindowController.swift */,
+				CDB561531B74FABB002FC599 /* PreferenceViewController.swift */,
 				CD0F93C21B6DBEAF000817CB /* UI Assets */,
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
@@ -362,14 +365,14 @@
 			path = ViviUITests;
 			sourceTree = "<group>";
 		};
-		CD4C3A521B6B483500C283E6 /* View Controllers */ = {
+		CD4C3A521B6B483500C283E6 /* Main Window View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				CD36855D1B5E659500DFC78A /* MainViewController.swift */,
 				CDC174971B7114E80081F6D4 /* Session View */,
 				CDC174981B7114F20081F6D4 /* Chat View */,
 			);
-			name = "View Controllers";
+			name = "Main Window View Controllers";
 			sourceTree = "<group>";
 		};
 		CD5E6F241B64E50700E33502 /* Protocols */ = {
@@ -809,6 +812,7 @@
 				CD60BA4F1B6D304E008E077A /* ChatMessageViewController.swift in Sources */,
 				CD4C3A5E1B6BC5F000C283E6 /* SWClientFactory.swift in Sources */,
 				CD36855C1B5E659500DFC78A /* AppDelegate.swift in Sources */,
+				CDB561541B74FABB002FC599 /* PreferenceViewController.swift in Sources */,
 				CD4C3A541B6B489B00C283E6 /* SessionViewController.swift in Sources */,
 				CD8C64811B6C84E900945529 /* ChatViewController.swift in Sources */,
 				CD4C3A581B6BAA2B00C283E6 /* ClientViewController.swift in Sources */,

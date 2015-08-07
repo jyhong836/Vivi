@@ -10,7 +10,7 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate {
+class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate, VIClientManagerDelegate {
 
     @IBOutlet weak var sesConView: NSView!
     @IBOutlet weak var sessionView: NSView!
@@ -32,29 +32,7 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        // TODO: remove test code with account
-        do {
-            if let c = try clientMgr.addClient(withAccountName: SWClientFactory.clientAccountString[0], andPasswd: SWClientFactory.clientPasswdString[0]) {
-                clientMgr.startClientLoop()
-                clients.append(c)
-                currentClient = c
-                
-                c.delegate = self
-                c.roster.delegate = self
-                (c.chatListController as! VIChatListController).chatDelegate = self
-                if let infoDict = NSBundle.mainBundle().localizedInfoDictionary {
-                    let appName = infoDict[String(kCFBundleNameKey)] as! String
-                    let appVer = infoDict[String(kCFBundleVersionKey)] as! String
-                    c.setSoftwareName(appName, currentVersion: appVer)
-                }
-                
-                // TODO: remove test code
-                (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "jyhong1@xmpp.jp"))
-            }
-        } catch {
-            NSLog("Unexpected error")
-        }
+        clientMgr.delegate = self
     }
 
     override var representedObject: AnyObject? {
@@ -133,6 +111,39 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     func chatIsSelected(chat: VIChat) {
         chatViewController?.currentChat = chat
         chatViewController?.view.hidden = false
+    }
+    
+    // MARK: Implement VIClientManagerDelegate
+    func managerDidAddClient(client: SWClient?) {
+        // FIXME: The new client should not be the currentClient in multi-client situation.
+        if let c = client {
+            clients.append(c)
+            currentClient = c
+            
+            c.delegate = self
+            c.roster.delegate = self
+            (c.chatListController as! VIChatListController).chatDelegate = self
+            if let infoDict = NSBundle.mainBundle().localizedInfoDictionary {
+                let appName = infoDict[String(kCFBundleNameKey)] as! String
+                let appVer = infoDict[String(kCFBundleVersionKey)] as! String
+                c.setSoftwareName(appName, currentVersion: appVer)
+            }
+            
+            // TODO: remove test code
+            (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "jyhong1@xmpp.jp"))
+            
+            sessionViewController?.currentClient = c
+            chatViewController?.currentClient = c
+        }
+    }
+    
+    func managerDidRemoveClient(client: SWClient?) {
+        // TODO: test remove client, and remove from subview controllers.
+        if client != nil && currentClient == client {
+            currentClient = nil
+            sessionViewController?.currentClient = nil
+            chatViewController?.currentClient = nil
+        }
     }
 }
 
