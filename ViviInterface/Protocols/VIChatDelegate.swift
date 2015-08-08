@@ -20,7 +20,7 @@ public protocol VIChatDelegate {
     func chatWillSendMessage(chat: VIChat, updatedIndex index: Int)
     
     /// New chat will start. This creats chat, but will not include any message or timestamp.
-    func chatWillStart(chat: VIChat)
+//    func chatWillStart(chat: VIChat)
     
     func chatIsSelected(chat: VIChat)
 }

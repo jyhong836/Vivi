@@ -12,11 +12,13 @@ import ViviSwiften
 //enum VIChatListError: ErrorType {
 //    case SendMessageFromUndefinedChat
 //}
+public let VIChatListChatDidAddNotification = "VIChatListChatDidAddNotification"
 
 /// VIChatListController is binded to one SWClient
 public class VIChatListController: VSChatListControllerProtocol {
     
     public var chatDelegate: VIChatDelegate?
+    let notificationCenter = NSNotificationCenter.defaultCenter()
     
     var chatList: [VIChat] = []
     public var selectedChatIndex: Int = -1 {
@@ -86,24 +88,13 @@ public class VIChatListController: VSChatListControllerProtocol {
     /// If no chat is relevent to buddy, new chat will be created.
     /// Updated or new created chat will be placed at index 0 of chat list.
     func updateChatList(withBuddy buddy: SWAccount) -> VIChat {
-        var lastchat: VIChat? = nil
-        for i in 0 ..< chatList.count {
-            if chatList[i].buddy.getAccountString() == buddy.getAccountString() {
-                lastchat = chatList[i]
-                chatList.removeAtIndex(i) // FIXME: this is not efficient
-                break
-            }
+        // Try to add chat
+        let (lastChat, isNew) = addChatWithBuddy(buddy)
+        if !isNew {
+            chatList.removeAtIndex(chatList.indexOf(lastChat)!)
+            chatList.insert(lastChat, atIndex: 0)
         }
-        if let chat = lastchat {
-            chatList.insert(chat, atIndex: 0)
-        } else {
-            lastchat = VIChat(owner: owner, buddy: buddy)
-            chatList.insert(lastchat!, atIndex: 0)
-            if let delegate = chatDelegate {
-                delegate.chatWillStart(lastchat!)
-            }
-        }
-        return lastchat!
+        return lastChat
     }
     
     // MARK: API for aceess and set element
@@ -119,16 +110,15 @@ public class VIChatListController: VSChatListControllerProtocol {
         return chat
     }
     
-    public func addChatWithBuddy(buddy: SWAccount) -> VIChat {
+    public func addChatWithBuddy(buddy: SWAccount) -> (VIChat, isNew: Bool) {
         if let existedChat = getChatWithBuddy(buddy) {
-            return existedChat
+            return (existedChat, false)
         } else {
             let newChat = VIChat(owner: owner, buddy: buddy)
             chatList.insert(newChat, atIndex: 0)
-            if let delegate = chatDelegate {
-                delegate.chatWillStart(newChat)
-            }
-            return newChat
+            notificationCenter.postNotificationName(
+                VIChatListChatDidAddNotification, object: nil, userInfo: ["index": 0])
+            return (newChat, true)
         }
     }
     

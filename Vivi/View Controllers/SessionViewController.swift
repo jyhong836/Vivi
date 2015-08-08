@@ -24,7 +24,16 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(
+            VIChatListChatDidAddNotification,
+            object: nil,
+            queue: NSOperationQueue.mainQueue()) {
+                (notification) -> Void in
+                let userInfo = notification.userInfo as! [String: AnyObject]
+                let index = userInfo["index"] as! Int
+                self.sessionTableView.insertRowsAtIndexes(NSIndexSet(index: index), withAnimation: NSTableViewAnimationOptions.SlideLeft)
+        }
     }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {

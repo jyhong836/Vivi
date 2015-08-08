@@ -89,10 +89,10 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     
     // MARK: Implementations for VIChatDelegate
     
-    func chatWillStart(chat: VIChat) {
-        sessionViewController?.sessionDidUpdate()
-        chatViewController?.chatDidUpdate(chat)
-    }
+//    func chatWillStart(chat: VIChat) {
+//        sessionViewController?.sessionDidUpdate()
+//        chatViewController?.chatDidUpdate(chat)
+//    }
     
     func chatDidReceiveMessage(chat: VIChat) {
         deliverNewMessageNotification(chat)
@@ -141,7 +141,6 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             
             // TODO: remove test code
             (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "test@noface"))
-//            (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "jyhong1@xmpp.jp"))
             
             sessionViewController?.currentClient = c
             chatViewController?.currentClient = c
