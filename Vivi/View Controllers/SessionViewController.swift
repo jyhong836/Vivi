@@ -27,6 +27,8 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     // MARK: Notification observers
     var newChatObserver: NSObjectProtocol?
     var chatWillSendObserver: NSObjectProtocol?
+    var chatDidSendObserver: NSObjectProtocol?
+    var chatDidReceiveObserver: NSObjectProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +37,15 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     override func viewWillAppear() {
         newChatObserver = notificationCenter.addObserverForName(VIChatListChatDidAddNotification, object: nil, queue: mainQueue, usingBlock: newChatDidAdd)
         chatWillSendObserver = notificationCenter.addObserverForName(VIChatListChatWillSendNotification, object: nil, queue: mainQueue, usingBlock: chatWillSendMessage)
+        chatDidSendObserver = notificationCenter.addObserverForName(VIChatListChatDidSendNotification, object: nil, queue: mainQueue, usingBlock: chatDidSendMessage)
+        chatDidReceiveObserver = notificationCenter.addObserverForName(VIChatListChatDidReceiveNotification, object: nil, queue: mainQueue, usingBlock: chatDidReceiveMessage)
     }
     
     override func viewWillDisappear() {
         notificationCenter.removeObserver(newChatObserver!)
         notificationCenter.removeObserver(chatWillSendObserver!)
+        notificationCenter.removeObserver(chatDidSendObserver!)
+        notificationCenter.removeObserver(chatDidReceiveObserver!)
     }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
@@ -88,12 +94,12 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     
     // MARK: API for chat update
     /// Called when any session is updated.
-    func sessionDidUpdate() {
-        // TODO: Add more process and seperate functions.
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.sessionTableView.reloadData()
-        })
-    }
+//    func sessionDidUpdate() {
+//        // TODO: Add more process and seperate functions.
+//        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//            self.sessionTableView.reloadData()
+//        })
+//    }
     
     func newChatDidAdd(notification: NSNotification) {
         let userInfo = notification.userInfo as! [String: AnyObject]
@@ -104,13 +110,28 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     func chatWillSendMessage(notification: NSNotification) {
         let userInfo = notification.userInfo as! [String: AnyObject]
         let oldIndex = userInfo["oldIndex"] as! Int
-        if oldIndex == -1 {
-            self.sessionTableView.insertRowsAtIndexes(NSIndexSet(index: 0), withAnimation: NSTableViewAnimationOptions.SlideLeft)
-        } else if oldIndex == 0 {
-            self.sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: oldIndex), columnIndexes: NSIndexSet(index: 0))
-        } else {
-            self.sessionTableView.moveRowAtIndex(oldIndex, toIndex: 0)
-        }
+        updateAndMoveCellAtIndex(oldIndex)
     }
     
+    func chatDidSendMessage(notification: NSNotification) {
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        let chatIndex = userInfo["chatIndex"] as! Int
+        self.sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: chatIndex), columnIndexes: NSIndexSet(index: 0))
+    }
+    
+    func chatDidReceiveMessage(notification: NSNotification) {
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        let oldIndex = userInfo["oldIndex"] as! Int
+        updateAndMoveCellAtIndex(oldIndex)
+    }
+    
+    /// Update cell at oldIndex. If index is -1, update cell at index 0.
+    /// If index is 0, update it. If index is others, move to index 0, and
+    /// update it.
+    func updateAndMoveCellAtIndex(oldIndex: Int) {
+        if oldIndex > 0 {
+            self.sessionTableView.moveRowAtIndex(oldIndex, toIndex: 0)
+        }
+        self.sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: 0), columnIndexes: NSIndexSet(index: 0))
+    }
 }

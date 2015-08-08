@@ -15,7 +15,6 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     @IBOutlet weak var sesConView: NSView!
     @IBOutlet weak var sessionView: NSView!
     @IBOutlet weak var chatView: NSView!
-//    @IBOutlet weak var tableView: NSTableView!
     
     weak var sessionViewController: SessionViewController?
     weak var chatViewController: ChatViewController?
@@ -97,24 +96,20 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     func chatDidReceiveMessage(chat: VIChat) {
         deliverNewMessageNotification(chat)
         
-        sessionViewController?.sessionDidUpdate()
         chatViewController?.chatDidUpdate(chat)
 //        tableView.reloadDataForRowIndexes(<#T##rowIndexes: NSIndexSet##NSIndexSet#>, columnIndexes: 0)
     }
     
     // TODO: Wrap the three delegate into one?
     func chatWillSendMessage(chat: VIChat, updatedIndex index: Int) {
-//        sessionViewController?.sessionDidUpdate()
         chatViewController?.chatDidUpdate(chat, updateMessageAtIndex: index)
     }
     
     func chatDidSendMessage(chat: VIChat, updatedIndex index: Int) {
-        sessionViewController?.sessionDidUpdate()
         chatViewController?.chatDidUpdate(chat, updateMessageAtIndex: index)
     }
     
     func chatFailSendMessage(chat: VIChat, updatedIndex index: Int, error: VSClientErrorType) {
-        sessionViewController?.sessionDidUpdate()
         chatViewController?.chatDidUpdate(chat, updateMessageAtIndex: index)
     }
     
@@ -140,7 +135,7 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             }
             
             // TODO: remove test code
-            (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "test@noface"))
+//            (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "test@noface"))
             (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "test1@noface"))
             
             sessionViewController?.currentClient = c

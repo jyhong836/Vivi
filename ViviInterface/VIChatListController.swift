@@ -14,6 +14,8 @@ import ViviSwiften
 //}
 public let VIChatListChatDidAddNotification = "VIChatListChatDidAddNotification"
 public let VIChatListChatWillSendNotification = "VIChatListChatWillSendNotification"
+public let VIChatListChatDidSendNotification = "VIChatListChatDidSendNotification"
+public let VIChatListChatDidReceiveNotification = "VIChatListChatDidReceiveNotification"
 
 /// VIChatListController is binded to one SWClient
 public class VIChatListController: VSChatListControllerProtocol {
@@ -47,11 +49,12 @@ public class VIChatListController: VSChatListControllerProtocol {
     /// This will add a new chat when the chat has not been established.
     /// Or update chat and put it to the index 0 of chat list.
     @objc public func clientDidReceivedMessageFrom(sender: SWAccount!, message: String!, timestamp: NSDate!) {
-        let (lastchat, _) = updateChatList(withBuddy: sender)
+        let (lastchat, oldIndex) = updateChatList(withBuddy: sender)
         lastchat.addMessage(message, timestamp: timestamp, direction: .From)
         if let delegate = chatDelegate {
             delegate.chatDidReceiveMessage(lastchat)
         }
+        notificationCenter.postNotificationName(VIChatListChatDidReceiveNotification, object: self, userInfo: ["oldIndex": oldIndex])
     }
     
     @objc public func clientWillSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!) {
@@ -62,29 +65,30 @@ public class VIChatListController: VSChatListControllerProtocol {
         if let delegate = chatDelegate {
 //            delegate.chatWillSendMessage(lastchat, updatedIndex: updatedIndex) // TODO: pass index
             delegate.chatWillSendMessage(lastchat, updatedIndex: -1) // TODO: pass index
-            
-            notificationCenter.postNotificationName(VIChatListChatWillSendNotification, object: self, userInfo: ["oldIndex": oldIndex])
         }
+        notificationCenter.postNotificationName(VIChatListChatWillSendNotification, object: self, userInfo: ["oldIndex": oldIndex])
     }
     
     /// Called when client did send a message to an account.
     /// This will add a new chat when the chat has not been established.
     /// Or update chat and put it to the index 0 of chat list.
     @objc public func clientDidSendMessageTo(receiver: SWAccount!, message: String!, timestamp: NSDate!) {
-        let (lastchat, _) = updateChatList(withBuddy: receiver)
+        let lastchat = getChatWithBuddy(receiver)!
         let updatedIndex = lastchat.updateMessage(message, timestamp: timestamp, direction: .To)
         if let delegate = chatDelegate {
             delegate.chatDidSendMessage(lastchat, updatedIndex: updatedIndex)
         }
+        notificationCenter.postNotificationName(VIChatListChatDidSendNotification, object: self, userInfo: ["chatIndex": Int(chatList.indexOf(lastchat)!), "messageIndex": updatedIndex])
     }
     
     @objc public func clientFailSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!, error: VSClientErrorType) {
         // TODO: Add process for not sended message
-        let (lastchat, _) = updateChatList(withBuddy: receiver)
+        let lastchat = getChatWithBuddy(receiver)!
         let updatedIndex = lastchat.updateMessage(message, timestamp: date, direction: .To)
         if let delegate = chatDelegate {
             delegate.chatFailSendMessage(lastchat, updatedIndex: updatedIndex, error: error)
         }
+        notificationCenter.postNotificationName(VIChatListChatDidSendNotification, object: self, userInfo: ["chatIndex": Int(chatList.indexOf(lastchat)!), "messageIndex": updatedIndex, "error": error.rawValue])
     }
     
     /// Update relevent chat with new message.
@@ -92,7 +96,8 @@ public class VIChatListController: VSChatListControllerProtocol {
     /// Updated or new created chat will be placed at index 0 of chat list.
     ///
     /// - Returns: (lastChat, oldIndex), oldIndex is the old index of updated chat.
-    /// return -1, if no old index.
+    /// return -1, if no old index, but the chat has been inserted at index 0. Do 
+    /// not insert new chat at index 0 when oldIndx is -1.
     func updateChatList(withBuddy buddy: SWAccount) -> (VIChat, oldIndex: Int) {
         // Try to add chat
         let (lastChat, isNew) = addChatWithBuddy(buddy)
