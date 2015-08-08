@@ -12,7 +12,11 @@ import ViviInterface
 
 class ChatViewController: NSViewController {
     
-    var currentClient: SWClient?
+    var currentClient: SWClient? {
+        didSet {
+            inputViewController?.currentClient = currentClient
+        }
+    }
     var currentChat: VIChat? {
         didSet {
             inputViewController?.currentBuddy = currentChat?.buddy

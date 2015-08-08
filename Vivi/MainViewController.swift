@@ -130,7 +130,8 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             }
             
             // TODO: remove test code
-            (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "jyhong1@xmpp.jp"))
+            (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "test@noface"))
+//            (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "jyhong1@xmpp.jp"))
             
             sessionViewController?.currentClient = c
             chatViewController?.currentClient = c
