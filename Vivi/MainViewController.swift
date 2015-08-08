@@ -10,7 +10,7 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate, VIClientManagerDelegate {
+class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate, VIClientManagerDelegate, NSUserNotificationCenterDelegate {
 
     @IBOutlet weak var sesConView: NSView!
     @IBOutlet weak var sessionView: NSView!
@@ -28,11 +28,19 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
         }
     }
     
+    let notification = NSUserNotification()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         clientMgr.delegate = self
+        NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
+        notification.title = "Account"
+        notification.informativeText = "message context"
+        notification.soundName = NSUserNotificationDefaultSoundName
+        notification.hasReplyButton = true
+        notification.otherButtonTitle = "Ignore"
     }
 
     override var representedObject: AnyObject? {
@@ -87,6 +95,8 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     }
     
     func chatDidReceiveMessage(chat: VIChat) {
+        deliverNewMessageNotification(chat)
+        
         sessionViewController?.sessionDidUpdate()
         chatViewController?.chatDidUpdate(chat)
 //        tableView.reloadDataForRowIndexes(<#T##rowIndexes: NSIndexSet##NSIndexSet#>, columnIndexes: 0)
@@ -144,6 +154,27 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             currentClient = nil
             sessionViewController?.currentClient = nil
             chatViewController?.currentClient = nil
+        }
+    }
+    
+    // MARK: NSUserNotification
+    func deliverNewMessageNotification(chat: VIChat) {
+        notification.title = chat.buddy.getAccountString()
+        notification.informativeText = chat.lastMessage
+        notification.userInfo = ["account": chat.buddy.getAccountString()]
+        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+    }
+    
+    // MARK: Implement NSUserNotificationCenterDelegate
+    func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
+        return true
+    }
+    
+    func userNotificationCenter(center: NSUserNotificationCenter, didActivateNotification notification: NSUserNotification) {
+        if notification.activationType == .Replied {
+            let userinfo = notification.userInfo!
+            currentClient?.sendMessageToAccount(SWAccount(accountName: userinfo["account"] as! String),
+                message: notification.response?.string)
         }
     }
 }
