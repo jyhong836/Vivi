@@ -54,7 +54,7 @@ public class VIChatListController: VSChatListControllerProtocol {
         if let delegate = chatDelegate {
             delegate.chatDidReceiveMessage(lastchat)
         }
-        notificationCenter.postNotificationName(VIChatListChatDidReceiveNotification, object: self, userInfo: ["oldIndex": oldIndex])
+        notificationCenter.postNotificationName(VIChatListChatDidReceiveNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
     }
     
     @objc public func clientWillSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!) {
@@ -66,7 +66,7 @@ public class VIChatListController: VSChatListControllerProtocol {
 //            delegate.chatWillSendMessage(lastchat, updatedIndex: updatedIndex) // TODO: pass index
             delegate.chatWillSendMessage(lastchat, updatedIndex: -1) // TODO: pass index
         }
-        notificationCenter.postNotificationName(VIChatListChatWillSendNotification, object: self, userInfo: ["oldIndex": oldIndex])
+        notificationCenter.postNotificationName(VIChatListChatWillSendNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
     }
     
     /// Called when client did send a message to an account.
@@ -78,7 +78,7 @@ public class VIChatListController: VSChatListControllerProtocol {
         if let delegate = chatDelegate {
             delegate.chatDidSendMessage(lastchat, updatedIndex: updatedIndex)
         }
-        notificationCenter.postNotificationName(VIChatListChatDidSendNotification, object: self, userInfo: ["chatIndex": Int(chatList.indexOf(lastchat)!), "messageIndex": updatedIndex])
+        notificationCenter.postNotificationName(VIChatListChatDidSendNotification, object: lastchat, userInfo: ["chatIndex": Int(chatList.indexOf(lastchat)!), "messageIndex": updatedIndex])
     }
     
     @objc public func clientFailSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!, error: VSClientErrorType) {
@@ -88,7 +88,7 @@ public class VIChatListController: VSChatListControllerProtocol {
         if let delegate = chatDelegate {
             delegate.chatFailSendMessage(lastchat, updatedIndex: updatedIndex, error: error)
         }
-        notificationCenter.postNotificationName(VIChatListChatDidSendNotification, object: self, userInfo: ["chatIndex": Int(chatList.indexOf(lastchat)!), "messageIndex": updatedIndex, "error": error.rawValue])
+        notificationCenter.postNotificationName(VIChatListChatDidSendNotification, object: lastchat, userInfo: ["chatIndex": Int(chatList.indexOf(lastchat)!), "messageIndex": updatedIndex, "error": error.rawValue])
     }
     
     /// Update relevent chat with new message.

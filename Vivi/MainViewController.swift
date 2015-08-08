@@ -88,29 +88,18 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     
     // MARK: Implementations for VIChatDelegate
     
-//    func chatWillStart(chat: VIChat) {
-//        sessionViewController?.sessionDidUpdate()
-//        chatViewController?.chatDidUpdate(chat)
-//    }
-    
     func chatDidReceiveMessage(chat: VIChat) {
         deliverNewMessageNotification(chat)
-        
-        chatViewController?.chatDidUpdate(chat)
-//        tableView.reloadDataForRowIndexes(<#T##rowIndexes: NSIndexSet##NSIndexSet#>, columnIndexes: 0)
     }
     
     // TODO: Wrap the three delegate into one?
     func chatWillSendMessage(chat: VIChat, updatedIndex index: Int) {
-        chatViewController?.chatDidUpdate(chat, updateMessageAtIndex: index)
     }
     
     func chatDidSendMessage(chat: VIChat, updatedIndex index: Int) {
-        chatViewController?.chatDidUpdate(chat, updateMessageAtIndex: index)
     }
     
     func chatFailSendMessage(chat: VIChat, updatedIndex index: Int, error: VSClientErrorType) {
-        chatViewController?.chatDidUpdate(chat, updateMessageAtIndex: index)
     }
     
     func chatIsSelected(chat: VIChat) {

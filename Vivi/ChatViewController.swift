@@ -40,27 +40,4 @@ class ChatViewController: NSViewController {
             chatMessageViewController = segue.destinationController as? ChatMessageViewController
         }
     }
-    
-//    func chatDidUpdate(chat: VIChat, withNewMessageAtIndex index: Int) {
-//        if chat == currentChat {
-//            // TODO: do something
-//            chatMessageViewController?.chatDidAddMessage()
-//        }
-//    }
-    
-    /// Update chat view.
-    ///
-    /// - Parameter index: If index is validate, then update specific message. If index is -1,
-    /// add a new message, which is default.
-    func chatDidUpdate(chat: VIChat, updateMessageAtIndex index: Int = -1) {
-        if chat == currentChat {
-            if index >= 0 && index < chat.messageCount {
-                chatMessageViewController?.chatDidUpdateMessageAtIndex(index)
-            } else if index == -1 {
-                chatMessageViewController?.chatDidAddMessage()
-            } else {
-                assertionFailure("Unexpected message index")
-            }
-        }
-    }
 }

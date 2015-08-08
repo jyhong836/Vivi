@@ -46,6 +46,10 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         notificationCenter.removeObserver(chatWillSendObserver!)
         notificationCenter.removeObserver(chatDidSendObserver!)
         notificationCenter.removeObserver(chatDidReceiveObserver!)
+        newChatObserver = nil
+        chatWillSendObserver = nil
+        chatDidSendObserver = nil
+        chatDidReceiveObserver = nil
     }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
@@ -93,13 +97,6 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
     
     // MARK: API for chat update
-    /// Called when any session is updated.
-//    func sessionDidUpdate() {
-//        // TODO: Add more process and seperate functions.
-//        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//            self.sessionTableView.reloadData()
-//        })
-//    }
     
     func newChatDidAdd(notification: NSNotification) {
         let userInfo = notification.userInfo as! [String: AnyObject]

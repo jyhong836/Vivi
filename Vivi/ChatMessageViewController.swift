@@ -16,6 +16,8 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     var currentChat: VIChat? {
         didSet {
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.removeChatObservers()
+                self.addChatObservers()
                 self.messageTableView.reloadData()
             }
         }
@@ -26,30 +28,57 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         // Do view setup here.
     }
     
+    let notificationCenter = NSNotificationCenter.defaultCenter()
+    let mainQueue = NSOperationQueue.mainQueue()
+    // MARK: Notification observers
+    var chatWillSendObserver: NSObjectProtocol?
+    var chatDidSendObserver: NSObjectProtocol?
+    var chatDidReceiveObserver: NSObjectProtocol?
+    
+    
+    override func viewWillAppear() {
+        addChatObservers()
+    }
+    
+    override func viewWillDisappear() {
+        removeChatObservers()
+        chatWillSendObserver = nil
+        chatDidSendObserver = nil
+        chatDidReceiveObserver = nil
+    }
+    
+    func addChatObservers() {
+        chatWillSendObserver = notificationCenter.addObserverForName(VIChatListChatWillSendNotification, object: currentChat, queue: mainQueue, usingBlock: chatWillSendMessage)
+        chatDidSendObserver = notificationCenter.addObserverForName(VIChatListChatDidSendNotification, object: currentChat, queue: mainQueue, usingBlock: chatDidSendMessage)
+        chatDidReceiveObserver = notificationCenter.addObserverForName(VIChatListChatDidReceiveNotification, object: currentChat, queue: mainQueue, usingBlock: chatDidReceiveMessage)
+    }
+    
+    func removeChatObservers() {
+        notificationCenter.removeObserver(chatWillSendObserver!)
+        notificationCenter.removeObserver(chatDidSendObserver!)
+        notificationCenter.removeObserver(chatDidReceiveObserver!)
+    }
+    
     // MARK: API for update chat table view
     /// Call when chat did update message at index. This will only reload one message cell view.
-    func chatDidUpdateMessageAtIndex(index: Int) {
+    private func chatDidUpdateMessageAtIndex(index: Int) {
         if currentChat != nil {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.messageTableView.reloadDataForRowIndexes(NSIndexSet(index: index), columnIndexes: NSIndexSet(index: 0))
-            })
+            self.messageTableView.reloadDataForRowIndexes(NSIndexSet(index: index), columnIndexes: NSIndexSet(index: 0))
         } else {
-            assert(false, "Tend to update an chat when currentChat is not set up")
+            assert(false, "Attempt to update an chat when currentChat is not set up")
         }
     }
     
     /// Call when chat add one message, this will update chat table view.
-    func chatDidAddMessage() {
+    private func chatDidAddMessage() {
         if currentChat != nil {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
 //                self.messageTableView.beginUpdates()
-                self.messageTableView.insertRowsAtIndexes(NSIndexSet(index: self.messageTableView.numberOfRows), withAnimation: NSTableViewAnimationOptions.EffectNone)
+            self.messageTableView.insertRowsAtIndexes(NSIndexSet(index: self.messageTableView.numberOfRows), withAnimation: NSTableViewAnimationOptions.EffectNone)
 //                self.messageTableView.endUpdates()
-                self.messageTableView.noteHeightOfRowsWithIndexesChanged(NSIndexSet(index: self.messageTableView.numberOfRows - 1))
-                self.messageTableView.scrollRowToVisible(self.messageTableView.numberOfRows - 1)
-            })
+            self.messageTableView.noteHeightOfRowsWithIndexesChanged(NSIndexSet(index: self.messageTableView.numberOfRows - 1))
+            self.messageTableView.scrollRowToVisible(self.messageTableView.numberOfRows - 1)
         } else {
-            assert(false, "Tend to update an chat when currentChat is not set up")
+            assert(false, "Attempt to update an chat when currentChat is not set up")
         }
     }
     
@@ -110,5 +139,23 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
             return cell!.frame.height
         }
         return defaultRowHeight
+    }
+    
+    // MARK: API for chat update
+    
+    func chatWillSendMessage(notification: NSNotification) {
+        chatDidAddMessage()
+    }
+    
+    func chatDidSendMessage(notification: NSNotification) {
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        let messageIndex = userInfo["messageIndex"] as! Int
+        // TODO: Process the send error
+//        let error = userInfo["error"] as! Int
+        chatDidUpdateMessageAtIndex(messageIndex)
+    }
+    
+    func chatDidReceiveMessage(notification: NSNotification) {
+        chatDidAddMessage()
     }
 }
