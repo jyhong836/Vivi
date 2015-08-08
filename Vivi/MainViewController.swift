@@ -104,7 +104,7 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     
     // TODO: Wrap the three delegate into one?
     func chatWillSendMessage(chat: VIChat, updatedIndex index: Int) {
-        sessionViewController?.sessionDidUpdate()
+//        sessionViewController?.sessionDidUpdate()
         chatViewController?.chatDidUpdate(chat, updateMessageAtIndex: index)
     }
     
@@ -141,6 +141,7 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             
             // TODO: remove test code
             (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "test@noface"))
+            (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "test1@noface"))
             
             sessionViewController?.currentClient = c
             chatViewController?.currentClient = c

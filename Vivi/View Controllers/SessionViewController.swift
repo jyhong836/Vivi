@@ -21,17 +21,25 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             clientViewController?.currentClient = currentClient
         }
     }
+    
+    let notificationCenter = NSNotificationCenter.defaultCenter()
+    let mainQueue = NSOperationQueue.mainQueue()
+    // MARK: Notification observers
+    var newChatObserver: NSObjectProtocol?
+    var chatWillSendObserver: NSObjectProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("newChatDidAdd:"), name: VIChatListChatDidAddNotification, object: nil)
+        newChatObserver = notificationCenter.addObserverForName(VIChatListChatDidAddNotification, object: nil, queue: mainQueue, usingBlock: newChatDidAdd)
+        chatWillSendObserver = notificationCenter.addObserverForName(VIChatListChatWillSendNotification, object: nil, queue: mainQueue, usingBlock: chatWillSendMessage)
     }
     
     override func viewWillDisappear() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        notificationCenter.removeObserver(newChatObserver!)
+        notificationCenter.removeObserver(chatWillSendObserver!)
     }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
@@ -91,6 +99,18 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         let userInfo = notification.userInfo as! [String: AnyObject]
         let index = userInfo["index"] as! Int
         self.sessionTableView.insertRowsAtIndexes(NSIndexSet(index: index), withAnimation: NSTableViewAnimationOptions.SlideLeft)
+    }
+    
+    func chatWillSendMessage(notification: NSNotification) {
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        let oldIndex = userInfo["oldIndex"] as! Int
+        if oldIndex == -1 {
+            self.sessionTableView.insertRowsAtIndexes(NSIndexSet(index: 0), withAnimation: NSTableViewAnimationOptions.SlideLeft)
+        } else if oldIndex == 0 {
+            self.sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: oldIndex), columnIndexes: NSIndexSet(index: 0))
+        } else {
+            self.sessionTableView.moveRowAtIndex(oldIndex, toIndex: 0)
+        }
     }
     
 }
