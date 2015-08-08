@@ -24,16 +24,14 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NSNotificationCenter.defaultCenter().addObserverForName(
-            VIChatListChatDidAddNotification,
-            object: nil,
-            queue: NSOperationQueue.mainQueue()) {
-                (notification) -> Void in
-                let userInfo = notification.userInfo as! [String: AnyObject]
-                let index = userInfo["index"] as! Int
-                self.sessionTableView.insertRowsAtIndexes(NSIndexSet(index: index), withAnimation: NSTableViewAnimationOptions.SlideLeft)
-        }
+    }
+    
+    override func viewWillAppear() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("newChatDidAdd:"), name: VIChatListChatDidAddNotification, object: nil)
+    }
+    
+    override func viewWillDisappear() {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
@@ -87,6 +85,12 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             self.sessionTableView.reloadData()
         })
+    }
+    
+    func newChatDidAdd(notification: NSNotification) {
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        let index = userInfo["index"] as! Int
+        self.sessionTableView.insertRowsAtIndexes(NSIndexSet(index: index), withAnimation: NSTableViewAnimationOptions.SlideLeft)
     }
     
 }
