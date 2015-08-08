@@ -75,4 +75,10 @@ typedef void (^VSSendMessageHandler)(VSClientErrorType);
 - (void)setSoftwareName: (NSString*)name
          currentVersion: (NSString*)version;
 
+// MARK: ClientOptions
+@property (nonatomic, readwrite) NSString* manualHostname;
+- (void)setManualHostname: (NSString*)manualHostname;
+@property (nonatomic, readwrite) int manualPort;
+- (void)setManualPort:(int)manualPort;
+
 @end

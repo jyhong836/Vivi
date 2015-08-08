@@ -17,7 +17,7 @@ using namespace Swift;
 
 @implementation SWClient {
     boost::shared_ptr<SWClientAdapter> client;
-//    SWAccount* account;// FIXME: memory control for NSString
+    ClientOptions options;
     NSString* passwd; // FIXME: the password should be encrypted
 }
 
@@ -72,13 +72,13 @@ using namespace Swift;
  */
 - (void)connect
 {
-    client->connect();
+    client->connect(options);
 }
 
 - (void)connectWithHandler: (VSConnectionHandler)handler
 {
     connectHandler = handler;
-    client->connect();
+    client->connect(options);
 }
 
 /*!
@@ -179,6 +179,16 @@ using namespace Swift;
          currentVersion: (NSString*)version
 {
     client->setSoftwareVersion(NSString2std_str(name), NSString2std_str(version));
+}
+
+// MARK: ClientOptions
+- (void)setManualHostname: (NSString*)manualHostname
+{
+    options.manualHostname = NSString2std_str(manualHostname);
+}
+
+- (void)setManualPort:(int)manualPort {
+    options.manualPort = manualPort;
 }
 
 @end

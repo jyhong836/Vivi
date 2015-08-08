@@ -48,8 +48,8 @@ public class VIClientManager: VIClientManagerProtocol {
     
     public let clientManagerDefaults: [String: AnyObject] = [
         "account": "",
-        "password": "password",
-        "domain": "server name",
+        "password": "",
+        "hostname": "",
         "port": Int(5222),
         "enabled": NSOffState
     ];
@@ -58,7 +58,12 @@ public class VIClientManager: VIClientManagerProtocol {
         let accountName = defaults.objectForKey("account") as! String
         let passwd = defaults.objectForKey("password") as! String
         do {
-            try addClient(withAccountName: accountName, andPasswd: passwd)
+            let client = try addClient(withAccountName: accountName, andPasswd: passwd)
+            if let cl = client {
+                cl.manualHostname = defaults.objectForKey("hostname") as! String // TODO: add host name valid check
+                cl.manualPort = Int32(defaults.objectForKey("port") as! Int)
+            }
+            defaults.setObject(NSOnState, forKey: "enabled")
         } catch VIClientManagerError.AccountNameConfilct {
             defaults.setObject(NSOffState, forKey: "enabled")
             let alert = NSAlert()
@@ -89,7 +94,6 @@ public class VIClientManager: VIClientManagerProtocol {
             defaults.setObject(NSOffState, forKey: "enabled")
             NSLog("Unknown error occured when add client")
         }
-        defaults.setObject(NSOnState, forKey: "enabled")
     }
     
     private func addClient(withAccount account: SWAccount, andPasswd passwd: String!) throws -> SWClient? {
@@ -134,6 +138,9 @@ public class VIClientManager: VIClientManagerProtocol {
                         self.clientList.removeAtIndex(i)
                         self.delegate?.managerDidRemoveClient(client)
                     })
+                } else {
+                    clientList.removeAtIndex(i)
+                    delegate?.managerDidRemoveClient(client)
                 }
             }
         }

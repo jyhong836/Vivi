@@ -26,7 +26,7 @@ class PreferenceViewController: NSViewController {
         // Do view setup here.
         accountTextField.stringValue = defaults.objectForKey("account") as! String
         passwordTextField.stringValue = defaults.objectForKey("password") as! String
-        domainTextField.stringValue = defaults.objectForKey("domain") as! String
+        domainTextField.stringValue = defaults.objectForKey("hostname") as! String
         portTextField.stringValue = String(defaults.objectForKey("port") as! Int)
         enableButton.state = defaults.objectForKey("enabled") as! Int
     }
@@ -34,20 +34,30 @@ class PreferenceViewController: NSViewController {
     @IBAction func accountEdited(sender: NSTextField) {
         defaults.setObject(sender.stringValue, forKey: "account")
     }
+    
     @IBAction func passwordEdited(sender: NSSecureTextField) {
         defaults.setObject(sender.stringValue, forKey: "password")
     }
+    
     @IBAction func domainEdited(sender: NSTextField) {
-        defaults.setObject(sender.stringValue, forKey: "domain")
+        defaults.setObject(sender.stringValue, forKey: "hostname")
     }
+    
     @IBAction func portEdited(sender: NSTextField) {
         defaults.setObject(Int(sender.stringValue), forKey: "port")
     }
+    
     @IBAction func enableChecked(sender: NSButton) {
         defaults.setObject(enableButton.state, forKey: "enabled")
         if sender.state == NSOnState {
             clientMgr.loadFromDefaults(defaults)
             enableButton.state = defaults.objectForKey("enabled") as! Int
+            if enableButton.state == NSOnState {
+                accountTextField.enabled = false;
+                passwordTextField.enabled = false;
+                domainTextField.enabled = false;
+                portTextField.enabled = false;
+            }
         } else if sender.state == NSOffState {
             clientMgr.removeClient(clientMgr.getClient(withAccountName: accountTextField.stringValue))
         }
