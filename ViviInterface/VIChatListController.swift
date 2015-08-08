@@ -88,7 +88,7 @@ public class VIChatListController: VSChatListControllerProtocol {
     func updateChatList(withBuddy buddy: SWAccount) -> VIChat {
         var lastchat: VIChat? = nil
         for i in 0 ..< chatList.count {
-            if chatList[i].buddy.getFullAccountString() == buddy.getFullAccountString() {
+            if chatList[i].buddy.getAccountString() == buddy.getAccountString() {
                 lastchat = chatList[i]
                 chatList.removeAtIndex(i) // FIXME: this is not efficient
                 break
@@ -111,7 +111,7 @@ public class VIChatListController: VSChatListControllerProtocol {
     public func getChatWithBuddy(buddy: SWAccount) -> VIChat? {
         var chat: VIChat? = nil
         for i in 0 ..< chatList.count {
-            if chatList[i].buddy.getFullAccountString() == buddy.getFullAccountString() {
+            if chatList[i].buddy.getAccountString() == buddy.getAccountString() {
                 chat = chatList[i]
                 break
             }

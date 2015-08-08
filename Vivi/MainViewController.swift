@@ -58,19 +58,19 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     // MARK: Implementations for VSClientDelegate
     
     func clientDidConnect(client: SWClient!) {
-        NSLog("client(\(client.account.getFullAccountString())) did connect")
+        NSLog("client(\(client.account.getAccountString())) did connect")
     }
     
     func clientDidDisconnect(client: SWClient!, errorCode code: Int32) {
-        NSLog("client(\(client.account.getFullAccountString())) did disconnect")
+        NSLog("client(\(client.account.getAccountString())) did disconnect")
     }
     
     func clientDidReceivePresence(client: SWClient!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow show: Int32, currentStatus status: String!) {
-        NSLog("client(\(client.account.getFullAccountString())) did receive presence from \(account.getFullAccountString())")
+        NSLog("client(\(client.account.getAccountString())) did receive presence from \(account.getAccountString())")
     }
     
     func clientDidReceiveMessage(client: SWClient!, fromAccount account: SWAccount!, inContent content: String!) {
-        NSLog("client(\(client.account.getFullAccountString())) did receive message from \(account.getFullAccountString()): \(content)")
+        NSLog("client(\(client.account.getAccountString())) did receive message from \(account.getAccountString()): \(content)")
     }
     
     // MARK: Implementations for VSXMPPRosterDelegate
