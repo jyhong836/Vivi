@@ -34,6 +34,8 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
 
         // Do any additional setup after loading the view.
         clientMgr.delegate = self
+        
+        // init user notification
         NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
         notification.title = "Account"
         notification.informativeText = "message context"
