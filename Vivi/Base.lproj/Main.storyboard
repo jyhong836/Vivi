@@ -702,7 +702,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="accountEdited:" target="5Xu-ai-OtS" id="4SU-hS-dXI"/>
+                                    <binding destination="Q01-lz-55E" name="value" keyPath="values.account" id="c3D-ix-Y3V"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5x3-Pl-FjD">
@@ -732,7 +732,7 @@
                                     </allowedInputSourceLocales>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="domainEdited:" target="5Xu-ai-OtS" id="Oo4-RK-KLe"/>
+                                    <binding destination="Q01-lz-55E" name="value" keyPath="values.hostname" id="FJr-W5-Ezy"/>
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lqd-01-8gE" userLabel="Port Text Field">
@@ -747,7 +747,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="portEdited:" target="5Xu-ai-OtS" id="o9v-BA-n1R"/>
+                                    <binding destination="Q01-lz-55E" name="value" keyPath="values.port" id="BDl-dP-iJv"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sgK-Ix-E3T">
@@ -777,7 +777,7 @@
                                     </allowedInputSourceLocales>
                                 </secureTextFieldCell>
                                 <connections>
-                                    <action selector="passwordEdited:" target="5Xu-ai-OtS" id="ZsY-6E-obz"/>
+                                    <binding destination="Q01-lz-55E" name="value" keyPath="values.password" id="vbd-ub-Eg2"/>
                                 </connections>
                             </secureTextField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GxU-1a-bFF">
@@ -788,6 +788,7 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="enableChecked:" target="5Xu-ai-OtS" id="pGt-QD-h5z"/>
+                                    <binding destination="Q01-lz-55E" name="value" keyPath="values.enabled" id="lUz-g7-0Jj"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -801,6 +802,7 @@
                     </connections>
                 </viewController>
                 <customObject id="CaX-9l-NTe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="Q01-lz-55E"/>
             </objects>
             <point key="canvasLocation" x="817" y="794"/>
         </scene>
