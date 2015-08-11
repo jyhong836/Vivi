@@ -12,7 +12,7 @@
 import Foundation
 import CoreData
 
-extension VIChatMO {
+public extension VIChatMO {
 
     @NSManaged var createdtime: NSDate?
     @NSManaged var buddy: VIAccountMO?

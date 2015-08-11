@@ -12,7 +12,7 @@
 import Foundation
 import CoreData
 
-extension VIAccountMO {
+public extension VIAccountMO {
 
     @NSManaged var domain: String?
     @NSManaged var node: String?

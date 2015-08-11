@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 //@objc(Resource)
-class VIResourceMO: NSManagedObject {
+public class VIResourceMO: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

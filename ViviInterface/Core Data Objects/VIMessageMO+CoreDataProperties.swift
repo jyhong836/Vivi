@@ -12,7 +12,7 @@
 import Foundation
 import CoreData
 
-extension VIMessageMO {
+public extension VIMessageMO {
 
     @NSManaged var content: String?
     @NSManaged var timestamp: NSDate?

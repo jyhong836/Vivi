@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 //@objc(Message)
-class VIMessageMO: NSManagedObject {
+public class VIMessageMO: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

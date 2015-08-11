@@ -12,7 +12,7 @@
 import Foundation
 import CoreData
 
-extension VIRosterMO {
+public extension VIRosterMO {
 
     @NSManaged var client: VIClientMO?
     @NSManaged var groups: NSSet?

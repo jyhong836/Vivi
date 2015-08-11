@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 //@objc(Group)
-class VIGroupMO: NSManagedObject {
+public class VIGroupMO: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

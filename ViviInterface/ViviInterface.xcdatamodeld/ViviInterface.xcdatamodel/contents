@@ -4,7 +4,6 @@
         <attribute name="domain" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="node" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="chat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chat" inverseName="buddy" inverseEntity="Chat" syncable="YES"/>
-        <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="account" inverseEntity="Client" syncable="YES"/>
         <relationship name="group" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="buddies" inverseEntity="Group" syncable="YES"/>
         <relationship name="resources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Resource" inverseName="account" inverseEntity="Resource" syncable="YES"/>
     </entity>
@@ -15,10 +14,11 @@
         <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="chats" inverseEntity="Client" syncable="YES"/>
     </entity>
     <entity name="Client" representedClassName=".VIClientMO" syncable="YES">
-        <attribute name="hostname" attributeType="String" syncable="YES"/>
+        <attribute name="accountname" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="enabled" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="hostname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" attributeType="String" syncable="YES"/>
         <attribute name="port" attributeType="Integer 16" defaultValueString="5222" syncable="YES"/>
-        <relationship name="account" maxCount="1" deletionRule="Cascade" destinationEntity="Account" inverseName="client" inverseEntity="Account" syncable="YES"/>
         <relationship name="chats" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Chat" inverseName="owner" inverseEntity="Chat" syncable="YES"/>
         <relationship name="roster" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Roster" inverseName="client" inverseEntity="Roster" syncable="YES"/>
     </entity>
@@ -41,9 +41,9 @@
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Group" inverseName="roster" inverseEntity="Group" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Account" positionX="0" positionY="-216" width="128" height="135"/>
+        <element name="Account" positionX="0" positionY="-216" width="128" height="120"/>
         <element name="Chat" positionX="180" positionY="-378" width="128" height="105"/>
-        <element name="Client" positionX="-20" positionY="-511" width="128" height="135"/>
+        <element name="Client" positionX="-20" positionY="-511" width="128" height="150"/>
         <element name="Group" positionX="-387" positionY="-225" width="128" height="90"/>
         <element name="Message" positionX="385" positionY="-279" width="128" height="90"/>
         <element name="Resource" positionX="-288" positionY="-81" width="128" height="75"/>

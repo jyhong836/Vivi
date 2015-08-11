@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 //@objc(Chat)
-class VIChatMO: NSManagedObject {
+public class VIChatMO: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

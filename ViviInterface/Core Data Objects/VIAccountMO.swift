@@ -8,10 +8,21 @@
 
 import Foundation
 import CoreData
+import ViviSwiften
 
 //@objc(Account)
-class VIAccountMO: NSManagedObject {
+public class VIAccountMO: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
+//    lazy var account: SWAccount = {
+//        guard self.node != nil else {
+//            NSLog("node is nil when attempt to access account.")
+//            abort()
+//        }
+//        guard self.domain != nil else {
+//            NSLog("node is nil when attempt to access account.")
+//            abort()
+//        }
+//        return SWAccount(accountName: "\(self.node)@\(self.domain)")
+//    }()
 
 }

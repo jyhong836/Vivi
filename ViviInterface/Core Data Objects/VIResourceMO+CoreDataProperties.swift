@@ -12,7 +12,7 @@
 import Foundation
 import CoreData
 
-extension VIResourceMO {
+public extension VIResourceMO {
 
     @NSManaged var name: String?
     @NSManaged var account: VIAccountMO?

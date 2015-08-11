@@ -12,13 +12,14 @@
 import Foundation
 import CoreData
 
-extension VIClientMO {
-
+public extension VIClientMO {
+    
+    @NSManaged var accountname: String?
     @NSManaged var hostname: String?
     @NSManaged var password: String?
     @NSManaged var port: NSNumber?
-    @NSManaged var account: VIAccountMO?
+    @NSManaged var enabled: NSNumber?
     @NSManaged var chats: NSOrderedSet?
-    @NSManaged var roster: NSManagedObject?
+    @NSManaged var roster: VIRosterMO?
 
 }

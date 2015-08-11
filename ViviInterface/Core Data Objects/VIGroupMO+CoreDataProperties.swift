@@ -12,7 +12,7 @@
 import Foundation
 import CoreData
 
-extension VIGroupMO {
+public extension VIGroupMO {
 
     @NSManaged var name: String?
     @NSManaged var buddies: NSSet?

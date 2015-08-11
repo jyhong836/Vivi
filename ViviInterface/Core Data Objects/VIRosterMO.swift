@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 //@objc(Roster)
-class VIRosterMO: NSManagedObject {
+public class VIRosterMO: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

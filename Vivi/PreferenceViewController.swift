@@ -21,6 +21,12 @@ class PreferenceViewController: NSViewController {
     @IBOutlet weak var portTextField: NSTextField!
     @IBOutlet weak var enableButton: NSButton!
     
+    @IBOutlet var clientArrayController: NSArrayController!
+    
+    weak var managedObjectContext: NSManagedObjectContext! = {
+        return (NSApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -28,8 +34,9 @@ class PreferenceViewController: NSViewController {
     
     @IBAction func enableChecked(sender: NSButton) {
         if sender.state == NSOnState {
-            clientMgr.loadFromDefaults(defaults)
-            enableButton.state = defaults.objectForKey("enabled") as! Int
+            let entity = clientArrayController.selectedObjects[0] as! VIClientMO
+            clientMgr.loadFromEnity(entity)
+            enableButton.state = (entity.enabled?.integerValue)!
             if enableButton.state == NSOnState {
                 accountTextField.enabled = false;
                 passwordTextField.enabled = false;
