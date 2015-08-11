@@ -230,6 +230,7 @@
 		CDF2122A1B629B3C0031913D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CDF2122C1B629B490031913D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CDF2122D1B629B490031913D /* SecurityInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityInterface.framework; path = System/Library/Frameworks/SecurityInterface.framework; sourceTree = SDKROOT; };
+		CDF2E0AF1B79C92A00B0329E /* ViviInterface 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ViviInterface 2.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1339,6 +1340,7 @@
 		CDCDDBFA1B79A0D900FC7D0E /* ViviInterface.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				CDF2E0AF1B79C92A00B0329E /* ViviInterface 2.xcdatamodel */,
 				CDCDDBFB1B79A0D900FC7D0E /* ViviInterface.xcdatamodel */,
 			);
 			currentVersion = CDCDDBFB1B79A0D900FC7D0E /* ViviInterface.xcdatamodel */;

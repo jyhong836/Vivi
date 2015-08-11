@@ -8,7 +8,8 @@
         <relationship name="resources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Resource" inverseName="account" inverseEntity="Resource" syncable="YES"/>
     </entity>
     <entity name="Chat" syncable="YES">
-        <attribute name="createdtime" attributeType="Date" syncable="YES"/>
+        <attribute name="createdtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="updatedtime" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="buddy" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="chat" inverseEntity="Account" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Message" inverseName="chat" inverseEntity="Message" syncable="YES"/>
         <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="chats" inverseEntity="Client" syncable="YES"/>
@@ -28,7 +29,7 @@
     </entity>
     <entity name="Message" syncable="YES">
         <attribute name="content" attributeType="String" syncable="YES"/>
-        <attribute name="timestamp" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="timestamp" attributeType="Date" syncable="YES"/>
         <relationship name="chat" maxCount="1" deletionRule="Nullify" destinationEntity="Chat" inverseName="messages" inverseEntity="Chat" syncable="YES"/>
     </entity>
     <entity name="Resource" syncable="YES">
@@ -40,12 +41,12 @@
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Group" inverseName="roster" inverseEntity="Group" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Account" positionX="-81" positionY="-207" width="128" height="118"/>
-        <element name="Chat" positionX="178" positionY="-378" width="128" height="103"/>
-        <element name="Client" positionX="-20" positionY="-511" width="128" height="133"/>
-        <element name="Group" positionX="-387" positionY="-225" width="128" height="88"/>
-        <element name="Message" positionX="385" positionY="-279" width="128" height="88"/>
-        <element name="Resource" positionX="-288" positionY="-81" width="128" height="73"/>
-        <element name="Roster" positionX="-191" positionY="-342" width="128" height="73"/>
+        <element name="Account" positionX="52" positionY="-252" width="128" height="118"/>
+        <element name="Chat" positionX="225" positionY="-81" width="128" height="118"/>
+        <element name="Client" positionX="-38" positionY="-81" width="128" height="133"/>
+        <element name="Group" positionX="-198" positionY="-250" width="128" height="88"/>
+        <element name="Message" positionX="439" positionY="-72" width="128" height="88"/>
+        <element name="Resource" positionX="331" positionY="-235" width="128" height="73"/>
+        <element name="Roster" positionX="-243" positionY="-72" width="128" height="73"/>
     </elements>
 </model>
