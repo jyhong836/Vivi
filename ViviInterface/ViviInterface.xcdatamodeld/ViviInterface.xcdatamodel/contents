@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8166.2" systemVersion="14E46" minimumToolsVersion="Xcode 7.0">
+    <entity name="Account" syncable="YES">
+        <attribute name="domain" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="node" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="resources" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Resource" syncable="YES"/>
+    </entity>
+    <entity name="Chat" syncable="YES">
+        <attribute name="createdtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="updatedtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="buddy" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Account" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="No Action" ordered="YES" destinationEntity="Message" inverseName="chat" inverseEntity="Message" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Client" inverseName="chats" inverseEntity="Client" syncable="YES"/>
+    </entity>
+    <entity name="Client" syncable="YES">
+        <attribute name="accountname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hostname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="port" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="chats" optional="YES" toMany="YES" deletionRule="No Action" ordered="YES" destinationEntity="Chat" inverseName="owner" inverseEntity="Chat" syncable="YES"/>
+        <relationship name="roster" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Roster" syncable="YES"/>
+    </entity>
+    <entity name="Group" syncable="YES">
+        <attribute name="groupname" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="buddies" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Account" syncable="YES"/>
+    </entity>
+    <entity name="Message" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="chat" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Chat" inverseName="messages" inverseEntity="Chat" syncable="YES"/>
+    </entity>
+    <entity name="Resource" syncable="YES">
+        <attribute name="resourcename" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Roster" syncable="YES">
+        <relationship name="groups" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Group" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Client" positionX="-38" positionY="-81" width="128" height="133"/>
+        <element name="Group" positionX="-162" positionY="-198" width="128" height="75"/>
+        <element name="Chat" positionX="225" positionY="-81" width="128" height="118"/>
+        <element name="Roster" positionX="-180" positionY="-78" width="128" height="60"/>
+        <element name="Account" positionX="63" positionY="-207" width="128" height="90"/>
+        <element name="Resource" positionX="324" positionY="-177" width="128" height="60"/>
+        <element name="Message" positionX="439" positionY="-72" width="128" height="88"/>
+    </elements>
+</model>

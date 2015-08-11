@@ -47,6 +47,7 @@
 		CDC2EE9A1B6A444D00872623 /* SWXMPPRoster.h in Headers */ = {isa = PBXBuildFile; fileRef = CDC2EE981B6A444D00872623 /* SWXMPPRoster.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDC2EE9B1B6A444D00872623 /* SWXMPPRoster.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDC2EE991B6A444D00872623 /* SWXMPPRoster.mm */; };
 		CDC49E441B5FF91500F5E6E6 /* ViviSwiften.pch in Headers */ = {isa = PBXBuildFile; fileRef = CDC49E431B5FF91400F5E6E6 /* ViviSwiften.pch */; };
+		CDCDDBFC1B79A0D900FC7D0E /* ViviInterface.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDCDDBFA1B79A0D900FC7D0E /* ViviInterface.xcdatamodeld */; };
 		CDDA21D91B6CEEDD00A94F8C /* ViviSwiftenDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = CDDA21D81B6CEE9B00A94F8C /* ViviSwiftenDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDE658911B5E66D400290E34 /* ViviSwiften.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658901B5E66D400290E34 /* ViviSwiften.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDE658A31B5E66D400290E34 /* ViviSwiften.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE6588E1B5E66D400290E34 /* ViviSwiften.framework */; };
@@ -207,6 +208,7 @@
 		CDC2EE981B6A444D00872623 /* SWXMPPRoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWXMPPRoster.h; sourceTree = "<group>"; };
 		CDC2EE991B6A444D00872623 /* SWXMPPRoster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWXMPPRoster.mm; sourceTree = "<group>"; };
 		CDC49E431B5FF91400F5E6E6 /* ViviSwiften.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViviSwiften.pch; sourceTree = "<group>"; };
+		CDCDDBFB1B79A0D900FC7D0E /* ViviInterface.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ViviInterface.xcdatamodel; sourceTree = "<group>"; };
 		CDDA21D81B6CEE9B00A94F8C /* ViviSwiftenDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViviSwiftenDefines.h; sourceTree = "<group>"; };
 		CDE6588E1B5E66D400290E34 /* ViviSwiften.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViviSwiften.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE658901B5E66D400290E34 /* ViviSwiften.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ViviSwiften.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -335,10 +337,10 @@
 		CD36855A1B5E659500DFC78A /* Vivi */ = {
 			isa = PBXGroup;
 			children = (
-				CD4C3A521B6B483500C283E6 /* Main Window View Controllers */,
 				CD36855B1B5E659500DFC78A /* AppDelegate.swift */,
 				CDC174931B7102610081F6D4 /* MainWindowController.swift */,
 				CDB561531B74FABB002FC599 /* PreferenceViewController.swift */,
+				CD4C3A521B6B483500C283E6 /* Main Window View Controllers */,
 				CD0F93C21B6DBEAF000817CB /* UI Assets */,
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
@@ -476,6 +478,7 @@
 				CDC2EE941B6A412B00872623 /* VIChat.swift */,
 				CD5E6F241B64E50700E33502 /* Protocols */,
 				CDEE68A51B6545D800D00EC7 /* Info.plist */,
+				CDCDDBFA1B79A0D900FC7D0E /* ViviInterface.xcdatamodeld */,
 			);
 			path = ViviInterface;
 			sourceTree = "<group>";
@@ -865,6 +868,7 @@
 			files = (
 				CD4C3A491B6A7EBE00C283E6 /* VIChatListController.swift in Sources */,
 				CDEE68BE1B65460C00D00EC7 /* VIClientManager.swift in Sources */,
+				CDCDDBFC1B79A0D900FC7D0E /* ViviInterface.xcdatamodeld in Sources */,
 				CD4C3A4B1B6A81DB00C283E6 /* VIChatDelegate.swift in Sources */,
 				CDEE68C01B65461600D00EC7 /* VIClientManagerProtocol.swift in Sources */,
 				CDC2EE951B6A412B00872623 /* VIChat.swift in Sources */,
@@ -1330,6 +1334,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CDCDDBFA1B79A0D900FC7D0E /* ViviInterface.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CDCDDBFB1B79A0D900FC7D0E /* ViviInterface.xcdatamodel */,
+			);
+			currentVersion = CDCDDBFB1B79A0D900FC7D0E /* ViviInterface.xcdatamodel */;
+			path = ViviInterface.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CD3685501B5E659500DFC78A /* Project object */;
 }
