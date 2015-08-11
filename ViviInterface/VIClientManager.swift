@@ -63,40 +63,12 @@ public class VIClientManager: VIClientManagerProtocol {
         alert.runModal()
     }
     
-//    public func loadFromDefaults(defaults: NSUserDefaults) {
-//        let accountName = defaults.objectForKey("account") as! String
-//        let passwd = defaults.objectForKey("password") as! String
-//        do {
-//            let client = try addClient(withAccountName: accountName, andPasswd: passwd)
-//            if let cl = client {
-//                cl.manualHostname = defaults.objectForKey("hostname") as! String // TODO: add host name valid check
-//                cl.manualPort = Int32(defaults.objectForKey("port") as! Int)
-//            }
-//            defaults.setObject(NSOnState, forKey: "enabled")
-//        } catch VIClientManagerError.AccountNameConfilct {
-//            defaults.setObject(NSOffState, forKey: "enabled")
-//            showAlert("There exists an conflicted accout, please change your account or use the existed account.")
-//        } catch VIClientManagerError.ClientAccountNameUnconvertible {
-//            defaults.setObject(NSOffState, forKey: "enabled")
-//            showAlert("Account name include illegal characters, please change your account.")
-//        } catch VIClientManagerError.ClientPasswordUnconvertible {
-//            defaults.setObject(NSOffState, forKey: "enabled")
-//            // FIXME: add format control
-//            showAlert("Account password include illegal characters, please change your account.")
-//        } catch VIClientManagerError.TooManyClients {
-//            defaults.setObject(NSOffState, forKey: "enabled")
-//            showAlert("There are too many clients.")
-//        } catch {
-//            defaults.setObject(NSOffState, forKey: "enabled")
-//            NSLog("Unknown error occured when add client: \(error)")
-//        }
-//    }
-    
     private func addClient(withAccount account: SWAccount, andPasswd passwd: String!) throws -> SWClient? {
         let newClient = SWClient(account: account, password: passwd, eventLoop: eventLoop)
         guard !clientList.contains( { (c: SWClient) -> Bool in
             c.account.getAccountString() == account.getAccountString()
         }) else {
+            NSLog("attempt to add conflicted client: \(newClient.account.getAccountString())")
             throw VIClientManagerError.AccountNameConfilct
         }
         
@@ -104,6 +76,7 @@ public class VIClientManager: VIClientManagerProtocol {
         
         clientList.append(newClient)
         delegate?.managerDidAddClient(newClient)
+        NSLog("added client: \(newClient.account.getAccountString())")
         return newClient
     }
     

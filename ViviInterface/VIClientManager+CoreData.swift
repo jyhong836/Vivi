@@ -20,6 +20,7 @@ extension VIClientManager {
         
         do {
             let fetchedClients = try moc.executeFetchRequest(clientFetch) as! [VIClientMO]
+            NSLog("enity num: \(fetchedClients.count)")
             for client in fetchedClients {
                 loadFromEnity(client)
             }

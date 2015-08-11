@@ -817,7 +817,11 @@
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                         <connections>
-                                                                            <binding destination="rL6-US-VYe" name="value" keyPath="objectValue.accountname" id="I5u-qt-wOv"/>
+                                                                            <binding destination="rL6-US-VYe" name="value" keyPath="objectValue.accountname" id="MzJ-jR-akL">
+                                                                                <dictionary key="options">
+                                                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                                                </dictionary>
+                                                                            </binding>
                                                                         </connections>
                                                                     </textFieldCell>
                                                                 </textField>
