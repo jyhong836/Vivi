@@ -36,6 +36,7 @@ extension VIClientManager {
         do {
             let client = try addClient(withAccountName: accountName, andPasswd: passwd)
             if let cl = client {
+                // FIXME: Format limit need
                 cl.manualHostname = clientEnity.hostname
                 cl.manualPort = (clientEnity.port?.intValue)!
             }

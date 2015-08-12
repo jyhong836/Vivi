@@ -10,6 +10,8 @@
 
 const char* NSString2std_str(NSString *nsstr) {
     if (![nsstr canBeConvertedToEncoding:[NSString defaultCStringEncoding]]) {
+        NSLog(@"\"%@\" can not be converted to c string", nsstr);
+//        assert(false);
         [NSException raise:@"NotBeConvertedNSString" format:@"\"%@\" can not be converted to c string", nsstr];
     }
     return [nsstr cStringUsingEncoding: [NSString defaultCStringEncoding]];
