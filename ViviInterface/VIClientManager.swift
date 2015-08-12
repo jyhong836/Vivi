@@ -10,6 +10,7 @@ import Cocoa
 import ViviSwiften
 
 public enum VIClientManagerError: ErrorType {
+    case AccountNameInvalid
     case AccountNameConfilct
     case ClientPasswordUnconvertible
     case ClientAccountNameUnconvertible
@@ -63,21 +64,30 @@ public class VIClientManager: VIClientManagerProtocol {
         alert.runModal()
     }
     
-    private func addClient(withAccount account: SWAccount, andPasswd passwd: String!) throws -> SWClient? {
-        let newClient = SWClient(account: account, password: passwd, eventLoop: eventLoop)
-        guard !clientList.contains( { (c: SWClient) -> Bool in
-            c.account.getAccountString() == account.getAccountString()
-        }) else {
-            NSLog("attempt to add conflicted client: \(newClient.account.getAccountString())")
+    func validateAccount(account: String!, passwd: String!) throws -> SWAccount {
+        if !account.canBeConvertedToEncoding(NSString.defaultCStringEncoding()) {
+            throw VIClientManagerError.ClientAccountNameUnconvertible
+        }
+        if !passwd.canBeConvertedToEncoding(NSString.defaultCStringEncoding()) {
+            throw VIClientManagerError.ClientPasswordUnconvertible
+        }
+        if clientCount >= maxClientCount {
+            throw VIClientManagerError.TooManyClients
+        }
+        
+        if clientList.contains( { (c: SWClient) -> Bool in
+            c.account.getAccountString() == account
+        }) {
+            NSLog("attempt to add conflicted client: \(account)")
             throw VIClientManagerError.AccountNameConfilct
         }
         
-        newClient.chatListController = VIChatListController(owner: newClient.account)
-        
-        clientList.append(newClient)
-        delegate?.managerDidAddClient(newClient)
-        NSLog("added client: \(newClient.account.getAccountString())")
-        return newClient
+        let swaccount = SWAccount(accountName: account)
+        if swaccount.valid {
+            return swaccount
+        } else {
+            throw VIClientManagerError.AccountNameInvalid
+        }
     }
     
     /**
@@ -85,16 +95,16 @@ public class VIClientManager: VIClientManagerProtocol {
         - Returns: Successfully added client or nil.
     */
     public func addClient(withAccountName account: String!, andPasswd passwd: String!) throws -> SWClient? {
-        guard account.canBeConvertedToEncoding(NSString.defaultCStringEncoding()) else {
-            throw VIClientManagerError.ClientAccountNameUnconvertible
-        }
-        guard passwd.canBeConvertedToEncoding(NSString.defaultCStringEncoding()) else {
-            throw VIClientManagerError.ClientPasswordUnconvertible
-        }
-        guard clientCount < maxClientCount else {
-            throw VIClientManagerError.TooManyClients
-        }
-        return try self.addClient(withAccount: SWAccount(accountName: account), andPasswd: passwd)
+        let swaccount = try validateAccount(account, passwd: passwd)
+        
+        let newClient = SWClient(account: swaccount, password: passwd, eventLoop: eventLoop)
+        
+        newClient.chatListController = VIChatListController(owner: newClient.account)
+        
+        clientList.append(newClient)
+        delegate?.managerDidAddClient(newClient)
+        NSLog("added client: \(newClient.account.getAccountString())")
+        return newClient
     }
     
     public func removeClient(client: SWClient?) {

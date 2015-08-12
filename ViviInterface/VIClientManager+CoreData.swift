@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import ViviSwiften
 
 /// Require the managedObjectContext to be set.
 extension VIClientManager {
@@ -55,5 +56,32 @@ extension VIClientManager {
             clientEnity.enabled = NSNumber(bool: false)
             NSLog("Unknown error occured when add client: \(error)")
         }
+    }
+    
+    /// Try to add new client enity. If can add client with account and passwd, return new SWAccount. If account has
+    /// existed, return nil.
+    ///
+    /// - Throws: VIClientManagerError
+    public func canAddClientEnity(withAccountName account: String!, andPasswd passwd: String!) throws -> SWAccount? {
+        let moc = self.managedObjectContext!
+        let clientFetch = NSFetchRequest(entityName: "Client")
+        
+        let swaccount: SWAccount? = try validateAccount(account, passwd: passwd)
+        
+        do {
+            let fetchedClients = try moc.executeFetchRequest(clientFetch) as! [VIClientMO]
+            if !fetchedClients.contains({ (client: VIClientMO) -> Bool in
+                return client.accountname == account
+            }) {
+                return swaccount
+            } else {
+                throw VIClientManagerError.AccountNameConfilct
+            }
+        } catch VIClientManagerError.AccountNameConfilct {
+            throw VIClientManagerError.AccountNameConfilct
+        } catch {
+            fatalError("Failed to fetch clients: \(error)")
+        }
+        return nil
     }
 }

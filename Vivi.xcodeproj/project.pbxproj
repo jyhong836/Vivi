@@ -53,6 +53,7 @@
 		CDA65F591B7A089700F832CA /* VIRosterMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA65F4B1B7A089700F832CA /* VIRosterMO.swift */; };
 		CDA65F5A1B7A089700F832CA /* VIRosterMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA65F4C1B7A089700F832CA /* VIRosterMO+CoreDataProperties.swift */; };
 		CDA65F641B7A36AE00F832CA /* VIClientManager+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA65F631B7A36AE00F832CA /* VIClientManager+CoreData.swift */; };
+		CDA65F671B7AE83E00F832CA /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA65F661B7AE83E00F832CA /* AddAccountViewController.swift */; };
 		CDB561541B74FABB002FC599 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB561531B74FABB002FC599 /* PreferenceViewController.swift */; };
 		CDB990E91B664E5D00598C51 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB990E81B664E5D00598C51 /* TestUtils.swift */; };
 		CDC174941B7102610081F6D4 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC174931B7102610081F6D4 /* MainWindowController.swift */; };
@@ -230,6 +231,7 @@
 		CDA65F4B1B7A089700F832CA /* VIRosterMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VIRosterMO.swift; path = "Core Data Objects/VIRosterMO.swift"; sourceTree = "<group>"; };
 		CDA65F4C1B7A089700F832CA /* VIRosterMO+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "VIRosterMO+CoreDataProperties.swift"; path = "Core Data Objects/VIRosterMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CDA65F631B7A36AE00F832CA /* VIClientManager+CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VIClientManager+CoreData.swift"; sourceTree = "<group>"; };
+		CDA65F661B7AE83E00F832CA /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 		CDB561531B74FABB002FC599 /* PreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PreferenceViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CDB990E81B664E5D00598C51 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		CDC174931B7102610081F6D4 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
@@ -368,9 +370,9 @@
 		CD36855A1B5E659500DFC78A /* Vivi */ = {
 			isa = PBXGroup;
 			children = (
+				CDA65F651B7AE81400F832CA /* Preference Controllers */,
 				CD36855B1B5E659500DFC78A /* AppDelegate.swift */,
 				CDC174931B7102610081F6D4 /* MainWindowController.swift */,
-				CDB561531B74FABB002FC599 /* PreferenceViewController.swift */,
 				CD4C3A521B6B483500C283E6 /* Main Window View Controllers */,
 				CD0F93C21B6DBEAF000817CB /* UI Assets */,
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
@@ -448,6 +450,15 @@
 				CDA65F481B7A089700F832CA /* VIMessageMO+CoreDataProperties.swift */,
 			);
 			name = "Core Data Objects";
+			sourceTree = "<group>";
+		};
+		CDA65F651B7AE81400F832CA /* Preference Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CDB561531B74FABB002FC599 /* PreferenceViewController.swift */,
+				CDA65F661B7AE83E00F832CA /* AddAccountViewController.swift */,
+			);
+			name = "Preference Controllers";
 			sourceTree = "<group>";
 		};
 		CDC174971B7114E80081F6D4 /* Session View */ = {
@@ -868,6 +879,7 @@
 				CD8C647F1B6C83D200945529 /* InputViewController.swift in Sources */,
 				CD60BA4F1B6D304E008E077A /* ChatMessageViewController.swift in Sources */,
 				CD4C3A5E1B6BC5F000C283E6 /* SWClientFactory.swift in Sources */,
+				CDA65F671B7AE83E00F832CA /* AddAccountViewController.swift in Sources */,
 				CD36855C1B5E659500DFC78A /* AppDelegate.swift in Sources */,
 				CDB561541B74FABB002FC599 /* PreferenceViewController.swift in Sources */,
 				CD4C3A541B6B489B00C283E6 /* SessionViewController.swift in Sources */,

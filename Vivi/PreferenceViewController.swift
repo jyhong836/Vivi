@@ -9,10 +9,11 @@
 import Cocoa
 import ViviInterface
 import ViviSwiften
+import CoreData
 
-class PreferenceViewController: NSViewController {
+class PreferenceViewController: NSViewController, AddAccountViewControllerDelegate {
     
-    let defaults = NSUserDefaults.standardUserDefaults()
+//    let defaults = NSUserDefaults.standardUserDefaults()
     let clientMgr = VIClientManager.sharedClientManager
 
     @IBOutlet weak var accountTextField: NSTextField!
@@ -46,5 +47,22 @@ class PreferenceViewController: NSViewController {
         } else if sender.state == NSOffState {
             clientMgr.removeClient(clientMgr.getClient(withAccountName: accountTextField.stringValue))
         }
+    }
+    
+    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addAccountSegue" {
+            let vc = segue.destinationController as! AddAccountViewController
+            vc.delegate = self
+        }
+    }
+    
+    func shouldAddAccount(account: SWAccount, password: String) {
+//        clientArrayController.add(self)
+        let moc = clientMgr.managedObjectContext!
+        let client = NSEntityDescription.insertNewObjectForEntityForName("Client", inManagedObjectContext: moc) as! VIClientMO
+        client.accountname = account.getAccountString()
+        client.password = password
+        client.hostname = account.getDomainString()
+        clientArrayController.addObject(client)
     }
 }
