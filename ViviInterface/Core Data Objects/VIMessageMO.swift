@@ -12,6 +12,8 @@ import CoreData
 //@objc(Message)
 public class VIMessageMO: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
-
+    func setDirection(dir: VIChatMessageDirection) {
+        self.direction = NSNumber(integer: dir.rawValue)
+    }
+    
 }

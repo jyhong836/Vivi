@@ -17,9 +17,10 @@ class ChatViewController: NSViewController {
             inputViewController?.currentClient = currentClient
         }
     }
-    var currentChat: VIChat? {
+    var currentChat: VIChatMO? {
         didSet {
-            inputViewController?.currentBuddy = currentChat?.buddy
+            // FIXME: Should pass swaccount or accountmo？
+            inputViewController?.currentBuddy = currentChat?.buddy?.swaccount
             chatMessageViewController?.currentChat = currentChat
         }
     }

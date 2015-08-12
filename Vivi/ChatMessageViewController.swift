@@ -13,7 +13,7 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
 
     @IBOutlet weak var messageTableView: NSTableView!
     
-    var currentChat: VIChat? {
+    var currentChat: VIChatMO? {
         didSet {
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 self.removeChatObservers()
@@ -119,7 +119,7 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var cell: MessageTableCellView? = messageCellViewForDir(currentChat?.messageAtIndex(row)!.direction, inTableView: tableView)
+        var cell: MessageTableCellView? = messageCellViewForDir(directionOfRow(row), inTableView: tableView)
         if let cl = cell {
             cell = configureCell(cl, row: row)
         }
@@ -132,13 +132,17 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     
     let defaultRowHeight = CGFloat(36)
     func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        var cell: MessageTableCellView? = messageCellViewForDir(currentChat?.messageAtIndex(row)!.direction, inTableView: tableView)
+        var cell: MessageTableCellView? = messageCellViewForDir(directionOfRow(row), inTableView: tableView)
         if let cl = cell {
             cell = configureCell(cl, row: row)
             cell!.layoutSubtreeIfNeeded()
             return cell!.frame.height
         }
         return defaultRowHeight
+    }
+    
+    private func directionOfRow(row: Int) -> VIChatMessageDirection {
+        return VIChatMessageDirection(rawValue: (currentChat?.messageAtIndex(row)?.direction?.integerValue)!)!
     }
     
     // MARK: API for chat update

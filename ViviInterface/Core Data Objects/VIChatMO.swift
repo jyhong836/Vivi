@@ -29,7 +29,7 @@ public class VIChatMO: NSManagedObject {
     /// Add a new message
     public func addMessage(content: String, timestamp: NSDate, direction: VIChatMessageDirection) -> VIMessageMO {
         let moc = self.managedObjectContext
-        let message = NSEntityDescription.insertNewObjectForEntityForName("message", inManagedObjectContext: moc!) as! VIMessageMO
+        let message = NSEntityDescription.insertNewObjectForEntityForName("Message", inManagedObjectContext: moc!) as! VIMessageMO
         message.content = content
         message.timestamp = timestamp
         message.direction = NSNumber(integer: direction.rawValue)
@@ -42,15 +42,19 @@ public class VIChatMO: NSManagedObject {
 //    func updateMessage(message: VIMessageMO, newDirection direction: VIChatMessageDirection) {
 //    }
     
+    public func indexOfMessage(message: VIMessageMO) -> Int {
+        return (messages?.indexOfObject(message))!
+    }
+    
     public var messageCount: Int {
         get {
             return messages!.count
         }
     }
     
-    public func messageAtIndex(index: Int) -> VIChatMessage? {
+    public func messageAtIndex(index: Int) -> VIMessageMO? {
         if index >= 0 && index < messageCount {
-            return (messages![index] as! VIChatMessage)
+            return (messages![index] as! VIMessageMO)
         } else {
             return nil
         }

@@ -63,7 +63,7 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     }
     
     func clientDidDisconnect(client: SWClient!, errorCode code: Int32) {
-        NSLog("client(\(client.account.getAccountString())) did disconnect")
+        NSLog("client(\(client.account.getAccountString())) did disconnect, with errorcodr(\(code))")
     }
     
     func clientDidReceivePresence(client: SWClient!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow show: Int32, currentStatus status: String!) {
@@ -82,7 +82,7 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     
     // MARK: Implementations for VIChatDelegate
     
-    func chatIsSelected(chat: VIChat) {
+    func chatIsSelected(chat: VIChatMO) {
         chatViewController?.currentChat = chat
         chatViewController?.view.hidden = false
     }
@@ -96,7 +96,7 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             
             c.delegate = self
             c.roster.delegate = self
-            (c.chatListController as! VIChatListController).chatDelegate = self
+            (c.managedObject as! VIClientMO).chatDelegate = self
             if let infoDict = NSBundle.mainBundle().localizedInfoDictionary {
                 let appName = infoDict[String(kCFBundleNameKey)] as! String
                 let appVer = infoDict[String(kCFBundleVersionKey)] as! String
@@ -104,8 +104,8 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             }
             
             // TODO: remove test code
-//            (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "test@noface"))
-            (c.chatListController as! VIChatListController).addChatWithBuddy(SWAccount(accountName: "test1@noface"))
+//            (c.managedObject as! VIClientMO).addChatWithBuddy(SWAccount(accountName: "test@noface"))
+            (c.managedObject as! VIClientMO).addChatWithBuddy(SWAccount(accountName: "test1@noface"))
             
             sessionViewController?.currentClient = c
             chatViewController?.currentClient = c

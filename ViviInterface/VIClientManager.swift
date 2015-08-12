@@ -91,14 +91,34 @@ public class VIClientManager: VIClientManagerProtocol {
         }
     }
     
+    /// Add Client with managedObject.
     /// - Throws: VIClientManagerError
     /// - Returns: Successfully added client or nil.
-    public func addClient(withAccountName account: String!, andPasswd passwd: String!) throws -> SWClient? {
+    func addClient(managedObject: VIClientMO) throws -> SWClient? {
+        let accountname = managedObject.accountname
+        let password = managedObject.password
+        let swaccount = try validateAccount(accountname, passwd: password)
+        
+        let newClient = SWClient(account: swaccount, password: password, eventLoop: eventLoop)
+        newClient.managedObject = managedObject
+        
+        //        newClient.chatListController = VIChatListController(owner: newClient.account)
+        
+        clientList.append(newClient)
+        delegate?.managerDidAddClient(newClient)
+        NSLog("added client: \(newClient.account.getAccountString())")
+        return newClient
+    }
+    
+    /// Add Client without managedObject. **Do not** use managedObject later.
+    /// - Throws: VIClientManagerError
+    /// - Returns: Successfully added client or nil.
+    func addClient(withAccountName account: String!, andPasswd passwd: String!) throws -> SWClient? {
         let swaccount = try validateAccount(account, passwd: passwd)
         
         let newClient = SWClient(account: swaccount, password: passwd, eventLoop: eventLoop)
         
-        newClient.chatListController = VIChatListController(owner: newClient.account)
+//        newClient.chatListController = VIChatListController(owner: newClient.account)
         
         clientList.append(newClient)
         delegate?.managerDidAddClient(newClient)

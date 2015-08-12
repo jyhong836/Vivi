@@ -34,31 +34,30 @@ extension VIClientManager {
     
     /// Call this when new enity should be added to client manager. When new VIClientMO is 
     /// created, use `canAddClientEnity` to make sure it's validated.
-    public func loadFromEnity(clientEnity: VIClientMO) {
-        let accountName = clientEnity.accountname!
-        let passwd = clientEnity.password!
+    public func loadFromEnity(clientMO: VIClientMO) {
         do {
-            let client = try addClient(withAccountName: accountName, andPasswd: passwd)
+            let client = try addClient(clientMO)
             if let cl = client {
                 // FIXME: Format limit need
-                cl.manualHostname = clientEnity.hostname
-                cl.manualPort = (clientEnity.port?.intValue)!
+                cl.manualHostname = clientMO.hostname
+                cl.manualPort = (clientMO.port?.intValue)!
+//                cl.managedObject = clientMO
             }
-            clientEnity.enabled = NSNumber(bool: true)
+            clientMO.enabled = NSNumber(bool: true)
         } catch VIClientManagerError.AccountNameConfilct {
-            clientEnity.enabled = NSNumber(bool: false)
+            clientMO.enabled = NSNumber(bool: false)
             showAlert("There exists an conflicted accout, please change your account or use the existed account.")
         } catch VIClientManagerError.ClientAccountNameUnconvertible {
-            clientEnity.enabled = NSNumber(bool: false)
+            clientMO.enabled = NSNumber(bool: false)
             showAlert("Account name include illegal characters, please change your account.")
         } catch VIClientManagerError.ClientPasswordUnconvertible {
             // FIXME: add format control
             showAlert("Account password include illegal characters, please change your account.")
         } catch VIClientManagerError.TooManyClients {
-            clientEnity.enabled = NSNumber(bool: false)
+            clientMO.enabled = NSNumber(bool: false)
             showAlert("There are too many clients.")
         } catch {
-            clientEnity.enabled = NSNumber(bool: false)
+            clientMO.enabled = NSNumber(bool: false)
             NSLog("Unknown error occured when add client: \(error)")
         }
     }

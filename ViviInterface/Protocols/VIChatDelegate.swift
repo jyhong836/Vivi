@@ -10,5 +10,5 @@ import ViviSwiften
 
 public protocol VIChatDelegate {
     
-    func chatIsSelected(chat: VIChat)
+    func chatIsSelected(chat: VIChatMO)
 }

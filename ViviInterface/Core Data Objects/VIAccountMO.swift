@@ -24,5 +24,18 @@ public class VIAccountMO: NSManagedObject {
 //        }
 //        return SWAccount(accountName: "\(self.node)@\(self.domain)")
 //    }()
+    
+    public var accountString: String {
+        get {
+            return "\(node)@\(domain)"
+        }
+    }
+    
+    public var swaccount: SWAccount? {
+        didSet {
+            self.node = swaccount?.getNodeString()
+            self.domain = swaccount?.getDomainString()
+        }
+    }
 
 }

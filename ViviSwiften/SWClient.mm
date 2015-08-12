@@ -21,6 +21,8 @@ using namespace Swift;
     NSString* passwd; // FIXME: the password should be encrypted
 }
 
+@synthesize managedObject;
+
 @synthesize account;
 @synthesize roster;
 
@@ -116,19 +118,15 @@ using namespace Swift;
     Message::ref swmsg = [self createSwiftMessage: targetAccount
                                           Message: message];
     NSDate* timestamp = [NSDate date]; // FIXME: timestamp should be provided by Swiften
-    [_chatListController clientWillSendMessageTo: targetAccount
+    id msgObject = [_chatListController clientWillSendMessageTo: targetAccount
                                          message: message
                                        timestamp: timestamp];
     if (client->isAvailable()) {
         client->sendMessage(swmsg);
-        [_chatListController clientDidSendMessageTo: targetAccount
-                                            message: message
-                                          timestamp: timestamp];
+        [_chatListController clientDidSendMessage: msgObject];
     } else {
-        [_chatListController clientFailSendMessageTo: targetAccount
-                                             message: message
-                                           timestamp: timestamp
-                                               error: VSClientErrorTypeClientUnavaliable];
+        [_chatListController clientFailSendMessage: msgObject
+                                             error: VSClientErrorTypeClientUnavaliable];
     }
 }
 
@@ -139,20 +137,16 @@ using namespace Swift;
     Message::ref swmsg = [self createSwiftMessage: targetAccount
                                           Message: message];
     NSDate* timestamp = [NSDate date]; // FIXME: timestamp should be provided by Swiften
-    [_chatListController clientWillSendMessageTo: targetAccount
-                                         message: message
-                                       timestamp: timestamp];
+    id msgObject = [_chatListController clientWillSendMessageTo: targetAccount
+                                                               message: message
+                                                             timestamp: timestamp];
     if (client->isAvailable()) {
         client->sendMessage(swmsg);
-        [_chatListController clientDidSendMessageTo: targetAccount
-                                            message: message
-                                          timestamp: timestamp];
+        [_chatListController clientDidSendMessage: msgObject];
         handler(VSClientErrorTypeNone);
     } else {
-        [_chatListController clientFailSendMessageTo: targetAccount
-                                             message: message
-                                           timestamp: timestamp
-                                               error: VSClientErrorTypeClientUnavaliable];
+        [_chatListController clientFailSendMessage: msgObject
+                                             error: VSClientErrorTypeClientUnavaliable];
         handler(VSClientErrorTypeClientUnavaliable);
     }
 }

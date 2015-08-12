@@ -13,21 +13,18 @@
 
 @protocol VSChatListControllerProtocol
 
-@property (readonly, nonatomic) SWAccount* owner;
+//@property (readonly, nonatomic) SWAccount* owner;
 
 @required
-- (void)clientWillSendMessageTo: (SWAccount*)receiver
-                        message: (NSString*)message
-                      timestamp: (NSDate*)date;
+- (id)clientWillSendMessageTo: (SWAccount*)receiver
+                             message: (NSString*)message
+                           timestamp: (NSDate*)date;
 @required
-- (void)clientDidSendMessageTo: (SWAccount*)receiver
-                       message: (NSString*)message
-                     timestamp: (NSDate*)date;
+- (void)clientDidSendMessage: (id)message;
+
 @required
-- (void)clientFailSendMessageTo: (SWAccount*)receiver
-                        message: (NSString*)message
-                      timestamp: (NSDate*)date
-                          error: (VSClientErrorType)error;
+- (void)clientFailSendMessage: (id)message
+                        error: (VSClientErrorType)error;
 @required
 - (void)clientDidReceivedMessageFrom: (SWAccount*)sender
                              message: (NSString*)message

@@ -75,7 +75,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         if let c = currentClient {
-            return (c.chatListController as! VIChatListController).chatCount
+            return (c.managedObject as! VIClientMO).chatCount
         } else {
             return 0
         }
@@ -87,10 +87,11 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         if let col = tableColumn {
             let cell = tableView.makeViewWithIdentifier(col.identifier, owner: self) as! SessionTableCellView
             if let c = currentClient {
-                let chatListController = (c.chatListController as! VIChatListController)
-                cell.textField?.stringValue = chatListController.chatAtIndex(row)!.buddy.getAccountString()
+                let clientMO = c.managedObject as! VIClientMO
+                let chat = clientMO.chatAtIndex(row)!
+                cell.textField?.stringValue = chat.buddy!.accountString
                 cell.textField?.toolTip = cell.textField?.stringValue
-                cell.lastMessageTextField.stringValue = (chatListController.chatAtIndex(row)!.lastMessage)
+                cell.lastMessageTextField.stringValue = chat.lastMessage.content!
                 cell.lastMessageTextField.toolTip = cell.lastMessageTextField.stringValue
             } else {
                 cell.textField?.stringValue = "Unknown user"
@@ -103,7 +104,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet {
         if proposedSelectionIndexes.count == 1 {
             // FIXME: ! Should use delegate to pass this message
-            (currentClient?.chatListController as! VIChatListController).selectedChatIndex = proposedSelectionIndexes.lastIndex
+            (currentClient?.managedObject as! VIClientMO).selectedChatIndex = proposedSelectionIndexes.lastIndex
         }
         return proposedSelectionIndexes
     }
@@ -145,10 +146,10 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
     
     /// Delever new message user notification in screen.
-    private func deliverNewMessageNotification(chat: VIChat) {
-        notification.title = chat.buddy.getAccountString()
-        notification.informativeText = chat.lastMessage
-        notification.userInfo = ["account": chat.buddy.getAccountString()]
+    private func deliverNewMessageNotification(chat: VIChatMO) {
+        notification.title = chat.buddy!.accountString
+        notification.informativeText = chat.lastMessage.content
+        notification.userInfo = ["account": chat.buddy!.accountString]
         NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
     }
     

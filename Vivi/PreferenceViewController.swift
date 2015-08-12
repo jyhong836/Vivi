@@ -39,14 +39,19 @@ class PreferenceViewController: NSViewController, AddAccountViewControllerDelega
             clientMgr.loadFromEnity(entity)
             enableButton.state = (entity.enabled?.integerValue)!
             if enableButton.state == NSOnState {
-                accountTextField.enabled = false;
-                passwordTextField.enabled = false;
-                domainTextField.enabled = false;
-                portTextField.enabled = false;
+                enableTextFields(false)
             }
         } else if sender.state == NSOffState {
             clientMgr.removeClient(clientMgr.getClient(withAccountName: accountTextField.stringValue))
+            enableTextFields(true)
         }
+    }
+    
+    func enableTextFields(enabled: Bool) {
+        accountTextField.enabled = enabled;
+        passwordTextField.enabled = enabled;
+        domainTextField.enabled = enabled;
+        portTextField.enabled = enabled;
     }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {

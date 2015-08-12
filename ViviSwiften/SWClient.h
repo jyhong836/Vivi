@@ -26,6 +26,9 @@ typedef void (^VSSendMessageHandler)(VSClientErrorType);
  */
 @interface SWClient : NSObject
 
+/// Bind NSManagedObject to SWClient.
+@property (nonatomic) id managedObject;
+
 @property (readonly, nonatomic) SWAccount* account;
 @property (readonly, nonatomic) SWXMPPRoster* roster;
 
