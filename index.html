@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Vivi by jyhong836</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Vivi</h1>
+      <h2 class="project-tagline">Vivi is a XMPP chatting client on OS X.</h2>
+      <a href="https://github.com/jyhong836/Vivi" class="btn">View on GitHub</a>
+      <a href="https://github.com/jyhong836/Vivi/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/jyhong836/Vivi/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="vivi" class="anchor" href="#vivi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Vivi</h1>
+
+<p>Vivi is a XMPP chatting client at OS X. <a href="http://swift.im/swiften.html">Swiften</a> is used as XMPP client library to communicate with XMPP server.</p>
+
+<p>The main language is Swift language. All UI code is programed with Swift. However, the XMPP tool is written with Objective-C and C++, since Swiften is a C++ based lib. The Objective-C and C++ codes are all included in ViviSwiften.framework. The framework provide the protocol for Swift based UI code. As a result, you can implement the protocol of the framework to write your own XMPP client GUI.</p>
+
+<h3>
+<a id="version-10-features" class="anchor" href="#version-10-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Version 1.0 Features</h3>
+
+<p>Here list all features would be implement in Vivi version 1.0. </p>
+
+<ul>
+<li>[ ] Single chat window.</li>
+<li>[ ] Window split.</li>
+<li>[ ] Notification and reply on notification bar.</li>
+<li>[ ] Contact tag.</li>
+<li>[ ] AIML Chat bot assistant.</li>
+<li>[ ] File transfer.</li>
+<li>[ ] Voice transfer in one button.</li>
+<li>[ ] Voice call.</li>
+</ul>
+
+<p>If you have any seggestion or report a bug, please create an issue at <a href="https://github.com/jyhong836/Vivi/issues">GitHub</a>.</p>
+
+<h3>
+<a id="compile-swiften" class="anchor" href="#compile-swiften" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compile Swiften</h3>
+
+<p>Before starting to code, compile the Swiften lib firstly. </p>
+
+<ul>
+<li>
+<p>If you have not installed <code>libboost*</code> (check with <code>ls /usr/local/lib | grep boost</code>), run below in bash:</p>
+
+<div class="highlight highlight-bash"><pre>./setupSwiften.sh</pre></div>
+</li>
+<li><p>If you have installed <code>libboost*</code>, still run the command above, and you need to add <code>/usr/local/include/boost</code> and  <code>/usr/local/lib/</code> to <code>Header Search Paths</code> and <code>Library Search Paths</code> in Xcode Building Settings.</p></li>
+</ul>
+
+<p>Read <code>SwiftXMPP/Documentation/BuildingOnUnix</code> for more details about compiling Swiften.</p>
+
+<h5>
+<a id="some-issues" class="anchor" href="#some-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>Some Issues</h5>
+
+<p>If it occurred to be some <strong>linker error</strong> or <strong>compile error</strong> about Swiften when building Xcode target, please check your linker and c flag settings flow below steps:</p>
+
+<ol>
+<li>In xcodeproject porject settings <code>Build Settings</code> tab, check the value of <code>Header Search Paths</code> and <code>Library Search Paths</code> (use the search tool in Build Settings to search the defines). They should point to the dir include Swiften's source dir <code>Swiften</code> and library <code>Swifetn.a</code>.</li>
+<li>In xcodeproject porject settings <code>Build Settings</code> tab, check the value of <code>SWIFTEN_LINKER_FLAGS</code> and <code>SWIFTEN_C_FLAGS</code>. </li>
+</ol>
+
+<p>The Swiften provide a tool to print the linker and c flag messages:</p>
+
+<div class="highlight highlight-bash"><pre><span class="pl-c1">cd</span> Frameworks/bin
+./swiften-config --libs <span class="pl-c"># print to be linked libs</span>
+./swiften-config --cflag <span class="pl-c"># print c++ flags</span>
+<span class="pl-c"># ignore the -LXXX or -IXXX output, it has been set in 'Build Phase' and 'Header Search Paths'</span></pre></div>
+
+<h3>
+<a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h3>
+
+<p>This client is developed by Junyuan Hong (<a href="mailto:jyhong836@gmail.com">jyhong836@gmail.com</a>), started at Jul 22, 2015. If you want to take part in development, just contact me.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/jyhong836/Vivi">Vivi</a> is maintained by <a href="https://github.com/jyhong836">jyhong836</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
