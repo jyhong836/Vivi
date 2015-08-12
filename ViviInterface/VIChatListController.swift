@@ -12,12 +12,14 @@ import ViviSwiften
 //enum VIChatListError: ErrorType {
 //    case SendMessageFromUndefinedChat
 //}
+
+// MARK: Chat list notificatons
 public let VIChatListChatDidAddNotification = "VIChatListChatDidAddNotification"
 public let VIChatListChatWillSendNotification = "VIChatListChatWillSendNotification"
 public let VIChatListChatDidSendNotification = "VIChatListChatDidSendNotification"
 public let VIChatListChatDidReceiveNotification = "VIChatListChatDidReceiveNotification"
 
-/// VIChatListController is binded to one SWClient
+/// VIChatListController should be bound to one SWClient
 public class VIChatListController: VSChatListControllerProtocol {
     
     public var chatDelegate: VIChatDelegate?
@@ -51,9 +53,6 @@ public class VIChatListController: VSChatListControllerProtocol {
     @objc public func clientDidReceivedMessageFrom(sender: SWAccount!, message: String!, timestamp: NSDate!) {
         let (lastchat, oldIndex) = updateChatList(withBuddy: sender)
         lastchat.addMessage(message, timestamp: timestamp, direction: .From)
-        if let delegate = chatDelegate {
-            delegate.chatDidReceiveMessage(lastchat)
-        }
         notificationCenter.postNotificationName(VIChatListChatDidReceiveNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
     }
     
@@ -61,11 +60,6 @@ public class VIChatListController: VSChatListControllerProtocol {
         // FIXME: should I add not sended message to chat list?
         let (lastchat, oldIndex) = updateChatList(withBuddy: receiver)
         lastchat.addMessage(message, timestamp: date, direction: .WillTo)
-//        let updatedIndex = lastchat.updateMessage(message, timestamp: date, direction: .WillTo)
-        if let delegate = chatDelegate {
-//            delegate.chatWillSendMessage(lastchat, updatedIndex: updatedIndex) // TODO: pass index
-            delegate.chatWillSendMessage(lastchat, updatedIndex: -1) // TODO: pass index
-        }
         notificationCenter.postNotificationName(VIChatListChatWillSendNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
     }
     
@@ -75,9 +69,6 @@ public class VIChatListController: VSChatListControllerProtocol {
     @objc public func clientDidSendMessageTo(receiver: SWAccount!, message: String!, timestamp: NSDate!) {
         let lastchat = getChatWithBuddy(receiver)!
         let updatedIndex = lastchat.updateMessage(message, timestamp: timestamp, direction: .To)
-        if let delegate = chatDelegate {
-            delegate.chatDidSendMessage(lastchat, updatedIndex: updatedIndex)
-        }
         notificationCenter.postNotificationName(VIChatListChatDidSendNotification, object: lastchat, userInfo: ["chatIndex": Int(chatList.indexOf(lastchat)!), "messageIndex": updatedIndex])
     }
     
@@ -85,9 +76,6 @@ public class VIChatListController: VSChatListControllerProtocol {
         // TODO: Add process for not sended message
         let lastchat = getChatWithBuddy(receiver)!
         let updatedIndex = lastchat.updateMessage(message, timestamp: date, direction: .To)
-        if let delegate = chatDelegate {
-            delegate.chatFailSendMessage(lastchat, updatedIndex: updatedIndex, error: error)
-        }
         notificationCenter.postNotificationName(VIChatListChatDidSendNotification, object: lastchat, userInfo: ["chatIndex": Int(chatList.indexOf(lastchat)!), "messageIndex": updatedIndex, "error": error.rawValue])
     }
     

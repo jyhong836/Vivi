@@ -13,6 +13,8 @@ import ViviSwiften
 /// Require the managedObjectContext to be set.
 extension VIClientManager {
     
+    /// Call this when application starts to load clients from CoreData.
+    /// This will only load enabled client enities to client manager.
     public func loadFromEnities() {
         let moc = self.managedObjectContext!
         let clientFetch = NSFetchRequest(entityName: "Client")
@@ -30,6 +32,8 @@ extension VIClientManager {
         }
     }
     
+    /// Call this when new enity should be added to client manager. When new VIClientMO is 
+    /// created, use `canAddClientEnity` to make sure it's validated.
     public func loadFromEnity(clientEnity: VIClientMO) {
         let accountName = clientEnity.accountname!
         let passwd = clientEnity.password!

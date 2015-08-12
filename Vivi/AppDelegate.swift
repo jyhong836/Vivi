@@ -17,7 +17,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
-        defaults.registerDefaults(VIClientManager.sharedClientManager.clientManagerDefaults)
         VIClientManager.sharedClientManager.startClientLoop()
         
         VIClientManager.sharedClientManager.managedObjectContext = self.managedObjectContext

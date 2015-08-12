@@ -10,7 +10,7 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate, VIClientManagerDelegate, NSUserNotificationCenterDelegate {
+class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate, VIClientManagerDelegate {
 
     @IBOutlet weak var sesConView: NSView!
     @IBOutlet weak var sessionView: NSView!
@@ -34,14 +34,6 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
 
         // Do any additional setup after loading the view.
         clientMgr.delegate = self
-        
-        // init user notification
-        NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
-        notification.title = "Account"
-        notification.informativeText = "message context"
-        notification.soundName = NSUserNotificationDefaultSoundName
-        notification.hasReplyButton = true
-        notification.otherButtonTitle = "Ignore"
     }
 
     override var representedObject: AnyObject? {
@@ -90,20 +82,6 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     
     // MARK: Implementations for VIChatDelegate
     
-    func chatDidReceiveMessage(chat: VIChat) {
-        deliverNewMessageNotification(chat)
-    }
-    
-    // TODO: Wrap the three delegate into one?
-    func chatWillSendMessage(chat: VIChat, updatedIndex index: Int) {
-    }
-    
-    func chatDidSendMessage(chat: VIChat, updatedIndex index: Int) {
-    }
-    
-    func chatFailSendMessage(chat: VIChat, updatedIndex index: Int, error: VSClientErrorType) {
-    }
-    
     func chatIsSelected(chat: VIChat) {
         chatViewController?.currentChat = chat
         chatViewController?.view.hidden = false
@@ -140,27 +118,6 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             currentClient = nil
             sessionViewController?.currentClient = nil
             chatViewController?.currentClient = nil
-        }
-    }
-    
-    // MARK: NSUserNotification
-    func deliverNewMessageNotification(chat: VIChat) {
-        notification.title = chat.buddy.getAccountString()
-        notification.informativeText = chat.lastMessage
-        notification.userInfo = ["account": chat.buddy.getAccountString()]
-        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
-    }
-    
-    // MARK: Implement NSUserNotificationCenterDelegate
-    func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
-        return true
-    }
-    
-    func userNotificationCenter(center: NSUserNotificationCenter, didActivateNotification notification: NSUserNotification) {
-        if notification.activationType == .Replied {
-            let userinfo = notification.userInfo!
-            currentClient?.sendMessageToAccount(SWAccount(accountName: userinfo["account"] as! String),
-                message: notification.response?.string)
         }
     }
 }

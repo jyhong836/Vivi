@@ -31,8 +31,11 @@ public class VIClientManager: VIClientManagerProtocol {
     public let eventLoop = SWEventLoop()
     public var delegate: VIClientManagerDelegate?
     
+    /// CoreData ManagedObjectContext. Assigne it when need to use ViviInterface core
+    /// model.
     public weak var managedObjectContext: NSManagedObjectContext?
     
+    /// Shared client manager.
     public static let sharedClientManager: VIClientManager = {
         let instance = VIClientManager()
         // init code here
@@ -49,14 +52,6 @@ public class VIClientManager: VIClientManagerProtocol {
         eventLoop.stop()
     }
     
-    public let clientManagerDefaults: [String: AnyObject] = [
-        "account": "",
-        "password": "",
-        "hostname": "",
-        "port": Int(5222),
-        "enabled": NSOffState
-    ];
-    
     func showAlert(text: String) {
         let alert = NSAlert()
         alert.addButtonWithTitle("OK")
@@ -64,6 +59,12 @@ public class VIClientManager: VIClientManagerProtocol {
         alert.runModal()
     }
     
+    /// Validate the SWAccount with account string ans password string.
+    ///
+    /// - Parameter account: Account string name, like 'node@exmaple.com'
+    /// - Parameter passwd: Password string.
+    /// - Throws: VIClientManagerError
+    /// - Returns: Return new created account if validated, else return nil.
     func validateAccount(account: String!, passwd: String!) throws -> SWAccount {
         if !account.canBeConvertedToEncoding(NSString.defaultCStringEncoding()) {
             throw VIClientManagerError.ClientAccountNameUnconvertible
@@ -90,10 +91,8 @@ public class VIClientManager: VIClientManagerProtocol {
         }
     }
     
-    /**
-        - Throws: VIClientManagerError: (AccountNameConfilct, ClientPasswordUnconvertible, ClientAccountNameUnconvertible, TooManyClients).
-        - Returns: Successfully added client or nil.
-    */
+    /// - Throws: VIClientManagerError
+    /// - Returns: Successfully added client or nil.
     public func addClient(withAccountName account: String!, andPasswd passwd: String!) throws -> SWClient? {
         let swaccount = try validateAccount(account, passwd: passwd)
         
@@ -107,6 +106,10 @@ public class VIClientManager: VIClientManagerProtocol {
         return newClient
     }
     
+    /// Remove specified client. If client has been added to client list, client
+    /// will be removed from list after disconnected.
+    /// 
+    /// - Parameter client: Client to be removed from client list.
     public func removeClient(client: SWClient?) {
         if client == nil {
             return
@@ -125,13 +128,16 @@ public class VIClientManager: VIClientManagerProtocol {
         }
     }
     
+    /// Remove specified client. For all clients in client list, client
+    /// will be removed from list after disconnected.
     public func removeAllClient() {
         for c in clientList {
             removeClient(c)
         }
     }
     
-    /// Force remove all clients, may cause to unexpected memory access error.
+    /// Force remove all clients, may cause to unexpected memory access error
+    /// when client is not disconnected correctly.
     internal func forceRemoveAllClient() {
         clientList.removeAll()
     }

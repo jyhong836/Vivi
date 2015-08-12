@@ -13,6 +13,7 @@ public enum VIChatMessageDirection {
     case From, To, WillTo, FailTo, None
 }
 
+// TODO: Refactor Message with ManagedObject
 public class VIChatMessage {
     public var content: String
     public var timestamp: NSDate
@@ -28,6 +29,7 @@ public func == (lhs: VIChat, rhs: VIChat) -> Bool {
     return lhs.owner == rhs.owner && lhs.buddy == rhs.buddy
 }
 
+// TODO: Refactor Chat with ManagedObject
 public class VIChat: Equatable {
     
     public var owner: SWAccount!
@@ -120,27 +122,6 @@ public class VIChat: Equatable {
         }
     }
     
-//    public func messageStringAtIndex(index: Int) -> String? {
-//        if index >= 0 && index < messageCount {
-//            return messageArray[index].message
-//        } else {
-//            return nil
-//        }
-//    }
-//    public func messageTimestampAtIndex(index: Int) -> NSDate? {
-//        if index >= 0 && index < messageCount {
-//            return messageArray[index].timestamp
-//        } else {
-//            return nil
-//        }
-//    }
-//    public func messageDirectionAtIndex(index: Int) -> VIChatMessageDirection? {
-//        if index >= 0 && index < messageCount {
-//            return messageArray[index].direction
-//        } else {
-//            return nil
-//        }
-//    }
     public func messageAtIndex(index: Int) -> VIChatMessage? {
         if index >= 0 && index < messageCount {
             return messageArray[index]

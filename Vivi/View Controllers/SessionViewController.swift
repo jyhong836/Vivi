@@ -10,7 +10,7 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSUserNotificationCenterDelegate {
     
     @IBOutlet weak var sessionTableView: NSTableView!
     
@@ -22,6 +22,8 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         }
     }
     
+    lazy var notification = NSUserNotification()
+    
     let notificationCenter = NSNotificationCenter.defaultCenter()
     let mainQueue = NSOperationQueue.mainQueue()
     // MARK: Notification observers
@@ -32,9 +34,18 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // init user notification
+        NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
+        notification.title = "Account"
+        notification.informativeText = "message context"
+        notification.soundName = NSUserNotificationDefaultSoundName
+        notification.hasReplyButton = true
+//        notification.otherButtonTitle = "Ignore"
     }
     
     override func viewWillAppear() {
+        // set up notification ovbservers when view appears
         newChatObserver = notificationCenter.addObserverForName(VIChatListChatDidAddNotification, object: nil, queue: mainQueue, usingBlock: newChatDidAdd)
         chatWillSendObserver = notificationCenter.addObserverForName(VIChatListChatWillSendNotification, object: nil, queue: mainQueue, usingBlock: chatWillSendMessage)
         chatDidSendObserver = notificationCenter.addObserverForName(VIChatListChatDidSendNotification, object: nil, queue: mainQueue, usingBlock: chatDidSendMessage)
@@ -42,6 +53,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
     
     override func viewWillDisappear() {
+        // clear notification ovbservers when view appears
         notificationCenter.removeObserver(newChatObserver!)
         notificationCenter.removeObserver(chatWillSendObserver!)
         notificationCenter.removeObserver(chatDidSendObserver!)
@@ -96,7 +108,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         return proposedSelectionIndexes
     }
     
-    // MARK: API for chat update
+    // MARK: Handlers for chat update notification observers
     
     func newChatDidAdd(notification: NSNotification) {
         let userInfo = notification.userInfo as! [String: AnyObject]
@@ -125,10 +137,31 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     /// Update cell at oldIndex. If index is -1, update cell at index 0.
     /// If index is 0, update it. If index is others, move to index 0, and
     /// update it.
-    func updateAndMoveCellAtIndex(oldIndex: Int) {
+    private func updateAndMoveCellAtIndex(oldIndex: Int) {
         if oldIndex > 0 {
             self.sessionTableView.moveRowAtIndex(oldIndex, toIndex: 0)
         }
         self.sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: 0), columnIndexes: NSIndexSet(index: 0))
+    }
+    
+    /// Delever new message user notification in screen.
+    private func deliverNewMessageNotification(chat: VIChat) {
+        notification.title = chat.buddy.getAccountString()
+        notification.informativeText = chat.lastMessage
+        notification.userInfo = ["account": chat.buddy.getAccountString()]
+        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+    }
+    
+    // MARK: Implement NSUserNotificationCenterDelegate
+    func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
+        return true
+    }
+    
+    func userNotificationCenter(center: NSUserNotificationCenter, didActivateNotification notification: NSUserNotification) {
+        if notification.activationType == .Replied {
+            let userinfo = notification.userInfo!
+            currentClient?.sendMessageToAccount(SWAccount(accountName: userinfo["account"] as! String),
+                message: notification.response?.string)
+        }
     }
 }
