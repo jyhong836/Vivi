@@ -12,6 +12,47 @@ import CoreData
 //@objc(Chat)
 public class VIChatMO: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
-
+    public override func awakeFromInsert() {
+        self.createdtime = NSDate()
+        self.updatedtime = NSDate()
+        self.messages = NSOrderedSet()
+    }
+    
+    // MARK: Message access
+    
+    public var lastMessage: VIMessageMO {
+        get {
+            return (messages?.lastObject)! as! VIMessageMO
+        }
+    }
+    
+    /// Add a new message
+    public func addMessage(content: String, timestamp: NSDate, direction: VIChatMessageDirection) -> VIMessageMO {
+        let moc = self.managedObjectContext
+        let message = NSEntityDescription.insertNewObjectForEntityForName("message", inManagedObjectContext: moc!) as! VIMessageMO
+        message.content = content
+        message.timestamp = timestamp
+        message.direction = NSNumber(integer: direction.rawValue)
+        message.chat = self
+        
+        return message
+    }
+    
+//    /// Update an existed message with new direction.
+//    func updateMessage(message: VIMessageMO, newDirection direction: VIChatMessageDirection) {
+//    }
+    
+    public var messageCount: Int {
+        get {
+            return messages!.count
+        }
+    }
+    
+    public func messageAtIndex(index: Int) -> VIChatMessage? {
+        if index >= 0 && index < messageCount {
+            return (messages![index] as! VIChatMessage)
+        } else {
+            return nil
+        }
+    }
 }

@@ -854,7 +854,7 @@
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="bIJ-0D-iXm">
-                                    <rect key="frame" x="1" y="1" width="0.0" height="16"/>
+                                    <rect key="frame" x="1" y="177" width="142" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="GEm-40-Ga4">
@@ -1078,7 +1078,7 @@ Gw
                 <customObject id="H2L-VQ-Kge" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="LOb-qW-89V"/>
             </objects>
-            <point key="canvasLocation" x="1315" y="794"/>
+            <point key="canvasLocation" x="817" y="1155"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -1285,7 +1285,7 @@ Gw
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="OR3-1v-GSt">
-                                                            <rect key="frame" x="44" y="1" width="108" height="17"/>
+                                                            <rect key="frame" x="44" y="1" width="106" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXG-L0-tYH">
@@ -1309,7 +1309,7 @@ Gw
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="2Bu-zA-q3e">
-                                    <rect key="frame" x="1" y="1" width="0.0" height="16"/>
+                                    <rect key="frame" x="1" y="228" width="152" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="9FV-p2-RVI">
@@ -1334,7 +1334,7 @@ Gw
                 </viewController>
                 <customObject id="zp4-1e-69y" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-395" y="2158"/>
+            <point key="canvasLocation" x="0.0" y="1760"/>
         </scene>
         <!--Session View Controller-->
         <scene sceneID="BvB-ij-g87">
@@ -1517,7 +1517,7 @@ Gw
                 </viewController>
                 <customObject id="lT7-KQ-ZZc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-222" y="1623"/>
+            <point key="canvasLocation" x="-291" y="1623"/>
         </scene>
         <!--Client View Controller-->
         <scene sceneID="94d-bE-q9x">
@@ -1590,7 +1590,7 @@ Gw
                 </viewController>
                 <customObject id="K1S-DI-AuK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-135" y="2026"/>
+            <point key="canvasLocation" x="-3" y="1450"/>
         </scene>
         <!--Input View Controller-->
         <scene sceneID="geo-jy-PJB">

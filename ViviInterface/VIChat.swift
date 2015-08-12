@@ -9,7 +9,7 @@
 import Foundation
 import ViviSwiften
 
-public enum VIChatMessageDirection {
+public enum VIChatMessageDirection: Int {
     case From, To, WillTo, FailTo, None
 }
 

@@ -370,10 +370,10 @@
 		CD36855A1B5E659500DFC78A /* Vivi */ = {
 			isa = PBXGroup;
 			children = (
-				CDA65F651B7AE81400F832CA /* Preference Controllers */,
 				CD36855B1B5E659500DFC78A /* AppDelegate.swift */,
 				CDC174931B7102610081F6D4 /* MainWindowController.swift */,
 				CD4C3A521B6B483500C283E6 /* Main Window View Controllers */,
+				CDA65F651B7AE81400F832CA /* Preference Controllers */,
 				CD0F93C21B6DBEAF000817CB /* UI Assets */,
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
@@ -440,14 +440,14 @@
 				CDA65F401B7A089700F832CA /* VIAccountMO+CoreDataProperties.swift */,
 				CDA65F411B7A089700F832CA /* VIChatMO.swift */,
 				CDA65F421B7A089700F832CA /* VIChatMO+CoreDataProperties.swift */,
+				CDA65F471B7A089700F832CA /* VIMessageMO.swift */,
+				CDA65F481B7A089700F832CA /* VIMessageMO+CoreDataProperties.swift */,
 				CDA65F491B7A089700F832CA /* VIResourceMO.swift */,
 				CDA65F4A1B7A089700F832CA /* VIResourceMO+CoreDataProperties.swift */,
 				CDA65F4B1B7A089700F832CA /* VIRosterMO.swift */,
 				CDA65F4C1B7A089700F832CA /* VIRosterMO+CoreDataProperties.swift */,
 				CDA65F451B7A089700F832CA /* VIGroupMO.swift */,
 				CDA65F461B7A089700F832CA /* VIGroupMO+CoreDataProperties.swift */,
-				CDA65F471B7A089700F832CA /* VIMessageMO.swift */,
-				CDA65F481B7A089700F832CA /* VIMessageMO+CoreDataProperties.swift */,
 			);
 			name = "Core Data Objects";
 			sourceTree = "<group>";
@@ -535,12 +535,12 @@
 		CDEE68A21B6545D800D00EC7 /* ViviInterface */ = {
 			isa = PBXGroup;
 			children = (
-				CDA65F221B7A05BA00F832CA /* Core Data Objects */,
 				CDEE68A31B6545D800D00EC7 /* ViviInterface.h */,
 				CD5E6F251B64E6FD00E33502 /* VIClientManager.swift */,
 				CDA65F631B7A36AE00F832CA /* VIClientManager+CoreData.swift */,
 				CD4C3A481B6A7EBE00C283E6 /* VIChatListController.swift */,
 				CDC2EE941B6A412B00872623 /* VIChat.swift */,
+				CDA65F221B7A05BA00F832CA /* Core Data Objects */,
 				CD5E6F241B64E50700E33502 /* Protocols */,
 				CDEE68A51B6545D800D00EC7 /* Info.plist */,
 				CDCDDBFA1B79A0D900FC7D0E /* ViviInterface.xcdatamodeld */,

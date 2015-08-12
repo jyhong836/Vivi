@@ -16,6 +16,7 @@ public extension VIMessageMO {
 
     @NSManaged var content: String?
     @NSManaged var timestamp: NSDate?
+    @NSManaged var direction: NSNumber?
     @NSManaged var chat: VIChatMO?
 
 }
