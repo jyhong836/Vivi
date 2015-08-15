@@ -145,7 +145,7 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         return VIChatMessageDirection(rawValue: (currentChat?.messageAtIndex(row)?.direction?.integerValue)!)!
     }
     
-    // MARK: API for chat update
+    // MARK: Notification receivers
     
     func chatWillSendMessage(notification: NSNotification) {
         chatDidAddMessage()

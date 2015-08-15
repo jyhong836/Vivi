@@ -10,7 +10,7 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSUserNotificationCenterDelegate {
+class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     
     @IBOutlet weak var sessionTableView: NSTableView!
     
@@ -19,11 +19,12 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     var currentClient: SWClient? = nil {
         didSet {
             clientViewController?.currentClient = currentClient
+            NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+                self.sessionTableView.reloadData()
+            }
         }
     }
-    
-    lazy var notification = NSUserNotification()
-    
+        
     let notificationCenter = NSNotificationCenter.defaultCenter()
     let mainQueue = NSOperationQueue.mainQueue()
     // MARK: Notification observers
@@ -34,14 +35,6 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // init user notification
-        NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
-        notification.title = "Account"
-        notification.informativeText = "message context"
-        notification.soundName = NSUserNotificationDefaultSoundName
-        notification.hasReplyButton = true
-//        notification.otherButtonTitle = "Ignore"
     }
     
     override func viewWillAppear() {
@@ -91,7 +84,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
                 let chat = clientMO.chatAtIndex(row)!
                 cell.textField?.stringValue = chat.buddy!.accountString
                 cell.textField?.toolTip = cell.textField?.stringValue
-                cell.lastMessageTextField.stringValue = chat.lastMessage.content!
+                cell.lastMessageTextField.stringValue = chat.lastMessage
                 cell.lastMessageTextField.toolTip = cell.lastMessageTextField.stringValue
             } else {
                 cell.textField?.stringValue = "Unknown user"
@@ -145,24 +138,4 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         self.sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: 0), columnIndexes: NSIndexSet(index: 0))
     }
     
-    /// Delever new message user notification in screen.
-    private func deliverNewMessageNotification(chat: VIChatMO) {
-        notification.title = chat.buddy!.accountString
-        notification.informativeText = chat.lastMessage.content
-        notification.userInfo = ["account": chat.buddy!.accountString]
-        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
-    }
-    
-    // MARK: Implement NSUserNotificationCenterDelegate
-    func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
-        return true
-    }
-    
-    func userNotificationCenter(center: NSUserNotificationCenter, didActivateNotification notification: NSUserNotification) {
-        if notification.activationType == .Replied {
-            let userinfo = notification.userInfo!
-            currentClient?.sendMessageToAccount(SWAccount(accountName: userinfo["account"] as! String),
-                message: notification.response?.string)
-        }
-    }
 }

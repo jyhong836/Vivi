@@ -80,6 +80,9 @@ public class VIClientMO: NSManagedObject, VSChatListControllerProtocol {
             newChat.owner = self
             newChat.buddy = buddyMO
             
+            notificationCenter.postNotificationName(
+                VIChatListChatDidAddNotification, object: self, userInfo: ["index": 0])
+            
             return (newChat, true)
         }
     }

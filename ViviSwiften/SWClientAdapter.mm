@@ -110,7 +110,7 @@ void SWClientAdapter::onMessageReceivedSlot(Message::ref msg)
         [swclient.delegate clientDidReceiveMessage: swclient
                                        fromAccount: account
                                          inContent: content];
-    [swclient.chatListController clientDidReceivedMessageFrom: account
+    [swclient.managedObject clientDidReceivedMessageFrom: account
                                                       message: content
                                                     timestamp: date];
 }

@@ -20,9 +20,14 @@ public class VIChatMO: NSManagedObject {
     
     // MARK: Message access
     
-    public var lastMessage: VIMessageMO {
+    public var lastMessage: String {
         get {
-            return (messages?.lastObject)! as! VIMessageMO
+            if let msgs = messages {
+                if let lastone = (msgs.lastObject as? VIMessageMO) {
+                    return lastone.content!
+                }
+            }
+            return ""
         }
     }
     
@@ -48,7 +53,11 @@ public class VIChatMO: NSManagedObject {
     
     public var messageCount: Int {
         get {
-            return messages!.count
+            if let msgs = messages {
+                return msgs.count
+            } else {
+                return 0
+            }
         }
     }
     

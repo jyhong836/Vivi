@@ -118,14 +118,14 @@ using namespace Swift;
     Message::ref swmsg = [self createSwiftMessage: targetAccount
                                           Message: message];
     NSDate* timestamp = [NSDate date]; // FIXME: timestamp should be provided by Swiften
-    id msgObject = [_chatListController clientWillSendMessageTo: targetAccount
+    id msgObject = [managedObject clientWillSendMessageTo: targetAccount
                                          message: message
                                        timestamp: timestamp];
     if (client->isAvailable()) {
         client->sendMessage(swmsg);
-        [_chatListController clientDidSendMessage: msgObject];
+        [managedObject clientDidSendMessage: msgObject];
     } else {
-        [_chatListController clientFailSendMessage: msgObject
+        [managedObject clientFailSendMessage: msgObject
                                              error: VSClientErrorTypeClientUnavaliable];
     }
 }
@@ -137,15 +137,15 @@ using namespace Swift;
     Message::ref swmsg = [self createSwiftMessage: targetAccount
                                           Message: message];
     NSDate* timestamp = [NSDate date]; // FIXME: timestamp should be provided by Swiften
-    id msgObject = [_chatListController clientWillSendMessageTo: targetAccount
+    id msgObject = [managedObject clientWillSendMessageTo: targetAccount
                                                                message: message
                                                              timestamp: timestamp];
     if (client->isAvailable()) {
         client->sendMessage(swmsg);
-        [_chatListController clientDidSendMessage: msgObject];
+        [managedObject clientDidSendMessage: msgObject];
         handler(VSClientErrorTypeNone);
     } else {
-        [_chatListController clientFailSendMessage: msgObject
+        [managedObject clientFailSendMessage: msgObject
                                              error: VSClientErrorTypeClientUnavaliable];
         handler(VSClientErrorTypeClientUnavaliable);
     }

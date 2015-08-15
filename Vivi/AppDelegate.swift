@@ -14,13 +14,21 @@ import ViviSwiften
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     let defaults = NSUserDefaults.standardUserDefaults()
-
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
-        // Insert code here to initialize your application
+    
+    func applicationWillFinishLaunching(notification: NSNotification) {
+        
         VIClientManager.sharedClientManager.startClientLoop()
         
         VIClientManager.sharedClientManager.managedObjectContext = self.managedObjectContext
         VIClientManager.sharedClientManager.loadFromEnities()
+    }
+
+    func applicationDidFinishLaunching(aNotification: NSNotification) {
+        // Insert code here to initialize your application
+//        VIClientManager.sharedClientManager.startClientLoop()
+//        
+//        VIClientManager.sharedClientManager.managedObjectContext = self.managedObjectContext
+//        VIClientManager.sharedClientManager.loadFromEnities()
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {

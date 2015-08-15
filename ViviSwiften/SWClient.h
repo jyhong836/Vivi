@@ -27,12 +27,11 @@ typedef void (^VSSendMessageHandler)(VSClientErrorType);
 @interface SWClient : NSObject
 
 /// Bind NSManagedObject to SWClient.
-@property (nonatomic) id managedObject;
+@property (nonatomic) id<VSChatListControllerProtocol> managedObject;
 
 @property (readonly, nonatomic) SWAccount* account;
 @property (readonly, nonatomic) SWXMPPRoster* roster;
 
-@property (nonatomic) id<VSChatListControllerProtocol> chatListController;
 @property (nonatomic) id<VSClientDelegate> delegate;
 /// Set through connectWithHandler.
 @property (readonly, nonatomic) VSConnectionHandler connectHandler;

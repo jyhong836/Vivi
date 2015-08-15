@@ -10,7 +10,7 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate, VIClientManagerDelegate {
+class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate, VIClientManagerDelegate, NSUserNotificationCenterDelegate {
 
     @IBOutlet weak var sesConView: NSView!
     @IBOutlet weak var sessionView: NSView!
@@ -29,11 +29,21 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     
     let notification = NSUserNotification()
     
+    let notificationCenter = NSNotificationCenter.defaultCenter()
+    var chatDidReceiveObserver: NSObjectProtocol?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         clientMgr.delegate = self
+        
+        let mainQueue = NSOperationQueue.mainQueue()
+        chatDidReceiveObserver = notificationCenter.addObserverForName(VIChatListChatDidReceiveNotification, object: nil, queue: mainQueue, usingBlock: {(n)->Void in
+            let clientMO = self.currentClient?.managedObject as! VIClientMO
+            self.deliverNewMessageNotification(clientMO.chatAtIndex(0)!)
+        })
+        initUserNotification()
     }
 
     override var representedObject: AnyObject? {
@@ -118,6 +128,38 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             currentClient = nil
             sessionViewController?.currentClient = nil
             chatViewController?.currentClient = nil
+        }
+    }
+    
+    // MARK: User notification
+    /// Deliver new message user notification in screen.
+    private func deliverNewMessageNotification(chat: VIChatMO) {
+        notification.title = chat.buddy!.accountString
+        notification.informativeText = chat.lastMessage
+        notification.userInfo = ["account": chat.buddy!.accountString]
+        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+    }
+    
+    func initUserNotification() {
+        // init user notification
+        NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
+        notification.title = "Account"
+        notification.informativeText = "message context"
+        notification.soundName = NSUserNotificationDefaultSoundName
+        notification.hasReplyButton = true
+        //        notification.otherButtonTitle = "Ignore"
+    }
+    
+    // MARK: Implement NSUserNotificationCenterDelegate
+    func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
+        return true
+    }
+    
+    func userNotificationCenter(center: NSUserNotificationCenter, didActivateNotification notification: NSUserNotification) {
+        if notification.activationType == .Replied {
+            let userinfo = notification.userInfo!
+            currentClient?.sendMessageToAccount(SWAccount(accountName: userinfo["account"] as! String),
+                message: notification.response?.string)
         }
     }
 }
