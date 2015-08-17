@@ -131,31 +131,34 @@ void SWClientAdapter::onPresenceReceivedSlot(Presence::ref pres)
 
 void SWClientAdapter::rosterOnJIDAddedSlot(const JID& jid)
 {
-    if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidAddAccount:)])
-        [swclient.roster.delegate rosterDidAddAccount: [[SWAccount alloc] initWithAccountName: std_str2NSString(jid.toString())]];
+    if ([swclient.roster.delegate respondsToSelector:@selector(roster:didAddAccount:)])
+        [swclient.roster.delegate roster: swclient.roster
+                           didAddAccount: [[SWAccount alloc] initWithAccountName: std_str2NSString(jid.toString())]];
 }
 
 void SWClientAdapter::rosterOnJIDRemovedSlot(const JID& jid)
 {
-    if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidRemoveAccount:)])
-        [swclient.roster.delegate rosterDidRemoveAccount: [[SWAccount alloc] initWithAccountName: std_str2NSString(jid.toString())]];
+    if ([swclient.roster.delegate respondsToSelector:@selector(roster:didRemoveAccount:)])
+        [swclient.roster.delegate roster: swclient.roster
+                        didRemoveAccount: [[SWAccount alloc] initWithAccountName: std_str2NSString(jid.toString())]];
 }
 
-void SWClientAdapter::rosterOnJIDUpdatedSlot(const JID&, const std::string&, const std::vector<std::string>&)
+void SWClientAdapter::rosterOnJIDUpdatedSlot(const JID& jid, const std::string&, const std::vector<std::string>&)
 {
-    if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidUpdate)])
+    if ([swclient.roster.delegate respondsToSelector:@selector(roster:didUpdateAccount:)])
         // TODO: Complete rosterOnJIDUpdatedSlot param passing
-        [swclient.roster.delegate rosterDidUpdate];
+        [swclient.roster.delegate roster: swclient.roster
+                        didUpdateAccount: [[SWAccount alloc] initWithAccountName: std_str2NSString(jid.toString())]];
 }
 
 void SWClientAdapter::rosterOnRosterClearedSlot()
 {
-    if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidClear)])
-        [swclient.roster.delegate rosterDidClear];
+    if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidClear:)])
+        [swclient.roster.delegate rosterDidClear: swclient.roster];
 }
 
 void SWClientAdapter::rosterOnInitialRosterPopulatedSlot()
 {
-    if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidInitialize)])
-        [swclient.roster.delegate rosterDidInitialize];
+    if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidInitialize:)])
+        [swclient.roster.delegate rosterDidInitialize: swclient.roster];
 }

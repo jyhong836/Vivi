@@ -32,6 +32,22 @@ using namespace Swift;
     return self;
 }
 
+- (id)initWithJID: (JID*)ajid
+{
+    if (self = [super init]) {
+        resources = [[NSMutableArray<NSString*> alloc] init];
+        jid = ajid;
+        if (!jid->isBare()) {
+            [self addResource: [self getResourceString]];
+            std::string bareID = jid->toBare().toString();
+            delete jid;
+            jid = new JID(bareID);
+        }
+        resourceIndex = -1;
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     delete jid;

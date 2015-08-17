@@ -21,6 +21,9 @@ namespace Swift {
  * @param accountName must be convertible to ASCII C String, or raise Exception.
  */
 - (id)initWithAccountName: (NSString *)account;
+#ifdef __cplusplus
+- (id)initWithJID: (Swift::JID*)ajid;
+#endif
 - (void)dealloc;
 
 @property (nonatomic, readonly)BOOL valid;

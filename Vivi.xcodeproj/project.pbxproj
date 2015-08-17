@@ -11,6 +11,8 @@
 		CD156DDB1B81F40E00EFC06F /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */; };
 		CD156DDF1B81FA8600EFC06F /* RosterCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DDD1B81FA8600EFC06F /* RosterCollectionViewItem.swift */; };
 		CD156DE41B81FB0900EFC06F /* RosterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DE31B81FB0900EFC06F /* RosterViewController.swift */; };
+		CD156DE71B823B0600EFC06F /* SWRosterItem.h in Headers */ = {isa = PBXBuildFile; fileRef = CD156DE51B823B0600EFC06F /* SWRosterItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CD156DE81B823B0600EFC06F /* SWRosterItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD156DE61B823B0600EFC06F /* SWRosterItem.mm */; };
 		CD36855C1B5E659500DFC78A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD36855B1B5E659500DFC78A /* AppDelegate.swift */; };
 		CD36855E1B5E659500DFC78A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD36855D1B5E659500DFC78A /* MainViewController.swift */; };
 		CD3685601B5E659500DFC78A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD36855F1B5E659500DFC78A /* Assets.xcassets */; };
@@ -181,6 +183,8 @@
 		CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		CD156DDD1B81FA8600EFC06F /* RosterCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RosterCollectionViewItem.swift; sourceTree = "<group>"; };
 		CD156DE31B81FB0900EFC06F /* RosterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RosterViewController.swift; path = "View Controllers/RosterViewController.swift"; sourceTree = "<group>"; };
+		CD156DE51B823B0600EFC06F /* SWRosterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRosterItem.h; sourceTree = "<group>"; };
+		CD156DE61B823B0600EFC06F /* SWRosterItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWRosterItem.mm; sourceTree = "<group>"; };
 		CD3685581B5E659500DFC78A /* Vivi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vivi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD36855B1B5E659500DFC78A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD36855D1B5E659500DFC78A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MainViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -530,6 +534,8 @@
 				CD72B2CC1B5F7A9800BCFD2A /* SWAccount.mm */,
 				CDC2EE981B6A444D00872623 /* SWXMPPRoster.h */,
 				CDC2EE991B6A444D00872623 /* SWXMPPRoster.mm */,
+				CD156DE51B823B0600EFC06F /* SWRosterItem.h */,
+				CD156DE61B823B0600EFC06F /* SWRosterItem.mm */,
 			);
 			name = "Swiften Adapter";
 			sourceTree = "<group>";
@@ -605,6 +611,7 @@
 				CD4C3A471B6A77EC00C283E6 /* VSChatListControllerProtocol.h in Headers */,
 				CD0932181B5F9757007ACB22 /* VSClientDelegateProtocol.h in Headers */,
 				CDC49E441B5FF91500F5E6E6 /* ViviSwiften.pch in Headers */,
+				CD156DE71B823B0600EFC06F /* SWRosterItem.h in Headers */,
 				CDE658C11B5E71F300290E34 /* VSControllerProtocol.h in Headers */,
 				CDE658911B5E66D400290E34 /* ViviSwiften.h in Headers */,
 				CDDA21D91B6CEEDD00A94F8C /* ViviSwiftenDefines.h in Headers */,
@@ -921,6 +928,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDE658D11B5EA70F00290E34 /* SWClientAdapter.mm in Sources */,
+				CD156DE81B823B0600EFC06F /* SWRosterItem.mm in Sources */,
 				CD72B2CE1B5F7A9800BCFD2A /* SWAccount.mm in Sources */,
 				CDE658CD1B5E8B8000290E34 /* SWClient.mm in Sources */,
 				CDC2EE9B1B6A444D00872623 /* SWXMPPRoster.mm in Sources */,

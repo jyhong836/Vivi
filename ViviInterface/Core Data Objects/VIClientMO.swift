@@ -22,6 +22,9 @@ public class VIClientMO: NSManagedObject, VSChatListControllerProtocol {
     override public func awakeFromInsert() {
         self.enabled = NSNumber(bool: false)
         self.chats = NSOrderedSet()
+        
+        let moc = self.managedObjectContext!
+        self.roster = NSEntityDescription.insertNewObjectForEntityForName("Roster", inManagedObjectContext: moc) as? VIRosterMO
     }
     
     // MARK: Chat selected delegate

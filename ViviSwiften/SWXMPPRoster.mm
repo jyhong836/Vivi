@@ -7,6 +7,7 @@
 //
 #import "SWXMPPRoster.h"
 #import <Swiften/Swiften.h>
+#import "SWRosterItem.h"
 
 using namespace Swift;
 
@@ -30,6 +31,26 @@ using namespace Swift;
             NSLog(@"group: \"%s\"", group.c_str());
         }
     }
+}
+
+- (NSSet<NSString*>*)getGroups
+{
+    std::set<std::string> stdgroups = roster->getGroups();
+    NSMutableArray<NSString*>* groupArray = [NSMutableArray alloc];
+    for (auto &groupname: stdgroups) {
+        [groupArray addObject: std_str2NSString(groupname)];
+    }
+    NSSet<NSString*>* groups = [[NSSet alloc] initWithArray:groupArray];
+    return groups;
+}
+
+- (NSArray<SWRosterItem*>*)getItems
+{
+    NSMutableArray<SWRosterItem*>* itemArray = [NSMutableArray alloc];
+    for (auto &item: roster->getItems()) {
+        [itemArray addObject: [[SWRosterItem alloc] initWithRosterItem:&item]];
+    }
+    return itemArray;
 }
 
 @end

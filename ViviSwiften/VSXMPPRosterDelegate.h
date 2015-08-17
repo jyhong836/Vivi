@@ -7,18 +7,22 @@
 //
 
 @class SWAccount;
+@class SWXMPPRoster;
 
 @protocol VSXMPPRosterDelegate <NSObject>
 
 @optional
-- (void)rosterDidAddAccount: (SWAccount*)account;
+- (void)roster: (SWXMPPRoster*)roster
+ didAddAccount: (SWAccount*)account;
 @optional
-- (void)rosterDidRemoveAccount: (SWAccount*)account;
+- (void)roster: (SWXMPPRoster*)roster
+didRemoveAccount: (SWAccount*)account;
 @optional
-- (void)rosterDidUpdate;
+- (void)roster: (SWXMPPRoster*)roster
+didUpdateAccount: (SWAccount*)account;
 @optional
-- (void)rosterDidClear;
+- (void)rosterDidClear: (SWXMPPRoster*)roster;
 @optional
-- (void)rosterDidInitialize;
+- (void)rosterDidInitialize: (SWXMPPRoster*)roster;
 
 @end

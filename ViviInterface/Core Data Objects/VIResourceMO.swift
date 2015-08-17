@@ -11,7 +11,5 @@ import CoreData
 
 //@objc(Resource)
 public class VIResourceMO: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
-
+    
 }

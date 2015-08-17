@@ -12,6 +12,7 @@ namespace Swift {
     class XMPPRoster;
 }
 #endif
+@class SWRosterItem;
 
 @protocol VSXMPPRosterDelegate;
 
@@ -26,5 +27,7 @@ namespace Swift {
 #endif
 
 - (void)printItems;
+- (NSSet<NSString*>*)getGroups;
+- (NSArray<SWRosterItem*>*)getItems;
 
 @end

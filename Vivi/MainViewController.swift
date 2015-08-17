@@ -10,7 +10,7 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelegate, VIChatDelegate, VIClientManagerDelegate, NSUserNotificationCenterDelegate {
+class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VIClientManagerDelegate, NSUserNotificationCenterDelegate {
 
     @IBOutlet weak var sesConView: NSView!
     @IBOutlet weak var sessionView: NSView!
@@ -89,12 +89,6 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
         NSLog("client(\(client.account.getAccountString())) did receive message from \(account.getAccountString()): \(content)")
     }
     
-    // MARK: Implementations for VSXMPPRosterDelegate
-    
-    func rosterDidInitialize() {
-        currentClient?.roster.printItems()
-    }
-    
     // MARK: Implementations for VIChatDelegate
     
     func chatIsSelected(chat: VIChatMO) {
@@ -110,7 +104,6 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             currentClient = c
             
             c.delegate = self
-            c.roster.delegate = self
             (c.managedObject as! VIClientMO).chatDelegate = self
             if let infoDict = NSBundle.mainBundle().localizedInfoDictionary {
                 let appName = infoDict[String(kCFBundleNameKey)] as! String
