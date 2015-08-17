@@ -39,7 +39,7 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
         clientMgr.delegate = self
         
         let mainQueue = NSOperationQueue.mainQueue()
-        chatDidReceiveObserver = notificationCenter.addObserverForName(VIChatListChatDidReceiveNotification, object: nil, queue: mainQueue, usingBlock: {(n)->Void in
+        chatDidReceiveObserver = notificationCenter.addObserverForName(VIClientChatDidReceiveMsgNotification, object: nil, queue: mainQueue, usingBlock: {(n)->Void in
             let clientMO = self.currentClient?.managedObject as! VIClientMO
             self.deliverNewMessageNotification(clientMO.chatAtIndex(0)!)
         })

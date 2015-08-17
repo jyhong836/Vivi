@@ -15,7 +15,6 @@
 		CD36856E1B5E659500DFC78A /* ViviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD36856D1B5E659500DFC78A /* ViviTests.swift */; };
 		CD3685791B5E659500DFC78A /* ViviUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3685781B5E659500DFC78A /* ViviUITests.swift */; };
 		CD4C3A471B6A77EC00C283E6 /* VSChatListControllerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CD4C3A461B6A77EC00C283E6 /* VSChatListControllerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CD4C3A491B6A7EBE00C283E6 /* VIChatListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A481B6A7EBE00C283E6 /* VIChatListController.swift */; };
 		CD4C3A4B1B6A81DB00C283E6 /* VIChatDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A4A1B6A81DB00C283E6 /* VIChatDelegate.swift */; };
 		CD4C3A541B6B489B00C283E6 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A531B6B489B00C283E6 /* SessionViewController.swift */; };
 		CD4C3A581B6BAA2B00C283E6 /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A571B6BAA2B00C283E6 /* ClientViewController.swift */; };
@@ -58,7 +57,6 @@
 		CDB990E91B664E5D00598C51 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB990E81B664E5D00598C51 /* TestUtils.swift */; };
 		CDC174941B7102610081F6D4 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC174931B7102610081F6D4 /* MainWindowController.swift */; };
 		CDC2EE931B674F4200872623 /* SwiftenTypeDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */; };
-		CDC2EE951B6A412B00872623 /* VIChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2EE941B6A412B00872623 /* VIChat.swift */; };
 		CDC2EE971B6A435800872623 /* VSXMPPRosterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = CDC2EE961B6A435800872623 /* VSXMPPRosterDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDC2EE9A1B6A444D00872623 /* SWXMPPRoster.h in Headers */ = {isa = PBXBuildFile; fileRef = CDC2EE981B6A444D00872623 /* SWXMPPRoster.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDC2EE9B1B6A444D00872623 /* SWXMPPRoster.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDC2EE991B6A444D00872623 /* SWXMPPRoster.mm */; };
@@ -180,7 +178,7 @@
 		CD0932171B5F9757007ACB22 /* VSClientDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSClientDelegateProtocol.h; sourceTree = "<group>"; };
 		CD3685581B5E659500DFC78A /* Vivi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vivi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD36855B1B5E659500DFC78A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		CD36855D1B5E659500DFC78A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CD36855D1B5E659500DFC78A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MainViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD36855F1B5E659500DFC78A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD3685621B5E659500DFC78A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CD3685641B5E659500DFC78A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -191,9 +189,8 @@
 		CD3685781B5E659500DFC78A /* ViviUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViviUITests.swift; sourceTree = "<group>"; };
 		CD36857A1B5E659500DFC78A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD4C3A461B6A77EC00C283E6 /* VSChatListControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSChatListControllerProtocol.h; sourceTree = "<group>"; };
-		CD4C3A481B6A7EBE00C283E6 /* VIChatListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIChatListController.swift; sourceTree = "<group>"; };
 		CD4C3A4A1B6A81DB00C283E6 /* VIChatDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VIChatDelegate.swift; path = ../ViviInterface/Protocols/VIChatDelegate.swift; sourceTree = "<group>"; };
-		CD4C3A531B6B489B00C283E6 /* SessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionViewController.swift; path = "View Controllers/SessionViewController.swift"; sourceTree = "<group>"; };
+		CD4C3A531B6B489B00C283E6 /* SessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SessionViewController.swift; path = "View Controllers/SessionViewController.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD4C3A571B6BAA2B00C283E6 /* ClientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
 		CD4C3A591B6BBBCC00C283E6 /* VIChatListControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIChatListControllerTests.swift; sourceTree = "<group>"; };
 		CD4C3A5B1B6BC43D00C283E6 /* SWClientFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWClientFactory.swift; sourceTree = "<group>"; };
@@ -202,7 +199,7 @@
 		CD5E6F251B64E6FD00E33502 /* VIClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VIClientManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD5E6F271B64F05300E33502 /* VIClientManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = VIClientManagerTests.swift; path = ../ViviTests/VIClientManagerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftenTypeDefine.swift; sourceTree = "<group>"; };
-		CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageViewController.swift; sourceTree = "<group>"; };
+		CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChatMessageViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD60BA501B6DB30F008E077A /* MessageTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableCellView.swift; sourceTree = "<group>"; };
 		CD72B2C71B5F6F5300BCFD2A /* SWEventLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWEventLoop.h; sourceTree = "<group>"; };
 		CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWEventLoop.mm; sourceTree = "<group>"; };
@@ -220,7 +217,7 @@
 		CDA65F401B7A089700F832CA /* VIAccountMO+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "VIAccountMO+CoreDataProperties.swift"; path = "Core Data Objects/VIAccountMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CDA65F411B7A089700F832CA /* VIChatMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VIChatMO.swift; path = "Core Data Objects/VIChatMO.swift"; sourceTree = "<group>"; };
 		CDA65F421B7A089700F832CA /* VIChatMO+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "VIChatMO+CoreDataProperties.swift"; path = "Core Data Objects/VIChatMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CDA65F431B7A089700F832CA /* VIClientMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VIClientMO.swift; path = "Core Data Objects/VIClientMO.swift"; sourceTree = "<group>"; };
+		CDA65F431B7A089700F832CA /* VIClientMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = VIClientMO.swift; path = "Core Data Objects/VIClientMO.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CDA65F441B7A089700F832CA /* VIClientMO+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "VIClientMO+CoreDataProperties.swift"; path = "Core Data Objects/VIClientMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CDA65F451B7A089700F832CA /* VIGroupMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VIGroupMO.swift; path = "Core Data Objects/VIGroupMO.swift"; sourceTree = "<group>"; };
 		CDA65F461B7A089700F832CA /* VIGroupMO+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "VIGroupMO+CoreDataProperties.swift"; path = "Core Data Objects/VIGroupMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -235,7 +232,6 @@
 		CDB561531B74FABB002FC599 /* PreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PreferenceViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CDB990E81B664E5D00598C51 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		CDC174931B7102610081F6D4 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
-		CDC2EE941B6A412B00872623 /* VIChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIChat.swift; sourceTree = "<group>"; };
 		CDC2EE961B6A435800872623 /* VSXMPPRosterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSXMPPRosterDelegate.h; sourceTree = "<group>"; };
 		CDC2EE981B6A444D00872623 /* SWXMPPRoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWXMPPRoster.h; sourceTree = "<group>"; };
 		CDC2EE991B6A444D00872623 /* SWXMPPRoster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWXMPPRoster.mm; sourceTree = "<group>"; };
@@ -538,8 +534,6 @@
 				CDEE68A31B6545D800D00EC7 /* ViviInterface.h */,
 				CD5E6F251B64E6FD00E33502 /* VIClientManager.swift */,
 				CDA65F631B7A36AE00F832CA /* VIClientManager+CoreData.swift */,
-				CD4C3A481B6A7EBE00C283E6 /* VIChatListController.swift */,
-				CDC2EE941B6A412B00872623 /* VIChat.swift */,
 				CDA65F221B7A05BA00F832CA /* Core Data Objects */,
 				CD5E6F241B64E50700E33502 /* Protocols */,
 				CDEE68A51B6545D800D00EC7 /* Info.plist */,
@@ -935,7 +929,6 @@
 				CDA65F581B7A089700F832CA /* VIResourceMO+CoreDataProperties.swift in Sources */,
 				CDA65F511B7A089700F832CA /* VIClientMO.swift in Sources */,
 				CDA65F4D1B7A089700F832CA /* VIAccountMO.swift in Sources */,
-				CD4C3A491B6A7EBE00C283E6 /* VIChatListController.swift in Sources */,
 				CDA65F4E1B7A089700F832CA /* VIAccountMO+CoreDataProperties.swift in Sources */,
 				CDA65F551B7A089700F832CA /* VIMessageMO.swift in Sources */,
 				CDA65F571B7A089700F832CA /* VIResourceMO.swift in Sources */,
@@ -950,7 +943,6 @@
 				CDA65F4F1B7A089700F832CA /* VIChatMO.swift in Sources */,
 				CDEE68C01B65461600D00EC7 /* VIClientManagerProtocol.swift in Sources */,
 				CDA65F591B7A089700F832CA /* VIRosterMO.swift in Sources */,
-				CDC2EE951B6A412B00872623 /* VIChat.swift in Sources */,
 				CDA65F5A1B7A089700F832CA /* VIRosterMO+CoreDataProperties.swift in Sources */,
 				CDA65F641B7A36AE00F832CA /* VIClientManager+CoreData.swift in Sources */,
 			);

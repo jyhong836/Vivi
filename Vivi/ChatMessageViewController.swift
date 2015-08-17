@@ -48,9 +48,9 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     }
     
     func addChatObservers() {
-        chatWillSendObserver = notificationCenter.addObserverForName(VIChatListChatWillSendNotification, object: currentChat, queue: mainQueue, usingBlock: chatWillSendMessage)
-        chatDidSendObserver = notificationCenter.addObserverForName(VIChatListChatDidSendNotification, object: currentChat, queue: mainQueue, usingBlock: chatDidSendMessage)
-        chatDidReceiveObserver = notificationCenter.addObserverForName(VIChatListChatDidReceiveNotification, object: currentChat, queue: mainQueue, usingBlock: chatDidReceiveMessage)
+        chatWillSendObserver = notificationCenter.addObserverForName(VIClientChatWillSendMsgNotification, object: currentChat, queue: mainQueue, usingBlock: chatWillSendMessage)
+        chatDidSendObserver = notificationCenter.addObserverForName(VIClientChatDidSendMsgNotification, object: currentChat, queue: mainQueue, usingBlock: chatDidSendMessage)
+        chatDidReceiveObserver = notificationCenter.addObserverForName(VIClientChatDidReceiveMsgNotification, object: currentChat, queue: mainQueue, usingBlock: chatDidReceiveMessage)
     }
     
     func removeChatObservers() {

@@ -39,10 +39,10 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     
     override func viewWillAppear() {
         // set up notification ovbservers when view appears
-        newChatObserver = notificationCenter.addObserverForName(VIChatListChatDidAddNotification, object: nil, queue: mainQueue, usingBlock: newChatDidAdd)
-        chatWillSendObserver = notificationCenter.addObserverForName(VIChatListChatWillSendNotification, object: nil, queue: mainQueue, usingBlock: chatWillSendMessage)
-        chatDidSendObserver = notificationCenter.addObserverForName(VIChatListChatDidSendNotification, object: nil, queue: mainQueue, usingBlock: chatDidSendMessage)
-        chatDidReceiveObserver = notificationCenter.addObserverForName(VIChatListChatDidReceiveNotification, object: nil, queue: mainQueue, usingBlock: chatDidReceiveMessage)
+        newChatObserver = notificationCenter.addObserverForName(VIClientChatDidAddNotification, object: nil, queue: mainQueue, usingBlock: newChatDidAdd)
+        chatWillSendObserver = notificationCenter.addObserverForName(VIClientChatWillSendMsgNotification, object: nil, queue: mainQueue, usingBlock: chatWillSendMessage)
+        chatDidSendObserver = notificationCenter.addObserverForName(VIClientChatDidSendMsgNotification, object: nil, queue: mainQueue, usingBlock: chatDidSendMessage)
+        chatDidReceiveObserver = notificationCenter.addObserverForName(VIClientChatDidReceiveMsgNotification, object: nil, queue: mainQueue, usingBlock: chatDidReceiveMessage)
     }
     
     override func viewWillDisappear() {

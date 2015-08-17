@@ -10,20 +10,14 @@ import Foundation
 import CoreData
 import ViviSwiften
 
+// MARK: Chat list notificatons
+public let VIClientChatDidAddNotification = "VIClientChatDidAddNotification"
+public let VIClientChatWillSendMsgNotification = "VIClientChatWillSendMsgNotification"
+public let VIClientChatDidSendMsgNotification = "VIClientChatDidSendMsgNotification"
+public let VIClientChatDidReceiveMsgNotification = "VIClientChatDidReceiveMsgNotification"
+
 //@objc(Client)
 public class VIClientMO: NSManagedObject, VSChatListControllerProtocol {
-
-//    lazy var client: SWClient? = {
-//        guard self.account != nil else {
-//            NSLog("account is nil, when attempt to access client")
-//            abort()
-//        }
-//        guard self.password != nil else {
-//            NSLog("password is nil, when attempt to access client")
-//            abort()
-//        }
-//        return SWClient(account: SWAccount(accountName: self.account?.account.getAccountString()), password: self.password, eventLoop: VIClientManager.sharedClientManager.eventLoop)
-//    }()
     
     override public func awakeFromInsert() {
         self.enabled = NSNumber(bool: false)
@@ -81,7 +75,7 @@ public class VIClientMO: NSManagedObject, VSChatListControllerProtocol {
             newChat.buddy = buddyMO
             
             notificationCenter.postNotificationName(
-                VIChatListChatDidAddNotification, object: self, userInfo: ["index": 0])
+                VIClientChatDidAddNotification, object: self, userInfo: ["index": 0])
             
             return (newChat, true)
         }
@@ -118,7 +112,7 @@ public class VIClientMO: NSManagedObject, VSChatListControllerProtocol {
     public func clientWillSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!) -> AnyObject! {
         let (lastchat, oldIndex) = updateChatList(withBuddy: receiver)
         let newMessage = lastchat.addMessage(message, timestamp: date, direction: .WillTo)
-        notificationCenter.postNotificationName(VIChatListChatWillSendNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
+        notificationCenter.postNotificationName(VIClientChatWillSendMsgNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
         
         return newMessage
     }
@@ -131,7 +125,7 @@ public class VIClientMO: NSManagedObject, VSChatListControllerProtocol {
         let updatedIndex = lastchat.indexOfMessage(msgMO)
         let chatIndex: Int = (chats?.indexOfObject(lastchat))!
         
-        notificationCenter.postNotificationName(VIChatListChatDidSendNotification, object: lastchat, userInfo: ["chatIndex": chatIndex, "messageIndex": updatedIndex])
+        notificationCenter.postNotificationName(VIClientChatDidSendMsgNotification, object: lastchat, userInfo: ["chatIndex": chatIndex, "messageIndex": updatedIndex])
     }
     
     public func clientFailSendMessage(message: AnyObject!, error: VSClientErrorType) {
@@ -142,13 +136,13 @@ public class VIClientMO: NSManagedObject, VSChatListControllerProtocol {
         let updatedIndex = lastchat.indexOfMessage(msgMO)
         let chatIndex: Int = (chats?.indexOfObject(lastchat))!
         
-        notificationCenter.postNotificationName(VIChatListChatDidSendNotification, object: lastchat, userInfo: ["chatIndex": chatIndex, "messageIndex": updatedIndex, "error": error.rawValue])
+        notificationCenter.postNotificationName(VIClientChatDidSendMsgNotification, object: lastchat, userInfo: ["chatIndex": chatIndex, "messageIndex": updatedIndex, "error": error.rawValue])
     }
     
     public func clientDidReceivedMessageFrom(sender: SWAccount!, message: String!, timestamp date: NSDate!) {
         let (lastchat, oldIndex) = updateChatList(withBuddy: sender)
         lastchat.addMessage(message, timestamp: date, direction: .From)
-        notificationCenter.postNotificationName(VIChatListChatDidReceiveNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
+        notificationCenter.postNotificationName(VIClientChatDidReceiveMsgNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
     }
     
 }

@@ -9,6 +9,10 @@
 import Foundation
 import CoreData
 
+public enum VIChatMessageDirection: Int {
+    case From, To, WillTo, FailTo, None
+}
+
 //@objc(Chat)
 public class VIChatMO: NSManagedObject {
 
@@ -42,10 +46,6 @@ public class VIChatMO: NSManagedObject {
         
         return message
     }
-    
-//    /// Update an existed message with new direction.
-//    func updateMessage(message: VIMessageMO, newDirection direction: VIChatMessageDirection) {
-//    }
     
     public func indexOfMessage(message: VIMessageMO) -> Int {
         return (messages?.indexOfObject(message))!
