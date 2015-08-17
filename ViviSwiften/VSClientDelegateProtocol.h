@@ -1,5 +1,5 @@
 //
-//  fuck.h
+//  VSClientDelegate.h
 //  Vivi
 //
 //  Created by Junyuan Hong on 7/22/15.

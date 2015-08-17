@@ -127,6 +127,7 @@ void SWClientAdapter::onPresenceReceivedSlot(Presence::ref pres)
                                   currentStatus: status];
 }
 
+// MARK: Roster slots
 
 void SWClientAdapter::rosterOnJIDAddedSlot(const JID& jid)
 {

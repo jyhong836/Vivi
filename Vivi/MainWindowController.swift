@@ -15,7 +15,8 @@ class MainWindowController: NSWindowController {
     
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
         window?.titlebarAppearsTransparent = true
-        window?.titleVisibility = NSWindowTitleVisibility.Hidden
+        window!.title = ""
+//        window?.titleVisibility = NSWindowTitleVisibility.Hidden
 //        window?.movableByWindowBackground = true
 //        window?.movable = true
     }

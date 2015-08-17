@@ -24,6 +24,9 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
     var currentClient: SWClient? = nil {
         didSet {
             sessionViewController?.currentClient = currentClient
+            if viewLoaded {
+                updateButtonStates()
+            }
         }
     }
     
@@ -44,6 +47,8 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             self.deliverNewMessageNotification(clientMO.chatAtIndex(0)!)
         })
         initUserNotification()
+        
+        updateButtonStates()
     }
 
     override var representedObject: AnyObject? {
@@ -161,6 +166,38 @@ class MainViewController: NSViewController, VSClientDelegate, VSXMPPRosterDelega
             currentClient?.sendMessageToAccount(SWAccount(accountName: userinfo["account"] as! String),
                 message: notification.response?.string)
         }
+    }
+    
+    // MARK: Buttons
+    
+    @IBOutlet weak var avaterButton: NSButton!
+    @IBOutlet weak var connectButton: NSButton!
+    @IBOutlet weak var rosterButton: NSButton!
+    
+    private func updateButtonStates() {
+        if currentClient != nil {
+            avaterButton.enabled = true
+            connectButton.enabled = true
+            rosterButton.enabled = true
+        } else {
+            avaterButton.enabled = false
+            connectButton.enabled = false
+            rosterButton.enabled = false
+        }
+    }
+    
+    @IBAction func loginButtonClicked(sender: AnyObject) {
+        if let c = currentClient {
+            c.connectWithHandler({ () -> Void in
+                // FIXME: Here need error parameter
+            })
+        }
+    }
+    
+    var rosterViewCollapse: (()->Void)?
+    
+    @IBAction func rosterButtonClicked(sender: NSButton) {
+        rosterViewCollapse?()
     }
 }
 

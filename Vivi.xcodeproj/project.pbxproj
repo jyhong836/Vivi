@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CD0932181B5F9757007ACB22 /* VSClientDelegateProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0932171B5F9757007ACB22 /* VSClientDelegateProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CD156DDB1B81F40E00EFC06F /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */; };
+		CD156DDF1B81FA8600EFC06F /* RosterCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DDD1B81FA8600EFC06F /* RosterCollectionViewItem.swift */; };
+		CD156DE41B81FB0900EFC06F /* RosterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DE31B81FB0900EFC06F /* RosterViewController.swift */; };
 		CD36855C1B5E659500DFC78A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD36855B1B5E659500DFC78A /* AppDelegate.swift */; };
 		CD36855E1B5E659500DFC78A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD36855D1B5E659500DFC78A /* MainViewController.swift */; };
 		CD3685601B5E659500DFC78A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD36855F1B5E659500DFC78A /* Assets.xcassets */; };
@@ -17,7 +20,6 @@
 		CD4C3A471B6A77EC00C283E6 /* VSChatListControllerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CD4C3A461B6A77EC00C283E6 /* VSChatListControllerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD4C3A4B1B6A81DB00C283E6 /* VIChatDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A4A1B6A81DB00C283E6 /* VIChatDelegate.swift */; };
 		CD4C3A541B6B489B00C283E6 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A531B6B489B00C283E6 /* SessionViewController.swift */; };
-		CD4C3A581B6BAA2B00C283E6 /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A571B6BAA2B00C283E6 /* ClientViewController.swift */; };
 		CD4C3A5A1B6BBBCC00C283E6 /* VIChatListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A591B6BBBCC00C283E6 /* VIChatListControllerTests.swift */; };
 		CD4C3A5C1B6BC43D00C283E6 /* SWClientFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A5B1B6BC43D00C283E6 /* SWClientFactory.swift */; };
 		CD4C3A5D1B6BC5E400C283E6 /* SWClientFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A5B1B6BC43D00C283E6 /* SWClientFactory.swift */; };
@@ -176,6 +178,9 @@
 
 /* Begin PBXFileReference section */
 		CD0932171B5F9757007ACB22 /* VSClientDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSClientDelegateProtocol.h; sourceTree = "<group>"; };
+		CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
+		CD156DDD1B81FA8600EFC06F /* RosterCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RosterCollectionViewItem.swift; sourceTree = "<group>"; };
+		CD156DE31B81FB0900EFC06F /* RosterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RosterViewController.swift; path = "View Controllers/RosterViewController.swift"; sourceTree = "<group>"; };
 		CD3685581B5E659500DFC78A /* Vivi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vivi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD36855B1B5E659500DFC78A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD36855D1B5E659500DFC78A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MainViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -191,7 +196,6 @@
 		CD4C3A461B6A77EC00C283E6 /* VSChatListControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSChatListControllerProtocol.h; sourceTree = "<group>"; };
 		CD4C3A4A1B6A81DB00C283E6 /* VIChatDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VIChatDelegate.swift; path = ../ViviInterface/Protocols/VIChatDelegate.swift; sourceTree = "<group>"; };
 		CD4C3A531B6B489B00C283E6 /* SessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SessionViewController.swift; path = "View Controllers/SessionViewController.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		CD4C3A571B6BAA2B00C283E6 /* ClientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
 		CD4C3A591B6BBBCC00C283E6 /* VIChatListControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIChatListControllerTests.swift; sourceTree = "<group>"; };
 		CD4C3A5B1B6BC43D00C283E6 /* SWClientFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWClientFactory.swift; sourceTree = "<group>"; };
 		CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSwiften.3.0.dylib; path = "Libraries and Frameworks/lib/libSwiften.3.0.dylib"; sourceTree = "<group>"; };
@@ -374,6 +378,9 @@
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
 				CD3685641B5E659500DFC78A /* Info.plist */,
+				CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */,
+				CD156DE31B81FB0900EFC06F /* RosterViewController.swift */,
+				CD156DDD1B81FA8600EFC06F /* RosterCollectionViewItem.swift */,
 			);
 			path = Vivi;
 			sourceTree = "<group>";
@@ -461,7 +468,6 @@
 			isa = PBXGroup;
 			children = (
 				CD4C3A531B6B489B00C283E6 /* SessionViewController.swift */,
-				CD4C3A571B6BAA2B00C283E6 /* ClientViewController.swift */,
 			);
 			name = "Session View";
 			sourceTree = "<group>";
@@ -868,6 +874,7 @@
 				CD60BA511B6DB30F008E077A /* MessageTableCellView.swift in Sources */,
 				CD8C647B1B6BE0F700945529 /* AvaterButton.swift in Sources */,
 				CDC174941B7102610081F6D4 /* MainWindowController.swift in Sources */,
+				CD156DE41B81FB0900EFC06F /* RosterViewController.swift in Sources */,
 				CD36855E1B5E659500DFC78A /* MainViewController.swift in Sources */,
 				CD8C647D1B6C6C3B00945529 /* SessionTableCellView.swift in Sources */,
 				CD8C647F1B6C83D200945529 /* InputViewController.swift in Sources */,
@@ -875,10 +882,11 @@
 				CD4C3A5E1B6BC5F000C283E6 /* SWClientFactory.swift in Sources */,
 				CDA65F671B7AE83E00F832CA /* AddAccountViewController.swift in Sources */,
 				CD36855C1B5E659500DFC78A /* AppDelegate.swift in Sources */,
+				CD156DDB1B81F40E00EFC06F /* MainSplitViewController.swift in Sources */,
 				CDB561541B74FABB002FC599 /* PreferenceViewController.swift in Sources */,
 				CD4C3A541B6B489B00C283E6 /* SessionViewController.swift in Sources */,
+				CD156DDF1B81FA8600EFC06F /* RosterCollectionViewItem.swift in Sources */,
 				CD8C64811B6C84E900945529 /* ChatViewController.swift in Sources */,
-				CD4C3A581B6BAA2B00C283E6 /* ClientViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

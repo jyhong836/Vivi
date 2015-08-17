@@ -14,11 +14,11 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     
     @IBOutlet weak var sessionTableView: NSTableView!
     
-    var clientViewController: ClientViewController?
+//    var clientViewController: ClientViewController?
     
     var currentClient: SWClient? = nil {
         didSet {
-            clientViewController?.currentClient = currentClient
+//            clientViewController?.currentClient = currentClient
             NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
                 self.sessionTableView.reloadData()
             }
@@ -57,12 +57,12 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         chatDidReceiveObserver = nil
     }
     
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ClientViewSegue" {
-            clientViewController = segue.destinationController as? ClientViewController
-            clientViewController?.currentClient = currentClient
-        }
-    }
+//    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "ClientViewSegue" {
+//            clientViewController = segue.destinationController as? ClientViewController
+//            clientViewController?.currentClient = currentClient
+//        }
+//    }
     
     // MARK: Implementations for NSTableViewDataSource
     
