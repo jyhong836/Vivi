@@ -36,7 +36,7 @@ using namespace Swift;
 - (NSSet<NSString*>*)getGroups
 {
     std::set<std::string> stdgroups = roster->getGroups();
-    NSMutableArray<NSString*>* groupArray = [NSMutableArray alloc];
+    NSMutableArray<NSString*>* groupArray = [[NSMutableArray alloc] init];
     for (auto &groupname: stdgroups) {
         [groupArray addObject: std_str2NSString(groupname)];
     }
@@ -44,12 +44,13 @@ using namespace Swift;
     return groups;
 }
 
-- (NSArray<SWRosterItem*>*)getItems
+- (NSMutableArray<SWRosterItem*>*)getItems
 {
-    NSMutableArray<SWRosterItem*>* itemArray = [NSMutableArray alloc];
+    NSMutableArray<SWRosterItem*>* itemArray = [[NSMutableArray alloc] init];
     for (auto &item: roster->getItems()) {
         [itemArray addObject: [[SWRosterItem alloc] initWithRosterItem:&item]];
     }
+//    NSArray* retArray = [itemArray copy];
     return itemArray;
 }
 

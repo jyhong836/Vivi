@@ -20,14 +20,14 @@ public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
     // MARK: Conform VSXMPPRosterDelegate
     
     public func rosterDidInitialize(roster: SWXMPPRoster!) {
-        let items = roster.getItems()
+        let items = roster.getItems() as NSArray as! [SWRosterItem!]
         for groupname in roster.getGroups() {
             addGroup(groupname)
         }
         for item in items {
             let newAccount = VIAccountMO.addAccount(item.account, managedObjectContext: self.managedObjectContext!)
-            for groupname in item.groups {
-                let (groupMO, _) = addGroup(groupname as! String)
+            for groupname in (item.groups as NSArray as! [String!]) {
+                let (groupMO, _) = addGroup(groupname)
                 newAccount.addGroup(groupMO)
             }
         }

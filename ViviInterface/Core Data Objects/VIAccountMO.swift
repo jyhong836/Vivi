@@ -38,7 +38,7 @@ public class VIAccountMO: NSManagedObject {
     /// Get existed group.
     public static func getAccount(node: String, domain: String, managedObjectContext moc: NSManagedObjectContext) -> VIAccountMO? {
         let fetchRequest = NSFetchRequest(entityName: "Account")
-        fetchRequest.predicate = NSPredicate(format: "(node = \(node) AND (domain = \(domain))")
+        fetchRequest.predicate = NSPredicate(format: "(node == %@) AND (domain == %@)", node, domain)
         do {
             let fetchedAccounts = try moc.executeFetchRequest(fetchRequest) as! [VIAccountMO]
             guard fetchedAccounts.count <= 1 else {

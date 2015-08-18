@@ -25,6 +25,7 @@ using namespace Swift;
 //        item = anItem;
         name = std_str2NSString(item->getName());
         account = [[SWAccount alloc] initWithAccountName: std_str2NSString(item->getJID().toString())];
+        groups = [[NSMutableArray alloc] init];
         for (auto &group: item->getGroups()) {
             [groups addObject: std_str2NSString(group)];
         }

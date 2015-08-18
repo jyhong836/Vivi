@@ -28,6 +28,6 @@ namespace Swift {
 
 - (void)printItems;
 - (NSSet<NSString*>*)getGroups;
-- (NSArray<SWRosterItem*>*)getItems;
+- (NSMutableArray<SWRosterItem*>*)getItems;
 
 @end
