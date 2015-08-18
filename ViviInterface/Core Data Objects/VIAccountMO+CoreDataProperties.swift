@@ -1,8 +1,8 @@
 //
-//  Account+CoreDataProperties.swift
+//  VIAccountMO+CoreDataProperties.swift
 //  Vivi
 //
-//  Created by Junyuan Hong on 8/11/15.
+//  Created by Junyuan Hong on 8/18/15.
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 //  Delete this file and regenerate it using "Create NSManagedObject Subclass…"
@@ -12,13 +12,12 @@
 import Foundation
 import CoreData
 
-public extension VIAccountMO {
+extension VIAccountMO {
 
     @NSManaged var domain: String?
     @NSManaged var node: String?
-    @NSManaged var chat: NSManagedObject?
-    @NSManaged var client: NSManagedObject?
-    @NSManaged var group: NSManagedObject?
+    @NSManaged var chat: VIChatMO?
+    @NSManaged var groups: NSSet?
     @NSManaged var resources: NSSet?
 
 }

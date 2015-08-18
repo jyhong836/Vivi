@@ -14,6 +14,11 @@ import ViviSwiften
 //@objc(Account)
 public class VIAccountMO: NSManagedObject {
     
+    public override func awakeFromInsert() {
+        groups = NSSet()
+        resources = NSSet()
+    }
+    
     public var accountString: String {
         get {
             return "\(node!)@\(domain!)"
@@ -27,6 +32,80 @@ public class VIAccountMO: NSManagedObject {
         set {
             self.node = newValue?.getNodeString()
             self.domain = newValue?.getDomainString()
+        }
+    }
+    
+    /// Get existed group.
+    public static func getAccount(node: String, domain: String, managedObjectContext moc: NSManagedObjectContext) -> VIAccountMO? {
+        let fetchRequest = NSFetchRequest(entityName: "Account")
+        fetchRequest.predicate = NSPredicate(format: "(node = \(node) AND (domain = \(domain))")
+        do {
+            let fetchedAccounts = try moc.executeFetchRequest(fetchRequest) as! [VIAccountMO]
+            guard fetchedAccounts.count <= 1 else {
+                fatalError("More than one account with the same node and domain.")
+            }
+            if fetchedAccounts.count == 1 {
+                return fetchedAccounts[0]
+            } else {
+                return nil
+            }
+        } catch {
+            fatalError("Fail to fetch account, error: \(error)")
+        }
+    }
+    
+    /// Add new account or get existed account.
+    public static func addAccount(node: String, domain: String, managedObjectContext moc: NSManagedObjectContext) -> VIAccountMO {
+        if let existedAccount = getAccount(node, domain: domain, managedObjectContext: moc) {
+            return existedAccount
+        } else {
+            let account = NSEntityDescription.insertNewObjectForEntityForName("Account", inManagedObjectContext: moc) as! VIAccountMO
+            account.node = node
+            account.domain = domain
+            do {
+                try moc.save()
+            } catch {
+                fatalError("Fail to save context: \(error)")
+            }
+            return account
+        }
+    }
+    
+    /// Add new account or get existed account.
+    public static func addAccount(swaccount: SWAccount, managedObjectContext moc: NSManagedObjectContext) -> VIAccountMO {
+        if let existedAccount = getAccount(swaccount.getNodeString(), domain: swaccount.getDomainString(), managedObjectContext: moc) {
+            return existedAccount
+        } else {
+            let accountMO = NSEntityDescription.insertNewObjectForEntityForName("Account", inManagedObjectContext: moc) as! VIAccountMO
+            accountMO.swaccount = swaccount
+            do {
+                try moc.save()
+            } catch {
+                fatalError("Fail to save context: \(error)")
+            }
+            return accountMO
+        }
+    }
+    
+    /// Return true if exist group.
+    func existGroup(newGroup: VIGroupMO) -> Bool {
+        for element in self.groups! {
+            let group = element as! VIGroupMO
+            if (group.name == newGroup.name) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    /// Return true, if add new group to account.
+    func addGroup(newGroup: VIGroupMO) -> Bool {
+        if existGroup(newGroup) {
+            return false
+        } else {
+            let groups = self.mutableSetValueForKey("groups")
+            groups.addObject(newGroup)
+            return true
         }
     }
 

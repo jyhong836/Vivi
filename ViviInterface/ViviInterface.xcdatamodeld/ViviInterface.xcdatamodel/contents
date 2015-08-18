@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8166.2" systemVersion="14E46" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8175.2" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
     <entity name="Account" representedClassName=".VIAccountMO" syncable="YES">
         <attribute name="domain" attributeType="String" syncable="YES"/>
         <attribute name="node" attributeType="String" indexed="YES" syncable="YES"/>
         <relationship name="chat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chat" inverseName="buddy" inverseEntity="Chat" syncable="YES"/>
-        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="buddies" inverseEntity="Group" syncable="YES"/>
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Group" inverseName="buddies" inverseEntity="Group" syncable="YES"/>
         <relationship name="resources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Resource" inverseName="account" inverseEntity="Resource" syncable="YES"/>
     </entity>
     <entity name="Chat" representedClassName=".VIChatMO" syncable="YES">
@@ -25,7 +25,7 @@
     </entity>
     <entity name="Group" representedClassName=".VIGroupMO" syncable="YES">
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
-        <relationship name="buddies" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Account" inverseName="group" inverseEntity="Account" syncable="YES"/>
+        <relationship name="buddies" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Account" inverseName="groups" inverseEntity="Account" syncable="YES"/>
         <relationship name="roster" maxCount="1" deletionRule="Nullify" destinationEntity="Roster" inverseName="groups" inverseEntity="Roster" syncable="YES"/>
     </entity>
     <entity name="Message" representedClassName=".VIMessageMO" syncable="YES">
@@ -44,10 +44,10 @@
     </entity>
     <fetchRequest name="RecentContact" entity="Account"/>
     <elements>
-        <element name="Account" positionX="0" positionY="-216" width="128" height="120"/>
+        <element name="Account" positionX="0" positionY="-216" width="128" height="118"/>
         <element name="Chat" positionX="180" positionY="-378" width="128" height="120"/>
         <element name="Client" positionX="-20" positionY="-511" width="128" height="150"/>
-        <element name="Group" positionX="-387" positionY="-225" width="128" height="90"/>
+        <element name="Group" positionX="-387" positionY="-225" width="128" height="88"/>
         <element name="Message" positionX="385" positionY="-279" width="128" height="105"/>
         <element name="Resource" positionX="-288" positionY="-81" width="128" height="75"/>
         <element name="Roster" positionX="-191" positionY="-342" width="128" height="75"/>

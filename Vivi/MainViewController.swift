@@ -78,7 +78,7 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
     }
     
     func clientDidDisconnect(client: SWClient!, errorCode code: Int32) {
-        NSLog("client(\(client.account.getAccountString())) did disconnect, with errorcodr(\(code))")
+        NSLog("client(\(client.account.getAccountString())) did disconnect: (\(SWClientErrorType(rawValue: code)))")
     }
     
     func clientDidReceivePresence(client: SWClient!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow show: Int32, currentStatus status: String!) {

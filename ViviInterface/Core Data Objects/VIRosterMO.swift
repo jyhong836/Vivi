@@ -24,7 +24,13 @@ public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
         for groupname in roster.getGroups() {
             addGroup(groupname)
         }
-        //TODO: add items to group
+        for item in items {
+            let newAccount = VIAccountMO.addAccount(item.account, managedObjectContext: self.managedObjectContext!)
+            for groupname in item.groups {
+                let (groupMO, _) = addGroup(groupname as! String)
+                newAccount.addGroup(groupMO)
+            }
+        }
         NSLog("roster did initialize")
     }
     
@@ -34,6 +40,7 @@ public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
     
     // MARK: Roster access methods
     
+    /// Get existed group.
     func getGroup(name: String) -> VIGroupMO? {
         for element in self.groups! {
             let group = element as! VIGroupMO
@@ -44,15 +51,16 @@ public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
         return nil
     }
     
+    /// Add new group or get existed group.
     func addGroup(newGroupName: String) -> (VIGroupMO, isNew: Bool) {
         if let group = getGroup(newGroupName) {
-            return (group, true)
+            return (group, false)
         } else {
             let moc = self.managedObjectContext
             let group = NSEntityDescription.insertNewObjectForEntityForName("Group", inManagedObjectContext: moc!) as! VIGroupMO
             group.name = newGroupName
             group.roster = self
-            return (group, false)
+            return (group, true)
         }
     }
     

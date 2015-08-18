@@ -25,6 +25,7 @@ public class VIClientMO: NSManagedObject, VSChatListControllerProtocol {
         
         let moc = self.managedObjectContext!
         self.roster = NSEntityDescription.insertNewObjectForEntityForName("Roster", inManagedObjectContext: moc) as? VIRosterMO
+        roster?.client = self
     }
     
     // MARK: Chat selected delegate

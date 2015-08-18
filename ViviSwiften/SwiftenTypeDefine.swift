@@ -24,3 +24,14 @@ let SWPresenceShowTypeStringDict: [SWPresenceShowType: String] = [.Online: "Onli
 public func parsePresenceShowType(type: SWPresenceShowType) -> String {
     return SWPresenceShowTypeStringDict[type]!
 }
+
+public enum SWClientErrorType: Int32 {
+    case UnknownError, DomainNameResolveError, ConnectionError, ConnectionReadError
+    case ConnectionWriteError, XMLError, AuthenticationFailedError, CompressionFailedError
+    case ServerVerificationFailedError, NoSupportedAuthMechanismsError, UnexpectedElementError, ResourceBindError
+    case SessionStartError, StreamError, TLSError, ClientCertificateLoadError
+    case ClientCertificateError, CertificateCardRemoved, UnknownCertificateError, CertificateExpiredError
+    case CertificateNotYetValidError, CertificateSelfSignedError, CertificateRejectedError, CertificateUntrustedError
+    case InvalidCertificatePurposeError, CertificatePathLengthExceededError, InvalidCertificateSignatureError, InvalidCAError
+    case InvalidServerIdentityError, RevokedError, RevocationCheckFailedError
+}
