@@ -24,14 +24,17 @@ public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
         for groupname in roster.getGroups() {
             addGroup(groupname)
         }
-        for item in items {
-            let newAccount = VIAccountMO.addAccount(item.account, managedObjectContext: self.managedObjectContext!)
-            for groupname in (item.groups as NSArray as! [String!]) {
-                let (groupMO, _) = addGroup(groupname)
-                newAccount.addGroup(groupMO)
+        do {
+            for item in items {
+                let newAccount = try VIAccountMO.addAccount(item.account, managedObjectContext: self.managedObjectContext!)
+                for groupname in (item.groups as NSArray as! [String!]) {
+                    let (groupMO, _) = addGroup(groupname)
+                    newAccount.addGroup(groupMO)
+                }
             }
+        } catch {
+            fatalError("Fail to add account: \(error)")
         }
-        NSLog("roster did initialize")
     }
     
     public func roster(roster: SWXMPPRoster!, didAddAccount account: SWAccount!) {

@@ -24,7 +24,7 @@ class CoreDataTests: XCTestCase {
         do {
             try psc.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
             moc = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-            moc?.persistentStoreCoordinator = psc
+            moc!.persistentStoreCoordinator = psc
         } catch {
             fatalError("Fail to add persistent store with type(NSInMemoryStoreType): \(error)")
         }
@@ -37,7 +37,39 @@ class CoreDataTests: XCTestCase {
     }
     
     func testInsertAccount() {
+        var hasCatchError = false
+        var testnode = "te#st.no@de"
+        var testdomain = "test.domain"
+        do {
+            try VIAccountMO.addAccount(testnode, domain: testdomain, managedObjectContext: moc!)
+        } catch {
+            hasCatchError = true
+        }
+        XCTAssertTrue(hasCatchError, "Not catch invalid error")
+        XCTAssertNil(VIAccountMO.getAccount(testnode, domain: testdomain, managedObjectContext: moc!), "entity should have been removed.")
         
+        hasCatchError = false
+        testdomain = "test.dom#ain"
+        do {
+            try VIAccountMO.addAccount(testnode, domain: testdomain, managedObjectContext: moc!)
+        } catch {
+            hasCatchError = true
+        }
+        XCTAssertTrue(hasCatchError, "Not catch invalid error")
+        
+        testnode = "test.node"
+        testdomain = "test.domain"
+        do {
+            try VIAccountMO.addAccount(testnode, domain: testdomain, managedObjectContext: moc!)
+        } catch {
+            XCTFail("catch unexpected error: \(error)")
+        }
+    }
+    
+    func testGetAccount() {
+        let testnode = "te#st.no@de"
+        let testdomain = "test.domain"
+        XCTAssertNil(VIAccountMO.getAccount(testnode, domain: testdomain, managedObjectContext: moc!), "get not existed account.")
     }
 
 }

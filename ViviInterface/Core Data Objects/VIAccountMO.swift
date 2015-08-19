@@ -54,8 +54,10 @@ public class VIAccountMO: NSManagedObject {
         }
     }
     
-    /// Add new account or get existed account.
-    public static func addAccount(node: String, domain: String, managedObjectContext moc: NSManagedObjectContext) -> VIAccountMO {
+    /// Add new account or get existed account. Entity will be
+    /// saved to persistent store immediately, throw relevant error
+    /// when failed and delete the entity from managedObjectContext.
+    public static func addAccount(node: String, domain: String, managedObjectContext moc: NSManagedObjectContext) throws -> VIAccountMO {
         if let existedAccount = getAccount(node, domain: domain, managedObjectContext: moc) {
             return existedAccount
         } else {
@@ -65,26 +67,26 @@ public class VIAccountMO: NSManagedObject {
             do {
                 try moc.save()
             } catch {
-                fatalError("Fail to save context: \(error)")
+                moc.deleteObject(account)
+                throw error
             }
             return account
         }
     }
     
     /// Add new account or get existed account.
-    public static func addAccount(swaccount: SWAccount, managedObjectContext moc: NSManagedObjectContext) -> VIAccountMO {
-        if let existedAccount = getAccount(swaccount.getNodeString(), domain: swaccount.getDomainString(), managedObjectContext: moc) {
-            return existedAccount
-        } else {
-            let accountMO = NSEntityDescription.insertNewObjectForEntityForName("Account", inManagedObjectContext: moc) as! VIAccountMO
-            accountMO.swaccount = swaccount
-            do {
-                try moc.save()
-            } catch {
-                fatalError("Fail to save context: \(error)")
-            }
-            return accountMO
+    public static func addAccount(swaccount: SWAccount, managedObjectContext moc: NSManagedObjectContext) throws -> VIAccountMO {
+        return try addAccount(swaccount.getNodeString(), domain: swaccount.getDomainString(), managedObjectContext: moc)
+    }
+    
+    public static func removeAccount(node: String, domain: String, managedObjectContext moc: NSManagedObjectContext) {
+        if let account = getAccount(node, domain: domain, managedObjectContext: moc) {
+            moc.deleteObject(account)
         }
+    }
+    
+    public static func removeAccount(swaccount: SWAccount, managedObjectContext moc: NSManagedObjectContext) {
+        removeAccount(swaccount.getNodeString(), domain: swaccount.getDomainString(), managedObjectContext: moc)
     }
     
     /// Return true if exist group.
@@ -108,5 +110,5 @@ public class VIAccountMO: NSManagedObject {
             return true
         }
     }
-
+    
 }

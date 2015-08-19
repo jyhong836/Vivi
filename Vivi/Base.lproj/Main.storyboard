@@ -694,15 +694,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HO1-ck-TIU" userLabel="Account Text Field">
+                            <textField verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HO1-ck-TIU" userLabel="Account Text Field">
                                 <rect key="frame" x="310" y="184" width="150" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="node@domain" drawsBackground="YES" id="tk7-Bo-LuX">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="node@domain" drawsBackground="YES" usesSingleLineMode="YES" id="tk7-Bo-LuX">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <allowedInputSourceLocales>
+                                        <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                    </allowedInputSourceLocales>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="yWC-lE-4XK" name="value" keyPath="selection.accountname" id="Lmc-ix-bmo"/>
+                                    <binding destination="yWC-lE-4XK" name="value" keyPath="selection.accountname" id="buV-B3-7M4">
+                                        <dictionary key="options">
+                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kKz-aB-H4E">
@@ -715,7 +722,7 @@
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nU6-Y0-eWB" userLabel="Domain Text Field">
                                 <rect key="frame" x="310" y="116" width="150" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Auto" drawsBackground="YES" id="fCn-hw-PwY">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Auto" drawsBackground="YES" usesSingleLineMode="YES" id="fCn-hw-PwY">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -724,12 +731,16 @@
                                     </allowedInputSourceLocales>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="yWC-lE-4XK" name="value" keyPath="selection.hostname" id="mWZ-gi-eyx"/>
+                                    <binding destination="yWC-lE-4XK" name="value" keyPath="selection.hostname" id="6cV-fa-4Mt">
+                                        <dictionary key="options">
+                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lqd-01-8gE" userLabel="Port Text Field">
                                 <rect key="frame" x="310" y="82" width="150" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Auto" drawsBackground="YES" id="dX3-2w-39t">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Auto" drawsBackground="YES" usesSingleLineMode="YES" id="dX3-2w-39t">
                                     <numberFormatter key="formatter" formatterBehavior="default10_4" localizesFormat="NO" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" id="mTh-Cf-Leq">
                                         <real key="minimum" value="1"/>
                                         <real key="maximum" value="65536"/>
@@ -737,9 +748,16 @@
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <allowedInputSourceLocales>
+                                        <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                    </allowedInputSourceLocales>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="yWC-lE-4XK" name="value" keyPath="selection.port" id="jNi-1R-PMA"/>
+                                    <binding destination="yWC-lE-4XK" name="value" keyPath="selection.port" id="dRg-qy-LpR">
+                                        <dictionary key="options">
+                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sgK-Ix-E3T">
@@ -769,7 +787,11 @@
                                     </allowedInputSourceLocales>
                                 </secureTextFieldCell>
                                 <connections>
-                                    <binding destination="yWC-lE-4XK" name="value" keyPath="selection.password" id="lOj-Qk-Kzg"/>
+                                    <binding destination="yWC-lE-4XK" name="value" keyPath="selection.password" id="Wez-6g-V00">
+                                        <dictionary key="options">
+                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </secureTextField>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6W8-sk-gta">
