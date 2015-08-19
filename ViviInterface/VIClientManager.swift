@@ -33,7 +33,7 @@ public class VIClientManager: VIClientManagerProtocol {
     
     /// CoreData ManagedObjectContext. Assigne it when need to use ViviInterface core
     /// model.
-    public weak var managedObjectContext: NSManagedObjectContext?
+    public lazy var managedObjectContext: NSManagedObjectContext? = VICoreDataController.shared.managedObjectContext
     
     /// Shared client manager.
     public static let sharedClientManager: VIClientManager = {

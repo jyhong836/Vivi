@@ -7,11 +7,12 @@
 //
 
 import Cocoa
+import ViviInterface
 
 class RosterViewController: NSViewController {
     
     weak var managedObjectContext: NSManagedObjectContext! = {
-        return (NSApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        return VICoreDataController.shared.managedObjectContext
         }()
 
     @IBOutlet weak var collectionView: NSCollectionView!

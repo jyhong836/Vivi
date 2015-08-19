@@ -25,7 +25,7 @@ class PreferenceViewController: NSViewController, AddAccountViewControllerDelega
     @IBOutlet var clientArrayController: NSArrayController!
     
     weak var managedObjectContext: NSManagedObjectContext! = {
-        return (NSApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        return VICoreDataController.shared.managedObjectContext
     }()
     
     override func viewDidLoad() {
