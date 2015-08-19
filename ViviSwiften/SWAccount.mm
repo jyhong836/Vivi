@@ -69,9 +69,17 @@ using namespace Swift;
     [resources addObject: resource];
 }
 
+/*!
+ * Set used resource index.
+ * The default resource index is -1, which means there is
+ * no resource used.
+ *
+ * Important: the index should between 0(include) and 
+ * resources count, or will cause an runtime assert.
+ */
 - (void)setResourceIndex: (int)index
 {
-    if (index > 0 && index < resources.count) {
+    if (index >= 0 && index < resources.count) {
         resourceIndex = index;
         JID *newjid = new JID(jid->getNode(), jid->getDomain(), NSString2std_str(resources[resourceIndex]));
         delete jid;
@@ -80,6 +88,11 @@ using namespace Swift;
         assert(false); // invalid index
 }
 
+/*!
+ * Set used resource index to defualt(-1).
+ * The default resource index is -1, which means there is
+ * no resource used.
+ */
 - (void)resetResourceIndex
 {
     resourceIndex = -1;

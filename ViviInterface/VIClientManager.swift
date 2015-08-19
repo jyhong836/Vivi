@@ -76,14 +76,14 @@ public class VIClientManager: VIClientManagerProtocol {
             throw VIClientManagerError.TooManyClients
         }
         
+        let swaccount = SWAccount(accountName: account)
         if clientList.contains( { (c: SWClient) -> Bool in
-            c.account.getAccountString() == account
+            c.account.getAccountString() == swaccount.getAccountString()
         }) {
             NSLog("attempt to add conflicted client: \(account)")
             throw VIClientManagerError.AccountNameConfilct
         }
         
-        let swaccount = SWAccount(accountName: account)
         if swaccount.valid {
             return swaccount
         } else {

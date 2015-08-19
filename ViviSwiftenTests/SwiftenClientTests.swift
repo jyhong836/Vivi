@@ -49,8 +49,10 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         let client1 = createClient(idx)
         let account = client1.account
         XCTAssertEqual(account.getAccountString(), "jyhong@xmpp.jp", "Account string \"\(account.getAccountString())\" not correspond to setting \"jyhong@xmpp.jp\"")
-        XCTAssertEqual(account.getFullAccountString(), clientAccountString[idx], "Account string does not correspond")
         XCTAssertEqual(account.getDomainString(), "xmpp.jp", "Account domain not correspond to setting \"xmpp.jp\"")
+        XCTAssertEqual(account.resources[0] as? String, "testResource", "Account resource not correspond")
+        XCTAssertEqual(account.getResourceString(), "", "Account resource not correspond")
+        account.setResourceIndex(0)
         XCTAssertEqual(account.getResourceString(), "testResource", "Account resource not correspond")
         XCTAssertEqual(account.getNodeString(), "jyhong", "Account resource  not correspond")
         // TODO: Add test for password
@@ -207,10 +209,10 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
     }
     
     func connectToClient(client: SWClient) {
-        let clientConnectExpectation = self.expectationWithDescription("Fail to connect to \(client.account.getFullAccountString())")
+        let clientConnectExpectation = self.expectationWithDescription("Fail to connect to \(client.account.getAccountString())")
         _clientDidConnect = {(c: SWClient!)->Void in
             XCTAssertEqual(c, client, "connected client not equal to expected")
-            print("connected to \(client.account.getFullAccountString())")
+            print("connected to \(client.account.getAccountString())")
             clientConnectExpectation.fulfill()
         }
         client.connect()
