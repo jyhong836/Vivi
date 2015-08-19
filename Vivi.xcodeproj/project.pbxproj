@@ -67,6 +67,7 @@
 		CDC322101B84D7080029CA91 /* VIRosterMOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC3220F1B84D7080029CA91 /* VIRosterMOTests.swift */; };
 		CDC322121B84D9930029CA91 /* VIClientMOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC322111B84D9930029CA91 /* VIClientMOTests.swift */; };
 		CDC322141B84DE1C0029CA91 /* VSClientControllerProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC322131B84DE1C0029CA91 /* VSClientControllerProtocolTests.swift */; };
+		CDC322161B8545530029CA91 /* PreferenceWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC322151B8545530029CA91 /* PreferenceWindow.storyboard */; };
 		CDC49E441B5FF91500F5E6E6 /* ViviSwiften.pch in Headers */ = {isa = PBXBuildFile; fileRef = CDC49E431B5FF91400F5E6E6 /* ViviSwiften.pch */; };
 		CDCDDBFC1B79A0D900FC7D0E /* ViviInterface.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDCDDBFA1B79A0D900FC7D0E /* ViviInterface.xcdatamodeld */; };
 		CDDA21D91B6CEEDD00A94F8C /* ViviSwiftenDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = CDDA21D81B6CEE9B00A94F8C /* ViviSwiftenDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -249,6 +250,7 @@
 		CDC3220F1B84D7080029CA91 /* VIRosterMOTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIRosterMOTests.swift; sourceTree = "<group>"; };
 		CDC322111B84D9930029CA91 /* VIClientMOTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIClientMOTests.swift; sourceTree = "<group>"; };
 		CDC322131B84DE1C0029CA91 /* VSClientControllerProtocolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSClientControllerProtocolTests.swift; sourceTree = "<group>"; };
+		CDC322151B8545530029CA91 /* PreferenceWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = PreferenceWindow.storyboard; path = ../PreferenceWindow.storyboard; sourceTree = "<group>"; };
 		CDC49E431B5FF91400F5E6E6 /* ViviSwiften.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViviSwiften.pch; sourceTree = "<group>"; };
 		CDCDDBFB1B79A0D900FC7D0E /* ViviInterface.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ViviInterface.xcdatamodel; sourceTree = "<group>"; };
 		CDDA21D81B6CEE9B00A94F8C /* ViviSwiftenDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViviSwiftenDefines.h; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				CD0F93C21B6DBEAF000817CB /* UI Assets */,
 				CD36855F1B5E659500DFC78A /* Assets.xcassets */,
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
+				CDC322151B8545530029CA91 /* PreferenceWindow.storyboard */,
 				CD3685641B5E659500DFC78A /* Info.plist */,
 				CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */,
 				CD156DE31B81FB0900EFC06F /* RosterViewController.swift */,
@@ -835,6 +838,7 @@
 			files = (
 				CD3685601B5E659500DFC78A /* Assets.xcassets in Resources */,
 				CD3685631B5E659500DFC78A /* Main.storyboard in Resources */,
+				CDC322161B8545530029CA91 /* PreferenceWindow.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
