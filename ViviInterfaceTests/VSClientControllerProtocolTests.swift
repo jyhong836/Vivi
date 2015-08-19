@@ -24,6 +24,7 @@ class VSClientControllerProtocolTests: XCTestCase {
     
     override func tearDown() {
         moc = nil
+        instance = nil
         
         super.tearDown()
     }
