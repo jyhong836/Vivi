@@ -40,6 +40,7 @@ using namespace Swift;
     for (auto &groupname: stdgroups) {
         [groupArray addObject: std_str2NSString(groupname)];
     }
+    // WARN: This may cause some error.
     NSSet<NSString*>* groups = [[NSSet alloc] initWithArray:groupArray];
     return groups;
 }

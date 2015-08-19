@@ -9,12 +9,16 @@
 import Cocoa
 
 class RosterViewController: NSViewController {
+    
+    weak var managedObjectContext: NSManagedObjectContext! = {
+        return (NSApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        }()
 
     @IBOutlet weak var collectionView: NSCollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        collectionView.itemPrototype = (self.storyboard?.instantiateControllerWithIdentifier("RosterCollectionItem") as! NSCollectionViewItem)
+        collectionView.itemPrototype = self.storyboard?.instantiateControllerWithIdentifier("RosterCollectionItem") as? NSCollectionViewItem
     }
     
 }

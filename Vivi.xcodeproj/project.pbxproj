@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		CD0932181B5F9757007ACB22 /* VSClientDelegateProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0932171B5F9757007ACB22 /* VSClientDelegateProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD156DDB1B81F40E00EFC06F /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */; };
-		CD156DDF1B81FA8600EFC06F /* RosterCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DDD1B81FA8600EFC06F /* RosterCollectionViewItem.swift */; };
 		CD156DE41B81FB0900EFC06F /* RosterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DE31B81FB0900EFC06F /* RosterViewController.swift */; };
 		CD156DE71B823B0600EFC06F /* SWRosterItem.h in Headers */ = {isa = PBXBuildFile; fileRef = CD156DE51B823B0600EFC06F /* SWRosterItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD156DE81B823B0600EFC06F /* SWRosterItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD156DE61B823B0600EFC06F /* SWRosterItem.mm */; };
@@ -181,7 +180,6 @@
 /* Begin PBXFileReference section */
 		CD0932171B5F9757007ACB22 /* VSClientDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSClientDelegateProtocol.h; sourceTree = "<group>"; };
 		CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
-		CD156DDD1B81FA8600EFC06F /* RosterCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RosterCollectionViewItem.swift; sourceTree = "<group>"; };
 		CD156DE31B81FB0900EFC06F /* RosterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RosterViewController.swift; path = "View Controllers/RosterViewController.swift"; sourceTree = "<group>"; };
 		CD156DE51B823B0600EFC06F /* SWRosterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRosterItem.h; sourceTree = "<group>"; };
 		CD156DE61B823B0600EFC06F /* SWRosterItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWRosterItem.mm; sourceTree = "<group>"; };
@@ -384,7 +382,6 @@
 				CD3685641B5E659500DFC78A /* Info.plist */,
 				CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */,
 				CD156DE31B81FB0900EFC06F /* RosterViewController.swift */,
-				CD156DDD1B81FA8600EFC06F /* RosterCollectionViewItem.swift */,
 			);
 			path = Vivi;
 			sourceTree = "<group>";
@@ -892,7 +889,6 @@
 				CD156DDB1B81F40E00EFC06F /* MainSplitViewController.swift in Sources */,
 				CDB561541B74FABB002FC599 /* PreferenceViewController.swift in Sources */,
 				CD4C3A541B6B489B00C283E6 /* SessionViewController.swift in Sources */,
-				CD156DDF1B81FA8600EFC06F /* RosterCollectionViewItem.swift in Sources */,
 				CD8C64811B6C84E900945529 /* ChatViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
