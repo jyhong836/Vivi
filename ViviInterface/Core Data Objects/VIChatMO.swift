@@ -18,7 +18,7 @@ public class VIChatMO: NSManagedObject {
 
     public override func awakeFromInsert() {
         self.createdtime = NSDate()
-        self.updatedtime = NSDate()
+        self.updatedtime = self.createdtime
         self.messages = NSOrderedSet()
     }
     
