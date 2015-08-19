@@ -71,7 +71,7 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
         }
     }
     
-    // MARK: Implementations for VSClientDelegate
+    // MARK: - Implementations for VSClientDelegate
     
     func clientDidConnect(client: SWClient!) {
         NSLog("client(\(client.account.getAccountString())) did connect")
@@ -89,14 +89,14 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
         NSLog("client(\(client.account.getAccountString())) did receive message from \(account.getAccountString()): \(content)")
     }
     
-    // MARK: Implementations for VIChatDelegate
+    // MARK: - Implementations for VIChatDelegate
     
     func chatIsSelected(chat: VIChatMO) {
         chatViewController?.currentChat = chat
         chatViewController?.view.hidden = false
     }
     
-    // MARK: Implement VIClientManagerDelegate
+    // MARK: - Implement VIClientManagerDelegate
     func managerDidAddClient(client: SWClient?) {
         // FIXME: The new client should not be the currentClient in multi-client situation.
         if let c = client {

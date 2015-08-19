@@ -10,14 +10,14 @@ import Foundation
 import CoreData
 import ViviSwiften
 
-// MARK: Chat list notificatons
+// MARK: Client chat notificatons
 public let VIClientChatDidAddNotification = "VIClientChatDidAddNotification"
 public let VIClientChatWillSendMsgNotification = "VIClientChatWillSendMsgNotification"
 public let VIClientChatDidSendMsgNotification = "VIClientChatDidSendMsgNotification"
 public let VIClientChatDidReceiveMsgNotification = "VIClientChatDidReceiveMsgNotification"
 
 //@objc(Client)
-public class VIClientMO: NSManagedObject, VSChatListControllerProtocol {
+public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
     
     override public func awakeFromInsert() {
         self.enabled = NSNumber(bool: false)
@@ -41,9 +41,9 @@ public class VIClientMO: NSManagedObject, VSChatListControllerProtocol {
         }
     }
     
-    // MARK: Chat access
+    // MARK: - Chat access
     
-    func updateChatList(withBuddy buddy: SWAccount) -> (VIChatMO, oldIndex: Int) {
+    func updateChats(withBuddy buddy: SWAccount) -> (VIChatMO, oldIndex: Int) {
         // Try to add chat
         let (lastChat, isNew) = addChatWithBuddy(buddy)
         var index = 0
@@ -110,11 +110,11 @@ public class VIClientMO: NSManagedObject, VSChatListControllerProtocol {
         return account
     }
     
-    // MARK: Implement VSChatListControllerProtocol
+    // MARK: - Implement VSClientControllerProtocol
     let notificationCenter = NSNotificationCenter.defaultCenter()
     
     public func clientWillSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!) -> AnyObject! {
-        let (lastchat, oldIndex) = updateChatList(withBuddy: receiver)
+        let (lastchat, oldIndex) = updateChats(withBuddy: receiver)
         let newMessage = lastchat.addMessage(message, timestamp: date, direction: .WillTo)
         notificationCenter.postNotificationName(VIClientChatWillSendMsgNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
         
@@ -144,7 +144,7 @@ public class VIClientMO: NSManagedObject, VSChatListControllerProtocol {
     }
     
     public func clientDidReceivedMessageFrom(sender: SWAccount!, message: String!, timestamp date: NSDate!) {
-        let (lastchat, oldIndex) = updateChatList(withBuddy: sender)
+        let (lastchat, oldIndex) = updateChats(withBuddy: sender)
         lastchat.addMessage(message, timestamp: date, direction: .From)
         notificationCenter.postNotificationName(VIClientChatDidReceiveMsgNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
     }

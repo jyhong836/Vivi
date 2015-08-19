@@ -24,7 +24,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             }
         }
     }
-        
+    
     let notificationCenter = NSNotificationCenter.defaultCenter()
     let mainQueue = NSOperationQueue.mainQueue()
     // MARK: Notification observers
@@ -64,7 +64,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 //        }
 //    }
     
-    // MARK: Implementations for NSTableViewDataSource
+    // MARK: - Implementations for NSTableViewDataSource
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         if let c = currentClient {
@@ -74,7 +74,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         }
     }
     
-    // MARK: Implementations for NSTableViewDelegate
+    // MARK: - Implementations for NSTableViewDelegate
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let col = tableColumn {
@@ -102,7 +102,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         return proposedSelectionIndexes
     }
     
-    // MARK: Handlers for chat update notification observers
+    // MARK: - Handlers for chat update notification observers
     
     func newChatDidAdd(notification: NSNotification) {
         let userInfo = notification.userInfo as! [String: AnyObject]

@@ -10,7 +10,7 @@
 #import "SWEventLoop.h"
 #import "SWAccount.h"
 #import "SWXMPPRoster.h"
-#import "VSChatListControllerProtocol.h"
+#import "VSClientControllerProtocol.h"
 #include <Swiften/Swiften.h>
 using namespace Swift;
 #import "SWClientAdapter.h"

@@ -11,7 +11,7 @@
 #import "SWClient.h"
 #import "SWXMPPRoster.h"
 #import "VSClientDelegateProtocol.h"
-#import "VSChatListControllerProtocol.h"
+#import "VSClientControllerProtocol.h"
 #import "VSXMPPRosterDelegate.h"
 
 using namespace Swift;

@@ -10,7 +10,7 @@
 @class SWAccount;
 @class SWXMPPRoster;
 @protocol VSClientDelegate;
-@protocol VSChatListControllerProtocol;
+@protocol VSClientControllerProtocol;
 
 #import "ViviSwiftenDefines.h"
 
@@ -27,7 +27,7 @@ typedef void (^VSSendMessageHandler)(VSClientErrorType);
 @interface SWClient : NSObject
 
 /// Bind NSManagedObject to SWClient.
-@property (nonatomic) id<VSChatListControllerProtocol> managedObject;
+@property (nonatomic) id<VSClientControllerProtocol> managedObject;
 
 @property (readonly, nonatomic) SWAccount* account;
 @property (readonly, nonatomic) SWXMPPRoster* roster;

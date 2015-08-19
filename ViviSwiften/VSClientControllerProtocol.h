@@ -1,5 +1,5 @@
 //
-//  VSChatListControllerProtocol.h
+//  VSClientControllerProtocol.h
 //  Vivi
 //
 //  Created by Junyuan Hong on 7/30/15.
@@ -11,9 +11,7 @@
 @class SWClient;
 @class SWAccount;
 
-@protocol VSChatListControllerProtocol
-
-//@property (readonly, nonatomic) SWAccount* owner;
+@protocol VSClientControllerProtocol
 
 @required
 - (id)clientWillSendMessageTo: (SWAccount*)receiver
