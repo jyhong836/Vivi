@@ -105,7 +105,7 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
             
             c.delegate = self
             (c.managedObject as! VIClientMO).chatDelegate = self
-            if let infoDict = NSBundle.mainBundle().localizedInfoDictionary {
+            if let infoDict = NSBundle.mainBundle().infoDictionary {
                 let appName = infoDict[String(kCFBundleNameKey)] as! String
                 let appVer = infoDict[String(kCFBundleVersionKey)] as! String
                 c.setSoftwareName(appName, currentVersion: appVer)

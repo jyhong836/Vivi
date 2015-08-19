@@ -556,8 +556,8 @@
 			children = (
 				CD5E6F271B64F05300E33502 /* VIClientManagerTests.swift */,
 				CDB990E81B664E5D00598C51 /* TestUtils.swift */,
-				CDEE68B31B6545D800D00EC7 /* Info.plist */,
 				CDBD30631B849C3E0064BA33 /* CoreDataTests.swift */,
+				CDEE68B31B6545D800D00EC7 /* Info.plist */,
 			);
 			path = ViviInterfaceTests;
 			sourceTree = "<group>";
