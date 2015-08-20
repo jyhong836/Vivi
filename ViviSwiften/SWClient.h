@@ -14,7 +14,7 @@
 
 #import "ViviSwiftenDefines.h"
 
-typedef void (^VSConnectionHandler)(void);
+typedef void (^VSConnectionHandler)(int);
 typedef void (^VSSendMessageHandler)(VSClientErrorType);
 
 /*!

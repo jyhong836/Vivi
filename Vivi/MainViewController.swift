@@ -185,13 +185,18 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
         connectSpinner.hidden = false
         connectSpinner.startAnimation(sender)
         if let c = currentClient {
-            c.connectWithHandler({ () -> Void in
+            c.connectWithHandler({ (errcode) -> Void in
                 NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                     self.connectButton.hidden = false
                     self.connectSpinner.hidden = true
                     self.connectSpinner.stopAnimation(sender)
+                    if let err = SWClientErrorType(rawValue: errcode) {
+                        let alert = NSAlert()
+                        alert.addButtonWithTitle("OK")
+                        alert.messageText = "Error: \(err)"
+                        alert.runModal()
+                    }
                 })
-                // FIXME: Here need error parameter
             })
         }
     }

@@ -60,7 +60,7 @@ void SWClientAdapter::onConnectedSlot()
     if ([swclient.delegate respondsToSelector:@selector(clientDidConnect:)])
         [swclient.delegate clientDidConnect: swclient];
     if (swclient.connectHandler) {
-        swclient.connectHandler();
+        swclient.connectHandler(-1);
         [swclient setConnectHandlerToNil];
     }
 }
@@ -76,8 +76,12 @@ void SWClientAdapter::onDisconnectedSlot(const boost::optional<ClientError> &err
                                      errorCode: -1];
         }
     }
+    if (swclient.connectHandler) {
+        swclient.connectHandler(err->getType());
+        [swclient setConnectHandlerToNil];
+    }
     if (swclient.disconnectHandler) {
-        swclient.disconnectHandler();
+        swclient.disconnectHandler(err->getType());
         [swclient setDisconnectHandlerToNil];
     }
 }

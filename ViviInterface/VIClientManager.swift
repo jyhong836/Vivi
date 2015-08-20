@@ -136,7 +136,7 @@ public class VIClientManager: VIClientManagerProtocol {
         } else {
             if let i = clientList.indexOf(client!) {
                 if client!.isActive() {
-                    client!.disconnectWithHandler({ () -> Void in
+                    client!.disconnectWithHandler({ (errcode) -> Void in
                         self.clientList.removeAtIndex(i)
                         self.delegate?.managerDidRemoveClient(client)
                     })
