@@ -1251,15 +1251,15 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="249" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5Vv-5X-pMT" userLabel="In Buble">
-                                                                    <rect key="frame" x="8" y="0.0" width="327" height="26"/>
+                                                                    <rect key="frame" x="8" y="0.0" width="326" height="26"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="axesIndependently" image="InMessageBuble" id="jcE-jE-Tix"/>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wg3-qF-lwV">
-                                                                    <rect key="frame" x="18" y="6" width="309" height="17"/>
+                                                                    <rect key="frame" x="18" y="6" width="308" height="17"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="305" id="169-ab-lbo"/>
+                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="305" id="JLI-B1-BwJ"/>
                                                                     </constraints>
-                                                                    <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="In Message" id="UVz-96-KfY">
+                                                                    <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="............................................................................." id="UVz-96-KfY">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1268,7 +1268,7 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="wg3-qF-lwV" firstAttribute="leading" secondItem="OS5-WE-eac" secondAttribute="leading" constant="20" id="5Md-zV-kK6"/>
-                                                                <constraint firstItem="5Vv-5X-pMT" firstAttribute="width" secondItem="wg3-qF-lwV" secondAttribute="width" constant="22" id="DOs-6N-llv"/>
+                                                                <constraint firstItem="5Vv-5X-pMT" firstAttribute="width" relation="greaterThanOrEqual" secondItem="wg3-qF-lwV" secondAttribute="width" constant="22" id="DOs-6N-llv"/>
                                                                 <constraint firstItem="wg3-qF-lwV" firstAttribute="top" secondItem="OS5-WE-eac" secondAttribute="top" constant="13" id="P1T-5Q-XaY"/>
                                                                 <constraint firstItem="5Vv-5X-pMT" firstAttribute="top" secondItem="OS5-WE-eac" secondAttribute="top" constant="10" id="QVK-vX-Fnp"/>
                                                                 <constraint firstAttribute="height" secondItem="5Vv-5X-pMT" secondAttribute="height" constant="10" id="UXR-ra-YBJ"/>
@@ -1285,15 +1285,12 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="YKF-yy-qXg" userLabel="Out Buble">
-                                                                    <rect key="frame" x="149" y="0.0" width="327" height="26"/>
+                                                                    <rect key="frame" x="150" y="0.0" width="326" height="26"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="axesIndependently" image="OutMessageBuble" id="aBP-VJ-Drh"/>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBj-iU-ZKe">
-                                                                    <rect key="frame" x="157" y="6" width="309" height="17"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="305" id="TLq-de-APW"/>
-                                                                    </constraints>
-                                                                    <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" title="Out Message" id="tNt-OV-lIj">
+                                                                    <rect key="frame" x="158" y="6" width="308" height="17"/>
+                                                                    <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" title="............................................................................." id="tNt-OV-lIj">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1304,7 +1301,7 @@
                                                                 <constraint firstItem="rBj-iU-ZKe" firstAttribute="top" secondItem="lOY-ec-Rwo" secondAttribute="top" constant="13" id="1bF-Uu-AJQ"/>
                                                                 <constraint firstAttribute="trailing" secondItem="rBj-iU-ZKe" secondAttribute="trailing" constant="20" id="3gc-Vn-dOF"/>
                                                                 <constraint firstAttribute="height" secondItem="YKF-yy-qXg" secondAttribute="height" constant="10" id="BPh-eK-fNX"/>
-                                                                <constraint firstItem="YKF-yy-qXg" firstAttribute="width" secondItem="rBj-iU-ZKe" secondAttribute="width" constant="22" id="RKp-aP-mI3"/>
+                                                                <constraint firstItem="YKF-yy-qXg" firstAttribute="width" relation="greaterThanOrEqual" secondItem="rBj-iU-ZKe" secondAttribute="width" constant="22" id="RKp-aP-mI3"/>
                                                                 <constraint firstAttribute="trailing" secondItem="YKF-yy-qXg" secondAttribute="trailing" constant="8" id="hxV-JX-UHH"/>
                                                                 <constraint firstItem="YKF-yy-qXg" firstAttribute="top" secondItem="lOY-ec-Rwo" secondAttribute="top" constant="10" id="tDi-5s-eWO"/>
                                                                 <constraint firstItem="YKF-yy-qXg" firstAttribute="height" secondItem="rBj-iU-ZKe" secondAttribute="height" constant="9" id="vuu-Ki-L0p"/>
