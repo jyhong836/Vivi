@@ -20,11 +20,5 @@
 - (void)clientDidReceiveMessage: (SWClient*)client
                     fromAccount: (SWAccount*)account
                       inContent: (NSString*)content;
-@optional
-- (void)clientDidReceivePresence: (SWClient*)client
-                     fromAccount: (SWAccount*)account
-                 currentPresence: (int)presenceType
-                     currentShow: (int)show
-                   currentStatus: (NSString*)status;
 
 @end

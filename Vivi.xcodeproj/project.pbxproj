@@ -358,9 +358,9 @@
 				CD3685771B5E659500DFC78A /* ViviUITests */,
 				CDE6588F1B5E66D400290E34 /* ViviSwiften */,
 				CD88E3531B60D84E00E7E256 /* ViviSwiftenTests */,
-				CDF2123A1B62A69D0031913D /* Linked Libraries and Frameworks */,
 				CDEE68A21B6545D800D00EC7 /* ViviInterface */,
 				CDEE68B01B6545D800D00EC7 /* ViviInterfaceTests */,
+				CDF2123A1B62A69D0031913D /* Linked Libraries and Frameworks */,
 				CD3685591B5E659500DFC78A /* Products */,
 			);
 			sourceTree = "<group>";

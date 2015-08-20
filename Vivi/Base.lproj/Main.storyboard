@@ -1266,7 +1266,7 @@
                                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="305" id="JLI-B1-BwJ"/>
                                                                     </constraints>
                                                                     <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="............................................................................." id="UVz-96-KfY">
-                                                                        <font key="font" metaFont="system"/>
+                                                                        <font key="font" metaFont="message"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -1297,7 +1297,7 @@
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBj-iU-ZKe">
                                                                     <rect key="frame" x="158" y="6" width="308" height="17"/>
                                                                     <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" title="............................................................................." id="tNt-OV-lIj">
-                                                                        <font key="font" metaFont="system"/>
+                                                                        <font key="font" metaFont="message"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -1341,15 +1341,15 @@
                                 <rect key="frame" x="0.0" y="291" width="489" height="59"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rBT-9z-q3O">
-                                        <rect key="frame" x="18" y="18" width="33" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="User" id="EY0-XR-LLJ">
-                                            <font key="font" metaFont="system"/>
+                                        <rect key="frame" x="14" y="22" width="48" height="19"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Name" id="EY0-XR-LLJ">
+                                            <font key="font" size="16" name=".HelveticaNeueDeskInterface-Regular"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="3Cx-Qe-OBe" userLabel="Lock Button">
-                                        <rect key="frame" x="449" y="16" width="20" height="20"/>
+                                        <rect key="frame" x="449" y="19" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="iV1-m9-E7s"/>
                                         </constraints>
@@ -1358,13 +1358,27 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C2h-bc-9oP">
+                                        <rect key="frame" x="14" y="4" width="125" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="121" id="gtj-sn-zsQ"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="account.node@domain" id="Icq-LT-AtV">
+                                            <font key="font" metaFont="label"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="C2h-bc-9oP" firstAttribute="top" secondItem="rBT-9z-q3O" secondAttribute="bottom" constant="1" id="0r1-yk-xPi"/>
                                     <constraint firstAttribute="trailing" secondItem="3Cx-Qe-OBe" secondAttribute="trailing" constant="20" symbolic="YES" id="2bP-hQ-YnW"/>
-                                    <constraint firstItem="3Cx-Qe-OBe" firstAttribute="centerY" secondItem="rBT-9z-q3O" secondAttribute="centerY" id="EX8-Ke-OOA"/>
-                                    <constraint firstItem="rBT-9z-q3O" firstAttribute="leading" secondItem="zlg-T4-pOV" secondAttribute="leading" constant="20" symbolic="YES" id="MrH-BH-S69"/>
-                                    <constraint firstAttribute="bottom" secondItem="3Cx-Qe-OBe" secondAttribute="bottom" constant="16" id="ZZP-aH-7Ad"/>
-                                    <constraint firstItem="3Cx-Qe-OBe" firstAttribute="top" secondItem="zlg-T4-pOV" secondAttribute="top" constant="23" id="hSt-cu-y3l"/>
+                                    <constraint firstItem="rBT-9z-q3O" firstAttribute="leading" secondItem="zlg-T4-pOV" secondAttribute="leading" constant="16" id="6z5-xb-eKR"/>
+                                    <constraint firstItem="rBT-9z-q3O" firstAttribute="leading" secondItem="C2h-bc-9oP" secondAttribute="leading" id="QGg-Ul-WRG"/>
+                                    <constraint firstItem="C2h-bc-9oP" firstAttribute="top" secondItem="zlg-T4-pOV" secondAttribute="top" constant="38" id="Sd4-FE-mCq"/>
+                                    <constraint firstAttribute="bottom" secondItem="3Cx-Qe-OBe" secondAttribute="bottom" constant="19" id="ZZP-aH-7Ad"/>
+                                    <constraint firstItem="3Cx-Qe-OBe" firstAttribute="top" secondItem="zlg-T4-pOV" secondAttribute="top" constant="20" id="hSt-cu-y3l"/>
+                                    <constraint firstAttribute="bottom" secondItem="C2h-bc-9oP" secondAttribute="bottom" constant="4" id="rbO-pu-Yux"/>
                                 </constraints>
                             </visualEffectView>
                         </subviews>
@@ -1380,6 +1394,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="accountTextField" destination="C2h-bc-9oP" id="BuZ-BX-1BX"/>
+                        <outlet property="buddyNameTextField" destination="rBT-9z-q3O" id="JLd-1I-ZYj"/>
                         <outlet property="messageTableView" destination="ZWo-vN-myc" id="dM6-vG-rzr"/>
                     </connections>
                 </viewController>

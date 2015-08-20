@@ -11,6 +11,8 @@ import ViviInterface
 
 class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
 
+    @IBOutlet weak var buddyNameTextField: NSTextField!
+    @IBOutlet weak var accountTextField: NSTextField!
     @IBOutlet weak var messageTableView: NSTableView!
     
     var currentChat: VIChatMO? {
@@ -18,6 +20,7 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 self.removeChatObservers()
                 self.addChatObservers()
+                self.updatePresence()
                 self.messageTableView.reloadData()
             }
         }
@@ -28,13 +31,15 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         // Do view setup here.
     }
     
+    // MARK: Notification configures
+    
     let notificationCenter = NSNotificationCenter.defaultCenter()
     let mainQueue = NSOperationQueue.mainQueue()
-    // MARK: Notification observers
+    
     var chatWillSendObserver: NSObjectProtocol?
     var chatDidSendObserver: NSObjectProtocol?
     var chatDidReceiveObserver: NSObjectProtocol?
-    
+    var didReceivePresenceObserver: NSObjectProtocol?
     
     override func viewWillAppear() {
         addChatObservers()
@@ -42,21 +47,24 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     
     override func viewWillDisappear() {
         removeChatObservers()
-        chatWillSendObserver = nil
-        chatDidSendObserver = nil
-        chatDidReceiveObserver = nil
     }
     
     func addChatObservers() {
         chatWillSendObserver = notificationCenter.addObserverForName(VIClientChatWillSendMsgNotification, object: currentChat, queue: mainQueue, usingBlock: chatWillSendMessage)
         chatDidSendObserver = notificationCenter.addObserverForName(VIClientChatDidSendMsgNotification, object: currentChat, queue: mainQueue, usingBlock: chatDidSendMessage)
         chatDidReceiveObserver = notificationCenter.addObserverForName(VIClientChatDidReceiveMsgNotification, object: currentChat, queue: mainQueue, usingBlock: chatDidReceiveMessage)
+        didReceivePresenceObserver = notificationCenter.addObserverForName(VIClientDidReceivePresence, object: currentChat?.buddy, queue: mainQueue, usingBlock: { (notification) -> Void in
+            self.updatePresence()
+        })
     }
     
     func removeChatObservers() {
         notificationCenter.removeObserver(chatWillSendObserver!)
         notificationCenter.removeObserver(chatDidSendObserver!)
         notificationCenter.removeObserver(chatDidReceiveObserver!)
+        chatWillSendObserver = nil
+        chatDidSendObserver = nil
+        chatDidReceiveObserver = nil
     }
     
     // MARK: API for update chat table view
@@ -161,5 +169,15 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     
     func chatDidReceiveMessage(notification: NSNotification) {
         chatDidAddMessage()
+    }
+    
+    func updatePresence() {
+        if let chat = self.currentChat {
+            let buddy = chat.buddy!
+            let account = buddy.swaccount!
+            self.buddyNameTextField.stringValue =
+            "\(account.getNodeString())(\(buddy.presence.toString()!))"
+            self.accountTextField.stringValue = account.getAccountString()
+        }
     }
 }

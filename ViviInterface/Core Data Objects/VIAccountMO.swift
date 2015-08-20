@@ -25,6 +25,8 @@ public class VIAccountMO: NSManagedObject {
         }
     }
     
+    // MARK: - Account accessors(static)
+    
     public var swaccount: SWAccount? {
         get {
             return SWAccount(accountName: accountString)
@@ -89,6 +91,8 @@ public class VIAccountMO: NSManagedObject {
         removeAccount(swaccount.getNodeString(), domain: swaccount.getDomainString(), managedObjectContext: moc)
     }
     
+    // MARK: - Group accessors
+    
     /// Return true if exist group.
     func existGroup(newGroup: VIGroupMO) -> Bool {
         for element in self.groups! {
@@ -110,5 +114,11 @@ public class VIAccountMO: NSManagedObject {
             return true
         }
     }
+    
+    // MARK: Account presence
+    
+    public var presence: SWPresenceType = SWPresenceType.Unavailable
+    public var presenceshow: SWPresenceShowType = SWPresenceShowType.None
+    public var status: String = ""
     
 }

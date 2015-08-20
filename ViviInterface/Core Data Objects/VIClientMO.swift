@@ -15,6 +15,7 @@ public let VIClientChatDidAddNotification = "VIClientChatDidAddNotification"
 public let VIClientChatWillSendMsgNotification = "VIClientChatWillSendMsgNotification"
 public let VIClientChatDidSendMsgNotification = "VIClientChatDidSendMsgNotification"
 public let VIClientChatDidReceiveMsgNotification = "VIClientChatDidReceiveMsgNotification"
+public let VIClientDidReceivePresence = "VIClientDidReceivePresence"
 
 //@objc(Client)
 public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
@@ -148,6 +149,27 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
         let (lastchat, oldIndex) = updateChats(withBuddy: sender)
         lastchat.addMessage(message, timestamp: date, direction: .From)
         notificationCenter.postNotificationName(VIClientChatDidReceiveMsgNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
+    }
+    
+    public func clientDidReceivePresence(client: SWClient!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow showType: Int32, currentStatus status: String!) {
+        NSLog("client(\(client.account.getAccountString())) did receive presence from \(account.getAccountString())")
+        do {
+            let accountMO = try VIAccountMO.addAccount(account.getNodeString(), domain: account.getDomainString(), managedObjectContext: self.managedObjectContext!)
+            
+            if let presence = SWPresenceType(rawValue: presenceType) {
+                accountMO.presence = presence
+            } else {
+                fatalError("Receive unexpected presence code: \(presenceType)")
+            }
+            if let show = SWPresenceShowType(rawValue: showType) {
+                accountMO.presenceshow = show
+            } else {
+                fatalError("Receive unexpected presence show code: \(showType)")
+            }
+            notificationCenter.postNotificationName(VIClientDidReceivePresence, object: accountMO, userInfo: nil)
+        } catch {
+            fatalError("Receive presence from account cause unexpected error when try to add account:\n \(error)")
+        }
     }
     
 }

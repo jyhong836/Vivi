@@ -27,5 +27,10 @@
 - (void)clientDidReceivedMessageFrom: (SWAccount*)sender
                              message: (NSString*)message
                            timestamp: (NSDate*)date;
+- (void)clientDidReceivePresence: (SWClient*)client
+                     fromAccount: (SWAccount*)account
+                 currentPresence: (int)presenceType
+                     currentShow: (int)showType
+                   currentStatus: (NSString*)status;
 
 @end

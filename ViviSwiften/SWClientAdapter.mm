@@ -123,12 +123,11 @@ void SWClientAdapter::onPresenceReceivedSlot(Presence::ref pres)
 {
     SWAccount* account = [[SWAccount alloc] initWithAccountName: std_str2NSString(pres->getFrom().toString())];
     NSString* status = std_str2NSString(pres->getStatus());
-    if ([swclient.delegate respondsToSelector:@selector( clientDidReceivePresence:fromAccount:currentPresence:currentShow:currentStatus:)])
-        [swclient.delegate clientDidReceivePresence: swclient
-                                    fromAccount: account
-                                currentPresence: pres->getType()
-                                    currentShow: pres->getShow()
-                                  currentStatus: status];
+    [swclient.managedObject clientDidReceivePresence: swclient
+                                         fromAccount: account
+                                     currentPresence: pres->getType()
+                                         currentShow: pres->getShow()
+                                       currentStatus: status];
 }
 
 // MARK: Roster slots

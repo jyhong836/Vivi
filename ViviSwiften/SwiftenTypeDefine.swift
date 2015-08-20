@@ -11,19 +11,19 @@ import Foundation
 // MARK: Swiften types
 public enum SWPresenceType: Int32 {
     case Available, Error, Probe, Subscribe, Subscribed, Unavailable, Unsubscribe, Unsubscribed
+    public func toString() -> String? {
+        return SWPresenceTypeStringDict[self]
+    }
 }
 let SWPresenceTypeStringDict: [SWPresenceType: String] = [.Available: "Available", .Error: "Error", .Probe: "Probe", .Subscribe: "Subscribe", .Subscribed: "Subscribed", .Unavailable: "Unavailable", .Unsubscribe: "Unsubscribe", .Unsubscribed: "Unsubscribed"]
-public func parsePresenceType(type: SWPresenceType) -> String {
-    return SWPresenceTypeStringDict[type]!
-}
 
 public enum SWPresenceShowType: Int32 {
     case Online, Away, FFC, XA, DND, None
+    public func toString() -> String? {
+        return SWPresenceShowTypeStringDict[self]
+    }
 }
 let SWPresenceShowTypeStringDict: [SWPresenceShowType: String] = [.Online: "Online", .Away: "Away", .FFC:"FFC", .XA: "XA", .DND: "DND", .None:"None"]
-public func parsePresenceShowType(type: SWPresenceShowType) -> String {
-    return SWPresenceShowTypeStringDict[type]!
-}
 
 public enum SWClientErrorType: Int32 {
     case UnknownError, DomainNameResolveError, ConnectionError, ConnectionReadError
