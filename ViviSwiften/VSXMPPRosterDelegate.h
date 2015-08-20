@@ -8,6 +8,7 @@
 
 @class SWAccount;
 @class SWXMPPRoster;
+@class SWRosterItem;
 
 @protocol VSXMPPRosterDelegate <NSObject>
 
@@ -19,7 +20,7 @@
 didRemoveAccount: (SWAccount*)account;
 @optional
 - (void)roster: (SWXMPPRoster*)roster
-didUpdateAccount: (SWAccount*)account;
+ didUpdateItem: (SWRosterItem*)item;
 @optional
 - (void)rosterDidClear: (SWXMPPRoster*)roster;
 @optional

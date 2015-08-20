@@ -21,7 +21,8 @@ typedef void (^VSSendMessageHandler)(VSClientErrorType);
  * @brief A Objective-C adapter for Swift::Client.
  * 
  * One Client correspond to one JID(or SWAccount). When connect method
- * called, the client will connect to server.
+ * called, the client will connect to server. You should not update data
+ * in SWClient, instead you have to realloc SWClient for new settings.
  *
  */
 @interface SWClient : NSObject

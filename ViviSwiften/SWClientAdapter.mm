@@ -10,6 +10,7 @@
 #import "SWAccount.h"
 #import "SWClient.h"
 #import "SWXMPPRoster.h"
+#import "SWRosterItem.h"
 #import "VSClientDelegateProtocol.h"
 #import "VSClientControllerProtocol.h"
 #import "VSXMPPRosterDelegate.h"
@@ -146,12 +147,13 @@ void SWClientAdapter::rosterOnJIDRemovedSlot(const JID& jid)
                         didRemoveAccount: [[SWAccount alloc] initWithAccountName: std_str2NSString(jid.toString())]];
 }
 
-void SWClientAdapter::rosterOnJIDUpdatedSlot(const JID& jid, const std::string&, const std::vector<std::string>&)
+void SWClientAdapter::rosterOnJIDUpdatedSlot(const JID& jid, const std::string& name, const std::vector<std::string>& groups)
 {
-    if ([swclient.roster.delegate respondsToSelector:@selector(roster:didUpdateAccount:)])
-        // TODO: Complete rosterOnJIDUpdatedSlot param passing
+    if ([swclient.roster.delegate respondsToSelector:@selector(roster:didUpdateItem:)]) {
+        XMPPRosterItem *item = new XMPPRosterItem(jid, name, groups, RosterItemPayload::None);
         [swclient.roster.delegate roster: swclient.roster
-                        didUpdateAccount: [[SWAccount alloc] initWithAccountName: std_str2NSString(jid.toString())]];
+                           didUpdateItem: [[SWRosterItem alloc] initWithRosterItem: item]];
+    }
 }
 
 void SWClientAdapter::rosterOnRosterClearedSlot()
