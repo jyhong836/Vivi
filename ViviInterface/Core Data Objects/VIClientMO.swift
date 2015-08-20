@@ -71,17 +71,21 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
         if let existedChat = getChatWithBuddy(buddy) {
             return (existedChat, false)
         } else {
-            let buddyMO = insertAccountFromSWAccount(buddy)
-            
             let moc = self.managedObjectContext
-            let newChat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: moc!) as! VIChatMO
-            newChat.owner = self
-            newChat.buddy = buddyMO
-            
-            notificationCenter.postNotificationName(
-                VIClientChatDidAddNotification, object: self, userInfo: ["index": 0])
-            
-            return (newChat, true)
+            do {
+                let buddyMO = try VIAccountMO.addAccount(buddy.getNodeString(), domain: buddy.getDomainString(), managedObjectContext: moc!)
+                
+                let newChat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: moc!) as! VIChatMO
+                newChat.owner = self
+                newChat.buddy = buddyMO
+                
+                notificationCenter.postNotificationName(
+                    VIClientChatDidAddNotification, object: self, userInfo: ["index": 0])
+                
+                return (newChat, true)
+            } catch {
+                fatalError("Fail to add account: \(error)")
+            }
         }
     }
     
@@ -98,16 +102,6 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
             }
         }
         return nil
-    }
-    
-    func insertAccountFromSWAccount(swaccount: SWAccount) -> VIAccountMO {
-        let account = NSEntityDescription.insertNewObjectForEntityForName("Account", inManagedObjectContext: self.managedObjectContext!) as! VIAccountMO
-        account.swaccount = swaccount
-        
-//        account.chat = self
-        // FIXME: set up group and resources
-        
-        return account
     }
     
     // MARK: - Implement VSClientControllerProtocol

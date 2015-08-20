@@ -126,7 +126,9 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     func chatDidReceiveMessage(notification: NSNotification) {
         let userInfo = notification.userInfo as! [String: AnyObject]
         let oldIndex = userInfo["oldIndex"] as! Int
-        updateCellNewMessageIconAtIndex(oldIndex>0 ? oldIndex : 0, hasNew: true)
+        if (currentClient?.managedObject as! VIClientMO).selectedChatIndex != oldIndex {
+            updateCellNewMessageIconAtIndex(oldIndex>0 ? oldIndex : 0, hasNew: true)
+        }
         updateAndMoveCellAtIndex(oldIndex)
     }
     
