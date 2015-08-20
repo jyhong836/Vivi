@@ -98,6 +98,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         if proposedSelectionIndexes.count == 1 {
             // FIXME: ! Should use delegate to pass this message
             (currentClient?.managedObject as! VIClientMO).selectedChatIndex = proposedSelectionIndexes.lastIndex
+            updateCellNewMessageIconAtIndex(proposedSelectionIndexes.lastIndex, hasNew: false)
         }
         return proposedSelectionIndexes
     }
@@ -125,6 +126,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     func chatDidReceiveMessage(notification: NSNotification) {
         let userInfo = notification.userInfo as! [String: AnyObject]
         let oldIndex = userInfo["oldIndex"] as! Int
+        updateCellNewMessageIconAtIndex(oldIndex>0 ? oldIndex : 0, hasNew: true)
         updateAndMoveCellAtIndex(oldIndex)
     }
     
@@ -136,6 +138,14 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             self.sessionTableView.moveRowAtIndex(oldIndex, toIndex: 0)
         }
         self.sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: 0), columnIndexes: NSIndexSet(index: 0))
+    }
+    
+    private func updateCellNewMessageIconAtIndex(index: Int, hasNew: Bool) {
+        if let cellView = self.sessionTableView.viewAtColumn(0, row: index, makeIfNecessary: false) as? SessionTableCellView {
+            cellView.newMessageIcon.hidden = !hasNew
+        } else {
+            fatalError("Fail to find cell view at index: \(index), which should be updated now.")
+        }
     }
     
 }

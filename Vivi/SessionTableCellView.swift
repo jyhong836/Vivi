@@ -12,7 +12,9 @@ class SessionTableCellView: NSTableCellView {
     
     @IBOutlet weak var lastMessageTextField: NSTextField!
     
+    @IBOutlet weak var newMessageIcon: NSImageView!
     @IBOutlet weak var avaterImageView: NSImageView!
+    
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)
 

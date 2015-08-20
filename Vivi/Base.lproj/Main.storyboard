@@ -1061,7 +1061,7 @@
                                                                     </constraints>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSUserGuest" id="3PM-vg-g6k"/>
                                                                 </imageView>
-                                                                <imageView translatesAutoresizingMaskIntoConstraints="NO" id="XSG-vN-nfe">
+                                                                <imageView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XSG-vN-nfe">
                                                                     <rect key="frame" x="3" y="17" width="16" height="16"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSStatusAvailable" id="fZn-LA-0Pu"/>
                                                                 </imageView>
@@ -1089,7 +1089,9 @@
                                                                 <constraint firstItem="XSG-vN-nfe" firstAttribute="centerY" secondItem="bCY-YT-pVg" secondAttribute="centerY" id="tIm-B5-q9A"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="avaterImageView" destination="bCY-YT-pVg" id="A70-Xv-CEW"/>
                                                                 <outlet property="lastMessageTextField" destination="hZy-Gr-wL9" id="XT2-Z7-FzL"/>
+                                                                <outlet property="newMessageIcon" destination="XSG-vN-nfe" id="Jf6-ex-KFU"/>
                                                                 <outlet property="textField" destination="Y8s-LE-ZPU" id="ajo-Eb-Hrc"/>
                                                             </connections>
                                                         </tableCellView>
