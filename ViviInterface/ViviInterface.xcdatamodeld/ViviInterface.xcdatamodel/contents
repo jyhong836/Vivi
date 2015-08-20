@@ -18,7 +18,7 @@
         <attribute name="accountname" attributeType="String" regularExpressionString="^.[a-zA-Z0-9.]+@.[a-zA-Z0-9.]+$" indexed="YES" syncable="YES"/>
         <attribute name="enabled" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="hostname" optional="YES" attributeType="String" regularExpressionString=".[a-zA-Z0-9.]+" syncable="YES"/>
-        <attribute name="password" attributeType="String" syncable="YES"/>
+        <attribute name="password" attributeType="Transformable" valueTransformerName="StringEncryptionTransformer" syncable="YES"/>
         <attribute name="port" attributeType="Integer 16" defaultValueString="5222" syncable="YES"/>
         <relationship name="chats" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Chat" inverseName="owner" inverseEntity="Chat" syncable="YES"/>
         <relationship name="roster" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Roster" inverseName="client" inverseEntity="Roster" syncable="YES"/>
