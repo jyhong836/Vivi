@@ -84,7 +84,7 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
                 
                 return (newChat, true)
             } catch {
-                fatalError("Fail to add account: \(error)")
+                fatalError("Fail to add chat with account: \(error)")
             }
         }
     }
@@ -103,6 +103,13 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
         }
         return nil
     }
+    
+//    public func removeChatAtIndex(index: Int) {
+//        if index >= 0 && index < chatCount {
+//            let chats = self.mutableOrderedSetValueForKey("chats")
+//            chats.removeObjectAtIndex(index)
+//        }
+//    }
     
     // MARK: - Implement VSClientControllerProtocol
     let notificationCenter = NSNotificationCenter.defaultCenter()

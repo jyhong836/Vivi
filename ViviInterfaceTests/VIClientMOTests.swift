@@ -20,6 +20,8 @@ class VIClientMOTests: XCTestCase {
         
         moc = setUpCoreData()
         client = NSEntityDescription.insertNewObjectForEntityForName("Client", inManagedObjectContext: moc!) as? VIClientMO
+        client?.accountname = "test@client"
+        client?.password = "123456"
     }
     
     override func tearDown() {
@@ -60,5 +62,14 @@ class VIClientMOTests: XCTestCase {
         XCTAssertTrue(isReceivedNotification, "should receive notification")
         notificationCenter.removeObserver(observer)
     }
+    
+//    func testRemoveChatAtIndex() {
+//        let swaccount = SWAccount(accountName: "testaccount@xxx")
+//        client!.addChatWithBuddy(swaccount)
+//        
+//        XCTAssertEqual(client!.chatCount, 1)
+//        client!.removeChatAtIndex(0)
+//        XCTAssertEqual(client!.chatCount, 0)
+//    }
 
 }

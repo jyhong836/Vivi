@@ -150,4 +150,13 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         }
     }
     
+    @IBAction func chatDeleteButtonClicked(sender: NSButton) {
+        let cellView = sender.superview as! SessionTableCellView
+        let row = sessionTableView.rowForView(cellView)
+        let clientMO = (currentClient?.managedObject as! VIClientMO)
+        let chat = clientMO.chatAtIndex(row)
+        VICoreDataController.shared.managedObjectContext.deleteObject(chat!)
+        sessionTableView.removeRowsAtIndexes(NSIndexSet(index: row), withAnimation: NSTableViewAnimationOptions.EffectFade)
+    }
+    
 }

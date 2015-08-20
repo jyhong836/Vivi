@@ -648,7 +648,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Vivi" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="817.5" y="-45"/>
+            <point key="canvasLocation" x="0.0" y="208"/>
         </scene>
         <!--PreferenceWindow-->
         <scene sceneID="VgY-6y-aoC">
@@ -656,7 +656,7 @@
                 <controllerPlaceholder storyboardName="PreferenceWindow" id="I47-zw-3R2" sceneMemberID="viewController"/>
                 <customObject id="98l-54-UW0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="817.5" y="114"/>
+            <point key="canvasLocation" x="0.5" y="367"/>
         </scene>
         <!--Main Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -1055,38 +1055,44 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <imageView translatesAutoresizingMaskIntoConstraints="NO" id="bCY-YT-pVg" userLabel="Avater Image View">
-                                                                    <rect key="frame" x="25" y="9" width="32" height="32"/>
+                                                                    <rect key="frame" x="20" y="9" width="32" height="32"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="32" id="19X-fY-A7y"/>
                                                                     </constraints>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSUserGuest" id="3PM-vg-g6k"/>
                                                                 </imageView>
                                                                 <imageView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XSG-vN-nfe">
-                                                                    <rect key="frame" x="3" y="17" width="16" height="16"/>
+                                                                    <rect key="frame" x="2" y="17" width="16" height="16"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSStatusAvailable" id="fZn-LA-0Pu"/>
                                                                 </imageView>
-                                                                <imageView translatesAutoresizingMaskIntoConstraints="NO" id="4zK-yB-OSU">
-                                                                    <rect key="frame" x="142" y="21" width="8" height="8"/>
+                                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gCa-Po-ghW" userLabel="Delete Button">
+                                                                    <rect key="frame" x="140" y="21" width="8" height="8"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="8" id="2s9-9W-DQd"/>
-                                                                        <constraint firstAttribute="height" constant="8" id="j0R-pS-KO4"/>
+                                                                        <constraint firstAttribute="width" constant="8" id="UNS-ZQ-QAr"/>
                                                                     </constraints>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSStopProgressTemplate" id="CfY-Co-brS"/>
-                                                                </imageView>
+                                                                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSStopProgressTemplate" imagePosition="above" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="Azn-3y-8JO">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="chatDeleteButtonClicked:" target="wCD-lF-Pb2" id="TJu-Tp-hSg"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="4zK-yB-OSU" secondAttribute="trailing" constant="5" id="0oQ-Zy-Qe2"/>
-                                                                <constraint firstItem="XSG-vN-nfe" firstAttribute="leading" secondItem="osE-c2-l1e" secondAttribute="leading" constant="3" id="1xg-l2-gg4"/>
+                                                                <constraint firstItem="XSG-vN-nfe" firstAttribute="leading" secondItem="osE-c2-l1e" secondAttribute="leading" constant="2" id="1xg-l2-gg4"/>
+                                                                <constraint firstAttribute="trailing" secondItem="gCa-Po-ghW" secondAttribute="trailing" constant="7" id="3ww-Sh-g54"/>
                                                                 <constraint firstItem="Y8s-LE-ZPU" firstAttribute="top" secondItem="osE-c2-l1e" secondAttribute="top" constant="3" id="4xN-d3-vbj"/>
                                                                 <constraint firstItem="bCY-YT-pVg" firstAttribute="centerY" secondItem="osE-c2-l1e" secondAttribute="centerY" id="BTA-Qc-7ZT"/>
+                                                                <constraint firstItem="gCa-Po-ghW" firstAttribute="centerY" secondItem="bCY-YT-pVg" secondAttribute="centerY" id="CjR-rI-9AB"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Y8s-LE-ZPU" secondAttribute="trailing" constant="16" id="Mgv-HJ-3Cs"/>
                                                                 <constraint firstItem="hZy-Gr-wL9" firstAttribute="leading" secondItem="Y8s-LE-ZPU" secondAttribute="leading" id="RYk-u4-47W"/>
-                                                                <constraint firstItem="hZy-Gr-wL9" firstAttribute="leading" secondItem="bCY-YT-pVg" secondAttribute="trailing" constant="6" id="Tpz-RE-QZ3"/>
+                                                                <constraint firstItem="hZy-Gr-wL9" firstAttribute="leading" secondItem="bCY-YT-pVg" secondAttribute="trailing" constant="11" id="Tpz-RE-QZ3"/>
                                                                 <constraint firstAttribute="trailing" secondItem="hZy-Gr-wL9" secondAttribute="trailing" constant="16" id="ZLw-ZA-k7Z"/>
                                                                 <constraint firstItem="hZy-Gr-wL9" firstAttribute="top" secondItem="Y8s-LE-ZPU" secondAttribute="bottom" constant="8" symbolic="YES" id="Zdj-yG-fPz"/>
-                                                                <constraint firstItem="bCY-YT-pVg" firstAttribute="centerY" secondItem="4zK-yB-OSU" secondAttribute="centerY" id="ZhT-db-6hJ"/>
-                                                                <constraint firstItem="bCY-YT-pVg" firstAttribute="leading" secondItem="osE-c2-l1e" secondAttribute="leading" constant="25" id="kgI-b6-AXx"/>
+                                                                <constraint firstItem="bCY-YT-pVg" firstAttribute="leading" secondItem="osE-c2-l1e" secondAttribute="leading" constant="20" id="kgI-b6-AXx"/>
                                                                 <constraint firstItem="XSG-vN-nfe" firstAttribute="centerY" secondItem="bCY-YT-pVg" secondAttribute="centerY" id="tIm-B5-q9A"/>
+                                                                <constraint firstItem="gCa-Po-ghW" firstAttribute="top" secondItem="osE-c2-l1e" secondAttribute="top" constant="21" id="ze9-0I-eQ0"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="avaterImageView" destination="bCY-YT-pVg" id="A70-Xv-CEW"/>
