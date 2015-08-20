@@ -46,6 +46,8 @@ class AddAccountViewController: NSViewController {
             if let swaccount = try VIClientManager.sharedClientManager.canAddClientEnity(withAccountName: account!, andPasswd: password!) {
                 delegate?.shouldAddAccount(swaccount, password: password!)
                 self.dismissViewController(self)
+            } else {
+                showAlert("Account has existed")
             }
         } catch {
             showAlert("Fail to add client: \(error)")

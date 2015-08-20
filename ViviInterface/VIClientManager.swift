@@ -113,7 +113,7 @@ public class VIClientManager: VIClientManagerProtocol {
     /// Add Client without managedObject. **Do not** use managedObject later.
     /// - Throws: VIClientManagerError
     /// - Returns: Successfully added client or nil.
-    func addClient(withAccountName account: String!, andPasswd passwd: String!) throws -> SWClient? {
+    internal func addClient(withAccountName account: String!, andPasswd passwd: String!) throws -> SWClient? {
         let swaccount = try validateAccount(account, passwd: passwd)
         
         let newClient = SWClient(account: swaccount, password: passwd, eventLoop: eventLoop)

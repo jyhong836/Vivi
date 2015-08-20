@@ -23,8 +23,15 @@
                                     </allowedInputSourceLocales>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="50f-P2-XHx" name="value" keyPath="selection.accountname" id="TRK-R1-9e0">
+                                    <binding destination="50f-P2-XHx" name="enabled" keyPath="selection.enabled" id="umA-mT-Pr8">
                                         <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="50f-P2-XHx" name="value" keyPath="selection.accountname" id="t4Y-fw-2pf">
+                                        <dictionary key="options">
+                                            <bool key="NSAlwaysPresentsApplicationModalAlerts" value="YES"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                         </dictionary>
                                     </binding>
@@ -49,8 +56,15 @@
                                     </allowedInputSourceLocales>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="50f-P2-XHx" name="value" keyPath="selection.hostname" id="NcX-sQ-5D7">
+                                    <binding destination="50f-P2-XHx" name="enabled" keyPath="selection.enabled" id="Gly-7F-bOf">
                                         <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="50f-P2-XHx" name="value" keyPath="selection.hostname" id="Kd1-GG-yKg">
+                                        <dictionary key="options">
+                                            <bool key="NSAlwaysPresentsApplicationModalAlerts" value="YES"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                         </dictionary>
                                     </binding>
@@ -71,8 +85,15 @@
                                     </allowedInputSourceLocales>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="50f-P2-XHx" name="value" keyPath="selection.port" id="lIx-VJ-IIb">
+                                    <binding destination="50f-P2-XHx" name="enabled" keyPath="selection.enabled" id="0dk-7s-Kha">
                                         <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="50f-P2-XHx" name="value" keyPath="selection.port" id="jvr-J5-vGK">
+                                        <dictionary key="options">
+                                            <bool key="NSAlwaysPresentsApplicationModalAlerts" value="YES"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                         </dictionary>
                                     </binding>
@@ -105,8 +126,15 @@
                                     </allowedInputSourceLocales>
                                 </secureTextFieldCell>
                                 <connections>
-                                    <binding destination="50f-P2-XHx" name="value" keyPath="selection.password" id="C6H-8d-PQI">
+                                    <binding destination="50f-P2-XHx" name="enabled" keyPath="selection.enabled" id="rwv-Gn-Oyt">
                                         <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="50f-P2-XHx" name="value" keyPath="selection.password" id="hdf-uy-xGy">
+                                        <dictionary key="options">
+                                            <bool key="NSAlwaysPresentsApplicationModalAlerts" value="YES"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                         </dictionary>
                                     </binding>
@@ -185,11 +213,15 @@
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="50f-P2-XHx" name="value" keyPath="arrangedObjects" id="U3U-uq-751">
+                                                            <dictionary key="options">
+                                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </tableColumn>
                                             </tableColumns>
-                                            <connections>
-                                                <binding destination="50f-P2-XHx" name="content" keyPath="arrangedObjects" id="rOr-vl-tOC"/>
-                                            </connections>
                                         </tableView>
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -239,7 +271,11 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="enableChecked:" target="hmk-0p-kC1" id="w5b-RR-5ra"/>
-                                    <binding destination="50f-P2-XHx" name="value" keyPath="selection.enabled" id="QyI-e8-pDM"/>
+                                    <binding destination="50f-P2-XHx" name="value" keyPath="selection.enabled" id="iPH-Id-aRG">
+                                        <dictionary key="options">
+                                            <bool key="NSAlwaysPresentsApplicationModalAlerts" value="YES"/>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WZ9-aR-MRK">

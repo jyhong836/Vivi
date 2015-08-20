@@ -33,26 +33,35 @@ class PreferenceViewController: NSViewController, AddAccountViewControllerDelega
         // Do view setup here.
     }
     
+    override func viewDidAppear() {
+        // FIXME: the client has not been selected?
+//        let entity = clientArrayController.selectedObjects[0] as! VIClientMO
+//        enableButton.state = (entity.enabled?.integerValue)!
+//        if enableButton.state == NSOnState {
+//            enableTextFields(false)
+//        }
+    }
+    
     @IBAction func enableChecked(sender: NSButton) {
         if sender.state == NSOnState {
             let entity = clientArrayController.selectedObjects[0] as! VIClientMO
             clientMgr.loadFromEnity(entity)
             enableButton.state = (entity.enabled?.integerValue)!
-            if enableButton.state == NSOnState {
-                enableTextFields(false)
-            }
+//            if enableButton.state == NSOnState {
+//                enableTextFields(false)
+//            }
         } else if sender.state == NSOffState {
             clientMgr.removeClient(clientMgr.getClient(withAccountName: accountTextField.stringValue))
-            enableTextFields(true)
+//            enableTextFields(true)
         }
     }
     
-    func enableTextFields(enabled: Bool) {
-        accountTextField.enabled = enabled;
-        passwordTextField.enabled = enabled;
-        domainTextField.enabled = enabled;
-        portTextField.enabled = enabled;
-    }
+//    func enableTextFields(enabled: Bool) {
+//        accountTextField.enabled = enabled;
+//        passwordTextField.enabled = enabled;
+//        domainTextField.enabled = enabled;
+//        portTextField.enabled = enabled;
+//    }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addAccountSegue" {
