@@ -384,6 +384,8 @@
 			children = (
 				CD36855B1B5E659500DFC78A /* AppDelegate.swift */,
 				CDC174931B7102610081F6D4 /* MainWindowController.swift */,
+				CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */,
+				CD156DE31B81FB0900EFC06F /* RosterViewController.swift */,
 				CD4C3A521B6B483500C283E6 /* Main Window View Controllers */,
 				CDA65F651B7AE81400F832CA /* Preference Controllers */,
 				CD0F93C21B6DBEAF000817CB /* UI Assets */,
@@ -391,8 +393,6 @@
 				CD3685611B5E659500DFC78A /* Main.storyboard */,
 				CDC322151B8545530029CA91 /* PreferenceWindow.storyboard */,
 				CD3685641B5E659500DFC78A /* Info.plist */,
-				CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */,
-				CD156DE31B81FB0900EFC06F /* RosterViewController.swift */,
 			);
 			path = Vivi;
 			sourceTree = "<group>";

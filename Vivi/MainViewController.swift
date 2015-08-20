@@ -179,9 +179,18 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
         }
     }
     
+    @IBOutlet weak var connectSpinner: NSProgressIndicator!
     @IBAction func loginButtonClicked(sender: AnyObject) {
+        connectButton.hidden = true
+        connectSpinner.hidden = false
+        connectSpinner.startAnimation(sender)
         if let c = currentClient {
             c.connectWithHandler({ () -> Void in
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    self.connectButton.hidden = false
+                    self.connectSpinner.hidden = true
+                    self.connectSpinner.stopAnimation(sender)
+                })
                 // FIXME: Here need error parameter
             })
         }

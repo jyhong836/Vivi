@@ -761,6 +761,9 @@
                                                             <action selector="rosterButtonClicked:" target="XfG-lQ-9wD" id="XLi-nR-fxM"/>
                                                         </connections>
                                                     </button>
+                                                    <progressIndicator hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="HqU-XE-vbp">
+                                                        <rect key="frame" x="210" y="14" width="16" height="16"/>
+                                                    </progressIndicator>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="Dkh-5M-qmJ" firstAttribute="leading" secondItem="IWe-AH-D1C" secondAttribute="leading" constant="8" id="2k5-Y3-h0Q"/>
@@ -830,6 +833,7 @@
                         <outlet property="avaterButton" destination="Dkh-5M-qmJ" id="jdz-mP-JBw"/>
                         <outlet property="chatView" destination="R3h-kS-2Cc" id="LMv-Wr-IT6"/>
                         <outlet property="connectButton" destination="dgn-bD-CAb" id="7CC-jE-pCX"/>
+                        <outlet property="connectSpinner" destination="HqU-XE-vbp" id="T35-um-TU3"/>
                         <outlet property="rosterButton" destination="rcz-ln-1OZ" id="ne8-ux-c3w"/>
                         <outlet property="sesConView" destination="SeZ-t9-alR" id="d4x-3b-FZ0"/>
                         <outlet property="sessionView" destination="o8d-Ct-cxH" id="d2T-zt-Cdb"/>
@@ -1388,7 +1392,7 @@
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nro-xc-ml0">
                                 <rect key="frame" x="9" y="25" width="48" height="48"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSUserGuest" id="4nN-Hj-3ci"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="grayBezel" image="NSUserGuest" id="4nN-Hj-3ci"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zPf-sB-T8n">
                                 <rect key="frame" x="14" y="5" width="38" height="17"/>
@@ -1405,9 +1409,9 @@
                         <constraints>
                             <constraint firstItem="zPf-sB-T8n" firstAttribute="centerX" secondItem="1EA-Bx-mMx" secondAttribute="centerX" id="LKk-Ee-RUh"/>
                             <constraint firstAttribute="bottom" secondItem="zPf-sB-T8n" secondAttribute="bottom" constant="5" id="NUP-Ks-EXE"/>
-                            <constraint firstItem="zPf-sB-T8n" firstAttribute="top" secondItem="Nro-xc-ml0" secondAttribute="bottom" constant="3" id="SNQ-OW-nat"/>
-                            <constraint firstItem="Nro-xc-ml0" firstAttribute="leading" secondItem="1EA-Bx-mMx" secondAttribute="leading" constant="9" id="iKx-zw-aU7"/>
-                            <constraint firstItem="Nro-xc-ml0" firstAttribute="top" secondItem="1EA-Bx-mMx" secondAttribute="top" constant="7" id="mCi-Bx-Iei"/>
+                            <constraint firstItem="zPf-sB-T8n" firstAttribute="top" secondItem="Nro-xc-ml0" secondAttribute="bottom" constant="6" id="SNQ-OW-nat"/>
+                            <constraint firstItem="Nro-xc-ml0" firstAttribute="leading" secondItem="1EA-Bx-mMx" secondAttribute="leading" constant="12" id="iKx-zw-aU7"/>
+                            <constraint firstItem="Nro-xc-ml0" firstAttribute="top" secondItem="1EA-Bx-mMx" secondAttribute="top" constant="10" id="mCi-Bx-Iei"/>
                             <constraint firstItem="zPf-sB-T8n" firstAttribute="centerX" secondItem="Nro-xc-ml0" secondAttribute="centerX" id="py8-pP-eWk"/>
                         </constraints>
                     </view>
