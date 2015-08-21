@@ -59,6 +59,10 @@ public class VIAccountMO: NSManagedObject {
     /// Add new account or get existed account. Entity will be
     /// saved to persistent store immediately, throw relevant error
     /// when failed and delete the entity from managedObjectContext.
+    ///
+    /// **IMPORTANT**: addAccount will call NSManagedObjectContext.save()
+    /// so you have to call this in mainQueue, if you use binded array
+    /// controller to update UI.
     public static func addAccount(node: String, domain: String, managedObjectContext moc: NSManagedObjectContext) throws -> VIAccountMO {
         if let existedAccount = getAccount(node, domain: domain, managedObjectContext: moc) {
             return existedAccount

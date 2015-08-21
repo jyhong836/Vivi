@@ -665,7 +665,7 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" topStrut="YES"/>
-                        <rect key="contentRect" x="515" y="511" width="650" height="289"/>
+                        <rect key="contentRect" x="515" y="190" width="650" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
                         <value key="minSize" type="size" width="650" height="450"/>
                     </window>
@@ -926,14 +926,14 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXf-Se-1co">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXf-Se-1co">
                                 <rect key="frame" x="0.0" y="0.0" width="512" height="80"/>
                                 <clipView key="contentView" id="BhO-PS-CHh">
-                                    <rect key="frame" x="1" y="1" width="510" height="78"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="512" height="80"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <collectionView id="MvE-hN-FDV" userLabel="Roster Collection View">
-                                            <rect key="frame" x="0.0" y="0.0" width="510" height="78"/>
+                                        <collectionView selectable="YES" allowsMultipleSelection="YES" maxNumberOfRows="1" id="MvE-hN-FDV" userLabel="Roster Collection View">
+                                            <rect key="frame" x="0.0" y="0.0" width="512" height="80"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <connections>
@@ -969,7 +969,7 @@
                     </connections>
                 </viewController>
                 <customObject id="YpK-SA-0di" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Account" automaticallyPreparesContent="YES" id="IcQ-sK-1Uz">
+                <arrayController mode="entity" entityName="Account" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="IcQ-sK-1Uz">
                     <connections>
                         <binding destination="fW5-7j-gLY" name="managedObjectContext" keyPath="self.managedObjectContext" id="W9d-wH-Tli"/>
                     </connections>
@@ -1423,7 +1423,11 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="e4p-zm-ibf" name="value" keyPath="representedObject.node" id="msj-tg-VcS"/>
+                                    <binding destination="e4p-zm-ibf" name="value" keyPath="representedObject.node" id="se9-Zq-00h">
+                                        <dictionary key="options">
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </textField>
                         </subviews>

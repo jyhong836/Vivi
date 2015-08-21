@@ -21,30 +21,34 @@ public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
     
     public func rosterDidInitialize(roster: SWXMPPRoster!) {
         NSLog("roster did initialize")
-        let items = roster.getItems() as NSArray as! [SWRosterItem!]
-        for groupname in roster.getGroups() {
-            addGroup(groupname)
-        }
-        do {
-            for item in items {
-                let newAccount = try VIAccountMO.addAccount(item.account, managedObjectContext: self.managedObjectContext!)
-                for groupname in (item.groups as NSArray as! [String!]) {
-                    let (groupMO, _) = addGroup(groupname)
-                    newAccount.addGroup(groupMO)
-                }
+        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+            let items = roster.getItems() as NSArray as! [SWRosterItem!]
+            for groupname in roster.getGroups() {
+                self.addGroup(groupname)
             }
-        } catch {
-            fatalError("Fail to add account: \(error)")
-        }
+            do {
+                for item in items {
+                    let newAccount = try VIAccountMO.addAccount(item.account, managedObjectContext: self.managedObjectContext!)
+                    for groupname in (item.groups as NSArray as! [String!]) {
+                        let (groupMO, _) = self.addGroup(groupname)
+                        newAccount.addGroup(groupMO)
+                    }
+                }
+            } catch {
+                fatalError("Fail to add account: \(error)")
+            }
+        })
     }
     
     public func roster(roster: SWXMPPRoster!, didAddAccount account: SWAccount!) {
         NSLog("roster did add account: \(account.getAccountString())")
-        do {
-            try VIAccountMO.addAccount(account, managedObjectContext: self.managedObjectContext!)
-        } catch {
-            fatalError("Fail to add account: \(error)")
-        }
+        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+            do {
+                try VIAccountMO.addAccount(account, managedObjectContext: self.managedObjectContext!)
+            } catch {
+                fatalError("Fail to add account: \(error)")
+            }
+        })
     }
     
     public func roster(roster: SWXMPPRoster!, didRemoveAccount account: SWAccount!) {

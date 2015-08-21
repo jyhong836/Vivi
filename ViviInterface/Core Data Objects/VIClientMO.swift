@@ -153,22 +153,24 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
     
     public func clientDidReceivePresence(client: SWClient!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow showType: Int32, currentStatus status: String!) {
         NSLog("client(\(client.account.getAccountString())) did receive presence from \(account.getAccountString())")
-        do {
-            let accountMO = try VIAccountMO.addAccount(account.getNodeString(), domain: account.getDomainString(), managedObjectContext: self.managedObjectContext!)
-            
-            if let presence = SWPresenceType(rawValue: presenceType) {
-                accountMO.presence = presence
-            } else {
-                fatalError("Receive unexpected presence code: \(presenceType)")
+        NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+            do {
+                let accountMO = try VIAccountMO.addAccount(account.getNodeString(), domain: account.getDomainString(), managedObjectContext: self.managedObjectContext!)
+                
+                if let presence = SWPresenceType(rawValue: presenceType) {
+                    accountMO.presence = presence
+                } else {
+                    fatalError("Receive unexpected presence code: \(presenceType)")
+                }
+                if let show = SWPresenceShowType(rawValue: showType) {
+                    accountMO.presenceshow = show
+                } else {
+                    fatalError("Receive unexpected presence show code: \(showType)")
+                }
+                self.notificationCenter.postNotificationName(VIClientDidReceivePresence, object: accountMO, userInfo: nil)
+            } catch {
+                fatalError("Receive presence from account cause unexpected error when try to add account:\n \(error)")
             }
-            if let show = SWPresenceShowType(rawValue: showType) {
-                accountMO.presenceshow = show
-            } else {
-                fatalError("Receive unexpected presence show code: \(showType)")
-            }
-            notificationCenter.postNotificationName(VIClientDidReceivePresence, object: accountMO, userInfo: nil)
-        } catch {
-            fatalError("Receive presence from account cause unexpected error when try to add account:\n \(error)")
         }
     }
     
