@@ -77,7 +77,6 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
                 let buddyMO = try VIAccountMO.addAccount(buddy.getNodeString(), domain: buddy.getDomainString(), managedObjectContext: moc!)
                 
                 let newChat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: moc!) as! VIChatMO
-                newChat.owner = self
                 newChat.buddy = buddyMO
                 let chats = self.mutableOrderedSetValueForKey("chats")
                 chats.insertObject(newChat, atIndex: 0)

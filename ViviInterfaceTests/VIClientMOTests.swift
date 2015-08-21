@@ -63,6 +63,18 @@ class VIClientMOTests: XCTestCase {
         notificationCenter.removeObserver(observer)
     }
     
+    func testAddChats() {
+        let swaccount1 = SWAccount(accountName: "testaccount@xxx.1")
+        let (chat1, isNew1) = client!.addChatWithBuddy(swaccount1)
+        XCTAssertTrue(isNew1, "chat should be new")
+        let swaccount2 = SWAccount(accountName: "testaccount@xxx.2")
+        let (chat2, isNew2) = client!.addChatWithBuddy(swaccount2)
+        XCTAssertTrue(isNew2, "chat should be new")
+        XCTAssertEqual(client!.chatCount, 2, "client should have two chat")
+        XCTAssertEqual(client!.chats!.indexOfObject(chat2), 0, "added chat should at index 0")
+        XCTAssertEqual(client!.chats!.indexOfObject(chat1), 1, "old chat should at index 1")
+    }
+    
 //    func testRemoveChatAtIndex() {
 //        let swaccount = SWAccount(accountName: "testaccount@xxx")
 //        client!.addChatWithBuddy(swaccount)

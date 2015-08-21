@@ -79,6 +79,7 @@
 		CDE658CD1B5E8B8000290E34 /* SWClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDE658CB1B5E8B8000290E34 /* SWClient.mm */; };
 		CDE658D01B5EA70F00290E34 /* SWClientAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE658CE1B5EA70F00290E34 /* SWClientAdapter.h */; };
 		CDE658D11B5EA70F00290E34 /* SWClientAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDE658CF1B5EA70F00290E34 /* SWClientAdapter.mm */; };
+		CDE7E20C1B877D260091AAE7 /* VSXMPPRosterDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE7E20B1B877D260091AAE7 /* VSXMPPRosterDelegateTests.swift */; };
 		CDEE686A1B65311600D00EC7 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDEE68691B65311600D00EC7 /* Utils.mm */; };
 		CDEE686C1B6531AF00D00EC7 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = CDEE686B1B6531AF00D00EC7 /* Utils.h */; };
 		CDEE68A41B6545D800D00EC7 /* ViviInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = CDEE68A31B6545D800D00EC7 /* ViviInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -262,6 +263,7 @@
 		CDE658CB1B5E8B8000290E34 /* SWClient.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = SWClient.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CDE658CE1B5EA70F00290E34 /* SWClientAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWClientAdapter.h; sourceTree = "<group>"; };
 		CDE658CF1B5EA70F00290E34 /* SWClientAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = SWClientAdapter.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		CDE7E20B1B877D260091AAE7 /* VSXMPPRosterDelegateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSXMPPRosterDelegateTests.swift; sourceTree = "<group>"; };
 		CDEE68691B65311600D00EC7 /* Utils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Utils.mm; sourceTree = "<group>"; };
 		CDEE686B1B6531AF00D00EC7 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		CDEE68A11B6545D800D00EC7 /* ViviInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViviInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -572,6 +574,7 @@
 				CDBD30631B849C3E0064BA33 /* VIAccountMOTests.swift */,
 				CDC3220D1B84CFB70029CA91 /* VIChatMOTests.swift */,
 				CDC3220F1B84D7080029CA91 /* VIRosterMOTests.swift */,
+				CDE7E20B1B877D260091AAE7 /* VSXMPPRosterDelegateTests.swift */,
 				CDEE68B31B6545D800D00EC7 /* Info.plist */,
 			);
 			path = ViviInterfaceTests;
@@ -988,6 +991,7 @@
 				CDC322121B84D9930029CA91 /* VIClientMOTests.swift in Sources */,
 				CD4C3A5D1B6BC5E400C283E6 /* SWClientFactory.swift in Sources */,
 				CDB990E91B664E5D00598C51 /* TestUtils.swift in Sources */,
+				CDE7E20C1B877D260091AAE7 /* VSXMPPRosterDelegateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

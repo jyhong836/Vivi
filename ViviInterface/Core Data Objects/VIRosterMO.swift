@@ -60,6 +60,7 @@ public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
     public func roster(roster: SWXMPPRoster!, didUpdateItem item: SWRosterItem!) {
         NSLog("roster did update item name: \(item.name)")
         do {
+            // FIXME: Will this cause UI update or not?
             let newAccount = try VIAccountMO.addAccount(item.account, managedObjectContext: self.managedObjectContext!)
             for groupname in (item.groups as NSArray as! [String!]) {
                 let (groupMO, _) = addGroup(groupname)
