@@ -11,7 +11,10 @@
 #import "SWAccount.h"
 #import "SWXMPPRoster.h"
 #import "VSClientControllerProtocol.h"
-#include <Swiften/Swiften.h>
+
+#import <Swiften/MUC/MUCManager.h>
+#import <Swiften/Network/BoostNetworkFactories.h>
+
 using namespace Swift;
 #import "SWClientAdapter.h"
 

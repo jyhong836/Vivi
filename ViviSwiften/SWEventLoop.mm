@@ -7,7 +7,9 @@
 //
 
 #import "SWEventLoop.h"
-#include <Swiften/Swiften.h>
+
+#import <Swiften/Network/BoostNetworkFactories.h>
+#import <Swiften/EventLoop/SimpleEventLoop.h>
 using namespace Swift;
 
 @implementation SWEventLoop {

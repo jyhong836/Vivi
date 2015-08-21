@@ -8,12 +8,11 @@
 
 #import "SWRosterItem.h"
 #import "SWAccount.h"
-#import <Swiften/Swiften.h>
+
+#import <Swiften/Roster/XMPPRosterItem.h>
 using namespace Swift;
 
-@implementation SWRosterItem {
-//    XMPPRosterItem* item;
-}
+@implementation SWRosterItem
 
 @synthesize name;
 @synthesize account;
@@ -22,7 +21,6 @@ using namespace Swift;
 - initWithRosterItem: (XMPPRosterItem*)item
 {
     if (self = [super init]) {
-//        item = anItem;
         name = std_str2NSString(item->getName());
         account = [[SWAccount alloc] initWithAccountName: std_str2NSString(item->getJID().toString())];
         groups = [[NSMutableArray alloc] init];

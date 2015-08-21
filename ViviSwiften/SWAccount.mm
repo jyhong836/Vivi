@@ -7,7 +7,8 @@
 //
 
 #import "SWAccount.h"
-#import <Swiften/Swiften.h>
+
+#import <Swiften/JID/JID.h>
 using namespace Swift;
 
 @implementation SWAccount {

@@ -6,9 +6,9 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 #import "SWXMPPRoster.h"
-#import <Swiften/Swiften.h>
 #import "SWRosterItem.h"
 
+#import <Swiften/Roster/XMPPRoster.h>
 using namespace Swift;
 
 @implementation SWXMPPRoster {

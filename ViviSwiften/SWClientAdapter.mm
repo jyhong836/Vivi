@@ -15,6 +15,11 @@
 #import "VSClientControllerProtocol.h"
 #import "VSXMPPRosterDelegate.h"
 
+#import <boost/bind.hpp>
+#import <Swiften/Roster/XMPPRosterImpl.h>
+#import <Swiften/MUC/MUCManager.h>
+#import <Swiften/Network/NetworkFactories.h>
+
 using namespace Swift;
 
 SWClientAdapter::SWClientAdapter(SWAccount* account,
@@ -49,10 +54,6 @@ SWClientAdapter::~SWClientAdapter()
 
 void SWClientAdapter::onConnectedSlot()
 {
-    // TODO: do something in Client
-//    GetRosterRequest::ref rosterRequest = GetRosterRequest::create(getIQRouter());
-//    rosterRequest->onResponse.connect(bind(&SWClientAdapter::onRosterReceivedSlot, this, _1, _2));
-//    rosterRequest->send();
     requestRoster();
     
     // TODO: remove the test presence
@@ -86,18 +87,6 @@ void SWClientAdapter::onDisconnectedSlot(const boost::optional<ClientError> &err
         [swclient setDisconnectHandlerToNil];
     }
 }
-
-//void SWClientAdapter::onRosterReceivedSlot(RosterPayload::ref rosterPayload, ErrorPayload::ref err)
-//{
-//    if (err) {
-//        // TODO: use NS Error Log instead
-////        std::cerr << "Error receiving roster. Continuing anyway.";
-//        NSLog(@"Error receiving roster. Continuing anyway.");
-//    }
-//    // TODO: remove the test presence
-//    // Send initial available presence
-////    sendPresence(Presence::create("TEST presence"));
-//}
 
 void SWClientAdapter::onMessageReceivedSlot(Message::ref msg)
 {

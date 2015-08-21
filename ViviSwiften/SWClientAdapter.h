@@ -9,7 +9,8 @@
 #ifndef __cplusplus
 #error "SWClientAdapter.h" is a C++ header, which shouldn't be included in non-C++ file
 #else
-#import <Swiften/Swiften.h>
+#import <Swiften/Client/Client.h>
+#import <Swiften/Base/API.h>
 
 @class SWAccount;
 @class SWClient;
@@ -21,7 +22,7 @@ namespace Swift
      *
      * SWClient will connect the signals to class slot methods, and call VSClientDelegate in global VSVivi.
      */
-    class SWClientAdapter: public Swift::Client
+    class SWIFTEN_API SWClientAdapter: public Client
     {
     public:
         SWClientAdapter(SWAccount* account,
@@ -35,9 +36,8 @@ namespace Swift
         SWClient* __weak swclient;
         void onConnectedSlot();
         void onDisconnectedSlot(const boost::optional<ClientError> &err);
-        void onRosterReceivedSlot(RosterPayload::ref rosterPayload,ErrorPayload::ref err);
-        void onMessageReceivedSlot(Message::ref msg);
-        void onPresenceReceivedSlot(Presence::ref pres);
+        void onMessageReceivedSlot(boost::shared_ptr<Message> msg);
+        void onPresenceReceivedSlot(boost::shared_ptr<Presence> pres);
         
     private:
         void rosterOnJIDAddedSlot(const JID& jid);
