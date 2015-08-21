@@ -12,6 +12,10 @@ import CoreData
 //@objc(Group)
 public class VIGroupMO: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
-
+    var isShouldBeDeleted: Bool = true
+    
+    public override func awakeFromInsert() {
+        isShouldBeDeleted = false
+    }
+    
 }

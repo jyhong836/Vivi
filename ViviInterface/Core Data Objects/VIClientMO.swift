@@ -79,9 +79,11 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
                 let newChat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: moc!) as! VIChatMO
                 newChat.owner = self
                 newChat.buddy = buddyMO
+                let chats = self.mutableOrderedSetValueForKey("chats")
+                chats.insertObject(newChat, atIndex: 0)
                 
                 notificationCenter.postNotificationName(
-                    VIClientChatDidAddNotification, object: self, userInfo: ["index": 0])
+                    VIClientChatDidAddNotification, object: self, userInfo: ["index": chats.indexOfObject(newChat)])
                 
                 return (newChat, true)
             } catch {

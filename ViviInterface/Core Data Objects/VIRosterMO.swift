@@ -37,6 +37,7 @@ public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
             } catch {
                 fatalError("Fail to add account: \(error)")
             }
+            self.removeNotUpdatedGroup()
         })
     }
     
@@ -71,10 +72,19 @@ public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
     
     public func rosterDidClear(roster: SWXMPPRoster!) {
         NSLog("roster did clear")
-        self.groups = NSSet()
     }
     
     // MARK: Roster access methods
+    
+    func removeNotUpdatedGroup() {
+        let groups = self.mutableSetValueForKey("groups") as NSMutableSet
+        for e in groups {
+            let group = e as! VIGroupMO
+            if group.isShouldBeDeleted {
+                managedObjectContext!.deleteObject(group)
+            }
+        }
+    }
     
     /// Get existed group.
     func getGroup(name: String) -> VIGroupMO? {
@@ -90,6 +100,8 @@ public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
     /// Add new group or get existed group.
     func addGroup(newGroupName: String) -> (VIGroupMO, isNew: Bool) {
         if let group = getGroup(newGroupName) {
+            // FIXME: This would be not efficient if addGroup is called often.
+            group.isShouldBeDeleted = false
             return (group, false)
         } else {
             let moc = self.managedObjectContext
