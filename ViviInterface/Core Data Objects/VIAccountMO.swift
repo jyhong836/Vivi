@@ -57,12 +57,14 @@ public class VIAccountMO: NSManagedObject {
     }
     
     /// Add new account or get existed account. Entity will be
-    /// saved to persistent store immediately, throw relevant error
-    /// when failed and delete the entity from managedObjectContext.
-    ///
-    /// **IMPORTANT**: addAccount will call NSManagedObjectContext.save()
-    /// so you have to call this in mainQueue, if you use binded array
-    /// controller to update UI.
+    /// validated immediately, throw relevant error when failed 
+    /// and delete the entity from managedObjectContext.
+    /// - Parameter node: Account node string.
+    /// - Parameter domain: Account domain string.
+    /// - Parameter managedObjectContext: NSManagedObjectContext
+    /// for core data.
+    /// - Throws: addAccount will call account.validateForInsert(),
+    /// and throw relevant NSError after delete invalidate account.
     public static func addAccount(node: String, domain: String, managedObjectContext moc: NSManagedObjectContext) throws -> VIAccountMO {
         if let existedAccount = getAccount(node, domain: domain, managedObjectContext: moc) {
             return existedAccount
@@ -71,7 +73,7 @@ public class VIAccountMO: NSManagedObject {
             account.node = node
             account.domain = domain
             do {
-                try moc.save()
+                try account.validateForInsert()
             } catch {
                 moc.deleteObject(account)
                 throw error
@@ -80,7 +82,14 @@ public class VIAccountMO: NSManagedObject {
         }
     }
     
-    /// Add new account or get existed account.
+    /// Add new account or get existed account. Entity will be
+    /// validated immediately, throw relevant error when failed
+    /// and delete the entity from managedObjectContext.
+    /// - Parameter swaccount: SWAccount stored relevant messages.
+    /// - Parameter managedObjectContext: NSManagedObjectContext
+    /// for core data.
+    /// - Throws: addAccount will call account.validateForInsert(),
+    /// and throw relevant NSError after delete invalidate account.
     public static func addAccount(swaccount: SWAccount, managedObjectContext moc: NSManagedObjectContext) throws -> VIAccountMO {
         return try addAccount(swaccount.getNodeString(), domain: swaccount.getDomainString(), managedObjectContext: moc)
     }
