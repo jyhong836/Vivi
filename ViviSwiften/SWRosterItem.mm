@@ -31,4 +31,17 @@ using namespace Swift;
     return self;
 }
 
+- (id)initWithName: (NSString*)aName
+       accountName: (NSString*)anAccount
+             group: (NSString*)aGroup
+{
+    if (self = [super init]) {
+        name = aName;
+        account = [[SWAccount alloc] initWithAccountName: anAccount];
+        groups = [[NSMutableArray alloc] init];
+        [groups addObject: aGroup];
+    }
+    return self;
+}
+
 @end

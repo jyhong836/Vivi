@@ -21,6 +21,9 @@ namespace Swift {
 #else
 - (id)initWithRosterItem: (void*)item;
 #endif
+- (id)initWithName: (NSString*)aName
+       accountName: (NSString*)anAccount
+             group: (NSString*)aGroup;
 
 @property (nonatomic)NSString* name;
 @property (nonatomic)SWAccount* account;

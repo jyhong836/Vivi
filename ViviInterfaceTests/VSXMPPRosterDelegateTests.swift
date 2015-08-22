@@ -16,6 +16,8 @@ class VSXMPPRosterDelegateTests: XCTestCase {
     var instance: VSXMPPRosterDelegate?
     
     let testGroupName: [String] = ["test group 1", "test group 2"]
+    let node = "test"
+    let domain = "xxx"
     
     override func setUp() {
         super.setUp()
@@ -37,29 +39,44 @@ class VSXMPPRosterDelegateTests: XCTestCase {
     }
     
     func testRosterDidInitialize() {
-        if let roster = instance as? VIRosterMO {
-            // FIXME: unable to test the cocurrent function.
-        } else {
+//        if let roster = instance as? VIRosterMO {
+//            let groupname = "test"
+//            roster.addGroup(groupname)
+//            roster.rosterDidInitialize(nil)
+//        } else {
             XCTFail("Unimplemented test for this type of VSXMPPRosterDelegate")
-        }
+//        }
     }
 
     func testRosterDidAddAccount() {
-        let node = "test"
-        let domain = "xxx"
+        if !instance!.respondsToSelector(Selector("roster:didAddAccount:")) {
+            XCTFail("Instance has not implement \"roster:didAddAccount:\"")
+        }
         instance!.roster!(nil, didAddAccount: SWAccount(accountName: "\(node)@\(domain)"))
-        // FIXME: unable to test the cocurrent function.
-//        let account = VIAccountMO.getAccount(node, domain: domain, managedObjectContext: moc!)
-//        XCTAssertNotNil(account, "should have added account")
-//        if account != nil {
-//            XCTAssertEqual(account!.node, node, "node doesn't correspond")
-//            XCTAssertEqual(account!.domain, domain, "domain  doesn't correspond")
-//        }
+        let account = VIAccountMO.getAccount(node, domain: domain, managedObjectContext: moc!)
+        XCTAssertNotNil(account, "should have added account")
+        if account != nil {
+            XCTAssertEqual(account!.node, node, "node doesn't correspond")
+            XCTAssertEqual(account!.domain, domain, "domain  doesn't correspond")
+        }
     }
     
     func testRosterDidRemoveAccount() {
+        if !instance!.respondsToSelector(Selector("roster:didRemoveAccount:")) {
+            XCTFail("Instance has not implement \"roster:didRemoveAccount:\"")
+        }
         if let roster = instance as? VIRosterMO {
-            // FIXME: unable to test the cocurrent function.
+            do {
+                try VIAccountMO.addAccount(node+"1", domain: domain, managedObjectContext: moc!)
+                XCTAssertNotNil(VIAccountMO.getAccount(node+"1", domain: domain, managedObjectContext: moc!), "account should have been added")
+                let account = try VIAccountMO.addAccount(node, domain: domain, managedObjectContext: moc!)
+                XCTAssertNotNil(VIAccountMO.getAccount(node, domain: domain, managedObjectContext: moc!), "account should have been added")
+                roster.roster(nil, didRemoveAccount: account.swaccount)
+                XCTAssertNil(VIAccountMO.getAccount(node, domain: domain, managedObjectContext: moc!), "account should have been removed")
+                XCTAssertNotNil(VIAccountMO.getAccount(node+"1", domain: domain, managedObjectContext: moc!), "account should have been added")
+            } catch {
+                XCTFail("Unexpected error")
+            }
         } else {
             XCTFail("Unimplemented test for this type of VSXMPPRosterDelegate")
         }
@@ -67,7 +84,11 @@ class VSXMPPRosterDelegateTests: XCTestCase {
     
     func testDidUpdateItem() {
         if let roster = instance as? VIRosterMO {
-            // FIXME: unable to test the cocurrent function.
+            roster.roster(nil, didUpdateItem: SWRosterItem(name: "name", accountName: "\(node)@\(domain)", group: "Buddies"))
+            let group = roster.getGroup("Buddies")
+            XCTAssertNotNil(group, "should have added group")
+            let account = VIAccountMO.getAccount(node, domain: domain, managedObjectContext: moc!)
+            XCTAssertNotNil(account?.groups?.containsObject(group!), "account should have set group")
         } else {
             XCTFail("Unimplemented test for this type of VSXMPPRosterDelegate")
         }

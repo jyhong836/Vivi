@@ -94,12 +94,16 @@ public class VIAccountMO: NSManagedObject {
         return try addAccount(swaccount.getNodeString(), domain: swaccount.getDomainString(), managedObjectContext: moc)
     }
     
+    /// Try to remove account. If account does not exist in core
+    /// data, return without do anything.
     public static func removeAccount(node: String, domain: String, managedObjectContext moc: NSManagedObjectContext) {
         if let account = getAccount(node, domain: domain, managedObjectContext: moc) {
             moc.deleteObject(account)
         }
     }
     
+    /// Try to remove account. If account does not exist in core
+    /// data, return without do anything.
     public static func removeAccount(swaccount: SWAccount, managedObjectContext moc: NSManagedObjectContext) {
         removeAccount(swaccount.getNodeString(), domain: swaccount.getDomainString(), managedObjectContext: moc)
     }
