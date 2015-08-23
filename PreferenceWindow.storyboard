@@ -23,16 +23,16 @@
                                     </allowedInputSourceLocales>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="50f-P2-XHx" name="enabled" keyPath="selection.enabled" id="umA-mT-Pr8">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
                                     <binding destination="50f-P2-XHx" name="value" keyPath="selection.accountname" id="t4Y-fw-2pf">
                                         <dictionary key="options">
                                             <bool key="NSAlwaysPresentsApplicationModalAlerts" value="YES"/>
                                             <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSValidatesImmediately" value="YES"/>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="50f-P2-XHx" name="enabled" keyPath="selection.enabled" id="umA-mT-Pr8">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
                                         </dictionary>
                                     </binding>
                                 </connections>
