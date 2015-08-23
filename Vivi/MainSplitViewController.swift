@@ -14,11 +14,11 @@ class MainSplitViewController: NSSplitViewController {
         super.viewDidLoad()
         // Do view setup here.
         let mainVC = splitViewItems[0].viewController as! MainViewController
+        self.splitViewItems[1].collapsed = true
         mainVC.rosterViewCollapse = {
             () -> Void in
             self.splitViewItems[1].animator().collapsed = !self.splitViewItems[1].collapsed
         }
-        self.splitViewItems[1].collapsed = true
     }
     
 }

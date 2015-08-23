@@ -736,23 +736,11 @@
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                     </button>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="dgn-bD-CAb" userLabel="Login Button">
-                                                        <rect key="frame" x="208" y="12" width="20" height="20"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="20" id="ajb-Ww-DcY"/>
-                                                        </constraints>
-                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFollowLinkFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="ctl-Fq-JLR">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <action selector="loginButtonClicked:" target="XfG-lQ-9wD" id="EOc-KZ-rf9"/>
-                                                        </connections>
-                                                    </button>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rcz-ln-1OZ">
-                                                        <rect key="frame" x="180" y="13" width="20" height="18"/>
+                                                        <rect key="frame" x="210" y="13" width="20" height="18"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="20" id="nNS-uj-duR"/>
+                                                            <constraint firstAttribute="height" constant="18" id="4sv-uL-sUP"/>
+                                                            <constraint firstAttribute="width" constant="20" id="yQV-D1-uVA"/>
                                                         </constraints>
                                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSEveryone" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="o60-Xm-7eq">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -762,23 +750,52 @@
                                                             <action selector="rosterButtonClicked:" target="XfG-lQ-9wD" id="XLi-nR-fxM"/>
                                                         </connections>
                                                     </button>
+                                                    <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cPK-zQ-RDv" userLabel="Presence Pop Up Button">
+                                                        <rect key="frame" x="54" y="3" width="82" height="19"/>
+                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="3702CB70-294D-4EB7-9C6B-D0B18D9EB181" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                                            <font key="font" metaFont="systemBold" size="12"/>
+                                                            <menu key="menu" id="P30-Lt-lYY">
+                                                                <items>
+                                                                    <menuItem title="Offline" id="BiQ-f5-EAm"/>
+                                                                    <menuItem title="Invisible" image="NSStatusNone" id="BhH-2m-cHH" userLabel="Invisible">
+                                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                                    </menuItem>
+                                                                    <menuItem isSeparatorItem="YES" id="KJr-TD-shQ"/>
+                                                                    <menuItem title="Online" image="NSStatusAvailable" id="ZxI-M9-tEj" userLabel="Online"/>
+                                                                    <menuItem isSeparatorItem="YES" id="Wqz-Mw-lTB"/>
+                                                                    <menuItem title="Away" image="NSStatusUnavailable" id="eNe-I7-59z"/>
+                                                                </items>
+                                                            </menu>
+                                                        </popUpButtonCell>
+                                                        <connections>
+                                                            <action selector="changePresenceBtnClicked:" target="XfG-lQ-9wD" id="Pgb-ef-Naz"/>
+                                                        </connections>
+                                                    </popUpButton>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rzw-I8-z9t">
+                                                        <rect key="frame" x="52" y="23" width="54" height="17"/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="account" id="VJO-pn-6wQ">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
                                                     <progressIndicator hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="HqU-XE-vbp">
-                                                        <rect key="frame" x="210" y="14" width="16" height="16"/>
+                                                        <rect key="frame" x="119" y="5" width="16" height="16"/>
                                                     </progressIndicator>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="Dkh-5M-qmJ" firstAttribute="leading" secondItem="IWe-AH-D1C" secondAttribute="leading" constant="8" id="2k5-Y3-h0Q"/>
-                                                    <constraint firstItem="Dkh-5M-qmJ" firstAttribute="centerY" secondItem="HqU-XE-vbp" secondAttribute="centerY" id="87P-za-3aO"/>
-                                                    <constraint firstItem="dgn-bD-CAb" firstAttribute="top" secondItem="IWe-AH-D1C" secondAttribute="top" constant="28" id="8bW-nz-8yb"/>
-                                                    <constraint firstItem="rcz-ln-1OZ" firstAttribute="centerY" secondItem="Dkh-5M-qmJ" secondAttribute="centerY" id="94X-3N-QTj"/>
+                                                    <constraint firstItem="rcz-ln-1OZ" firstAttribute="top" secondItem="IWe-AH-D1C" secondAttribute="top" constant="29" id="Cm3-bt-O0B"/>
                                                     <constraint firstItem="Dkh-5M-qmJ" firstAttribute="top" secondItem="IWe-AH-D1C" secondAttribute="top" constant="20" symbolic="YES" id="DV9-Pj-c5I"/>
-                                                    <constraint firstItem="rcz-ln-1OZ" firstAttribute="centerY" secondItem="dgn-bD-CAb" secondAttribute="centerY" id="E4s-zi-3VY"/>
-                                                    <constraint firstAttribute="trailing" secondItem="dgn-bD-CAb" secondAttribute="trailing" constant="14" id="JsU-EP-IsR"/>
-                                                    <constraint firstItem="dgn-bD-CAb" firstAttribute="leading" secondItem="rcz-ln-1OZ" secondAttribute="trailing" constant="8" symbolic="YES" id="MaO-pL-PGB"/>
-                                                    <constraint firstItem="HqU-XE-vbp" firstAttribute="centerX" secondItem="dgn-bD-CAb" secondAttribute="centerX" id="T6t-Ii-9vJ"/>
+                                                    <constraint firstItem="HqU-XE-vbp" firstAttribute="leading" secondItem="Dkh-5M-qmJ" secondAttribute="trailing" constant="75" id="GN0-pF-AM6"/>
+                                                    <constraint firstItem="rzw-I8-z9t" firstAttribute="top" secondItem="Dkh-5M-qmJ" secondAttribute="top" id="MkQ-5N-rba"/>
+                                                    <constraint firstItem="HqU-XE-vbp" firstAttribute="centerY" secondItem="cPK-zQ-RDv" secondAttribute="centerY" id="Nlb-S7-Kne"/>
                                                     <constraint firstAttribute="bottom" secondItem="Dkh-5M-qmJ" secondAttribute="bottom" constant="4" id="Xaw-f7-BlV"/>
-                                                    <constraint firstItem="rcz-ln-1OZ" firstAttribute="top" secondItem="IWe-AH-D1C" secondAttribute="top" constant="29" id="hrY-VJ-GQj"/>
-                                                    <constraint firstItem="rcz-ln-1OZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dkh-5M-qmJ" secondAttribute="trailing" constant="20" id="phg-OR-qWn"/>
+                                                    <constraint firstAttribute="trailing" secondItem="rcz-ln-1OZ" secondAttribute="trailing" constant="12" id="avH-xc-MSA"/>
+                                                    <constraint firstItem="cPK-zQ-RDv" firstAttribute="bottom" secondItem="Dkh-5M-qmJ" secondAttribute="bottom" id="jmZ-Wp-QTI"/>
+                                                    <constraint firstItem="cPK-zQ-RDv" firstAttribute="leading" secondItem="Dkh-5M-qmJ" secondAttribute="trailing" constant="10" symbolic="YES" id="okz-K0-5PG"/>
+                                                    <constraint firstItem="cPK-zQ-RDv" firstAttribute="leading" secondItem="rzw-I8-z9t" secondAttribute="leading" id="t65-eW-Un0"/>
                                                 </constraints>
                                             </visualEffectView>
                                         </subviews>
@@ -833,10 +850,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="accountLabel" destination="rzw-I8-z9t" id="dpl-UV-LQR"/>
                         <outlet property="avaterButton" destination="Dkh-5M-qmJ" id="jdz-mP-JBw"/>
                         <outlet property="chatView" destination="R3h-kS-2Cc" id="LMv-Wr-IT6"/>
-                        <outlet property="connectButton" destination="dgn-bD-CAb" id="7CC-jE-pCX"/>
                         <outlet property="connectSpinner" destination="HqU-XE-vbp" id="T35-um-TU3"/>
+                        <outlet property="presencePopUpButton" destination="cPK-zQ-RDv" id="Q0b-dw-BnT"/>
                         <outlet property="rosterButton" destination="rcz-ln-1OZ" id="ne8-ux-c3w"/>
                         <outlet property="sesConView" destination="SeZ-t9-alR" id="d4x-3b-FZ0"/>
                         <outlet property="sessionView" destination="o8d-Ct-cxH" id="d2T-zt-Cdb"/>
@@ -1245,7 +1263,7 @@ DQ
         <scene sceneID="dne-AY-w1U">
             <objects>
                 <viewController id="ZTq-eb-EqD" userLabel="Chat Message View Controller" customClass="ChatMessageViewController" customModule="Vivi" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="4Ge-Hu-069" userLabel="Chat Message View">
+                    <view key="view" id="4Ge-Hu-069" userLabel="Chat Message View">
                         <rect key="frame" x="0.0" y="0.0" width="489" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -1361,7 +1379,7 @@ DQ
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <visualEffectView blendingMode="withinWindow" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="xb6-Of-oR6">
+                            <visualEffectView wantsLayer="YES" blendingMode="withinWindow" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="xb6-Of-oR6">
                                 <rect key="frame" x="0.0" y="290" width="489" height="60"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="3Cx-Qe-OBe" userLabel="Lock Button">
@@ -1473,11 +1491,63 @@ DQ
         </scene>
     </scenes>
     <resources>
+        <image name="3702CB70-294D-4EB7-9C6B-D0B18D9EB181" width="1" height="1">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
+GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
+c1dOU0NvbG9ygAKADRIgwwAAgAOAC1Z7MSwgMX3SFQoWGFpOUy5vYmplY3RzoReABIAK0hUKGh2iGxyA
+BYAGgAkQANIgCiEiXxAUTlNUSUZGUmVwcmVzZW50YXRpb26AB4AITxEIdE1NACoAAAAKAAAADgEAAAMA
+AAABAAEAAAEBAAMAAAABAAEAAAECAAMAAAACAAgACAEDAAMAAAABAAEAAAEGAAMAAAABAAEAAAERAAQA
+AAABAAAACAESAAMAAAABAAEAAAEVAAMAAAABAAIAAAEWAAMAAAABAAEAAAEXAAQAAAABAAAAAgEcAAMA
+AAABAAEAAAFSAAMAAAABAAEAAAFTAAMAAAACAAEAAYdzAAcAAAe8AAAAuAAAAAAAAAe8YXBwbAIgAABt
+bnRyR1JBWVhZWiAH0AACAA4ADAAAAABhY3NwQVBQTAAAAABub25lAAAAAAAAAAAAAAAAAAAAAAAA9tYA
+AQAAAADTLWFwcGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVk
+ZXNjAAAAwAAAAG9kc2NtAAABMAAABi5jcHJ0AAAHYAAAADh3dHB0AAAHmAAAABRrVFJDAAAHrAAAAA5k
+ZXNjAAAAAAAAABVHZW5lcmljIEdyYXkgUHJvZmlsZQAAAAAAAAAAAAAAFUdlbmVyaWMgR3JheSBQcm9m
+aWxlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbWx1YwAAAAAA
+AAAeAAAADHNrU0sAAAAqAAABeGRhREsAAAA0AAABomNhRVMAAAAsAAAB1nB0QlIAAAAqAAACAnVrVUEA
+AAAsAAACLGZyRlUAAAAqAAACWGh1SFUAAAAuAAACgnpoVFcAAAAQAAACsG5iTk8AAAAsAAACwGNzQ1oA
+AAAkAAAC7GhlSUwAAAAgAAADEGl0SVQAAAAuAAADMHJvUk8AAAAkAAADXmRlREUAAAA6AAADgmtvS1IA
+AAAYAAADvHN2U0UAAAAuAAAD1HpoQ04AAAAQAAAEAmphSlAAAAAWAAAEEmVsR1IAAAAkAAAEKHB0UE8A
+AAA4AAAETG5sTkwAAAAqAAAEhGVzRVMAAAAoAAAErnRoVEgAAAAkAAAE1nRyVFIAAAAiAAAE+mZpRkkA
+AAAsAAAFHGhySFIAAAA6AAAFSHBsUEwAAAA2AAAFgnJ1UlUAAAAmAAAFuGFyRUcAAAAoAAAF3mVuVVMA
+AAAoAAAGBgBWAWEAZQBvAGIAZQBjAG4A/QAgAHMAaQB2AP0AIABwAHIAbwBmAGkAbABHAGUAbgBlAHIA
+ZQBsACAAZwByAOUAdABvAG4AZQBiAGUAcwBrAHIAaQB2AGUAbABzAGUAUABlAHIAZgBpAGwAIABkAGUA
+IABnAHIAaQBzACAAZwBlAG4A6AByAGkAYwBQAGUAcgBmAGkAbAAgAEMAaQBuAHoAYQAgAEcAZQBuAOkA
+cgBpAGMAbwQXBDAEMwQwBDsETAQ9BDgEOQAgBD8EQAQ+BEQEMAQ5BDsAIABHAHIAYQB5AFAAcgBvAGYA
+aQBsACAAZwDpAG4A6QByAGkAcQB1AGUAIABnAHIAaQBzAMEAbAB0AGEAbADhAG4AbwBzACAAcwB6APwA
+cgBrAGUAIABwAHIAbwBmAGkAbJAadShwcJaOgnJfaWPPj/AARwBlAG4AZQByAGkAcwBrACAAZwByAOUA
+dABvAG4AZQBwAHIAbwBmAGkAbABPAGIAZQBjAG4A/QAgAWEAZQBkAP0AIABwAHIAbwBmAGkAbAXkBegF
+1QXkBdkF3AAgAEcAcgBhAHkAIAXbBdwF3AXZAFAAcgBvAGYAaQBsAG8AIABnAHIAaQBnAGkAbwAgAGcA
+ZQBuAGUAcgBpAGMAbwBQAHIAbwBmAGkAbAAgAGcAcgBpACAAZwBlAG4AZQByAGkAYwBBAGwAbABnAGUA
+bQBlAGkAbgBlAHMAIABHAHIAYQB1AHMAdAB1AGYAZQBuAC0AUAByAG8AZgBpAGzHfLwYACAARwByAGEA
+eQAg1QS4XNMMx3wARwBlAG4AZQByAGkAcwBrACAAZwByAOUAcwBrAGEAbABlAHAAcgBvAGYAaQBsZm6Q
+GnBwXqZjz4/wZYdO9k4AgiwwsDDsMKQw1zDtMNUwoTCkMOsDkwO1A70DuQO6A8wAIAPAA8EDvwPGA68D
+uwAgA7MDugPBA7kAUABlAHIAZgBpAGwAIABnAGUAbgDpAHIAaQBjAG8AIABkAGUAIABjAGkAbgB6AGUA
+bgB0AG8AcwBBAGwAZwBlAG0AZQBlAG4AIABnAHIAaQBqAHMAcAByAG8AZgBpAGUAbABQAGUAcgBmAGkA
+bAAgAGcAcgBpAHMAIABnAGUAbgDpAHIAaQBjAG8OQg4bDiMORA4fDiUOTA4qDjUOQA4XDjIOFw4xDkgO
+Jw5EDhsARwBlAG4AZQBsACAARwByAGkAIABQAHIAbwBmAGkAbABpAFkAbABlAGkAbgBlAG4AIABoAGEA
+cgBtAGEAYQBwAHIAbwBmAGkAaQBsAGkARwBlAG4AZQByAGkBDQBrAGkAIABwAHIAbwBmAGkAbAAgAHMA
+aQB2AGkAaAAgAHQAbwBuAG8AdgBhAFUAbgBpAHcAZQByAHMAYQBsAG4AeQAgAHAAcgBvAGYAaQBsACAA
+cwB6AGEAcgBvAVsAYwBpBB4EMQRJBDgEOQAgBEEENQRABEsEOQAgBD8EQAQ+BEQEOAQ7BEwGRQZEBkEA
+IAYqBjkGMQZKBkEAIABHAHIAYQB5ACAGJwZEBjkGJwZFAEcAZQBuAGUAcgBpAGMAIABHAHIAYQB5ACAA
+UAByAG8AZgBpAGwAZQAAdGV4dAAAAABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRz
+IHJlc2VydmVkLgBYWVogAAAAAAAA81EAAQAAAAEWzGN1cnYAAAAAAAAAAQHNAADSJSYnKFokY2xhc3Nu
+YW1lWCRjbGFzc2VzXxAQTlNCaXRtYXBJbWFnZVJlcKMpKitfEBBOU0JpdG1hcEltYWdlUmVwWk5TSW1h
+Z2VSZXBYTlNPYmplY3TSJSYtLldOU0FycmF5oi0r0iUmMDFeTlNNdXRhYmxlQXJyYXmjMC0r0zM0CjU2
+N1dOU1doaXRlXE5TQ29sb3JTcGFjZUQwIDAAEAOADNIlJjk6V05TQ29sb3KiOSvSJSY8PVdOU0ltYWdl
+ojwrXxAPTlNLZXllZEFyY2hpdmVy0UBBVHJvb3SAAQAIABEAGgAjAC0AMgA3AEYATABXAF4AZQByAHkA
+gQCDAIUAigCMAI4AlQCaAKUApwCpAKsAsACzALUAtwC5ALsAwADXANkA2wlTCVgJYwlsCX8JgwmWCaEJ
+qgmvCbcJugm/Cc4J0gnZCeEJ7gnzCfUJ9wn8CgQKBwoMChQKFwopCiwKMQAAAAAAAAIBAAAAAAAAAEIA
+AAAAAAAAAAAAAAAAAAozA
+</mutableData>
+        </image>
         <image name="InMessageBuble" width="39" height="25"/>
         <image name="NSEveryone" width="32" height="32"/>
-        <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
         <image name="NSLockLockedTemplate" width="10" height="14"/>
         <image name="NSStatusAvailable" width="16" height="16"/>
+        <image name="NSStatusNone" width="16" height="16"/>
+        <image name="NSStatusUnavailable" width="16" height="16"/>
         <image name="NSStopProgressTemplate" width="11" height="11"/>
         <image name="NSUser" width="32" height="32"/>
         <image name="NSUserGuest" width="32" height="32"/>

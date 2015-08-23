@@ -26,6 +26,7 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
             sessionViewController?.currentClient = currentClient
             if viewLoaded {
                 updateButtonStates()
+                accountLabel.stringValue = (currentClient?.account.getAccountString())!
             }
         }
     }
@@ -159,48 +160,52 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
     
     // MARK: Buttons
     
+    @IBOutlet weak var accountLabel: NSTextField!
     @IBOutlet weak var avaterButton: NSButton!
-    @IBOutlet weak var connectButton: NSButton!
     @IBOutlet weak var rosterButton: NSButton!
+    @IBOutlet weak var presencePopUpButton: NSPopUpButton!
     
     private func updateButtonStates() {
         if currentClient != nil {
             avaterButton.enabled = true
-            connectButton.enabled = true
             rosterButton.enabled = true
+            presencePopUpButton.enabled = true
         } else {
             avaterButton.enabled = false
-            connectButton.enabled = false
             rosterButton.enabled = false
+            presencePopUpButton.enabled = false
         }
     }
     
     @IBOutlet weak var connectSpinner: NSProgressIndicator!
-    @IBAction func loginButtonClicked(sender: AnyObject) {
-        connectButton.hidden = true
-        connectSpinner.hidden = false
-        connectSpinner.startAnimation(sender)
-        if let c = currentClient {
-            c.connectWithHandler({ (errcode) -> Void in
-                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                    self.connectButton.hidden = false
-                    self.connectSpinner.hidden = true
-                    self.connectSpinner.stopAnimation(sender)
-                    if let err = SWClientErrorType(rawValue: errcode) {
-                        let alert = NSAlert()
-                        alert.addButtonWithTitle("OK")
-                        alert.messageText = "Error: \(err)"
-                        alert.runModal()
-                    }
-                })
-            })
-        }
-    }
     
     var rosterViewCollapse: (()->Void)?
     
     @IBAction func rosterButtonClicked(sender: NSButton) {
         rosterViewCollapse?()
+    }
+    @IBAction func changePresenceBtnClicked(sender: NSPopUpButton) {
+        if sender.selectedItem?.title != "Offline" {
+            let image = sender.selectedItem?.image
+            sender.selectedItem?.image = nil
+            connectSpinner.hidden = false
+            connectSpinner.startAnimation(sender)
+            if let c = currentClient {
+                c.connectWithHandler({ (errcode) -> Void in
+                    NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                        self.connectSpinner.hidden = true
+                        sender.selectedItem?.image = image
+                        self.connectSpinner.stopAnimation(sender)
+                        if let err = SWClientErrorType(rawValue: errcode) {
+                            let alert = NSAlert()
+                            alert.addButtonWithTitle("OK")
+                            alert.messageText = "Error: \(err)"
+                            alert.runModal()
+                        }
+                    })
+                })
+            }
+        }
     }
 }
 
