@@ -1207,11 +1207,11 @@
                                 </scroller>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KcA-ZZ-Kpf">
-                                <rect key="frame" x="410" y="-2" width="79" height="32"/>
+                                <rect key="frame" x="383" y="-2" width="106" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="67" id="Wuz-KZ-X0Y"/>
+                                    <constraint firstAttribute="width" constant="94" id="Wuz-KZ-X0Y"/>
                                 </constraints>
-                                <buttonCell key="cell" type="push" title="Send" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dfO-EE-2MT">
+                                <buttonCell key="cell" type="push" title="Send(⌘↩︎)" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" sound="Morse" inset="2" id="dfO-EE-2MT">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                     <string key="keyEquivalent" base64-UTF8="YES">
@@ -1256,7 +1256,7 @@ DQ
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="60" viewBased="YES" id="ZWo-vN-myc" userLabel="Message Table View">
-                                            <rect key="frame" x="0.0" y="0.0" width="487" height="348"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="487" height="289"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1482,5 +1482,6 @@ DQ
         <image name="NSUser" width="32" height="32"/>
         <image name="NSUserGuest" width="32" height="32"/>
         <image name="OutMessageBuble" width="39" height="26"/>
+        <sound name="Morse"/>
     </resources>
 </document>
