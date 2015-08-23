@@ -100,6 +100,10 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             (currentClient?.managedObject as! VIClientMO).selectedChatIndex = proposedSelectionIndexes.lastIndex
             updateCellNewMessageIconAtIndex(proposedSelectionIndexes.lastIndex, hasNew: false)
         }
+        for index in proposedSelectionIndexes {
+            let view = tableView.viewAtColumn(0, row: index, makeIfNecessary: false) as! SessionTableCellView
+            view.switchSeperator()
+        }
         return proposedSelectionIndexes
     }
     

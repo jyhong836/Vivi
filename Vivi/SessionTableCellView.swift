@@ -14,6 +14,11 @@ class SessionTableCellView: NSTableCellView {
     
     @IBOutlet weak var newMessageIcon: NSImageView!
     @IBOutlet weak var avaterImageView: NSImageView!
+    @IBOutlet weak var seperator: NSBox!
+    
+    func switchSeperator() {
+        seperator.hidden = !seperator.hidden
+    }
     
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)
