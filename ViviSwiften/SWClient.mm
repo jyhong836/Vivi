@@ -154,6 +154,16 @@ using namespace Swift;
     }
 }
 
+- (void)sendPresence: (int)presenceType
+            showType: (int)showType
+              status: (NSString*)status
+{
+    Presence::ref presence = Presence::create(NSString2std_str(status));
+    presence->setType((Presence::Type)presenceType);
+    presence->setShow((StatusShow::Type)showType);
+    client->sendPresence(presence);
+}
+
 - (BOOL)isAvailable
 {
     return client->isAvailable();

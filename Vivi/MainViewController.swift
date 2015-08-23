@@ -184,26 +184,77 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
     @IBAction func rosterButtonClicked(sender: NSButton) {
         rosterViewCollapse?()
     }
+    
+    /// Require currentClient not be nil
+    func sendPresence(presence: String) {
+        let (pres, show, status) = SWPresenceType.parseFrom(presence)
+        NSLog("send presence(\(presence)): \(pres), \(show), \(status)")
+        currentClient!.sendPresence(pres.rawValue, showType: show.rawValue, status: status)
+    }
+    
     @IBAction func changePresenceBtnClicked(sender: NSPopUpButton) {
-        if sender.selectedItem?.title != "Offline" {
-            let image = sender.selectedItem?.image
-            sender.selectedItem?.image = nil
-            connectSpinner.hidden = false
-            connectSpinner.startAnimation(sender)
+        let title = sender.selectedItem?.title
+        guard title != nil else {
+            fatalError("presence title is nil")
+        }
+        if title == "Offline" {
+            // Try to disconnect client to server
             if let c = currentClient {
+                if !c.isActive() {
+                    return
+                }
+                
+                connectSpinner.hidden = false
+                connectSpinner.startAnimation(sender)
+                c.disconnectWithHandler({ (errcode) -> Void in
+                    self.connectSpinner.hidden = true
+                    self.connectSpinner.stopAnimation(sender)
+                    if let err = SWClientErrorType(rawValue: errcode) {
+                        let alert = NSAlert()
+                        alert.addButtonWithTitle("OK")
+                        alert.messageText = "Error: \(err)"
+                        alert.runModal()
+                    }
+                })
+            } else {
+                fatalError("Attempt to disconnect from nil client.")
+            }
+        } else {
+            // Try to connect client to server
+            if let c = currentClient {
+                if c.isAvailable() {
+                    sendPresence(title!)
+                    return
+                }
+                // FIXME: If do not disconnect before reconnect, may cause some error.
+//                else if c.isActive() {
+//                    return
+//                }
+                
+                let image = sender.selectedItem?.image
+                sender.selectedItem?.image = nil
+                connectSpinner.hidden = false
+                connectSpinner.startAnimation(sender)
+                
                 c.connectWithHandler({ (errcode) -> Void in
                     NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                        self.connectSpinner.hidden = true
                         sender.selectedItem?.image = image
+                        self.connectSpinner.hidden = true
                         self.connectSpinner.stopAnimation(sender)
                         if let err = SWClientErrorType(rawValue: errcode) {
                             let alert = NSAlert()
                             alert.addButtonWithTitle("OK")
                             alert.messageText = "Error: \(err)"
                             alert.runModal()
+                            sender.selectItemWithTitle("Offline")
                         }
                     })
+                    if SWClientErrorType(rawValue: errcode) == nil {
+                        self.sendPresence(title!)
+                    }
                 })
+            } else {
+                fatalError("Attempt to connect to nil client.")
             }
         }
     }

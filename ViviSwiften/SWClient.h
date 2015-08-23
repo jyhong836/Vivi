@@ -62,6 +62,9 @@ typedef void (^VSSendMessageHandler)(VSClientErrorType);
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
                      Message: (NSString*)message
                      handler: (VSSendMessageHandler)handler;
+- (void)sendPresence: (int)presenceType
+            showType: (int)showType
+              status: (NSString*)status;
 
 /// Checks whether the client is connected to the server, and stanzas can be sent.
 - (BOOL)isAvailable;

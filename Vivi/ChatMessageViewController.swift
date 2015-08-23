@@ -176,7 +176,7 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
             let buddy = chat.buddy!
             let account = buddy.swaccount!
             self.buddyNameTextField.stringValue =
-            "\(account.getNodeString())(\(buddy.presence.toString()!))"
+            "\(account.getNodeString())(\(buddy.presence.parseWithShow(buddy.presenceshow, andStatus: buddy.status)!))"
             self.accountTextField.stringValue = account.getAccountString()
         }
     }

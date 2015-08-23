@@ -56,9 +56,6 @@ void SWClientAdapter::onConnectedSlot()
 {
     requestRoster();
     
-    // TODO: remove the test presence
-    sendPresence(Presence::create(""));
-    
     if ([swclient.delegate respondsToSelector:@selector(clientDidConnect:)])
         [swclient.delegate clientDidConnect: swclient];
     if (swclient.connectHandler) {
@@ -78,12 +75,15 @@ void SWClientAdapter::onDisconnectedSlot(const boost::optional<ClientError> &err
                                      errorCode: -1];
         }
     }
+    int errcode = -1;
+    if (err.is_initialized())
+        errcode = err->getType();
     if (swclient.connectHandler) {
-        swclient.connectHandler(err->getType());
+        swclient.connectHandler(errcode);
         [swclient setConnectHandlerToNil];
     }
     if (swclient.disconnectHandler) {
-        swclient.disconnectHandler(err->getType());
+        swclient.disconnectHandler(errcode);
         [swclient setDisconnectHandlerToNil];
     }
 }
