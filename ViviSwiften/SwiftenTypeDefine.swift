@@ -38,6 +38,7 @@ public enum SWPresenceType: Int32 {
     /// found, presence will be return in status, and presencetyp is
     /// `.Available`, show type is `.Online`.
     public static func parseFrom(presence: String!) -> (presence: SWPresenceType, show: SWPresenceShowType, status: String!) {
+        // FIXME: By default, Swiften will use (show).None for Unavailable presence, (show).Online for Available.
         for (type, str) in SWPresenceTypeStringDict {
             if presence == str {
                 return (presence: type, show: SWPresenceShowType(presence: type), status: "")
@@ -84,7 +85,7 @@ public enum SWPresenceShowType: Int32 {
         }
     }
 }
-let SWPresenceShowTypeStringDict: [SWPresenceShowType: String] = [.Online: "Online", .Away: "Away", .FFC:"FFC", .XA: "XA", .DND: "DND", .None:"None"]
+let SWPresenceShowTypeStringDict: [SWPresenceShowType: String] = [.Online: "Online", .Away: "Away", .FFC:"FFC", .XA: "XA"/* extended away */, .DND: "DND" /* do not disturb */, .None:"None"]
 
 public enum SWClientErrorType: Int32 {
     case UnknownError, DomainNameResolveError, ConnectionError, ConnectionReadError
