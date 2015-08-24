@@ -165,6 +165,22 @@ using namespace Swift;
     client->sendPresence(presence);
 }
 
+- (void)initVisibleList
+{
+    
+}
+
+- (void)setInvisible: (BOOL)invisible
+{
+    if (invisible != _invisible) {
+        if (invisible) {
+            
+        } else {
+            
+        }
+    }
+}
+
 - (BOOL)isAvailable
 {
     return client->isAvailable();

@@ -54,10 +54,12 @@
 		CDA65F5A1B7A089700F832CA /* VIRosterMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA65F4C1B7A089700F832CA /* VIRosterMO+CoreDataProperties.swift */; };
 		CDA65F641B7A36AE00F832CA /* VIClientManager+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA65F631B7A36AE00F832CA /* VIClientManager+CoreData.swift */; };
 		CDA65F671B7AE83E00F832CA /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA65F661B7AE83E00F832CA /* AddAccountViewController.swift */; };
-		CDB2E5D61B8AC9B900677775 /* InvisiblePayload.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5D41B8AC9B900677775 /* InvisiblePayload.hpp */; };
-		CDB2E5DA1B8ACBC800677775 /* InvisiblePayloadParser.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5D81B8ACBC800677775 /* InvisiblePayloadParser.hpp */; };
-		CDB2E5DD1B8ACD8100677775 /* InvisiblePayloadSerializer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDB2E5DB1B8ACD8100677775 /* InvisiblePayloadSerializer.mm */; };
-		CDB2E5DE1B8ACD8100677775 /* InvisiblePayloadSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5DC1B8ACD8100677775 /* InvisiblePayloadSerializer.hpp */; };
+		CDB2E5D61B8AC9B900677775 /* InvisibleListPayload.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5D41B8AC9B900677775 /* InvisibleListPayload.hpp */; };
+		CDB2E5DD1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDB2E5DB1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm */; };
+		CDB2E5DE1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5DC1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp */; };
+		CDB2E5E41B8AEB2500677775 /* InvisibleActivePayload.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5E21B8AEB2500677775 /* InvisibleActivePayload.hpp */; };
+		CDB2E5E71B8AEB9E00677775 /* InvisibleActiveSerializer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDB2E5E51B8AEB9E00677775 /* InvisibleActiveSerializer.mm */; };
+		CDB2E5E81B8AEB9E00677775 /* InvisibleActiveSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5E61B8AEB9E00677775 /* InvisibleActiveSerializer.hpp */; };
 		CDB561541B74FABB002FC599 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB561531B74FABB002FC599 /* PreferenceViewController.swift */; };
 		CDB990E91B664E5D00598C51 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB990E81B664E5D00598C51 /* TestUtils.swift */; };
 		CDBD30641B849C3E0064BA33 /* VIAccountMOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD30631B849C3E0064BA33 /* VIAccountMOTests.swift */; };
@@ -243,10 +245,12 @@
 		CDA65F4C1B7A089700F832CA /* VIRosterMO+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "VIRosterMO+CoreDataProperties.swift"; path = "Core Data Objects/VIRosterMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CDA65F631B7A36AE00F832CA /* VIClientManager+CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VIClientManager+CoreData.swift"; sourceTree = "<group>"; };
 		CDA65F661B7AE83E00F832CA /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
-		CDB2E5D41B8AC9B900677775 /* InvisiblePayload.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisiblePayload.hpp; sourceTree = "<group>"; };
-		CDB2E5D81B8ACBC800677775 /* InvisiblePayloadParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisiblePayloadParser.hpp; sourceTree = "<group>"; };
-		CDB2E5DB1B8ACD8100677775 /* InvisiblePayloadSerializer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InvisiblePayloadSerializer.mm; sourceTree = "<group>"; };
-		CDB2E5DC1B8ACD8100677775 /* InvisiblePayloadSerializer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisiblePayloadSerializer.hpp; sourceTree = "<group>"; };
+		CDB2E5D41B8AC9B900677775 /* InvisibleListPayload.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisibleListPayload.hpp; sourceTree = "<group>"; };
+		CDB2E5DB1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InvisibleListPayloadSerializer.mm; sourceTree = "<group>"; };
+		CDB2E5DC1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisibleListPayloadSerializer.hpp; sourceTree = "<group>"; };
+		CDB2E5E21B8AEB2500677775 /* InvisibleActivePayload.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisibleActivePayload.hpp; sourceTree = "<group>"; };
+		CDB2E5E51B8AEB9E00677775 /* InvisibleActiveSerializer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InvisibleActiveSerializer.mm; sourceTree = "<group>"; };
+		CDB2E5E61B8AEB9E00677775 /* InvisibleActiveSerializer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisibleActiveSerializer.hpp; sourceTree = "<group>"; };
 		CDB561531B74FABB002FC599 /* PreferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PreferenceViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CDB990E81B664E5D00598C51 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		CDBD30631B849C3E0064BA33 /* VIAccountMOTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIAccountMOTests.swift; sourceTree = "<group>"; };
@@ -488,10 +492,12 @@
 		CDB2E5D21B8AC97200677775 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				CDB2E5D41B8AC9B900677775 /* InvisiblePayload.hpp */,
-				CDB2E5D81B8ACBC800677775 /* InvisiblePayloadParser.hpp */,
-				CDB2E5DB1B8ACD8100677775 /* InvisiblePayloadSerializer.mm */,
-				CDB2E5DC1B8ACD8100677775 /* InvisiblePayloadSerializer.hpp */,
+				CDB2E5D41B8AC9B900677775 /* InvisibleListPayload.hpp */,
+				CDB2E5DB1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm */,
+				CDB2E5DC1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp */,
+				CDB2E5E21B8AEB2500677775 /* InvisibleActivePayload.hpp */,
+				CDB2E5E51B8AEB9E00677775 /* InvisibleActiveSerializer.mm */,
+				CDB2E5E61B8AEB9E00677775 /* InvisibleActiveSerializer.hpp */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -638,18 +644,19 @@
 			files = (
 				CDE658CC1B5E8B8000290E34 /* SWClient.h in Headers */,
 				CDE658D01B5EA70F00290E34 /* SWClientAdapter.h in Headers */,
-				CDB2E5DE1B8ACD8100677775 /* InvisiblePayloadSerializer.hpp in Headers */,
+				CDB2E5E81B8AEB9E00677775 /* InvisibleActiveSerializer.hpp in Headers */,
+				CDB2E5DE1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp in Headers */,
 				CD72B2C91B5F6F5300BCFD2A /* SWEventLoop.h in Headers */,
 				CDEE686C1B6531AF00D00EC7 /* Utils.h in Headers */,
-				CDB2E5D61B8AC9B900677775 /* InvisiblePayload.hpp in Headers */,
+				CDB2E5D61B8AC9B900677775 /* InvisibleListPayload.hpp in Headers */,
 				CDC2EE971B6A435800872623 /* VSXMPPRosterDelegate.h in Headers */,
+				CDB2E5E41B8AEB2500677775 /* InvisibleActivePayload.hpp in Headers */,
 				CD72B2CD1B5F7A9800BCFD2A /* SWAccount.h in Headers */,
 				CDC2EE9A1B6A444D00872623 /* SWXMPPRoster.h in Headers */,
 				CD4C3A471B6A77EC00C283E6 /* VSClientControllerProtocol.h in Headers */,
 				CD0932181B5F9757007ACB22 /* VSClientDelegateProtocol.h in Headers */,
 				CDC49E441B5FF91500F5E6E6 /* ViviSwiften.pch in Headers */,
 				CD156DE71B823B0600EFC06F /* SWRosterItem.h in Headers */,
-				CDB2E5DA1B8ACBC800677775 /* InvisiblePayloadParser.hpp in Headers */,
 				CDE658C11B5E71F300290E34 /* VSControllerProtocol.h in Headers */,
 				CDE658911B5E66D400290E34 /* ViviSwiften.h in Headers */,
 				CDDA21D91B6CEEDD00A94F8C /* ViviSwiftenDefines.h in Headers */,
@@ -971,7 +978,8 @@
 				CDC2EE9B1B6A444D00872623 /* SWXMPPRoster.mm in Sources */,
 				CDEE686A1B65311600D00EC7 /* Utils.mm in Sources */,
 				CD72B2CA1B5F6F5300BCFD2A /* SWEventLoop.mm in Sources */,
-				CDB2E5DD1B8ACD8100677775 /* InvisiblePayloadSerializer.mm in Sources */,
+				CDB2E5E71B8AEB9E00677775 /* InvisibleActiveSerializer.mm in Sources */,
+				CDB2E5DD1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm in Sources */,
 				CDC2EE931B674F4200872623 /* SwiftenTypeDefine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

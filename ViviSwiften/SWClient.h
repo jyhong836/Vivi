@@ -66,6 +66,11 @@ typedef void (^VSSendMessageHandler)(VSClientErrorType);
             showType: (int)showType
               status: (NSString*)status;
 
+/// Set visible and invisible list to sever.
+- (void)initVisibleList;
+/// Active or inactive invisible state;
+@property (nonatomic)BOOL invisible;
+
 /// Checks whether the client is connected to the server, and stanzas can be sent.
 - (BOOL)isAvailable;
 /*!
