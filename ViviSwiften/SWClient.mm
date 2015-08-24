@@ -12,7 +12,8 @@
 #import "SWXMPPRoster.h"
 #import "VSClientControllerProtocol.h"
 
-#import <Swiften/MUC/MUCManager.h>
+#import <Swiften/Elements/Message.h>
+#import <Swiften/Elements/Presence.h>
 #import <Swiften/Network/BoostNetworkFactories.h>
 
 using namespace Swift;

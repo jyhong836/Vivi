@@ -17,7 +17,8 @@
 
 #import <boost/bind.hpp>
 #import <Swiften/Roster/XMPPRosterImpl.h>
-#import <Swiften/MUC/MUCManager.h>
+#import <Swiften/Elements/Message.h>
+#import <Swiften/Elements/Presence.h>
 #import <Swiften/Network/NetworkFactories.h>
 
 using namespace Swift;
