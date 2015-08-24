@@ -66,8 +66,8 @@ typedef void (^VSSendMessageHandler)(VSClientErrorType);
             showType: (int)showType
               status: (NSString*)status;
 
-/// Set visible and invisible list to sever.
-- (void)initVisibleList;
+/// Send visible or invisible list set request to sever, according to (BOOL)invisible property.
+- (void)initInvisibleList;
 /// Active or inactive invisible state;
 @property (nonatomic)BOOL invisible;
 

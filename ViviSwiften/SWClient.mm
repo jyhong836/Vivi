@@ -12,9 +12,15 @@
 #import "SWXMPPRoster.h"
 #import "VSClientControllerProtocol.h"
 
+#import "InvisibleListPayload.hpp"
+#import "InvisibleListPayloadSerializer.hpp"
+#import "InvisibleActivePayload.hpp"
+#import "InvisibleActiveSerializer.hpp"
+
 #import <Swiften/Elements/Message.h>
 #import <Swiften/Elements/Presence.h>
 #import <Swiften/Network/BoostNetworkFactories.h>
+#import <Swiften/Queries/Requests/SetPrivateStorageRequest.h>
 
 using namespace Swift;
 #import "SWClientAdapter.h"
@@ -22,7 +28,11 @@ using namespace Swift;
 @implementation SWClient {
     boost::shared_ptr<SWClientAdapter> client;
     ClientOptions options;
-    NSString* passwd; // FIXME: the password should be encrypted
+    NSString* passwd;
+    InvisibleListPayloadSerializer invisibleListPayloadSerializer;
+    InvisibleActiveSerializer invisibleActiveSerializer;
+    BOOL hasInitInvisibleList;
+    BOOL hasInitVisibleList;
 }
 
 @synthesize managedObject;
@@ -55,17 +65,22 @@ using namespace Swift;
                                                      self);
         connectHandler = nil;
         roster = [[SWXMPPRoster alloc] init: client->getRoster()];
+        client->addPayloadSerializer(&invisibleListPayloadSerializer);
+        client->addPayloadSerializer(&invisibleActiveSerializer);
+        _invisible = NO;
     }
     return self;
 }
 
-//- (void)dealloc
-//{
+- (void)dealloc
+{
 //    NSLog(@"delete SWClient %@", [account getAccountString]);
 //    if (client->isActive()) {
 //        client->disconnect();
 //    }
-//}
+    client->removePayloadSerializer(&invisibleListPayloadSerializer);
+    client->removePayloadSerializer(&invisibleActiveSerializer);
+}
 
 - (SWAccount*)getAccount
 {
@@ -165,19 +180,33 @@ using namespace Swift;
     client->sendPresence(presence);
 }
 
-- (void)initVisibleList
+- (void)initInvisibleList
 {
-    
+    SetPrivateStorageRequest<InvisibleListPayload>::ref request = SetPrivateStorageRequest<InvisibleListPayload>::create(boost::shared_ptr<InvisibleListPayload>(new InvisibleListPayload(_invisible)), client->getIQRouter());
+    request->send();
+    // TODO: handler the error
+    if (_invisible) {
+        hasInitInvisibleList = YES;
+    } else {
+        hasInitVisibleList = YES;
+    }
 }
 
 - (void)setInvisible: (BOOL)invisible
 {
     if (invisible != _invisible) {
+        _invisible = invisible;
         if (invisible) {
-            
+            if (!hasInitInvisibleList) {
+                [self initInvisibleList];
+            }
         } else {
-            
+            if (!hasInitVisibleList) {
+                [self initInvisibleList];
+            }
         }
+        SetPrivateStorageRequest<InvisibleActivePayload>::ref request = SetPrivateStorageRequest<InvisibleActivePayload>::create(boost::shared_ptr<InvisibleActivePayload>(new InvisibleActivePayload(_invisible)), client->getIQRouter());
+        request->send();
     }
 }
 
