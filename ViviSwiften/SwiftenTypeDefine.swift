@@ -51,7 +51,7 @@ public enum SWPresenceType: Int32 {
         }
         if presence == "Invisible" {
             // FIXME: this will cause unable to receive any update from server.
-            return (presence: .Unavailable, show: SWPresenceShowType.None, status: "")
+            return (presence: .Available, show: SWPresenceShowType.Online, status: "")
         }
         if presence == "Offline" {
             return (presence: .Unavailable, show: SWPresenceShowType.None, status: presence)

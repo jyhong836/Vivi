@@ -187,6 +187,7 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
     
     /// Require currentClient not be nil
     func sendPresence(presence: String) {
+        currentClient!.invisible = presence == "Invisible"
         let (pres, show, status) = SWPresenceType.parseFrom(presence)
         NSLog("send presence(\(presence)): \(pres), \(show), \(status)")
         currentClient!.sendPresence(pres.rawValue, showType: show.rawValue, status: status)

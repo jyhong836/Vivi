@@ -10,7 +10,7 @@
 
 #include <Swiften/Elements/Payload.h>
 
-class InvisibleActivePayload: Swift::Payload{
+class InvisibleActivePayload: public Swift::Payload {
 public:
     InvisibleActivePayload(bool invisible): invisible(invisible) {}
     bool invisible;
