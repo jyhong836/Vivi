@@ -21,6 +21,12 @@
 #import <Swiften/Elements/Presence.h>
 #import <Swiften/Network/NetworkFactories.h>
 
+#define __DiscoInfo_Exp__
+#ifdef __DiscoInfo_Exp__
+#import <Swiften/Disco/EntityCapsProvider.h>
+#import <Swiften/Disco/GetDiscoInfoRequest.h>
+#endif // __DiscoInfo_Exp__
+
 using namespace Swift;
 
 SWClientAdapter::SWClientAdapter(SWAccount* account,
@@ -53,6 +59,21 @@ SWClientAdapter::~SWClientAdapter()
 
 // MARK: SLOTS
 
+#ifdef __DiscoInfo_Exp__
+void receiveDiscoInfo(boost::shared_ptr<DiscoInfo> discoInfo, ErrorPayload::ref err) {
+    NSLog(@"receive DiscoInfo");
+    if (err) {
+        NSLog(@"DiscoInfoRequest ERROR: %s", err->getText().c_str());
+    }
+    assert(discoInfo!=NULL);
+    printf("** Discovered server features **\n");
+    for (auto feature: discoInfo->getFeatures()) {
+        printf("%s\n", feature.c_str());
+    }
+    printf("*** END ***\n");
+}
+#endif // __DiscoInfo_Exp__
+
 void SWClientAdapter::onConnectedSlot()
 {
     requestRoster();
@@ -63,6 +84,13 @@ void SWClientAdapter::onConnectedSlot()
         swclient.connectHandler(-1);
         [swclient setConnectHandlerToNil];
     }
+#ifdef __DiscoInfo_Exp__
+    GetDiscoInfoRequest::ref infoRequest = GetDiscoInfoRequest::create(JID(this->getJID().getDomain()), this->getIQRouter());
+    infoRequest->onResponse.connect(boost::bind(&receiveDiscoInfo, _1, _2));
+    NSLog(@"send DiscoInfoRequest");
+    infoRequest->send();
+#endif // __DiscoInfo_Exp__
+    
 }
 
 void SWClientAdapter::onDisconnectedSlot(const boost::optional<ClientError> &err)

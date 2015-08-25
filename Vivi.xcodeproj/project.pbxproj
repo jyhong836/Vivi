@@ -18,6 +18,9 @@
 		CD3685631B5E659500DFC78A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD3685611B5E659500DFC78A /* Main.storyboard */; };
 		CD36856E1B5E659500DFC78A /* ViviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD36856D1B5E659500DFC78A /* ViviTests.swift */; };
 		CD3685791B5E659500DFC78A /* ViviUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3685781B5E659500DFC78A /* ViviUITests.swift */; };
+		CD4174201B8CB55F00CB5C21 /* InvisiblePresence.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CD41741E1B8CB55F00CB5C21 /* InvisiblePresence.hpp */; };
+		CD4174231B8CB8F300CB5C21 /* InvisiblePresenceSerializer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD4174211B8CB8F300CB5C21 /* InvisiblePresenceSerializer.mm */; };
+		CD4174241B8CB8F300CB5C21 /* InvisiblePresenceSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CD4174221B8CB8F300CB5C21 /* InvisiblePresenceSerializer.hpp */; };
 		CD4C3A471B6A77EC00C283E6 /* VSClientControllerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CD4C3A461B6A77EC00C283E6 /* VSClientControllerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD4C3A4B1B6A81DB00C283E6 /* VIChatDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A4A1B6A81DB00C283E6 /* VIChatDelegate.swift */; };
 		CD4C3A541B6B489B00C283E6 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C3A531B6B489B00C283E6 /* SessionViewController.swift */; };
@@ -207,6 +210,9 @@
 		CD3685741B5E659500DFC78A /* ViviUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViviUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD3685781B5E659500DFC78A /* ViviUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViviUITests.swift; sourceTree = "<group>"; };
 		CD36857A1B5E659500DFC78A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD41741E1B8CB55F00CB5C21 /* InvisiblePresence.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisiblePresence.hpp; sourceTree = "<group>"; };
+		CD4174211B8CB8F300CB5C21 /* InvisiblePresenceSerializer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InvisiblePresenceSerializer.mm; sourceTree = "<group>"; };
+		CD4174221B8CB8F300CB5C21 /* InvisiblePresenceSerializer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisiblePresenceSerializer.hpp; sourceTree = "<group>"; };
 		CD4C3A461B6A77EC00C283E6 /* VSClientControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VSClientControllerProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CD4C3A4A1B6A81DB00C283E6 /* VIChatDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VIChatDelegate.swift; path = ../ViviInterface/Protocols/VIChatDelegate.swift; sourceTree = "<group>"; };
 		CD4C3A531B6B489B00C283E6 /* SessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SessionViewController.swift; path = "View Controllers/SessionViewController.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -498,6 +504,9 @@
 				CDB2E5E21B8AEB2500677775 /* InvisibleActivePayload.hpp */,
 				CDB2E5E51B8AEB9E00677775 /* InvisibleActiveSerializer.mm */,
 				CDB2E5E61B8AEB9E00677775 /* InvisibleActiveSerializer.hpp */,
+				CD41741E1B8CB55F00CB5C21 /* InvisiblePresence.hpp */,
+				CD4174211B8CB8F300CB5C21 /* InvisiblePresenceSerializer.mm */,
+				CD4174221B8CB8F300CB5C21 /* InvisiblePresenceSerializer.hpp */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -648,12 +657,14 @@
 				CDB2E5DE1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp in Headers */,
 				CD72B2C91B5F6F5300BCFD2A /* SWEventLoop.h in Headers */,
 				CDEE686C1B6531AF00D00EC7 /* Utils.h in Headers */,
+				CD4174201B8CB55F00CB5C21 /* InvisiblePresence.hpp in Headers */,
 				CDB2E5D61B8AC9B900677775 /* InvisibleListPayload.hpp in Headers */,
 				CDC2EE971B6A435800872623 /* VSXMPPRosterDelegate.h in Headers */,
 				CDB2E5E41B8AEB2500677775 /* InvisibleActivePayload.hpp in Headers */,
 				CD72B2CD1B5F7A9800BCFD2A /* SWAccount.h in Headers */,
 				CDC2EE9A1B6A444D00872623 /* SWXMPPRoster.h in Headers */,
 				CD4C3A471B6A77EC00C283E6 /* VSClientControllerProtocol.h in Headers */,
+				CD4174241B8CB8F300CB5C21 /* InvisiblePresenceSerializer.hpp in Headers */,
 				CD0932181B5F9757007ACB22 /* VSClientDelegateProtocol.h in Headers */,
 				CDC49E441B5FF91500F5E6E6 /* ViviSwiften.pch in Headers */,
 				CD156DE71B823B0600EFC06F /* SWRosterItem.h in Headers */,
@@ -972,6 +983,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDE658D11B5EA70F00290E34 /* SWClientAdapter.mm in Sources */,
+				CD4174231B8CB8F300CB5C21 /* InvisiblePresenceSerializer.mm in Sources */,
 				CD156DE81B823B0600EFC06F /* SWRosterItem.mm in Sources */,
 				CD72B2CE1B5F7A9800BCFD2A /* SWAccount.mm in Sources */,
 				CDE658CD1B5E8B8000290E34 /* SWClient.mm in Sources */,

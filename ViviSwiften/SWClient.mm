@@ -6,6 +6,8 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
+//#define __XML_TRACER__
+
 #import "SWClient.h"
 #import "SWEventLoop.h"
 #import "SWAccount.h"
@@ -17,6 +19,9 @@
 #import "InvisibleActivePayload.hpp"
 #import "InvisibleActiveSerializer.hpp"
 
+#ifdef __XML_TRACER__
+#import <Swiften/Client/ClientXMLTracer.h>
+#endif // __XML_TRACER__
 #import <Swiften/Elements/Message.h>
 #import <Swiften/Elements/Presence.h>
 #import <Swiften/Network/BoostNetworkFactories.h>
@@ -33,6 +38,9 @@ using namespace Swift;
     InvisibleActiveSerializer invisibleActiveSerializer;
     BOOL hasInitInvisibleList;
     BOOL hasInitVisibleList;
+#ifdef __XML_TRACER__
+    ClientXMLTracer *tracer;
+#endif // __XML_TRACER__
 }
 
 @synthesize managedObject;
@@ -68,6 +76,9 @@ using namespace Swift;
         client->addPayloadSerializer(&invisibleListPayloadSerializer);
         client->addPayloadSerializer(&invisibleActiveSerializer);
         _invisible = NO;
+#ifdef __XML_TRACER__
+        tracer = new ClientXMLTracer(&*client);
+#endif // __XML_TRACER__
     }
     return self;
 }
@@ -80,6 +91,10 @@ using namespace Swift;
 //    }
     client->removePayloadSerializer(&invisibleListPayloadSerializer);
     client->removePayloadSerializer(&invisibleActiveSerializer);
+    
+#ifdef __XML_TRACER__
+    delete tracer;
+#endif // __XML_TRACER__
 }
 
 - (SWAccount*)getAccount
