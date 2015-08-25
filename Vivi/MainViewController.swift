@@ -26,7 +26,9 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
             sessionViewController?.currentClient = currentClient
             if viewLoaded {
                 updateButtonStates()
-                accountLabel.stringValue = (currentClient?.account.getAccountString())!
+                if currentClient != nil {
+                    accountLabel.stringValue = (currentClient?.account.getAccountString())!
+                }
             }
         }
     }
