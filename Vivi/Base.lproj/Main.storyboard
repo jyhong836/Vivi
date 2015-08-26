@@ -752,13 +752,13 @@
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cPK-zQ-RDv" userLabel="Presence Pop Up Button">
                                                         <rect key="frame" x="54" y="3" width="85" height="19"/>
-                                                        <popUpButtonCell key="cell" type="recessed" title="Invisible" bezelStyle="recessed" image="150E8B71-1F7E-4311-8979-D57494D434A5" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" state="on" borderStyle="border" inset="2" arrowPosition="noArrow" selectedItem="BhH-2m-cHH" id="U20-0O-Jjl" userLabel="Offline">
+                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="E406B611-752F-40C7-AF39-05E13C5D01A1" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                             <menu key="menu" id="P30-Lt-lYY">
                                                                 <items>
-                                                                    <menuItem title="Offline" id="BiQ-f5-EAm"/>
-                                                                    <menuItem title="Invisible" state="on" image="NSStatusNone" id="BhH-2m-cHH" userLabel="Invisible">
+                                                                    <menuItem title="Offline" state="on" id="BiQ-f5-EAm"/>
+                                                                    <menuItem title="Invisible" image="NSStatusNone" id="BhH-2m-cHH" userLabel="Invisible">
                                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                                     </menuItem>
                                                                     <menuItem isSeparatorItem="YES" id="KJr-TD-shQ"/>
@@ -854,6 +854,7 @@
                         <outlet property="avaterButton" destination="Dkh-5M-qmJ" id="jdz-mP-JBw"/>
                         <outlet property="chatView" destination="R3h-kS-2Cc" id="LMv-Wr-IT6"/>
                         <outlet property="connectSpinner" destination="HqU-XE-vbp" id="T35-um-TU3"/>
+                        <outlet property="invisibleItem" destination="BhH-2m-cHH" id="kBI-pe-ZSj"/>
                         <outlet property="presencePopUpButton" destination="cPK-zQ-RDv" id="Q0b-dw-BnT"/>
                         <outlet property="rosterButton" destination="rcz-ln-1OZ" id="ne8-ux-c3w"/>
                         <outlet property="sesConView" destination="SeZ-t9-alR" id="d4x-3b-FZ0"/>
@@ -1491,7 +1492,7 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="150E8B71-1F7E-4311-8979-D57494D434A5" width="1" height="1">
+        <image name="E406B611-752F-40C7-AF39-05E13C5D01A1" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

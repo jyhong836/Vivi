@@ -47,6 +47,7 @@ namespace Swift
         void onServerDiscoInfoReceivedSlot(boost::shared_ptr<DiscoInfo> discoInfo, ErrorPayload::ref err);
         void printFeatures();
     public:
+        bool hasInitializedServerDiscoInfo();
         bool serverHasFeature(const std::string &feature);
         void requestServerDiscoInfo();
         

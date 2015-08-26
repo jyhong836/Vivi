@@ -28,6 +28,7 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
                 updateButtonStates()
                 if currentClient != nil {
                     accountLabel.stringValue = (currentClient?.account.getAccountString())!
+                    invisibleItem.hidden = !currentClient!.canBeInvisible
                 }
             }
         }
@@ -37,6 +38,8 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
     
     let notificationCenter = NSNotificationCenter.defaultCenter()
     var chatDidReceiveObserver: NSObjectProtocol?
+    
+    // MARK: - View controllers
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -195,6 +198,8 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
         currentClient!.sendPresence(pres.rawValue, showType: show.rawValue, status: status)
     }
     
+    @IBOutlet weak var invisibleItem: NSMenuItem!
+    
     @IBAction func changePresenceBtnClicked(sender: NSPopUpButton) {
         let title = sender.selectedItem?.title
         guard title != nil else {
@@ -254,6 +259,17 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
                     })
                     if SWClientErrorType(rawValue: errcode) == nil {
                         self.sendPresence(title!)
+                    }
+                    if !c.hasInitializedServerCaps {
+                        c.updateServerCapsWithHandler({ (errString) -> Void in
+                            if let err = errString {
+                                NSLog("Error when update server caps: \(err)")
+                            } else {
+                                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                                    self.invisibleItem.hidden = !c.canBeInvisible
+                                })
+                            }
+                        })
                     }
                 })
             } else {

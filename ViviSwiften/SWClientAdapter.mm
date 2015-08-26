@@ -106,6 +106,11 @@ bool SWClientAdapter::serverHasFeature(const std::string &feature)
     }
 }
 
+bool SWClientAdapter::hasInitializedServerDiscoInfo()
+{
+    return serverDiscInfo_ != NULL;
+}
+
 #pragma mark - Transport slots
 
 void SWClientAdapter::onConnectedSlot()

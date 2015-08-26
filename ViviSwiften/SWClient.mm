@@ -269,22 +269,32 @@ using namespace Swift;
 
 - (BOOL)canBeInvisible
 {
+    if (client->serverHasFeature("presence")) {
 #ifndef __INVISIBLE__
-    return NO;
+        return NO;
 #else
-#ifdef __INVISIBLE_INVISIBILITY__
-    return YES;
-#else
-#ifdef __INVISIBLE_INVISIBILITY__
-    return YES;
-#else
-    return NO;
+    #ifdef __INVISIBLE_PRESENCE__
+            return YES;
+    #else
+        #ifdef __INVISIBLE_INVISIBILITY__
+                return YES;
+        #else
+                return NO;
+        #endif
+    #endif
 #endif
-#endif
-#endif
+    } else {
+        return NO;
+    }
 }
 
 @synthesize updateServerCapsHandler;
+@synthesize hasInitializedServerCaps;
+
+- (BOOL)hasInitializedServerCaps
+{
+    return client->hasInitializedServerDiscoInfo();
+}
 
 - (void)updateServerCapsWithHandler: (VSUpdateServerCapsHandler)handler
 {

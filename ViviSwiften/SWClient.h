@@ -81,9 +81,11 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
  * presence.
  */
 @property (nonatomic)BOOL invisible;
-/// Check if client able to be invisible.
+/// Check if client able to be invisible. Call after client
+/// update server caps.
 @property (nonatomic, readonly)BOOL canBeInvisible;
 
+@property (nonatomic, readonly)BOOL hasInitializedServerCaps;
 - (void)updateServerCapsWithHandler: (VSUpdateServerCapsHandler)handler;
 @property (nonatomic, readonly)VSUpdateServerCapsHandler updateServerCapsHandler;
 - (void)setUpdateServerCapsHandlerToNil;
