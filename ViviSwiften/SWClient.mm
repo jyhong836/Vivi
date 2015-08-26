@@ -8,24 +8,40 @@
 
 //#define __XML_TRACER__
 
+#define __INVISIBLE__
+#ifdef __INVISIBLE__
+    #define __INVISIBLE_PRESENCE__ // XEP-0018(rejected)
+    //#define __INVISIBLE_INVISIBILITY__ // XEP-0126
+#endif // __INVISIBLE__
+
 #import "SWClient.h"
 #import "SWEventLoop.h"
 #import "SWAccount.h"
 #import "SWXMPPRoster.h"
 #import "VSClientControllerProtocol.h"
 
-#import "InvisibleListPayload.hpp"
-#import "InvisibleListPayloadSerializer.hpp"
-#import "InvisibleActivePayload.hpp"
-#import "InvisibleActiveSerializer.hpp"
+#ifdef __INVISIBLE_INVISIBILITY__
+    #import "InvisibleListPayload.hpp"
+    #import "InvisibleListPayloadSerializer.hpp"
+    #import "InvisibleActivePayload.hpp"
+    #import "InvisibleActiveSerializer.hpp"
+#endif // __INVISIBLE_INVISIBILITY__
 
 #ifdef __XML_TRACER__
-#import <Swiften/Client/ClientXMLTracer.h>
+    #import <Swiften/Client/ClientXMLTracer.h>
 #endif // __XML_TRACER__
 #import <Swiften/Elements/Message.h>
-#import <Swiften/Elements/Presence.h>
 #import <Swiften/Network/BoostNetworkFactories.h>
 #import <Swiften/Queries/Requests/SetPrivateStorageRequest.h>
+#import <Swiften/Serializer/PayloadSerializerCollection.h>
+
+#import <Swiften/Elements/Presence.h>
+#ifdef __INVISIBLE_PRESENCE__
+#ifndef SWIFTEN_INVISIBLE_PRESENCE
+#warning Attempt to use invisible presence, while it's not implemented in Swiften.
+#undef __INVISIBLE_PRESENCE__
+#endif // SWIFTEN_INVISIBLE_PRESENCE
+#endif // __INVISIBLE_PRESENCE__
 
 using namespace Swift;
 #import "SWClientAdapter.h"
@@ -34,10 +50,13 @@ using namespace Swift;
     boost::shared_ptr<SWClientAdapter> client;
     ClientOptions options;
     NSString* passwd;
+#ifdef __INVISIBLE_INVISIBILITY__
     InvisibleListPayloadSerializer invisibleListPayloadSerializer;
     InvisibleActiveSerializer invisibleActiveSerializer;
     BOOL hasInitInvisibleList;
     BOOL hasInitVisibleList;
+#endif // __INVISIBLE_INVISIBILITY__
+    
 #ifdef __XML_TRACER__
     ClientXMLTracer *tracer;
 #endif // __XML_TRACER__
@@ -73,9 +92,13 @@ using namespace Swift;
                                                      self);
         connectHandler = nil;
         roster = [[SWXMPPRoster alloc] init: client->getRoster()];
+#ifdef __INVISIBLE_INVISIBILITY__
         client->addPayloadSerializer(&invisibleListPayloadSerializer);
         client->addPayloadSerializer(&invisibleActiveSerializer);
+#endif // __INVISIBLE_INVISIBILITY__
+        
         _invisible = NO;
+        
 #ifdef __XML_TRACER__
         tracer = new ClientXMLTracer(&*client);
 #endif // __XML_TRACER__
@@ -88,9 +111,11 @@ using namespace Swift;
 //    NSLog(@"delete SWClient %@", [account getAccountString]);
 //    if (client->isActive()) {
 //        client->disconnect();
-//    }
+    //    }
+#ifdef __INVISIBLE_INVISIBILITY__
     client->removePayloadSerializer(&invisibleListPayloadSerializer);
     client->removePayloadSerializer(&invisibleActiveSerializer);
+#endif // __INVISIBLE_INVISIBILITY__
     
 #ifdef __XML_TRACER__
     delete tracer;
@@ -195,6 +220,8 @@ using namespace Swift;
     client->sendPresence(presence);
 }
 
+#ifdef __INVISIBLE_INVISIBILITY__
+/// Send visible or invisible list set request to sever, according to (BOOL)invisible property. (XEP-0126)
 - (void)initInvisibleList
 {
     SetPrivateStorageRequest<InvisibleListPayload>::ref request = SetPrivateStorageRequest<InvisibleListPayload>::create(boost::shared_ptr<InvisibleListPayload>(new InvisibleListPayload(_invisible)), client->getIQRouter());
@@ -206,11 +233,16 @@ using namespace Swift;
         hasInitVisibleList = YES;
     }
 }
+#endif // __INVISIBLE_INVISIBILITY__
 
 - (void)setInvisible: (BOOL)invisible
 {
     if (invisible != _invisible) {
         _invisible = invisible;
+#ifndef __INVISIBLE__
+        [NSException raise:@"InvisibleNotImplemented" format:@"Invisible presence is not implemented"];
+#endif // ~__INVISIBLE__
+#ifdef __INVISIBLE_INVISIBILITY__
         if (invisible) {
             if (!hasInitInvisibleList) {
                 [self initInvisibleList];
@@ -222,7 +254,32 @@ using namespace Swift;
         }
         SetPrivateStorageRequest<InvisibleActivePayload>::ref request = SetPrivateStorageRequest<InvisibleActivePayload>::create(boost::shared_ptr<InvisibleActivePayload>(new InvisibleActivePayload(_invisible)), client->getIQRouter());
         request->send();
+#endif // __INVISIBLE_INVISIBILITY__
+#ifdef __INVISIBLE_PRESENCE__
+        if (invisible) {
+            Presence::ref presence = Presence::create();
+            presence->setType(Presence::Type::Unavailable);
+            client->sendPresence(presence);
+        }
+#endif // __INVISIBLE_INVISIBILITY__
     }
+}
+
+- (BOOL)canBeInvisible
+{
+#ifndef __INVISIBLE__
+    return NO;
+#else
+#ifdef __INVISIBLE_INVISIBILITY__
+    return YES;
+#else
+#ifdef __INVISIBLE_INVISIBILITY__
+    return YES;
+#else
+    return NO;
+#endif
+#endif
+#endif
 }
 
 - (BOOL)isAvailable

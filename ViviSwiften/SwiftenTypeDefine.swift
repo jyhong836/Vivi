@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: Swiften types
 public enum SWPresenceType: Int32 {
-    case Available, Error, Probe, Subscribe, Subscribed, Unavailable, Unsubscribe, Unsubscribed
+    case Available, Error, Probe, Subscribe, Subscribed, Unavailable, Unsubscribe, Unsubscribed, Invisible, Visible
     public func toString() -> String? {
         return SWPresenceTypeStringDict[self]
     }
@@ -49,10 +49,10 @@ public enum SWPresenceType: Int32 {
                 return (presence: .Available, show: type, status: "")
             }
         }
-        if presence == "Invisible" {
-            // FIXME: this will cause unable to receive any update from server.
-            return (presence: .Available, show: SWPresenceShowType.Online, status: "")
-        }
+//        if presence == "Invisible" {
+//            // FIXME: this will cause unable to receive any update from server.
+//            return (presence: .Available, show: SWPresenceShowType.Online, status: "")
+//        }
         if presence == "Offline" {
             return (presence: .Unavailable, show: SWPresenceShowType.None, status: presence)
         }
@@ -67,7 +67,7 @@ public enum SWPresenceType: Int32 {
         }
     }
 }
-let SWPresenceTypeStringDict: [SWPresenceType: String] = [.Available: "Available", .Error: "Error", .Probe: "Probe", .Subscribe: "Subscribe", .Subscribed: "Subscribed", .Unavailable: "Unavailable", .Unsubscribe: "Unsubscribe", .Unsubscribed: "Unsubscribed"]
+let SWPresenceTypeStringDict: [SWPresenceType: String] = [.Available: "Available", .Error: "Error", .Probe: "Probe", .Subscribe: "Subscribe", .Subscribed: "Subscribed", .Unavailable: "Unavailable", .Unsubscribe: "Unsubscribe", .Unsubscribed: "Unsubscribed", .Invisible: "Invisible", .Visible: "Visible"]
 
 public enum SWPresenceShowType: Int32 {
     case Online, Away, FFC, XA, DND, None

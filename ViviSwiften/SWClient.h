@@ -66,10 +66,20 @@ typedef void (^VSSendMessageHandler)(VSClientErrorType);
             showType: (int)showType
               status: (NSString*)status;
 
-/// Send visible or invisible list set request to sever, according to (BOOL)invisible property.
-- (void)initInvisibleList;
-/// Active or inactive invisible state;
+/*! 
+ * @brief Active or inactive invisible state.
+ *
+ * :IMPORTANT: Check `canBeInvisible` before using invisible property.
+ * If you set invisible when `invisible` is not implemented, 
+ * an exception will throw.
+ *
+ * When using invisible presence(XEP-018, rejected) to implement,
+ * set invisible from false to true, will send an "Unvailable" 
+ * presence.
+ */
 @property (nonatomic)BOOL invisible;
+/// Check if client able to be invisible.
+@property (nonatomic, readonly)BOOL canBeInvisible;
 
 /// Checks whether the client is connected to the server, and stanzas can be sent.
 - (BOOL)isAvailable;
