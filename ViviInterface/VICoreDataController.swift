@@ -161,7 +161,7 @@ public class VICoreDataController {
             alert.addButtonWithTitle(cancelButton)
             
             let answer = alert.runModal()
-            if answer == NSAlertFirstButtonReturn {
+            if answer == NSAlertSecondButtonReturn {
                 return .TerminateCancel
             }
         }
