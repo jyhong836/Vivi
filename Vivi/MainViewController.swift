@@ -27,8 +27,9 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
             if viewLoaded {
                 updateButtonStates()
                 if currentClient != nil {
-                    accountLabel.stringValue = (currentClient?.account.getAccountString())!
-                    invisibleItem.hidden = !currentClient!.canBeInvisible
+                    accountLabel.stringValue = (currentClient!.account.getAccountString())!
+                    let clientMO = currentClient!.managedObject as! VIClientMO
+                    invisibleItem.hidden = !(clientMO.canbeinvisible!.boolValue)
                 }
             }
         }
@@ -267,6 +268,7 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
                             } else {
                                 NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                                     self.invisibleItem.hidden = !c.canBeInvisible
+                                    (c.managedObject as! VIClientMO).canbeinvisible = NSNumber(bool: c.canBeInvisible)
                                 })
                             }
                         })

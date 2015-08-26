@@ -16,6 +16,7 @@
     </entity>
     <entity name="Client" representedClassName=".VIClientMO" syncable="YES">
         <attribute name="accountname" attributeType="String" regularExpressionString="^.[a-zA-Z0-9.]+@.[a-zA-Z0-9.]+$" indexed="YES" syncable="YES"/>
+        <attribute name="canbeinvisible" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="enabled" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="hostname" optional="YES" attributeType="String" regularExpressionString=".[a-zA-Z0-9.]+" syncable="YES"/>
         <attribute name="password" attributeType="Transformable" valueTransformerName="StringEncryptionTransformer" syncable="YES"/>
@@ -46,7 +47,7 @@
     <elements>
         <element name="Account" positionX="0" positionY="-216" width="128" height="120"/>
         <element name="Chat" positionX="180" positionY="-378" width="128" height="120"/>
-        <element name="Client" positionX="-20" positionY="-511" width="128" height="150"/>
+        <element name="Client" positionX="-20" positionY="-511" width="128" height="163"/>
         <element name="Group" positionX="-387" positionY="-225" width="128" height="88"/>
         <element name="Message" positionX="385" positionY="-279" width="128" height="105"/>
         <element name="Resource" positionX="-288" positionY="-81" width="128" height="75"/>
