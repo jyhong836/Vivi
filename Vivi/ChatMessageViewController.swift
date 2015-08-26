@@ -173,11 +173,18 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     
     func updatePresence() {
         if let chat = self.currentChat {
-            let buddy = chat.buddy!
-            let account = buddy.swaccount!
-            self.buddyNameTextField.stringValue =
-            "\(account.getNodeString())(\(buddy.presence.parseWithShow(buddy.presenceshow, andStatus: buddy.status)!))"
-            self.accountTextField.stringValue = account.getAccountString()
+            if let buddy = chat.buddy {
+                let account = buddy.swaccount!
+                self.buddyNameTextField.stringValue =
+                "\(account.getNodeString())(\(buddy.presence.parseWithShow(buddy.presenceshow, andStatus: buddy.status)!))"
+                self.accountTextField.stringValue = account.getAccountString()
+//                accountTextField.editable = false
+            } else {
+                self.buddyNameTextField.stringValue =
+                "New Chat"
+                self.accountTextField.stringValue = "node@domain"
+//                accountTextField.editable = true
+            }
         }
     }
 }

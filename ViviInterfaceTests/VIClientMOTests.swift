@@ -75,6 +75,21 @@ class VIClientMOTests: XCTestCase {
         XCTAssertEqual(client!.chats!.indexOfObject(chat1), 1, "old chat should at index 1")
     }
     
+    func testAddTempChat() {
+        let swaccount1 = SWAccount(accountName: "testaccount@xxx.1")
+        client!.addChatWithBuddy(swaccount1)
+        let chat = client!.addTempChat()
+        XCTAssertNil(chat.buddy, "buddy of temp chat should be nil")
+        var hasCatchError = false
+        do {
+            try moc!.save()
+        } catch {
+            hasCatchError = true
+        }
+        XCTAssertTrue(hasCatchError, "should through error when save temp chat without buddy")
+        XCTAssertEqual(client!.chats!.indexOfObject(chat), 0, "new chat should at index 0")
+    }
+    
 //    func testRemoveChatAtIndex() {
 //        let swaccount = SWAccount(accountName: "testaccount@xxx")
 //        client!.addChatWithBuddy(swaccount)

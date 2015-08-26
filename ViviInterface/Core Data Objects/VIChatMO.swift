@@ -22,7 +22,7 @@ public class VIChatMO: NSManagedObject {
         self.messages = NSOrderedSet()
     }
     
-    // MARK: Message access
+    // MARK: - Message access
     
     public var lastMessage: String {
         get {

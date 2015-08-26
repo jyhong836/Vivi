@@ -82,7 +82,11 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             if let c = currentClient {
                 let clientMO = c.managedObject as! VIClientMO
                 let chat = clientMO.chatAtIndex(row)!
-                cell.textField?.stringValue = chat.buddy!.accountString
+                if let buddy = chat.buddy {
+                    cell.textField?.stringValue = buddy.accountString
+                } else {
+                    cell.textField?.stringValue = "New Chat"
+                }
                 cell.textField?.toolTip = cell.textField?.stringValue
                 cell.lastMessageTextField.stringValue = chat.lastMessage
                 cell.lastMessageTextField.toolTip = cell.lastMessageTextField.stringValue
@@ -95,16 +99,50 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
     
     func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet {
-        if proposedSelectionIndexes.count == 1 {
+//        if proposedSelectionIndexes.count == 1 {
             // FIXME: ! Should use delegate to pass this message
-            (currentClient?.managedObject as! VIClientMO).selectedChatIndex = proposedSelectionIndexes.lastIndex
-            updateCellNewMessageIconAtIndex(proposedSelectionIndexes.lastIndex, hasNew: false)
-        }
+            selectChatAtIndex(proposedSelectionIndexes.lastIndex)
+//        }
         for index in proposedSelectionIndexes {
             let view = tableView.viewAtColumn(0, row: index, makeIfNecessary: false) as! SessionTableCellView
             view.switchSeperator()
         }
         return proposedSelectionIndexes
+    }
+    
+    func selectChatAtIndex(index: Int) {
+        (currentClient?.managedObject as! VIClientMO).selectedChatIndex = index
+        updateCellNewMessageIconAtIndex(index, hasNew: false)
+    }
+    
+    // MARK: Button action
+    
+    @IBAction func addChatButtonClicked(sender: NSButton) {
+        if let client = currentClient {
+            let clientMO = client.managedObject as! VIClientMO
+            clientMO.addTempChat()
+            sessionTableView.selectRowIndexes(NSIndexSet(index: 0), byExtendingSelection: false)
+            selectChatAtIndex(0)
+        } else {
+            // TODO: Let user to add a client.
+            let question = NSLocalizedString("Could not add chat without client account", comment: "Add chat error question message")
+            let info = NSLocalizedString("Without client, no message can be send", comment: "Add chat error question info")
+            let configureButton = NSLocalizedString("Configure", comment: "Configure button title")
+            let cancelButton = NSLocalizedString("Cancel", comment: "Cancel button title")
+            let alert = NSAlert()
+            alert.messageText = question
+            alert.informativeText = info
+            alert.addButtonWithTitle(configureButton)
+            alert.addButtonWithTitle(cancelButton)
+            
+            let answer = alert.runModal()
+            if answer == NSAlertFirstButtonReturn {
+                // TODO: Configure new client
+            }
+//            else {
+//                // Cancel
+//            }
+        }
     }
     
     // MARK: - Handlers for chat update notification observers

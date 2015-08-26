@@ -91,6 +91,20 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
         }
     }
     
+    /// Add a new temp chat at index 0, without buddy.
+    /// WARN: do not save context before setting buddy attribute.
+    public func addTempChat() -> VIChatMO {
+        let moc = self.managedObjectContext
+        let newChat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: moc!) as! VIChatMO
+        let chats = self.mutableOrderedSetValueForKey("chats")
+        chats.insertObject(newChat, atIndex: 0)
+        
+        notificationCenter.postNotificationName(
+            VIClientChatDidAddNotification, object: self, userInfo: ["index": chats.indexOfObject(newChat)])
+        
+        return newChat
+    }
+    
     public var chatCount: Int {
         get {
             return (chats!.count)
