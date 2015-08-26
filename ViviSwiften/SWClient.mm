@@ -220,6 +220,8 @@ using namespace Swift;
     client->sendPresence(presence);
 }
 
+#pragma mark Implement invisible presence(XEP-0018 or XEP-0126).
+
 #ifdef __INVISIBLE_INVISIBILITY__
 /// Send visible or invisible list set request to sever, according to (BOOL)invisible property. (XEP-0126)
 - (void)initInvisibleList
@@ -282,6 +284,21 @@ using namespace Swift;
 #endif
 }
 
+@synthesize updateServerCapsHandler;
+
+- (void)updateServerCapsWithHandler: (VSUpdateServerCapsHandler)handler
+{
+    updateServerCapsHandler = handler;
+    client->requestServerDiscoInfo();
+}
+
+- (void)setUpdateServerCapsHandlerToNil
+{
+    updateServerCapsHandler = nil;
+}
+
+#pragma mark Client status
+
 - (BOOL)isAvailable
 {
     return client->isAvailable();
@@ -306,7 +323,8 @@ using namespace Swift;
     client->setSoftwareVersion(NSString2std_str(name), NSString2std_str(version));
 }
 
-// MARK: ClientOptions
+#pragma mark ClientOptions
+
 - (void)setManualHostname: (NSString*)manualHostname
 {
     options.manualHostname = NSString2std_str(manualHostname);

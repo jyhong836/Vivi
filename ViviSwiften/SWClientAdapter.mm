@@ -21,11 +21,8 @@
 #import <Swiften/Elements/Presence.h>
 #import <Swiften/Network/NetworkFactories.h>
 
-#define __DiscoInfo_Exp__
-#ifdef __DiscoInfo_Exp__
-#import <Swiften/Disco/EntityCapsProvider.h>
+//#import <Swiften/Disco/EntityCapsProvider.h>
 #import <Swiften/Disco/GetDiscoInfoRequest.h>
-#endif // __DiscoInfo_Exp__
 
 using namespace Swift;
 
@@ -57,22 +54,59 @@ SWClientAdapter::~SWClientAdapter()
 //    NSLog(@"** Deconstruct SWClientAdapter **");
 }
 
-// MARK: SLOTS
+#pragma mark - Request server caps DiscoInfo
 
-#ifdef __DiscoInfo_Exp__
-void receiveDiscoInfo(boost::shared_ptr<DiscoInfo> discoInfo, ErrorPayload::ref err) {
-    NSLog(@"receive DiscoInfo");
-    if (err) {
-        NSLog(@"DiscoInfoRequest ERROR: %s", err->getText().c_str());
+/*!
+ * Request server DiscoInfo. Throw exception if client is unavailable.
+ */
+void SWClientAdapter::requestServerDiscoInfo()
+{
+    if (this->isAvailable()) {
+        GetDiscoInfoRequest::ref infoRequest = GetDiscoInfoRequest::create(JID(this->getJID().getDomain()), this->getIQRouter());
+        infoRequest->onResponse.connect(boost::bind(&SWClientAdapter::onServerDiscoInfoReceivedSlot, this, _1, _2));
+        NSLog(@"send DiscoInfoRequest");
+        infoRequest->send();
+    } else {
+        [NSException raise: @"UnavailableForAction" format: @"Attempt to request disco info when client is unavailable"];
     }
-    assert(discoInfo!=NULL);
-    printf("** Discovered server features **\n");
-    for (auto feature: discoInfo->getFeatures()) {
-        printf("%s\n", feature.c_str());
-    }
-    printf("*** END ***\n");
 }
-#endif // __DiscoInfo_Exp__
+
+void SWClientAdapter::onServerDiscoInfoReceivedSlot(boost::shared_ptr<DiscoInfo> discoInfo, ErrorPayload::ref err) {
+    NSLog(@"receive DiscoInfo");
+    this->serverDiscInfo_ = discoInfo;
+    if (swclient.updateServerCapsHandler) {
+        if (err) {
+            swclient.updateServerCapsHandler(std_str2NSString(err->getText()));
+        } else {
+            swclient.updateServerCapsHandler(nil);
+        }
+        [swclient setUpdateServerCapsHandlerToNil];
+    }
+}
+
+void SWClientAdapter::printFeatures()
+{
+    if (serverDiscInfo_) {
+        printf("** Discovered server features **\n");
+        for (auto feature: serverDiscInfo_->getFeatures()) {
+            printf("%s\n", feature.c_str());
+        }
+        printf("*** END ***\n");
+    }
+}
+
+/// Return true if server has feature. Call this after server disco info
+/// has been received.
+bool SWClientAdapter::serverHasFeature(const std::string &feature)
+{
+    if (serverDiscInfo_) {
+        return serverDiscInfo_->hasFeature(feature);
+    } else {
+        return false;
+    }
+}
+
+#pragma mark - Transport slots
 
 void SWClientAdapter::onConnectedSlot()
 {
@@ -84,13 +118,6 @@ void SWClientAdapter::onConnectedSlot()
         swclient.connectHandler(-1);
         [swclient setConnectHandlerToNil];
     }
-#ifdef __DiscoInfo_Exp__
-    GetDiscoInfoRequest::ref infoRequest = GetDiscoInfoRequest::create(JID(this->getJID().getDomain()), this->getIQRouter());
-    infoRequest->onResponse.connect(boost::bind(&receiveDiscoInfo, _1, _2));
-    NSLog(@"send DiscoInfoRequest");
-    infoRequest->send();
-#endif // __DiscoInfo_Exp__
-    
 }
 
 void SWClientAdapter::onDisconnectedSlot(const boost::optional<ClientError> &err)
@@ -149,7 +176,7 @@ void SWClientAdapter::onPresenceReceivedSlot(Presence::ref pres)
                                        currentStatus: status];
 }
 
-// MARK: Roster slots
+#pragma mark - Roster slots
 
 void SWClientAdapter::rosterOnJIDAddedSlot(const JID& jid)
 {

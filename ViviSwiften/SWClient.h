@@ -16,6 +16,7 @@
 
 typedef void (^VSConnectionHandler)(int);
 typedef void (^VSSendMessageHandler)(VSClientErrorType);
+typedef void (^VSUpdateServerCapsHandler)(NSString*);
 
 /*!
  * @brief A Objective-C adapter for Swift::Client.
@@ -66,6 +67,8 @@ typedef void (^VSSendMessageHandler)(VSClientErrorType);
             showType: (int)showType
               status: (NSString*)status;
 
+#pragma mark Invisible presence
+
 /*! 
  * @brief Active or inactive invisible state.
  *
@@ -80,6 +83,10 @@ typedef void (^VSSendMessageHandler)(VSClientErrorType);
 @property (nonatomic)BOOL invisible;
 /// Check if client able to be invisible.
 @property (nonatomic, readonly)BOOL canBeInvisible;
+
+- (void)updateServerCapsWithHandler: (VSUpdateServerCapsHandler)handler;
+@property (nonatomic, readonly)VSUpdateServerCapsHandler updateServerCapsHandler;
+- (void)setUpdateServerCapsHandlerToNil;
 
 /// Checks whether the client is connected to the server, and stanzas can be sent.
 - (BOOL)isAvailable;

@@ -11,6 +11,8 @@
 #else
 #import <Swiften/Client/Client.h>
 #import <Swiften/Base/API.h>
+#import <Swiften/Elements/DiscoInfo.h>
+#import <Swiften/Elements/ErrorPayload.h>
 
 @class SWAccount;
 @class SWClient;
@@ -31,6 +33,7 @@ namespace Swift
                       SWClient* clientAdapter,
                       Storages* storages = NULL);
         ~SWClientAdapter();
+        
     private:
         /// Never free swclient inside SWClientAdapter
         SWClient* __weak swclient;
@@ -38,6 +41,14 @@ namespace Swift
         void onDisconnectedSlot(const boost::optional<ClientError> &err);
         void onMessageReceivedSlot(boost::shared_ptr<Message> msg);
         void onPresenceReceivedSlot(boost::shared_ptr<Presence> pres);
+        
+    private:
+        DiscoInfo::ref serverDiscInfo_;
+        void onServerDiscoInfoReceivedSlot(boost::shared_ptr<DiscoInfo> discoInfo, ErrorPayload::ref err);
+        void printFeatures();
+    public:
+        bool serverHasFeature(const std::string &feature);
+        void requestServerDiscoInfo();
         
     private:
         void rosterOnJIDAddedSlot(const JID& jid);
