@@ -61,7 +61,9 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
     public func getChatWithBuddy(buddy: SWAccount) -> VIChatMO? {
         for element in self.chats! {
             let chat = element as! VIChatMO
-            if (chat.buddy!.node == buddy.getNodeString()) && (chat.buddy!.domain == buddy.getDomainString()) {
+            if chat.buddy != nil &&
+                chat.buddy!.node == buddy.getNodeString() &&
+                chat.buddy!.domain == buddy.getDomainString() {
                 return chat
             }
         }
