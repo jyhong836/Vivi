@@ -752,7 +752,7 @@
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cPK-zQ-RDv" userLabel="Presence Pop Up Button">
                                                         <rect key="frame" x="54" y="3" width="85" height="19"/>
-                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="90A12FDA-A42D-4A82-949C-D7036888C77B" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
+                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="261021A9-639B-4909-B2BB-35982835ABAD" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                             <menu key="menu" id="P30-Lt-lYY">
@@ -1064,7 +1064,7 @@
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="cell" width="158" minWidth="50" maxWidth="1000" id="woy-zX-tFF">
+                                                <tableColumn identifier="cell" width="158" minWidth="50" maxWidth="1000" id="woy-zX-tFF" userLabel="Column">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1090,6 +1090,9 @@
                                                                         <allowedInputSourceLocales>
                                                                             <string>NSAllRomanInputSourcesLocaleIdentifier</string>
                                                                         </allowedInputSourceLocales>
+                                                                        <connections>
+                                                                            <binding destination="osE-c2-l1e" name="value" keyPath="objectValue.buddy.node" id="gsd-JC-iPd"/>
+                                                                        </connections>
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hZy-Gr-wL9">
@@ -1098,6 +1101,9 @@
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                        <connections>
+                                                                            <binding destination="osE-c2-l1e" name="value" keyPath="objectValue.lastMessage" id="fTf-Iy-dRj"/>
+                                                                        </connections>
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <imageView translatesAutoresizingMaskIntoConstraints="NO" id="bCY-YT-pVg" userLabel="Avater Image View">
@@ -1158,10 +1164,16 @@
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="Ts9-7L-3iT" name="value" keyPath="arrangedObjects" id="WQW-hx-zZE">
+                                                            <dictionary key="options">
+                                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <outlet property="dataSource" destination="wCD-lF-Pb2" id="brW-6i-PAI"/>
                                                 <outlet property="delegate" destination="wCD-lF-Pb2" id="C7d-2r-j8z"/>
                                             </connections>
                                         </tableView>
@@ -1193,6 +1205,12 @@
                     </connections>
                 </viewController>
                 <customObject id="lT7-KQ-ZZc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="Chat" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="Ts9-7L-3iT">
+                    <connections>
+                        <binding destination="wCD-lF-Pb2" name="managedObjectContext" keyPath="self.managedObjectContext" id="3Lc-vx-Jjt"/>
+                        <binding destination="wCD-lF-Pb2" name="sortDescriptors" keyPath="self.sortDescriptors" id="7mC-NJ-WEN"/>
+                    </connections>
+                </arrayController>
             </objects>
             <point key="canvasLocation" x="-9" y="1625"/>
         </scene>
@@ -1515,7 +1533,7 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="90A12FDA-A42D-4A82-949C-D7036888C77B" width="1" height="1">
+        <image name="261021A9-639B-4909-B2BB-35982835ABAD" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

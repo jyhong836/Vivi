@@ -10,8 +10,12 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class SessionViewController: NSViewController, NSTableViewDelegate {
     
+    weak var managedObjectContext: NSManagedObjectContext! = {
+        return VICoreDataController.shared.managedObjectContext
+        }()
+
     @IBOutlet weak var sessionTableView: NSTableView!
     
 //    var clientViewController: ClientViewController?
@@ -57,46 +61,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         chatDidReceiveObserver = nil
     }
     
-//    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "ClientViewSegue" {
-//            clientViewController = segue.destinationController as? ClientViewController
-//            clientViewController?.currentClient = currentClient
-//        }
-//    }
-    
-    // MARK: - Implementations for NSTableViewDataSource
-    
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        if let c = currentClient {
-            return (c.managedObject as! VIClientMO).chatCount
-        } else {
-            return 0
-        }
-    }
-    
     // MARK: - Implementations for NSTableViewDelegate
-    
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        if let col = tableColumn {
-            let cell = tableView.makeViewWithIdentifier(col.identifier, owner: self) as! SessionTableCellView
-            if let c = currentClient {
-                let clientMO = c.managedObject as! VIClientMO
-                let chat = clientMO.chatAtIndex(row)!
-                if let buddy = chat.buddy {
-                    cell.textField?.stringValue = buddy.accountString
-                } else {
-                    cell.textField?.stringValue = "New Chat"
-                }
-                cell.textField?.toolTip = cell.textField?.stringValue
-                cell.lastMessageTextField.stringValue = chat.lastMessage
-                cell.lastMessageTextField.toolTip = cell.lastMessageTextField.stringValue
-            } else {
-                cell.textField?.stringValue = "Unknown user"
-            }
-            return cell
-        }
-        return nil
-    }
     
     func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet {
 //        if proposedSelectionIndexes.count == 1 {
@@ -111,8 +76,8 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
     
     func selectChatAtIndex(index: Int) {
+        // FIXME: should not use this to send select notification
         (currentClient?.managedObject as! VIClientMO).selectedChatIndex = index
-        updateCellNewMessageIconAtIndex(index, hasNew: false)
     }
     
     // MARK: Button action
@@ -145,6 +110,13 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         }
     }
     
+    let chatSortDescriptor = NSSortDescriptor(key: "updatedtime", ascending: false, selector: Selector("compare:"))
+    var sortDescriptors: [NSSortDescriptor] {
+        get {
+            return [chatSortDescriptor]
+        }
+    }
+    
     @IBAction func searchTextChanged(sender: NSSearchField) {
         let text = sender.stringValue
         
@@ -153,48 +125,25 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     // MARK: - Handlers for chat update notification observers
     
     func newChatDidAdd(notification: NSNotification) {
-        let userInfo = notification.userInfo as! [String: AnyObject]
-        let index = userInfo["index"] as! Int
-        self.sessionTableView.insertRowsAtIndexes(NSIndexSet(index: index), withAnimation: NSTableViewAnimationOptions.SlideLeft)
+//        let userInfo = notification.userInfo as! [String: AnyObject]
+//        let index = userInfo["index"] as! Int
+//        self.sessionTableView.insertRowsAtIndexes(NSIndexSet(index: index), withAnimation: NSTableViewAnimationOptions.SlideLeft)
     }
     
     func chatWillSendMessage(notification: NSNotification) {
-        let userInfo = notification.userInfo as! [String: AnyObject]
-        let oldIndex = userInfo["oldIndex"] as! Int
-        updateAndMoveCellAtIndex(oldIndex)
+//        let userInfo = notification.userInfo as! [String: AnyObject]
+//        let oldIndex = userInfo["oldIndex"] as! Int
     }
     
     func chatDidSendMessage(notification: NSNotification) {
-        let userInfo = notification.userInfo as! [String: AnyObject]
-        let chatIndex = userInfo["chatIndex"] as! Int
-        self.sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: chatIndex), columnIndexes: NSIndexSet(index: 0))
+//        let userInfo = notification.userInfo as! [String: AnyObject]
+//        let chatIndex = userInfo["chatIndex"] as! Int
+//        self.sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: chatIndex), columnIndexes: NSIndexSet(index: 0))
     }
     
     func chatDidReceiveMessage(notification: NSNotification) {
-        let userInfo = notification.userInfo as! [String: AnyObject]
-        let oldIndex = userInfo["oldIndex"] as! Int
-        if (currentClient?.managedObject as! VIClientMO).selectedChatIndex != oldIndex {
-            updateCellNewMessageIconAtIndex(oldIndex>0 ? oldIndex : 0, hasNew: true)
-        }
-        updateAndMoveCellAtIndex(oldIndex)
-    }
-    
-    /// Update cell at oldIndex. If index is -1, update cell at index 0.
-    /// If index is 0, update it. If index is others, move to index 0, and
-    /// update it.
-    private func updateAndMoveCellAtIndex(oldIndex: Int) {
-        if oldIndex > 0 {
-            self.sessionTableView.moveRowAtIndex(oldIndex, toIndex: 0)
-        }
-        self.sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: 0), columnIndexes: NSIndexSet(index: 0))
-    }
-    
-    private func updateCellNewMessageIconAtIndex(index: Int, hasNew: Bool) {
-        if let cellView = self.sessionTableView.viewAtColumn(0, row: index, makeIfNecessary: false) as? SessionTableCellView {
-            cellView.newMessageIcon.hidden = !hasNew
-        } else {
-            fatalError("Fail to find cell view at index: \(index), which should be updated now.")
-        }
+//        let userInfo = notification.userInfo as! [String: AnyObject]
+//        let oldIndex = userInfo["oldIndex"] as! Int
     }
     
     @IBAction func chatDeleteButtonClicked(sender: NSButton) {
@@ -203,7 +152,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         let clientMO = (currentClient?.managedObject as! VIClientMO)
         let chat = clientMO.chatAtIndex(row)
         VICoreDataController.shared.managedObjectContext.deleteObject(chat!)
-        sessionTableView.removeRowsAtIndexes(NSIndexSet(index: row), withAnimation: NSTableViewAnimationOptions.EffectFade)
+//        sessionTableView.removeRowsAtIndexes(NSIndexSet(index: row), withAnimation: NSTableViewAnimationOptions.EffectFade)
     }
     
 }

@@ -44,6 +44,10 @@ public class VIChatMO: NSManagedObject {
         message.direction = NSNumber(integer: direction.rawValue)
         message.chat = self
         
+        NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+            self.updatedtime = NSDate()
+        }
+        
         return message
     }
     
