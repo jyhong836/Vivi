@@ -111,7 +111,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
         if let client = currentClient {
             let clientMO = client.managedObject as! VIClientMO
             clientMO.addTempChat()
-            sessionTableView.selectRowIndexes(NSIndexSet(index: 0), byExtendingSelection: false)
+//            sessionTableView.selectRowIndexes(NSIndexSet(index: 0), byExtendingSelection: false)
             selectChatAtIndex(0)
         } else {
             // TODO: Let user to add a client.
