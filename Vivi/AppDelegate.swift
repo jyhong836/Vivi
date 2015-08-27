@@ -19,8 +19,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         VIClientManager.sharedClientManager.startClientLoop()
         
-//        VIClientManager.sharedClientManager.managedObjectContext = self.managedObjectContext
-        VIClientManager.sharedClientManager.loadFromEnities()
+        let clientMgr = VIClientManager.sharedClientManager
+        clientMgr.loadFromEnities()
+        
+        // init unread count
+        updateDockBadge()
+        clientMgr.addUnreadCountObservers(self)
     }
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -32,6 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     // MARK: Reopen window when active dock
+    
     func applicationShouldHandleReopen(sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         if !flag {
             for window in sender.windows {
@@ -40,7 +45,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         return true
     }
-    
     
     // MARK: - Core Data stack
     
@@ -60,6 +64,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldTerminate(sender: NSApplication) -> NSApplicationTerminateReply {
         // Save changes in the application's managed object context before the application terminates.
         return coreDataController.applicationShouldTerminate(sender)
+    }
+    
+    // MARK: Update ui
+    
+    /// Update dock tile badge with unread message count. This function will
+    /// recaculate the unread count.
+    func updateDockBadge() {
+        let dockTile = NSApplication.sharedApplication().dockTile
+        let unreadCount = VIClientManager.sharedClientManager.unreadCount
+        if unreadCount > 0 {
+            dockTile.badgeLabel = String(unreadCount)
+        } else {
+            dockTile.badgeLabel = nil
+        }
+    }
+    
+    func addDockBadgeCount() {
+        let dockTile = NSApplication.sharedApplication().dockTile
+        if let label = dockTile.badgeLabel {
+            let unreadCount = Int(label)! + 1
+            if unreadCount > 0 {
+                dockTile.badgeLabel = String(unreadCount)
+            }
+        }
+    }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        if object is VIClientMO && keyPath == "unreadcount" {
+            updateDockBadge()
+        }
     }
 }
 

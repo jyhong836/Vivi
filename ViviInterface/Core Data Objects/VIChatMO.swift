@@ -25,7 +25,14 @@ public class VIChatMO: NSManagedObject {
     // MARK: - Unread message count
     
     /// Mark whether the chat is being represented in GUI view.
-    public var isRepresented: Bool = false
+    public var isRepresented: Bool = false {
+        didSet {
+            if (isRepresented) {
+                owner!.unreadcount = owner!.unreadcount!.integerValue - unreadcount!.integerValue
+                unreadcount = 0
+            }
+        }
+    }
     
     /// Indicate whether chat has unread message. (read-only)
     public var hasUnreadMessage: Bool {
@@ -37,7 +44,8 @@ public class VIChatMO: NSManagedObject {
     /// Add unread message counnt if chat is not represented.
     func addUnreadCount() {
         if !isRepresented {
-            self.unreadcount = NSNumber(int: self.unreadcount!.intValue + 1)
+            unreadcount = unreadcount!.integerValue + 1
+            owner!.unreadcount = owner!.unreadcount!.integerValue + 1
         }
     }
     

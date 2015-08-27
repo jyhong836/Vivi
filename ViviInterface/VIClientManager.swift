@@ -59,6 +59,18 @@ public class VIClientManager: VIClientManagerProtocol {
         alert.runModal()
     }
     
+    /// Get unread message count. (read-only)
+    public var unreadCount: Int {
+        get {
+            var count = 0
+            for client in clientList {
+                let clientMO = client.managedObject as! VIClientMO
+                count += clientMO.unreadcount!.integerValue
+            }
+            return count
+        }
+    }
+    
     /// Validate the SWAccount with account string ans password string.
     ///
     /// - Parameter account: Account string name, like 'node@exmaple.com'
@@ -90,6 +102,8 @@ public class VIClientManager: VIClientManagerProtocol {
             throw VIClientManagerError.AccountNameInvalid
         }
     }
+    
+    // MARK: - Access client
     
     /// Add Client with managedObject.
     /// - Throws: VIClientManagerError
@@ -195,4 +209,14 @@ public class VIClientManager: VIClientManagerProtocol {
     
     // FIXME: Multi-client is unsafe when deleted
     public let maxClientCount: Int  = 5
+    
+    // MARK: - Client observer
+    
+    /// Add observers for unread count of all clients.
+    public func addUnreadCountObservers(observer: NSObject) {
+        for client in clientList {
+            let clientMO = client.managedObject as! VIClientMO
+            clientMO.addObserver(observer, forKeyPath: "unreadcount", options: NSKeyValueObservingOptions.New, context: nil)
+        }
+    }
 }

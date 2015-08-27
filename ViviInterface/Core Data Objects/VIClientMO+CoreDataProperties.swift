@@ -18,6 +18,7 @@ public extension VIClientMO {
     @NSManaged var hostname: String?
     @NSManaged var password: String?
     @NSManaged var port: NSNumber?
+    @NSManaged var unreadcount: NSNumber?
     @NSManaged var enabled: NSNumber?
     @NSManaged var canbeinvisible: NSNumber?
     @NSManaged var chats: NSOrderedSet?
