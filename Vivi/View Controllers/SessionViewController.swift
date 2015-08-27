@@ -17,6 +17,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
         }()
 
     @IBOutlet weak var sessionTableView: NSTableView!
+    @IBOutlet var chatArrayController: NSArrayController!
     
 //    var clientViewController: ClientViewController?
     
