@@ -22,6 +22,12 @@ public class VIChatMO: NSManagedObject {
         self.messages = NSOrderedSet()
     }
     
+    public var hasUnreadMessage: Bool {
+        get {
+            return unreadcount?.integerValue > 0
+        }
+    }
+    
     // MARK: - Message access
     
     public var lastMessage: String {
@@ -45,6 +51,7 @@ public class VIChatMO: NSManagedObject {
         message.chat = self
         
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+            self.unreadcount = NSNumber(int: self.unreadcount!.intValue + 1)
             self.updatedtime = NSDate()
         }
         

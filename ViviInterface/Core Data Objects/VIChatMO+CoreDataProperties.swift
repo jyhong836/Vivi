@@ -16,6 +16,7 @@ public extension VIChatMO {
 
     @NSManaged var createdtime: NSDate?
     @NSManaged var updatedtime: NSDate?
+    @NSManaged var unreadcount: NSNumber?
     @NSManaged var buddy: VIAccountMO?
     @NSManaged var messages: NSOrderedSet?
     @NSManaged var owner: VIClientMO?

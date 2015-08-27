@@ -65,20 +65,44 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
     // MARK: - Implementations for NSTableViewDelegate
     
     func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet {
+        // TODO: Maybe should process this in arraycontroller
 //        if proposedSelectionIndexes.count == 1 {
             // FIXME: ! Should use delegate to pass this message
             selectChatAtIndex(proposedSelectionIndexes.lastIndex)
 //        }
-        for index in proposedSelectionIndexes {
-            let view = tableView.viewAtColumn(0, row: index, makeIfNecessary: false) as! SessionTableCellView
-            view.switchSeperator()
-        }
+//        for index in proposedSelectionIndexes {
+//            let view = tableView.viewAtColumn(0, row: index, makeIfNecessary: false) as! SessionTableCellView
+//            view.switchSeperator()
+//        }
         return proposedSelectionIndexes
     }
     
     func selectChatAtIndex(index: Int) {
+        // FIXME: should not use index to access
         // FIXME: should not use this to send select notification
         (currentClient?.managedObject as! VIClientMO).selectedChatIndex = index
+        clearChatUnreadCount(index)
+    }
+    
+    func clearChatUnreadCount(chatIndex: Int) {
+        if let chat = (currentClient?.managedObject as! VIClientMO).chatAtIndex(chatIndex) {
+            addDockTile(-chat.unreadcount!.integerValue)
+            chat.unreadcount = NSNumber(int: 0)
+            sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: chatIndex), columnIndexes: NSIndexSet(index: 0))
+        }
+    }
+    
+    /// Add dock tile count.
+    func addDockTile(addition: Int) {
+//        var badgeCount = 0
+//        if let badge = NSApplication.sharedApplication().dockTile.badgeLabel {
+//            badgeCount = Int(badge)!
+//        }
+//        badgeCount += addition
+//        guard badgeCount >= 0 else {
+//            fatalError("badge count should not be negative.")
+//        }
+//        NSApplication.sharedApplication().dockTile.badgeLabel = String(badgeCount)
     }
     
     // MARK: Button action
@@ -118,11 +142,6 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
         }
     }
     
-    @IBAction func searchTextChanged(sender: NSSearchField) {
-        let text = sender.stringValue
-        
-    }
-    
     // MARK: - Handlers for chat update notification observers
     
     func newChatDidAdd(notification: NSNotification) {
@@ -145,6 +164,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
     func chatDidReceiveMessage(notification: NSNotification) {
 //        let userInfo = notification.userInfo as! [String: AnyObject]
 //        let oldIndex = userInfo["oldIndex"] as! Int
+        addDockTile(1)
     }
     
     @IBAction func chatDeleteButtonClicked(sender: NSButton) {

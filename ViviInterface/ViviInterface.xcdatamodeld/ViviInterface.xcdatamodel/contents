@@ -9,6 +9,7 @@
     </entity>
     <entity name="Chat" representedClassName=".VIChatMO" syncable="YES">
         <attribute name="createdtime" attributeType="Date" syncable="YES"/>
+        <attribute name="unreadcount" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
         <attribute name="updatedtime" attributeType="Date" indexed="YES" syncable="YES"/>
         <relationship name="buddy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="chat" inverseEntity="Account" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Message" inverseName="chat" inverseEntity="Message" syncable="YES"/>
@@ -46,7 +47,7 @@
     <fetchRequest name="RecentContact" entity="Account"/>
     <elements>
         <element name="Account" positionX="0" positionY="-216" width="128" height="120"/>
-        <element name="Chat" positionX="180" positionY="-378" width="128" height="118"/>
+        <element name="Chat" positionX="180" positionY="-378" width="128" height="135"/>
         <element name="Client" positionX="-20" positionY="-511" width="128" height="163"/>
         <element name="Group" positionX="-387" positionY="-225" width="128" height="88"/>
         <element name="Message" positionX="385" positionY="-279" width="128" height="105"/>
