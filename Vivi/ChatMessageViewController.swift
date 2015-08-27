@@ -35,6 +35,10 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         // Do view setup here.
     }
     
+    @IBAction func accountTextChanged(sender: NSTextField) {
+        // TODO: setup account here
+    }
+    
     // MARK: Notification configures
     
     let notificationCenter = NSNotificationCenter.defaultCenter()
@@ -175,6 +179,8 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         chatDidAddMessage()
     }
     
+    /// Update buddyNameTextField and accountTextField. If Buddy 
+    /// is nil, show "New Chat", and set accountTextField to editable.
     func updatePresence() {
         if let chat = self.currentChat {
             if let buddy = chat.buddy {
@@ -182,12 +188,12 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
                 self.buddyNameTextField.stringValue =
                 "\(account.getNodeString())(\(buddy.presence.parseWithShow(buddy.presenceshow, andStatus: buddy.status)!))"
                 self.accountTextField.stringValue = account.getAccountString()
-//                accountTextField.editable = false
+                accountTextField.editable = false
             } else {
-                self.buddyNameTextField.stringValue =
-                "New Chat"
+                self.buddyNameTextField.stringValue = "New Chat"
                 self.accountTextField.stringValue = "node@domain"
-//                accountTextField.editable = true
+                accountTextField.editable = true
+                accountTextField.window?.makeFirstResponder(accountTextField)
             }
         }
     }
