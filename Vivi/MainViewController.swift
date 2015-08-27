@@ -10,7 +10,7 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
-class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VIClientManagerDelegate, NSUserNotificationCenterDelegate {
+class MainViewController: NSViewController, VSClientDelegate, SessionViewControllerDelegate, VIClientManagerDelegate, NSUserNotificationCenterDelegate {
 
     @IBOutlet weak var sesConView: NSView!
     @IBOutlet weak var sessionView: NSView!
@@ -70,6 +70,7 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
             case "SessionViewSegue":
                 sessionViewController = segue.destinationController as? SessionViewController
                 sessionViewController?.currentClient = currentClient
+                sessionViewController?.delegate = self
             case "ChatViewSegue":
                 chatViewController = segue.destinationController as? ChatViewController
                 chatViewController?.currentClient = currentClient
@@ -107,7 +108,6 @@ class MainViewController: NSViewController, VSClientDelegate, VIChatDelegate, VI
             currentClient = c
             
             c.delegate = self
-            (c.managedObject as! VIClientMO).chatDelegate = self
             if let infoDict = NSBundle.mainBundle().infoDictionary {
                 let appName = infoDict[String(kCFBundleNameKey)] as! String
                 let appVer = infoDict[String(kCFBundleVersionKey)] as! String

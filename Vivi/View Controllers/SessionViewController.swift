@@ -10,11 +10,17 @@ import Cocoa
 import ViviSwiften
 import ViviInterface
 
+protocol SessionViewControllerDelegate {
+    func chatIsSelected(chat: VIChatMO)
+}
+
 class SessionViewController: NSViewController, NSTableViewDelegate {
     
     weak var managedObjectContext: NSManagedObjectContext! = {
         return VICoreDataController.shared.managedObjectContext
         }()
+    
+    var delegate: SessionViewControllerDelegate?
 
     @IBOutlet weak var sessionTableView: NSTableView!
     @IBOutlet var chatArrayController: NSArrayController!
@@ -67,7 +73,6 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
     func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet {
         // TODO: Maybe should process this in arraycontroller
 //        if proposedSelectionIndexes.count == 1 {
-            // FIXME: ! Should use delegate to pass this message
             selectChatAtIndex(proposedSelectionIndexes.lastIndex)
 //        }
 //        for index in proposedSelectionIndexes {
@@ -78,9 +83,10 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
     }
     
     func selectChatAtIndex(index: Int) {
-        // FIXME: should not use index to access
-        // FIXME: should not use this to send select notification
-        (currentClient?.managedObject as! VIClientMO).selectedChatIndex = index
+        let view = sessionTableView.viewAtColumn(0, row: index, makeIfNecessary: false) as! SessionTableCellView
+        let chat = view.objectValue as! VIChatMO
+        delegate?.chatIsSelected(chat)
+        
         clearChatUnreadCount(index)
     }
     

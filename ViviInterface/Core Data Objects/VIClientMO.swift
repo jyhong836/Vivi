@@ -29,19 +29,6 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
         roster?.client = self
     }
     
-    // MARK: Chat selected delegate
-    // FIXME: remove the delegate in future. Use Notification instead
-    public var chatDelegate: VIChatDelegate?
-    
-    public var selectedChatIndex: Int = -1 {
-        didSet {
-            if selectedChatIndex >= 0 && selectedChatIndex < chats!.count {
-                let chat: VIChatMO = chats![selectedChatIndex] as! VIChatMO
-                chatDelegate?.chatIsSelected(chat)
-            }
-        }
-    }
-    
     // MARK: - Chat access
     
     func updateChats(withBuddy buddy: SWAccount) -> (VIChatMO, oldIndex: Int) {
