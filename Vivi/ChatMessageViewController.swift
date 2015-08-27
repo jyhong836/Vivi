@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ViviSwiften
 import ViviInterface
 
 class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
@@ -36,7 +37,17 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     }
     
     @IBAction func accountTextChanged(sender: NSTextField) {
-        // TODO: setup account here
+        do {
+            guard currentChat != nil else {
+                fatalError("current chat should not be nil")
+            }
+            currentChat?.buddy = try VIAccountMO.addAccount(SWAccount(accountName: sender.stringValue), managedObjectContext: VICoreDataController.shared.managedObjectContext)
+            updatePresence()
+        } catch {
+            let nserror = error as NSError
+            let alert = NSAlert(error: nserror)
+            alert.runModal()
+        }
     }
     
     // MARK: Notification configures
