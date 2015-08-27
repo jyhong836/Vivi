@@ -35,7 +35,7 @@ public class VIChatMO: NSManagedObject {
     }
     
     /// Indicate whether chat has unread message. (read-only)
-    public var hasUnreadMessage: Bool {
+    var hasUnreadMessage: Bool {
         get {
             return unreadcount?.integerValue > 0
         }

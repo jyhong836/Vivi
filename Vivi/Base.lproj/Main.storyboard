@@ -752,7 +752,7 @@
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cPK-zQ-RDv" userLabel="Presence Pop Up Button">
                                                         <rect key="frame" x="54" y="3" width="85" height="19"/>
-                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="12BDFA35-63F1-452E-9269-B0703F547746" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
+                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="19271F91-A00A-4207-BD8B-4B0E48EB19A9" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                             <menu key="menu" id="P30-Lt-lYY">
@@ -1122,7 +1122,7 @@
                                                                     <rect key="frame" x="2" y="17" width="16" height="16"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSStatusAvailable" id="fZn-LA-0Pu"/>
                                                                     <connections>
-                                                                        <binding destination="osE-c2-l1e" name="hidden" keyPath="objectValue.hasUnreadMessage" id="KbK-wf-7rd">
+                                                                        <binding destination="osE-c2-l1e" name="hidden" keyPath="objectValue.unreadcount" id="foU-TR-xG6">
                                                                             <dictionary key="options">
                                                                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                                                                             </dictionary>
@@ -1546,7 +1546,7 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="12BDFA35-63F1-452E-9269-B0703F547746" width="1" height="1">
+        <image name="19271F91-A00A-4207-BD8B-4B0E48EB19A9" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

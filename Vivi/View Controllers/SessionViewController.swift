@@ -70,17 +70,6 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
     
     // MARK: - Implementations for NSTableViewDelegate
     
-    func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet {
-//        if proposedSelectionIndexes.count == 1 {
-            selectChatAtIndex(proposedSelectionIndexes.lastIndex)
-//        }
-//        for index in proposedSelectionIndexes {
-//            let view = tableView.viewAtColumn(0, row: index, makeIfNecessary: false) as! SessionTableCellView
-//            view.switchSeperator()
-//        }
-        return proposedSelectionIndexes
-    }
-    
     func selectionShouldChangeInTableView(tableView: NSTableView) -> Bool {
         if let chat = chatArrayController.selectedObjects.last as? VIChatMO {
             chat.isRepresented = false
@@ -88,17 +77,15 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
         return true
     }
     
-    func selectChatAtIndex(index: Int) {
-        let view = sessionTableView.viewAtColumn(0, row: index, makeIfNecessary: false) as! SessionTableCellView
-        let chat = view.objectValue as! VIChatMO
-        chat.isRepresented = true
-        delegate?.chatIsSelected(chat)
-        
-        clearChatUnreadCount(index)
+    func tableViewSelectionDidChange(notification: NSNotification) {
+        if let chat = chatArrayController.selectedObjects.last as? VIChatMO {
+            didSelectChat(chat)
+        }
     }
     
-    func clearChatUnreadCount(chatIndex: Int) {
-        sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: chatIndex), columnIndexes: NSIndexSet(index: 0))
+    func didSelectChat(chat: VIChatMO) {
+        chat.isRepresented = true
+        delegate?.chatIsSelected(chat)
     }
     
     // MARK: Button action
@@ -107,8 +94,9 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
         if let client = currentClient {
             let clientMO = client.managedObject as! VIClientMO
             sessionTableView.insertRowsAtIndexes(NSIndexSet(index: 0), withAnimation: NSTableViewAnimationOptions.EffectFade)
-            clientMO.addTempChat()
-            selectChatAtIndex(0)
+            let tempChat = clientMO.addTempChat()
+            chatArrayController.addObject(tempChat)
+            didSelectChat(tempChat)
         } else {
             // TODO: Let user to add a client.
             let question = NSLocalizedString("Could not add chat without client account", comment: "Add chat error question message")
@@ -129,6 +117,18 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
 //                // Cancel
 //            }
         }
+    }
+    
+    @IBAction func chatDeleteButtonClicked(sender: NSButton) {
+        let cellView = sender.superview as! SessionTableCellView
+        let row = sessionTableView.rowForView(cellView)
+        if row == -1 {
+            fatalError("unknown error: attempt to delete not existed row")
+        }
+        let clientMO = (currentClient?.managedObject as! VIClientMO)
+        let chat = clientMO.chatAtIndex(row)
+        sessionTableView.removeRowsAtIndexes(NSIndexSet(index: row), withAnimation: NSTableViewAnimationOptions.EffectFade)
+        chatArrayController.removeObject(chat!)
     }
     
     let chatSortDescriptor = NSSortDescriptor(key: "updatedtime", ascending: false, selector: Selector("compare:"))
@@ -160,18 +160,6 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
     func chatDidReceiveMessage(notification: NSNotification) {
 //        let userInfo = notification.userInfo as! [String: AnyObject]
 //        let oldIndex = userInfo["oldIndex"] as! Int
-    }
-    
-    @IBAction func chatDeleteButtonClicked(sender: NSButton) {
-        let cellView = sender.superview as! SessionTableCellView
-        let row = sessionTableView.rowForView(cellView)
-        if row == -1 {
-            fatalError("unknown error: attempt to delete not existed row")
-        }
-        let clientMO = (currentClient?.managedObject as! VIClientMO)
-        let chat = clientMO.chatAtIndex(row)
-        sessionTableView.removeRowsAtIndexes(NSIndexSet(index: row), withAnimation: NSTableViewAnimationOptions.EffectFade)
-        chatArrayController.removeObject(chat!)
     }
     
 }
