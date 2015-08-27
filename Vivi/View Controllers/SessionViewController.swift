@@ -98,24 +98,7 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
     }
     
     func clearChatUnreadCount(chatIndex: Int) {
-        if let chat = (currentClient?.managedObject as! VIClientMO).chatAtIndex(chatIndex) {
-            addDockTile(-chat.unreadcount!.integerValue)
-            chat.unreadcount = NSNumber(int: 0)
-            sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: chatIndex), columnIndexes: NSIndexSet(index: 0))
-        }
-    }
-    
-    /// Add dock tile count.
-    func addDockTile(addition: Int) {
-//        var badgeCount = 0
-//        if let badge = NSApplication.sharedApplication().dockTile.badgeLabel {
-//            badgeCount = Int(badge)!
-//        }
-//        badgeCount += addition
-//        guard badgeCount >= 0 else {
-//            fatalError("badge count should not be negative.")
-//        }
-//        NSApplication.sharedApplication().dockTile.badgeLabel = String(badgeCount)
+        sessionTableView.reloadDataForRowIndexes(NSIndexSet(index: chatIndex), columnIndexes: NSIndexSet(index: 0))
     }
     
     // MARK: Button action
@@ -177,7 +160,6 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
     func chatDidReceiveMessage(notification: NSNotification) {
 //        let userInfo = notification.userInfo as! [String: AnyObject]
 //        let oldIndex = userInfo["oldIndex"] as! Int
-        addDockTile(1)
     }
     
     @IBAction func chatDeleteButtonClicked(sender: NSButton) {
