@@ -71,7 +71,6 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
     // MARK: - Implementations for NSTableViewDelegate
     
     func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet {
-        // TODO: Maybe should process this in arraycontroller
 //        if proposedSelectionIndexes.count == 1 {
             selectChatAtIndex(proposedSelectionIndexes.lastIndex)
 //        }
@@ -116,8 +115,8 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
     @IBAction func addChatButtonClicked(sender: NSButton) {
         if let client = currentClient {
             let clientMO = client.managedObject as! VIClientMO
+            sessionTableView.insertRowsAtIndexes(NSIndexSet(index: 0), withAnimation: NSTableViewAnimationOptions.EffectFade)
             clientMO.addTempChat()
-//            sessionTableView.selectRowIndexes(NSIndexSet(index: 0), byExtendingSelection: false)
             selectChatAtIndex(0)
         } else {
             // TODO: Let user to add a client.
@@ -176,10 +175,13 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
     @IBAction func chatDeleteButtonClicked(sender: NSButton) {
         let cellView = sender.superview as! SessionTableCellView
         let row = sessionTableView.rowForView(cellView)
+        if row == -1 {
+            fatalError("unknown error: attempt to delete not existed row")
+        }
         let clientMO = (currentClient?.managedObject as! VIClientMO)
         let chat = clientMO.chatAtIndex(row)
-        VICoreDataController.shared.managedObjectContext.deleteObject(chat!)
-//        sessionTableView.removeRowsAtIndexes(NSIndexSet(index: row), withAnimation: NSTableViewAnimationOptions.EffectFade)
+        sessionTableView.removeRowsAtIndexes(NSIndexSet(index: row), withAnimation: NSTableViewAnimationOptions.EffectFade)
+        chatArrayController.removeObject(chat!)
     }
     
 }
