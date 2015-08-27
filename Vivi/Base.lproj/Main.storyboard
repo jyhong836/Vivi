@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8173.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8187.4"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -752,7 +752,7 @@
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cPK-zQ-RDv" userLabel="Presence Pop Up Button">
                                                         <rect key="frame" x="54" y="3" width="85" height="19"/>
-                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="4392CA42-CA64-4FE5-87CE-C67CDE130724" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
+                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="90A12FDA-A42D-4A82-949C-D7036888C77B" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                             <menu key="menu" id="P30-Lt-lYY">
@@ -976,7 +976,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tpa-P6-qgr">
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tpa-P6-qgr">
                                 <rect key="frame" x="494" y="84" width="13" height="13"/>
                                 <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Tgj-Ff-PIO">
                                     <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
@@ -986,6 +986,8 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="HdS-T9-jjy" firstAttribute="leading" secondItem="DTW-Pf-Brh" secondAttribute="leading" constant="8" id="2fj-zX-hpE"/>
+                            <constraint firstAttribute="trailing" secondItem="Tpa-P6-qgr" secondAttribute="trailing" constant="5" id="aD8-p2-VED"/>
+                            <constraint firstItem="Tpa-P6-qgr" firstAttribute="top" secondItem="DTW-Pf-Brh" secondAttribute="top" constant="5" id="jHL-wf-BXM"/>
                             <constraint firstItem="FXf-Se-1co" firstAttribute="top" secondItem="HdS-T9-jjy" secondAttribute="bottom" constant="2" id="jTg-y5-1SG"/>
                             <constraint firstAttribute="trailing" secondItem="FXf-Se-1co" secondAttribute="trailing" id="jqm-jI-aN2"/>
                             <constraint firstAttribute="bottom" secondItem="FXf-Se-1co" secondAttribute="bottom" id="rbh-CV-199"/>
@@ -1024,6 +1026,9 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <connections>
+                                            <action selector="searchTextChanged:" target="wCD-lF-Pb2" id="yNu-E3-1z5"/>
+                                        </connections>
                                     </searchField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eDU-XK-YQs">
                                         <rect key="frame" x="132" y="2" width="22" height="25"/>
@@ -1458,6 +1463,11 @@ DQ
                     </connections>
                 </viewController>
                 <customObject id="RBt-iF-OUq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="Account" automaticallyPreparesContent="YES" id="tPa-yT-5X5">
+                    <connections>
+                        <binding destination="ZTq-eb-EqD" name="managedObjectContext" keyPath="self.managedObjectContext" id="x2g-Tp-xvQ"/>
+                    </connections>
+                </arrayController>
             </objects>
             <point key="canvasLocation" x="117.5" y="2315"/>
         </scene>
@@ -1505,7 +1515,7 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="4392CA42-CA64-4FE5-87CE-C67CDE130724" width="1" height="1">
+        <image name="90A12FDA-A42D-4A82-949C-D7036888C77B" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

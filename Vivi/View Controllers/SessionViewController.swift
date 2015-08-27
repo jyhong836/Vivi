@@ -145,6 +145,11 @@ class SessionViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         }
     }
     
+    @IBAction func searchTextChanged(sender: NSSearchField) {
+        let text = sender.stringValue
+        
+    }
+    
     // MARK: - Handlers for chat update notification observers
     
     func newChatDidAdd(notification: NSNotification) {

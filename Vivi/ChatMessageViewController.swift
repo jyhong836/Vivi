@@ -10,6 +10,10 @@ import Cocoa
 import ViviInterface
 
 class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+    
+    weak var managedObjectContext: NSManagedObjectContext! = {
+        return VICoreDataController.shared.managedObjectContext
+        }()
 
     @IBOutlet weak var buddyNameTextField: NSTextField!
     @IBOutlet weak var accountTextField: NSTextField!
