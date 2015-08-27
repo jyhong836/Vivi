@@ -81,9 +81,17 @@ class SessionViewController: NSViewController, NSTableViewDelegate {
         return proposedSelectionIndexes
     }
     
+    func selectionShouldChangeInTableView(tableView: NSTableView) -> Bool {
+        if let chat = chatArrayController.selectedObjects.last as? VIChatMO {
+            chat.isRepresented = false
+        }
+        return true
+    }
+    
     func selectChatAtIndex(index: Int) {
         let view = sessionTableView.viewAtColumn(0, row: index, makeIfNecessary: false) as! SessionTableCellView
         let chat = view.objectValue as! VIChatMO
+        chat.isRepresented = true
         delegate?.chatIsSelected(chat)
         
         clearChatUnreadCount(index)

@@ -22,14 +22,28 @@ public class VIChatMO: NSManagedObject {
         self.messages = NSOrderedSet()
     }
     
+    // MARK: - Unread message count
+    
+    /// Mark whether the chat is being represented in GUI view.
+    public var isRepresented: Bool = false
+    
+    /// Indicate whether chat has unread message. (read-only)
     public var hasUnreadMessage: Bool {
         get {
             return unreadcount?.integerValue > 0
         }
     }
     
+    /// Add unread message counnt if chat is not represented.
+    func addUnreadCount() {
+        if !isRepresented {
+            self.unreadcount = NSNumber(int: self.unreadcount!.intValue + 1)
+        }
+    }
+    
     // MARK: - Message access
     
+    /// Last added message. (read-only)
     public var lastMessage: String {
         get {
             if let msgs = messages {
@@ -50,8 +64,9 @@ public class VIChatMO: NSManagedObject {
         message.direction = NSNumber(integer: direction.rawValue)
         message.chat = self
         
+        addUnreadCount()
+        
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-            self.unreadcount = NSNumber(int: self.unreadcount!.intValue + 1)
             self.updatedtime = NSDate()
         }
         
