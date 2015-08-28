@@ -23,6 +23,7 @@
 
 //#import <Swiften/Disco/EntityCapsProvider.h>
 #import <Swiften/Disco/GetDiscoInfoRequest.h>
+#import <Swiften/Avatars/AvatarManagerImpl.h>
 
 using namespace Swift;
 
@@ -46,6 +47,9 @@ swclient(swclient)
     this->getRoster()->onJIDUpdated.connect(boost::bind(&SWClientAdapter::rosterOnJIDUpdatedSlot, this, _1, _2, _3));
     this->getRoster()->onRosterCleared.connect(boost::bind(&SWClientAdapter::rosterOnRosterClearedSlot, this));
     this->getRoster()->onInitialRosterPopulated.connect(boost::bind(&SWClientAdapter::rosterOnInitialRosterPopulatedSlot, this));
+    
+    // Connect singals to avatar slots
+    this->getAvatarManager()->onAvatarChanged.connect(boost::bind(&SWClientAdapter::clientOnJIDAvatarChanged, this, _1));
 }
 
 SWClientAdapter::~SWClientAdapter()
@@ -216,4 +220,12 @@ void SWClientAdapter::rosterOnInitialRosterPopulatedSlot()
 {
     if ([swclient.roster.delegate respondsToSelector:@selector(rosterDidInitialize:)])
         [swclient.roster.delegate rosterDidInitialize: swclient.roster];
+}
+
+#pragma mark - Avatar slots
+
+void SWClientAdapter::clientOnJIDAvatarChanged(const JID& jid)
+{
+    NSLog(@"%s avatar changed", jid.toString().c_str());
+    // TODO: Call delegate here.
 }

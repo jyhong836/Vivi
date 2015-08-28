@@ -34,6 +34,8 @@ namespace Swift
                       Storages* storages = NULL);
         ~SWClientAdapter();
         
+#pragma mark - Client action slots
+        
     private:
         /// Never free swclient inside SWClientAdapter
         SWClient* __weak swclient;
@@ -41,6 +43,8 @@ namespace Swift
         void onDisconnectedSlot(const boost::optional<ClientError> &err);
         void onMessageReceivedSlot(boost::shared_ptr<Message> msg);
         void onPresenceReceivedSlot(boost::shared_ptr<Presence> pres);
+        
+#pragma mark - Sever discoInfo slots
         
     private:
         DiscoInfo::ref serverDiscInfo_;
@@ -50,6 +54,8 @@ namespace Swift
         bool hasInitializedServerDiscoInfo();
         bool serverHasFeature(const std::string &feature);
         void requestServerDiscoInfo();
+    
+#pragma mark - Roster slots
         
     private:
         void rosterOnJIDAddedSlot(const JID& jid);
@@ -57,6 +63,11 @@ namespace Swift
         void rosterOnJIDUpdatedSlot(const JID&, const std::string&, const std::vector<std::string>&);
         void rosterOnRosterClearedSlot();
         void rosterOnInitialRosterPopulatedSlot();
+        
+#pragma mark - Avatar slots
+        
+    private:
+        void clientOnJIDAvatarChanged(const JID& jid);
     };
 }
 

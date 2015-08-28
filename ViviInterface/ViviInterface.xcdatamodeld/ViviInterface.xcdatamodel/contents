@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8193.2" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
     <entity name="Account" representedClassName=".VIAccountMO" syncable="YES">
+        <attribute name="avatar" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="domain" attributeType="String" minValueString="1" regularExpressionString=".[a-zA-Z0-9.]+" syncable="YES"/>
         <attribute name="node" attributeType="String" minValueString="1" defaultValueString="node" regularExpressionString=".[a-zA-Z0-9.]+" indexed="YES" syncable="YES"/>
         <relationship name="chat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chat" inverseName="buddy" inverseEntity="Chat" syncable="YES"/>
@@ -47,7 +48,7 @@
     </entity>
     <fetchRequest name="RecentContact" entity="Account"/>
     <elements>
-        <element name="Account" positionX="0" positionY="-216" width="128" height="120"/>
+        <element name="Account" positionX="0" positionY="-216" width="128" height="133"/>
         <element name="Chat" positionX="180" positionY="-378" width="128" height="135"/>
         <element name="Client" positionX="-20" positionY="-511" width="128" height="180"/>
         <element name="Group" positionX="-387" positionY="-225" width="128" height="88"/>
