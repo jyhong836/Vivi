@@ -22,4 +22,12 @@ class RosterViewController: NSViewController {
         collectionView.itemPrototype = self.storyboard?.instantiateControllerWithIdentifier("RosterCollectionItem") as? NSCollectionViewItem
     }
     
+    let nodeSortDescripoter = NSSortDescriptor(key: "node", ascending: true, selector: Selector("compare:"))
+    let domainSortDescripoter = NSSortDescriptor(key: "domain", ascending: true, selector: Selector("compare:"))
+    var sortDescriptors: [NSSortDescriptor] {
+        get {
+            return [nodeSortDescripoter, domainSortDescripoter]
+        }
+    }
+    
 }

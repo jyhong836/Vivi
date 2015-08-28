@@ -2,7 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8193.2" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
     <entity name="Account" representedClassName=".VIAccountMO" syncable="YES">
         <attribute name="avatar" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <attribute name="domain" attributeType="String" minValueString="1" regularExpressionString=".[a-zA-Z0-9.]+" syncable="YES"/>
+        <attribute name="domain" attributeType="String" minValueString="1" regularExpressionString=".[a-zA-Z0-9.]+" indexed="YES" syncable="YES"/>
         <attribute name="node" attributeType="String" minValueString="1" defaultValueString="node" regularExpressionString=".[a-zA-Z0-9.]+" indexed="YES" syncable="YES"/>
         <relationship name="chat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chat" inverseName="buddy" inverseEntity="Chat" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Group" inverseName="buddies" inverseEntity="Group" syncable="YES"/>

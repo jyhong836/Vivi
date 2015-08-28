@@ -752,7 +752,7 @@
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cPK-zQ-RDv" userLabel="Presence Pop Up Button">
                                                         <rect key="frame" x="54" y="3" width="85" height="19"/>
-                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="2663D96D-3FFD-4F1E-AAF2-BEE4E17FC15E" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
+                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="628308A3-B0AA-4A7C-AEF8-F9A043D028E3" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                             <menu key="menu" id="P30-Lt-lYY">
@@ -1003,6 +1003,7 @@
                 <arrayController mode="entity" entityName="Account" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="IcQ-sK-1Uz">
                     <connections>
                         <binding destination="fW5-7j-gLY" name="managedObjectContext" keyPath="self.managedObjectContext" id="W9d-wH-Tli"/>
+                        <binding destination="fW5-7j-gLY" name="sortDescriptors" keyPath="self.sortDescriptors" id="d82-LS-5nn"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -1065,7 +1066,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="50" viewBased="YES" id="zaB-TU-6Mx">
-                                            <rect key="frame" x="0.0" y="0.0" width="158" height="228"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="158" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="0.0" height="2"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1120,7 +1121,11 @@
                                                                     </constraints>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSUserGuest" id="3PM-vg-g6k"/>
                                                                     <connections>
-                                                                        <binding destination="osE-c2-l1e" name="data" keyPath="objectValue.buddy.avatar" id="QWE-99-Fuj"/>
+                                                                        <binding destination="osE-c2-l1e" name="value" keyPath="objectValue.buddy.avatar" id="VQw-R1-xNq">
+                                                                            <dictionary key="options">
+                                                                                <string key="NSValueTransformerName">NSDataAvatarTransformer</string>
+                                                                            </dictionary>
+                                                                        </binding>
                                                                     </connections>
                                                                 </imageView>
                                                                 <imageView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XSG-vN-nfe">
@@ -1525,7 +1530,11 @@ DQ
                                 <rect key="frame" x="9" y="25" width="48" height="48"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="grayBezel" image="NSUserGuest" id="4nN-Hj-3ci"/>
                                 <connections>
-                                    <binding destination="e4p-zm-ibf" name="data" keyPath="representedObject.avatar" id="4JT-yi-mSF"/>
+                                    <binding destination="e4p-zm-ibf" name="value" keyPath="representedObject.avatar" id="lc9-Qa-VPg">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSDataAvatarTransformer</string>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zPf-sB-T8n">
@@ -1560,7 +1569,7 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="2663D96D-3FFD-4F1E-AAF2-BEE4E17FC15E" width="1" height="1">
+        <image name="628308A3-B0AA-4A7C-AEF8-F9A043D028E3" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

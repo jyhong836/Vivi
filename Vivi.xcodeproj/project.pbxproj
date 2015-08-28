@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CD0932181B5F9757007ACB22 /* VSClientDelegateProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0932171B5F9757007ACB22 /* VSClientDelegateProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CD0E72AB1B9023C1002F58E9 /* NSDataAvatarTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0E72AA1B9023C1002F58E9 /* NSDataAvatarTransformer.swift */; settings = {ASSET_TAGS = (); }; };
 		CD156DDB1B81F40E00EFC06F /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */; };
 		CD156DE41B81FB0900EFC06F /* RosterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DE31B81FB0900EFC06F /* RosterViewController.swift */; };
 		CD156DE71B823B0600EFC06F /* SWRosterItem.h in Headers */ = {isa = PBXBuildFile; fileRef = CD156DE51B823B0600EFC06F /* SWRosterItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -191,6 +192,7 @@
 
 /* Begin PBXFileReference section */
 		CD0932171B5F9757007ACB22 /* VSClientDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSClientDelegateProtocol.h; sourceTree = "<group>"; };
+		CD0E72AA1B9023C1002F58E9 /* NSDataAvatarTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataAvatarTransformer.swift; sourceTree = "<group>"; };
 		CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		CD156DE31B81FB0900EFC06F /* RosterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RosterViewController.swift; path = "View Controllers/RosterViewController.swift"; sourceTree = "<group>"; };
 		CD156DE51B823B0600EFC06F /* SWRosterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRosterItem.h; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 				CD8C647A1B6BE0F700945529 /* AvaterButton.swift */,
 				CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */,
 				CD60BA501B6DB30F008E077A /* MessageTableCellView.swift */,
+				CD0E72AA1B9023C1002F58E9 /* NSDataAvatarTransformer.swift */,
 			);
 			name = "UI Assets";
 			sourceTree = "<group>";
@@ -930,6 +933,7 @@
 				CDC174941B7102610081F6D4 /* MainWindowController.swift in Sources */,
 				CD156DE41B81FB0900EFC06F /* RosterViewController.swift in Sources */,
 				CD36855E1B5E659500DFC78A /* MainViewController.swift in Sources */,
+				CD0E72AB1B9023C1002F58E9 /* NSDataAvatarTransformer.swift in Sources */,
 				CD8C647D1B6C6C3B00945529 /* SessionTableCellView.swift in Sources */,
 				CD8C647F1B6C83D200945529 /* InputViewController.swift in Sources */,
 				CD60BA4F1B6D304E008E077A /* ChatMessageViewController.swift in Sources */,

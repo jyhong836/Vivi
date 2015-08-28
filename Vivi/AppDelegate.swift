@@ -15,6 +15,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
+    override class func initialize() {
+        super.initialize()
+        let NSDataAvatarTransformerName = "NSDataAvatarTransformer"
+        NSValueTransformer.setValueTransformer(NSDataAvatarTransformer(), forName: NSDataAvatarTransformerName)
+    }
+    
     func applicationWillFinishLaunching(notification: NSNotification) {
         
         VIClientManager.sharedClientManager.startClientLoop()
