@@ -30,6 +30,11 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
                     accountLabel.stringValue = (currentClient!.account.getAccountString())!
                     let clientMO = currentClient!.managedObject as! VIClientMO
                     invisibleItem.hidden = !(clientMO.canbeinvisible!.boolValue)
+                    
+                    let accountMO = VIAccountMO.getAccount(currentClient!.account.getNodeString(), domain: currentClient!.account.getDomainString(), managedObjectContext: VICoreDataController.shared.managedObjectContext)
+                    if let imgData = accountMO?.avatar {
+                        avaterButton.image = NSImage(data: imgData)
+                    }
                 }
             }
         }
