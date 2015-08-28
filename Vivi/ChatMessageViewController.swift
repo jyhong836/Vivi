@@ -134,10 +134,16 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
                 cell = tableView.makeViewWithIdentifier("InMessageCellView", owner: self) as? MessageTableCellView
             case .To:
                 cell = tableView.makeViewWithIdentifier("OutMessageCellView", owner: self) as? MessageTableCellView
-            case .WillTo: // TODO: add "will to" processing
+                cell?.clearBadges()
+                cell?.showFailBadge = false
+            case .WillTo:
                 cell = tableView.makeViewWithIdentifier("OutMessageCellView", owner: self) as? MessageTableCellView
-            case .FailTo: // TODO: add "fail to" processing
+                cell?.clearBadges()
+                cell?.showSendingBadge = true
+            case .FailTo:
                 cell = tableView.makeViewWithIdentifier("OutMessageCellView", owner: self) as? MessageTableCellView
+                cell?.clearBadges()
+                cell?.showFailBadge = true
             default:
                 break
             }
@@ -181,9 +187,20 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     func chatDidSendMessage(notification: NSNotification) {
         let userInfo = notification.userInfo as! [String: AnyObject]
         let messageIndex = userInfo["messageIndex"] as! Int
-        // TODO: Process the send error
-//        let error = userInfo["error"] as! Int
         chatDidUpdateMessageAtIndex(messageIndex)
+        if let errcode = userInfo["error"] as? Int {
+            let error = VSClientErrorType(rawValue: errcode)!
+            switch (error) {
+            case .ClientUnavaliable:
+                let alert = NSAlert()
+                alert.messageText = "Please log in before sending message."
+                alert.runModal()
+            case .Unknown:
+                fallthrough
+            default:
+                NSLog("** Fail to send message: Unknown error")
+            }
+        }
     }
     
     func chatDidReceiveMessage(notification: NSNotification) {

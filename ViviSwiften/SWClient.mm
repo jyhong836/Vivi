@@ -205,7 +205,7 @@ using namespace Swift;
         handler(VSClientErrorTypeNone);
     } else {
         [managedObject clientFailSendMessage: msgObject
-                                             error: VSClientErrorTypeClientUnavaliable];
+                                       error: VSClientErrorTypeClientUnavaliable];
         handler(VSClientErrorTypeClientUnavaliable);
     }
 }

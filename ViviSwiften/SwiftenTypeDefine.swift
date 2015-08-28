@@ -87,7 +87,7 @@ public enum SWPresenceShowType: Int32 {
 }
 let SWPresenceShowTypeStringDict: [SWPresenceShowType: String] = [.Online: "Online", .Away: "Away", .FFC:"FFC", .XA: "XA"/* extended away */, .DND: "DND" /* do not disturb */, .None:"None"]
 
-public enum SWClientErrorType: Int32 {
+public enum SWClientErrorType: Int32, ErrorType {
     case UnknownError, DomainNameResolveError, ConnectionError, ConnectionReadError
     case ConnectionWriteError, XMLError, AuthenticationFailedError, CompressionFailedError
     case ServerVerificationFailedError, NoSupportedAuthMechanismsError, UnexpectedElementError, ResourceBindError

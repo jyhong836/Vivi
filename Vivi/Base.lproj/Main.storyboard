@@ -741,7 +741,7 @@
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cPK-zQ-RDv" userLabel="Presence Pop Up Button">
                                                         <rect key="frame" x="54" y="3" width="82" height="19"/>
-                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="412D8048-779D-46E1-B59D-9C89250C2DD9" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
+                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="15EA293B-E203-4013-9009-BAD3C0416C15" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                             <menu key="menu" id="P30-Lt-lYY">
@@ -1399,19 +1399,36 @@ DQ
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
+                                                                <imageView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mnS-OI-Rbd">
+                                                                    <rect key="frame" x="128" y="5" width="16" height="16"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="16" id="0i1-VL-Sxz"/>
+                                                                        <constraint firstAttribute="width" constant="16" id="wIt-jP-YRp"/>
+                                                                    </constraints>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="fa-warning-circle" id="pkS-sI-8V3"/>
+                                                                </imageView>
+                                                                <progressIndicator hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Kwa-bF-88g">
+                                                                    <rect key="frame" x="128" y="5" width="16" height="16"/>
+                                                                </progressIndicator>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="rBj-iU-ZKe" firstAttribute="top" secondItem="lOY-ec-Rwo" secondAttribute="top" constant="13" id="1bF-Uu-AJQ"/>
                                                                 <constraint firstAttribute="trailing" secondItem="rBj-iU-ZKe" secondAttribute="trailing" constant="20" id="3gc-Vn-dOF"/>
+                                                                <constraint firstItem="Kwa-bF-88g" firstAttribute="leading" secondItem="mnS-OI-Rbd" secondAttribute="leading" id="Acw-jb-b1I"/>
                                                                 <constraint firstAttribute="height" secondItem="YKF-yy-qXg" secondAttribute="height" constant="10" id="BPh-eK-fNX"/>
                                                                 <constraint firstItem="YKF-yy-qXg" firstAttribute="width" relation="greaterThanOrEqual" secondItem="rBj-iU-ZKe" secondAttribute="width" constant="22" id="RKp-aP-mI3"/>
+                                                                <constraint firstItem="mnS-OI-Rbd" firstAttribute="centerY" secondItem="YKF-yy-qXg" secondAttribute="centerY" id="WxW-7y-wT8"/>
                                                                 <constraint firstAttribute="trailing" secondItem="YKF-yy-qXg" secondAttribute="trailing" constant="8" id="hxV-JX-UHH"/>
+                                                                <constraint firstItem="Kwa-bF-88g" firstAttribute="top" secondItem="mnS-OI-Rbd" secondAttribute="top" id="rw5-qQ-bJO"/>
                                                                 <constraint firstItem="YKF-yy-qXg" firstAttribute="top" secondItem="lOY-ec-Rwo" secondAttribute="top" constant="10" id="tDi-5s-eWO"/>
                                                                 <constraint firstItem="YKF-yy-qXg" firstAttribute="height" secondItem="rBj-iU-ZKe" secondAttribute="height" constant="9" id="vuu-Ki-L0p"/>
+                                                                <constraint firstItem="YKF-yy-qXg" firstAttribute="leading" secondItem="mnS-OI-Rbd" secondAttribute="trailing" constant="6" id="xQr-HT-zWu"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="bubleImageView" destination="YKF-yy-qXg" id="cgK-yF-qux"/>
+                                                                <outlet property="sendingSpinner" destination="Kwa-bF-88g" id="7ak-m3-1ry"/>
                                                                 <outlet property="textField" destination="rBj-iU-ZKe" id="sEJ-Qu-Dih"/>
+                                                                <outlet property="warningBadge" destination="mnS-OI-Rbd" id="6Cf-5D-EDN"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
@@ -1506,11 +1523,6 @@ DQ
                     </connections>
                 </viewController>
                 <customObject id="RBt-iF-OUq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Account" automaticallyPreparesContent="YES" id="tPa-yT-5X5">
-                    <connections>
-                        <binding destination="ZTq-eb-EqD" name="managedObjectContext" keyPath="self.managedObjectContext" id="x2g-Tp-xvQ"/>
-                    </connections>
-                </arrayController>
             </objects>
             <point key="canvasLocation" x="117.5" y="2315"/>
         </scene>
@@ -1565,7 +1577,7 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="412D8048-779D-46E1-B59D-9C89250C2DD9" width="1" height="1">
+        <image name="15EA293B-E203-4013-9009-BAD3C0416C15" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -1627,6 +1639,7 @@ AAAAAAAAAAAAAAAAAAozA
         <image name="NSUser" width="32" height="32"/>
         <image name="NSUserGuest" width="32" height="32"/>
         <image name="OutMessageBuble" width="39" height="26"/>
+        <image name="fa-warning-circle" width="23" height="23"/>
         <sound name="Morse"/>
     </resources>
 </document>
