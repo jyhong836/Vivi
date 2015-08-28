@@ -33,7 +33,7 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
                     
                     let accountMO = VIAccountMO.getAccount(currentClient!.account.getNodeString(), domain: currentClient!.account.getDomainString(), managedObjectContext: VICoreDataController.shared.managedObjectContext)
                     if let imgData = accountMO?.avatar {
-                        avaterButton.image = NSImage(data: imgData)
+                        avaterView.image = NSImage(data: imgData)
                     }
                 }
             }
@@ -172,17 +172,17 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
     // MARK: Buttons
     
     @IBOutlet weak var accountLabel: NSTextField!
-    @IBOutlet weak var avaterButton: NSButton!
+    @IBOutlet weak var avaterView: AvatarView!
     @IBOutlet weak var rosterButton: NSButton!
     @IBOutlet weak var presencePopUpButton: NSPopUpButton!
     
     private func updateButtonStates() {
         if currentClient != nil {
-            avaterButton.enabled = true
+            avaterView.enabled = true
             rosterButton.enabled = true
             presencePopUpButton.enabled = true
         } else {
-            avaterButton.enabled = false
+            avaterView.enabled = false
             rosterButton.enabled = false
             presencePopUpButton.enabled = false
         }

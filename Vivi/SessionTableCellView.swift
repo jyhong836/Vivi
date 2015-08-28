@@ -13,7 +13,7 @@ class SessionTableCellView: NSTableCellView {
     @IBOutlet weak var lastMessageTextField: NSTextField!
     
     @IBOutlet weak var newMessageIcon: NSImageView!
-    @IBOutlet weak var avaterImageView: NSImageView!
+    @IBOutlet weak var avaterImageView: AvatarView!
     @IBOutlet weak var seperator: NSBox!
     
     func switchSeperator() {

@@ -725,17 +725,6 @@
                                             <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="IWe-AH-D1C">
                                                 <rect key="frame" x="0.0" y="490" width="242" height="60"/>
                                                 <subviews>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Dkh-5M-qmJ" userLabel="Avater Button" customClass="AvaterButton" customModule="Vivi" customModuleProvider="target">
-                                                        <rect key="frame" x="8" y="4" width="36" height="36"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="36" id="PUw-V1-SYo"/>
-                                                            <constraint firstAttribute="width" constant="36" id="bn4-rU-YMa"/>
-                                                        </constraints>
-                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSUser" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="aL5-fB-EWk">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                    </button>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rcz-ln-1OZ">
                                                         <rect key="frame" x="210" y="13" width="20" height="18"/>
                                                         <constraints>
@@ -751,8 +740,8 @@
                                                         </connections>
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cPK-zQ-RDv" userLabel="Presence Pop Up Button">
-                                                        <rect key="frame" x="54" y="3" width="85" height="19"/>
-                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="628308A3-B0AA-4A7C-AEF8-F9A043D028E3" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
+                                                        <rect key="frame" x="54" y="3" width="82" height="19"/>
+                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="412D8048-779D-46E1-B59D-9C89250C2DD9" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                             <menu key="menu" id="P30-Lt-lYY">
@@ -783,19 +772,26 @@
                                                     <progressIndicator hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="HqU-XE-vbp">
                                                         <rect key="frame" x="119" y="5" width="16" height="16"/>
                                                     </progressIndicator>
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8iU-s2-GZO" customClass="AvatarView" customModule="Vivi" customModuleProvider="target">
+                                                        <rect key="frame" x="8" y="4" width="36" height="36"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="36" id="8rI-cM-TxE"/>
+                                                        </constraints>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="bottom" imageScaling="proportionallyUpOrDown" image="NSUser" id="is3-Si-Z9f"/>
+                                                    </imageView>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="Dkh-5M-qmJ" firstAttribute="leading" secondItem="IWe-AH-D1C" secondAttribute="leading" constant="8" id="2k5-Y3-h0Q"/>
+                                                    <constraint firstItem="8iU-s2-GZO" firstAttribute="top" secondItem="IWe-AH-D1C" secondAttribute="top" constant="20" symbolic="YES" id="9de-RP-Ho5"/>
                                                     <constraint firstItem="rcz-ln-1OZ" firstAttribute="top" secondItem="IWe-AH-D1C" secondAttribute="top" constant="29" id="Cm3-bt-O0B"/>
-                                                    <constraint firstItem="Dkh-5M-qmJ" firstAttribute="top" secondItem="IWe-AH-D1C" secondAttribute="top" constant="20" symbolic="YES" id="DV9-Pj-c5I"/>
-                                                    <constraint firstItem="HqU-XE-vbp" firstAttribute="leading" secondItem="Dkh-5M-qmJ" secondAttribute="trailing" constant="75" id="GN0-pF-AM6"/>
-                                                    <constraint firstItem="rzw-I8-z9t" firstAttribute="top" secondItem="Dkh-5M-qmJ" secondAttribute="top" id="MkQ-5N-rba"/>
+                                                    <constraint firstItem="HqU-XE-vbp" firstAttribute="leading" secondItem="8iU-s2-GZO" secondAttribute="trailing" constant="75" id="Iee-Vn-4gI"/>
+                                                    <constraint firstItem="8iU-s2-GZO" firstAttribute="top" secondItem="rzw-I8-z9t" secondAttribute="top" id="JKR-qn-Ep4"/>
                                                     <constraint firstItem="HqU-XE-vbp" firstAttribute="centerY" secondItem="cPK-zQ-RDv" secondAttribute="centerY" id="Nlb-S7-Kne"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Dkh-5M-qmJ" secondAttribute="bottom" constant="4" id="Xaw-f7-BlV"/>
+                                                    <constraint firstItem="8iU-s2-GZO" firstAttribute="centerY" secondItem="rcz-ln-1OZ" secondAttribute="centerY" id="Orx-Hg-Caz"/>
+                                                    <constraint firstItem="rzw-I8-z9t" firstAttribute="leading" secondItem="8iU-s2-GZO" secondAttribute="trailing" constant="10" id="VSW-Kh-17i"/>
                                                     <constraint firstAttribute="trailing" secondItem="rcz-ln-1OZ" secondAttribute="trailing" constant="12" id="avH-xc-MSA"/>
-                                                    <constraint firstItem="cPK-zQ-RDv" firstAttribute="bottom" secondItem="Dkh-5M-qmJ" secondAttribute="bottom" id="jmZ-Wp-QTI"/>
-                                                    <constraint firstItem="cPK-zQ-RDv" firstAttribute="leading" secondItem="Dkh-5M-qmJ" secondAttribute="trailing" constant="10" symbolic="YES" id="okz-K0-5PG"/>
+                                                    <constraint firstItem="8iU-s2-GZO" firstAttribute="bottom" secondItem="cPK-zQ-RDv" secondAttribute="bottom" id="iRx-Ga-5pF"/>
                                                     <constraint firstItem="cPK-zQ-RDv" firstAttribute="leading" secondItem="rzw-I8-z9t" secondAttribute="leading" id="t65-eW-Un0"/>
+                                                    <constraint firstItem="8iU-s2-GZO" firstAttribute="leading" secondItem="IWe-AH-D1C" secondAttribute="leading" constant="8" id="xv3-BJ-AOU"/>
                                                 </constraints>
                                             </visualEffectView>
                                         </subviews>
@@ -851,7 +847,7 @@
                     </view>
                     <connections>
                         <outlet property="accountLabel" destination="rzw-I8-z9t" id="dpl-UV-LQR"/>
-                        <outlet property="avaterButton" destination="Dkh-5M-qmJ" id="jdz-mP-JBw"/>
+                        <outlet property="avaterView" destination="8iU-s2-GZO" id="KfI-pY-RgJ"/>
                         <outlet property="chatView" destination="R3h-kS-2Cc" id="LMv-Wr-IT6"/>
                         <outlet property="connectSpinner" destination="HqU-XE-vbp" id="T35-um-TU3"/>
                         <outlet property="invisibleItem" destination="BhH-2m-cHH" id="kBI-pe-ZSj"/>
@@ -1114,7 +1110,7 @@
                                                                         </connections>
                                                                     </textFieldCell>
                                                                 </textField>
-                                                                <imageView translatesAutoresizingMaskIntoConstraints="NO" id="bCY-YT-pVg" userLabel="Avater Image View">
+                                                                <imageView translatesAutoresizingMaskIntoConstraints="NO" id="bCY-YT-pVg" userLabel="Avater Image View" customClass="AvatarView" customModule="Vivi" customModuleProvider="target">
                                                                     <rect key="frame" x="20" y="9" width="32" height="32"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="32" id="19X-fY-A7y"/>
@@ -1526,9 +1522,9 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="65" height="80"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nro-xc-ml0">
-                                <rect key="frame" x="9" y="25" width="48" height="48"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="grayBezel" image="NSUserGuest" id="4nN-Hj-3ci"/>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nro-xc-ml0" customClass="AvatarView" customModule="Vivi" customModuleProvider="target">
+                                <rect key="frame" x="12" y="28" width="42" height="42"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSUserGuest" id="4nN-Hj-3ci"/>
                                 <connections>
                                     <binding destination="e4p-zm-ibf" name="value" keyPath="representedObject.avatar" id="lc9-Qa-VPg">
                                         <dictionary key="options">
@@ -1569,7 +1565,7 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="628308A3-B0AA-4A7C-AEF8-F9A043D028E3" width="1" height="1">
+        <image name="412D8048-779D-46E1-B59D-9C89250C2DD9" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
