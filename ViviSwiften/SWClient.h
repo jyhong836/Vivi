@@ -11,6 +11,7 @@
 @class SWXMPPRoster;
 @protocol VSClientDelegate;
 @protocol VSClientControllerProtocol;
+@protocol VSAvatarDelegate;
 
 #import "ViviSwiftenDefines.h"
 
@@ -34,6 +35,7 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
 @property (readonly, nonatomic) SWAccount* account;
 @property (readonly, nonatomic) SWXMPPRoster* roster;
 
+@property (nonatomic) id<VSAvatarDelegate> avatarDelegate;
 @property (nonatomic) id<VSClientDelegate> delegate;
 /// Set through connectWithHandler.
 @property (readonly, nonatomic) VSConnectionHandler connectHandler;

@@ -27,6 +27,7 @@
 		CD5E6F1F1B64DA7D00E33502 /* libSwiften.3.0.dylib in Copy Libraries */ = {isa = PBXBuildFile; fileRef = CD5E6F1D1B64DA5100E33502 /* libSwiften.3.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CD60BA4F1B6D304E008E077A /* ChatMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */; };
 		CD60BA511B6DB30F008E077A /* MessageTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD60BA501B6DB30F008E077A /* MessageTableCellView.swift */; };
+		CD64B4491B8FE06C00FBEF9D /* VSAvatarDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = CD64B4481B8FE06C00FBEF9D /* VSAvatarDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD72B2C91B5F6F5300BCFD2A /* SWEventLoop.h in Headers */ = {isa = PBXBuildFile; fileRef = CD72B2C71B5F6F5300BCFD2A /* SWEventLoop.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD72B2CA1B5F6F5300BCFD2A /* SWEventLoop.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */; };
 		CD72B2CD1B5F7A9800BCFD2A /* SWAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -216,6 +217,7 @@
 		CD5E6F291B64F6E000E33502 /* SwiftenTypeDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftenTypeDefine.swift; sourceTree = "<group>"; };
 		CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChatMessageViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD60BA501B6DB30F008E077A /* MessageTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableCellView.swift; sourceTree = "<group>"; };
+		CD64B4481B8FE06C00FBEF9D /* VSAvatarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSAvatarDelegate.h; sourceTree = "<group>"; };
 		CD72B2C71B5F6F5300BCFD2A /* SWEventLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWEventLoop.h; sourceTree = "<group>"; };
 		CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWEventLoop.mm; sourceTree = "<group>"; };
 		CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAccount.h; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 				CDE658C01B5E71F300290E34 /* VSControllerProtocol.h */,
 				CDC2EE961B6A435800872623 /* VSXMPPRosterDelegate.h */,
 				CD4C3A461B6A77EC00C283E6 /* VSClientControllerProtocol.h */,
+				CD64B4481B8FE06C00FBEF9D /* VSAvatarDelegate.h */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -642,6 +645,7 @@
 				CDE658CC1B5E8B8000290E34 /* SWClient.h in Headers */,
 				CDE658D01B5EA70F00290E34 /* SWClientAdapter.h in Headers */,
 				CDB2E5E81B8AEB9E00677775 /* InvisibleActiveSerializer.hpp in Headers */,
+				CD64B4491B8FE06C00FBEF9D /* VSAvatarDelegate.h in Headers */,
 				CDB2E5DE1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp in Headers */,
 				CD72B2C91B5F6F5300BCFD2A /* SWEventLoop.h in Headers */,
 				CDEE686C1B6531AF00D00EC7 /* Utils.h in Headers */,

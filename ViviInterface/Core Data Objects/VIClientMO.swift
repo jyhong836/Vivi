@@ -18,7 +18,7 @@ public let VIClientChatDidReceiveMsgNotification = "VIClientChatDidReceiveMsgNot
 public let VIClientDidReceivePresence = "VIClientDidReceivePresence"
 
 //@objc(Client)
-public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
+public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDelegate {
     
     override public func awakeFromInsert() {
         self.enabled = NSNumber(bool: false)
@@ -176,6 +176,14 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol {
             } catch {
                 fatalError("Receive presence from account cause unexpected error when try to add account:\n \(error)")
             }
+        }
+    }
+    
+    // MARK: - Conform avatar delegate
+    
+    public func account(account: SWAccount!, didChangeAvatar avatarData: NSData!) {
+        if let accountMO = VIAccountMO.getAccount(account.getNodeString(), domain: account.getDomainString(), managedObjectContext: self.managedObjectContext!) {
+            accountMO.avatar = avatarData
         }
     }
     

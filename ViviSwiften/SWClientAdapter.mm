@@ -6,6 +6,8 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
+#import <AppKit/AppKit.h>
+
 #import "SWClientAdapter.h"
 #import "SWAccount.h"
 #import "SWClient.h"
@@ -14,6 +16,7 @@
 #import "VSClientDelegateProtocol.h"
 #import "VSClientControllerProtocol.h"
 #import "VSXMPPRosterDelegate.h"
+#import "VSAvatarDelegate.h"
 
 #import <boost/bind.hpp>
 #import <Swiften/Roster/XMPPRosterImpl.h>
@@ -227,5 +230,10 @@ void SWClientAdapter::rosterOnInitialRosterPopulatedSlot()
 void SWClientAdapter::clientOnJIDAvatarChanged(const JID& jid)
 {
     NSLog(@"%s avatar changed", jid.toString().c_str());
-    // TODO: Call delegate here.
+    SWAccount* account = [[SWAccount alloc] initWithAccountName: std_str2NSString(jid.toString())];
+    ByteArray avatar = getAvatarManager()->getAvatar(jid);
+    NSData *nsdata = [NSData dataWithBytes: &avatar[0] length: (NSUInteger)avatar.size()];
+    
+    if ([swclient.avatarDelegate respondsToSelector: @selector(account:didChangeAvatar:)])
+        [swclient.avatarDelegate account: account didChangeAvatar:nsdata];
 }

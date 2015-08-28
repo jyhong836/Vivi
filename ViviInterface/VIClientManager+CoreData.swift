@@ -43,6 +43,7 @@ extension VIClientManager {
                 cl.manualPort = (clientMO.port?.intValue)!
 //                cl.managedObject = clientMO
                 cl.roster.delegate = clientMO.roster!
+                cl.avatarDelegate = clientMO
             }
             clientMO.enabled = NSNumber(bool: true)
         } catch VIClientManagerError.AccountNameConfilct {

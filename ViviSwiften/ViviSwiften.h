@@ -21,6 +21,7 @@ FOUNDATION_EXPORT const unsigned char ViviSwiftenVersionString[];
 #import <ViviSwiften/VSControllerProtocol.h>
 #import <ViviSwiften/VSXMPPRosterDelegate.h>
 #import <ViviSwiften/VSClientControllerProtocol.h>
+#import <ViviSwiften/VSAvatarDelegate.h>
 
 // MARK: Swiften wrappers
 #import <ViviSwiften/SWClient.h>

@@ -33,6 +33,8 @@ using namespace Swift;
     return self;
 }
 
+/// FIXME: This is not safe. The JID used to init may not be released
+/// later.
 - (id)initWithJID: (JID*)ajid
 {
     if (self = [super init]) {
