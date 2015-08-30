@@ -34,6 +34,7 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
 
 @property (readonly, nonatomic) SWAccount* account;
 @property (readonly, nonatomic) SWXMPPRoster* roster;
+@property (nonatomic) int priority;
 
 @property (nonatomic) id<VSAvatarDelegate> avatarDelegate;
 @property (nonatomic) id<VSClientDelegate> delegate;

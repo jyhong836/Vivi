@@ -156,7 +156,11 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
     }
     
     public func clientDidReceivePresence(client: SWClient!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow showType: Int32, currentStatus status: String!) {
-        NSLog("client(\(client.account.getAccountString())) did receive presence from \(account.getAccountString()): \(SWPresenceType(rawValue: presenceType)?.toString()), \(SWPresenceShowType(rawValue: showType)?.toString()), \(status))")
+        NSLog("client(\(client.account.getAccountString())) did receive presence from \(account.getAccountString())/\(account.getResourceString()): \(SWPresenceType(rawValue: presenceType)?.toString()), \(SWPresenceShowType(rawValue: showType)?.toString()), \(status))")
+        print("* Resource *")
+        for res in account.resources {
+            print("+ \(res)")
+        }
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
             do {
                 let accountMO = try VIAccountMO.addAccount(account.getNodeString(), domain: account.getDomainString(), managedObjectContext: self.managedObjectContext!)

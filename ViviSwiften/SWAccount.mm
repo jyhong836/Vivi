@@ -12,7 +12,7 @@
 using namespace Swift;
 
 @implementation SWAccount {
-    int resourceIndex;
+    NSInteger resourceIndex;
 }
 
 @synthesize jid;
@@ -67,9 +67,10 @@ using namespace Swift;
 
 @synthesize resources;
 
-- (void)addResource: (NSString*)resource
+- (NSInteger)addResource: (NSString*)resource
 {
     [resources addObject: resource];
+    return resources.count - 1;
 }
 
 /*!
@@ -80,7 +81,7 @@ using namespace Swift;
  * Important: the index should between 0(include) and 
  * resources count, or will cause an runtime assert.
  */
-- (void)setResourceIndex: (int)index
+- (void)setResourceIndex: (NSInteger)index
 {
     if (index >= 0 && index < resources.count) {
         resourceIndex = index;

@@ -112,6 +112,8 @@ public class VIClientManager: VIClientManagerProtocol {
         let accountname = managedObject.accountname
         let password = managedObject.password
         let swaccount = try validateAccount(accountname, passwd: password)
+        let resIdx = swaccount.addResource(managedObject.resource)
+        swaccount.setResourceIndex(resIdx)
         
         let newClient = SWClient(account: swaccount, password: password, eventLoop: eventLoop)
         newClient.managedObject = managedObject

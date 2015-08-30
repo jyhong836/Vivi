@@ -34,8 +34,8 @@ namespace Swift {
 - (NSString*)getDomainString;
 
 @property NSMutableArray<NSString*> *resources;
-- (void)addResource: (NSString*)resource;
-- (void)setResourceIndex: (int)index;
+- (NSInteger)addResource: (NSString*)resource;
+- (void)setResourceIndex: (NSInteger)index;
 - (void)resetResourceIndex;
 
 @end

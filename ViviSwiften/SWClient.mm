@@ -66,6 +66,7 @@ using namespace Swift;
 
 @synthesize account;
 @synthesize roster;
+@synthesize priority;
 
 @synthesize connectHandler;
 - (void)setConnectHandlerToNil
@@ -92,6 +93,7 @@ using namespace Swift;
                                                      self);
         connectHandler = nil;
         roster = [[SWXMPPRoster alloc] init: client->getRoster()];
+        priority = 0;
 #ifdef __INVISIBLE_INVISIBILITY__
         client->addPayloadSerializer(&invisibleListPayloadSerializer);
         client->addPayloadSerializer(&invisibleActiveSerializer);
@@ -213,11 +215,20 @@ using namespace Swift;
 - (void)sendPresence: (int)presenceType
             showType: (int)showType
               status: (NSString*)status
+            priority: (int)aPriority
 {
     Presence::ref presence = Presence::create(NSString2std_str(status));
     presence->setType((Presence::Type)presenceType);
     presence->setShow((StatusShow::Type)showType);
+    presence->setPriority(aPriority);
     client->sendPresence(presence);
+}
+
+- (void)sendPresence: (int)presenceType
+            showType: (int)showType
+              status: (NSString*)status
+{
+    [self sendPresence: presenceType showType:showType status:status priority: priority];
 }
 
 #pragma mark Implement invisible presence(XEP-0018 or XEP-0126).

@@ -38,10 +38,10 @@ extension VIClientManager {
         do {
             let client = try addClient(clientMO)
             if let cl = client {
-                // FIXME: Format limit need
                 cl.manualHostname = clientMO.hostname
                 cl.manualPort = (clientMO.port?.intValue)!
-//                cl.managedObject = clientMO
+                cl.priority = (clientMO.priority?.intValue)!
+                
                 cl.roster.delegate = clientMO.roster!
                 cl.avatarDelegate = clientMO
             }
@@ -66,7 +66,6 @@ extension VIClientManager {
     
     /// Try to add new client enity. If can add client with account and passwd, return new SWAccount. If account has
     /// existed, return nil.
-    ///
     /// - Throws: VIClientManagerError
     public func canAddClientEnity(withAccountName account: String!, andPasswd passwd: String!) throws -> SWAccount? {
         let moc = self.managedObjectContext!
