@@ -107,6 +107,9 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
               currentOS: (NSString*)os;
 - (void)setSoftwareName: (NSString*)name
          currentVersion: (NSString*)version;
+- (void)setDiscoInfo: (NSString*)clientName
+            capsNode: (NSString*)node
+            features: (NSArray<NSString*>*)features;
 
 // MARK: ClientOptions
 @property (nonatomic, readwrite) NSString* manualHostname;

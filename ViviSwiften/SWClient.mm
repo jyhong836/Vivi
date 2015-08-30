@@ -30,12 +30,15 @@
 #ifdef __XML_TRACER__
     #import <Swiften/Client/ClientXMLTracer.h>
 #endif // __XML_TRACER__
+
 #import <Swiften/Elements/Message.h>
 #import <Swiften/Network/BoostNetworkFactories.h>
 #import <Swiften/Queries/Requests/SetPrivateStorageRequest.h>
 #import <Swiften/Serializer/PayloadSerializerCollection.h>
 
 #import <Swiften/Elements/Presence.h>
+#import <Swiften/Disco/ClientDiscoManager.h>
+
 #ifdef __INVISIBLE_PRESENCE__
 #ifndef SWIFTEN_INVISIBLE_PRESENCE
 #warning Attempt to use invisible presence, while it's not implemented in Swiften.
@@ -334,7 +337,6 @@ using namespace Swift;
          currentVersion: (NSString*)version
               currentOS: (NSString*)os
 {
-    NSString2std_str(name);
     client->setSoftwareVersion(NSString2std_str(name), NSString2std_str(version), NSString2std_str(os));
 }
 
@@ -342,6 +344,19 @@ using namespace Swift;
          currentVersion: (NSString*)version
 {
     client->setSoftwareVersion(NSString2std_str(name), NSString2std_str(version));
+}
+
+- (void)setDiscoInfo: (NSString*)clientName
+            capsNode: (NSString*)node
+            features: (NSArray<NSString*>*)features
+{
+    DiscoInfo discoInfo;
+    discoInfo.addIdentity(DiscoInfo::Identity(NSString2std_str(clientName)));
+    for (NSString* feature in features) {
+        discoInfo.addFeature(NSString2std_str(feature));
+    }
+    client->getDiscoManager()->setCapsNode(NSString2std_str(node));
+    client->getDiscoManager()->setDiscoInfo(discoInfo);
 }
 
 #pragma mark ClientOptions
