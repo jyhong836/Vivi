@@ -54,6 +54,8 @@
 		CDA65F5A1B7A089700F832CA /* VIRosterMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA65F4C1B7A089700F832CA /* VIRosterMO+CoreDataProperties.swift */; };
 		CDA65F641B7A36AE00F832CA /* VIClientManager+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA65F631B7A36AE00F832CA /* VIClientManager+CoreData.swift */; };
 		CDA65F671B7AE83E00F832CA /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA65F661B7AE83E00F832CA /* AddAccountViewController.swift */; };
+		CDACF3521B94A42D0010969D /* SWFileTransferManager.h in Headers */ = {isa = PBXBuildFile; fileRef = CDACF3501B94A42D0010969D /* SWFileTransferManager.h */; settings = {ASSET_TAGS = (); }; };
+		CDACF3531B94A42D0010969D /* SWFileTransferManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDACF3511B94A42D0010969D /* SWFileTransferManager.mm */; settings = {ASSET_TAGS = (); }; };
 		CDB2E5D61B8AC9B900677775 /* InvisibleListPayload.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5D41B8AC9B900677775 /* InvisibleListPayload.hpp */; };
 		CDB2E5DD1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDB2E5DB1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm */; };
 		CDB2E5DE1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5DC1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp */; };
@@ -246,6 +248,8 @@
 		CDA65F4C1B7A089700F832CA /* VIRosterMO+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "VIRosterMO+CoreDataProperties.swift"; path = "Core Data Objects/VIRosterMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CDA65F631B7A36AE00F832CA /* VIClientManager+CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VIClientManager+CoreData.swift"; sourceTree = "<group>"; };
 		CDA65F661B7AE83E00F832CA /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
+		CDACF3501B94A42D0010969D /* SWFileTransferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWFileTransferManager.h; sourceTree = "<group>"; };
+		CDACF3511B94A42D0010969D /* SWFileTransferManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWFileTransferManager.mm; sourceTree = "<group>"; };
 		CDB2E5D41B8AC9B900677775 /* InvisibleListPayload.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisibleListPayload.hpp; sourceTree = "<group>"; };
 		CDB2E5DB1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InvisibleListPayloadSerializer.mm; sourceTree = "<group>"; };
 		CDB2E5DC1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisibleListPayloadSerializer.hpp; sourceTree = "<group>"; };
@@ -574,6 +578,8 @@
 				CDC2EE991B6A444D00872623 /* SWXMPPRoster.mm */,
 				CD156DE51B823B0600EFC06F /* SWRosterItem.h */,
 				CD156DE61B823B0600EFC06F /* SWRosterItem.mm */,
+				CDACF3501B94A42D0010969D /* SWFileTransferManager.h */,
+				CDACF3511B94A42D0010969D /* SWFileTransferManager.mm */,
 			);
 			name = "Swiften Adapter";
 			sourceTree = "<group>";
@@ -658,6 +664,7 @@
 				CD72B2CD1B5F7A9800BCFD2A /* SWAccount.h in Headers */,
 				CDC2EE9A1B6A444D00872623 /* SWXMPPRoster.h in Headers */,
 				CD4C3A471B6A77EC00C283E6 /* VSClientControllerProtocol.h in Headers */,
+				CDACF3521B94A42D0010969D /* SWFileTransferManager.h in Headers */,
 				CD0932181B5F9757007ACB22 /* VSClientDelegateProtocol.h in Headers */,
 				CDC49E441B5FF91500F5E6E6 /* ViviSwiften.pch in Headers */,
 				CD156DE71B823B0600EFC06F /* SWRosterItem.h in Headers */,
@@ -982,6 +989,7 @@
 				CDE658CD1B5E8B8000290E34 /* SWClient.mm in Sources */,
 				CDC2EE9B1B6A444D00872623 /* SWXMPPRoster.mm in Sources */,
 				CDEE686A1B65311600D00EC7 /* Utils.mm in Sources */,
+				CDACF3531B94A42D0010969D /* SWFileTransferManager.mm in Sources */,
 				CD72B2CA1B5F6F5300BCFD2A /* SWEventLoop.mm in Sources */,
 				CDB2E5E71B8AEB9E00677775 /* InvisibleActiveSerializer.mm in Sources */,
 				CDB2E5DD1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm in Sources */,

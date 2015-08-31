@@ -9,6 +9,7 @@
 @class SWEventLoop;
 @class SWAccount;
 @class SWXMPPRoster;
+@class SWFileTransferManager;
 @protocol VSClientDelegate;
 @protocol VSClientControllerProtocol;
 @protocol VSAvatarDelegate;
@@ -34,10 +35,11 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
 /// Bind NSManagedObject to SWClient.
 @property (nonatomic) id<VSClientControllerProtocol> managedObject;
 
-@property (readonly, nonatomic) SWAccount* account;
-@property (readonly, nonatomic) SWXMPPRoster* roster;
+@property (nonatomic, readonly) SWAccount* account;
+@property (nonatomic, readonly) SWXMPPRoster* roster;
 @property (nonatomic) int priority;
 @property (nonatomic) NSString* nickname;
+@property (nonatomic, readonly) SWFileTransferManager* fileTransferManager;
 
 @property (nonatomic) id<VSAvatarDelegate> avatarDelegate;
 @property (nonatomic) id<VSClientDelegate> delegate;

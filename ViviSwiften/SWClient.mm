@@ -19,6 +19,7 @@
 #import "SWAccount.h"
 #import "SWXMPPRoster.h"
 #import "VSClientControllerProtocol.h"
+#import "SWFileTransferManager.h"
 
 #ifdef __INVISIBLE_INVISIBILITY__
     #import "InvisibleListPayload.hpp"
@@ -74,6 +75,7 @@ using namespace Swift;
 @synthesize roster;
 @synthesize priority;
 @synthesize nickname;
+@synthesize fileTransferManager;
 
 - (void)setNickname:(NSString *)aNickname
 {
@@ -112,6 +114,8 @@ using namespace Swift;
 #ifdef __XML_TRACER__
         tracer = new ClientXMLTracer(&*client);
 #endif // __XML_TRACER__
+        
+        fileTransferManager = [[SWFileTransferManager alloc] initWithFileTransferManager: client->getFileTransferManager()];
     }
     return self;
 }
