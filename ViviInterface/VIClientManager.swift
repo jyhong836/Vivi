@@ -65,7 +65,9 @@ public class VIClientManager: VIClientManagerProtocol {
             var count = 0
             for client in clientList {
                 let clientMO = client.managedObject as! VIClientMO
-                count += clientMO.unreadcount!.integerValue
+                if let unreadcount = clientMO.unreadcount {
+                    count += unreadcount.integerValue
+                }
             }
             return count
         }

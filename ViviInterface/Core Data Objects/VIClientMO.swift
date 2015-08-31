@@ -29,6 +29,13 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
         roster?.client = self
     }
     
+    public override func prepareForDeletion() {
+        if enabled!.boolValue {
+            let clientMgr = VIClientManager.sharedClientManager
+            clientMgr.removeClient(clientMgr.getClient(withAccountName: accountname!))
+        }
+    }
+    
     // MARK: - Chat access
     
     func updateChats(withBuddy buddy: SWAccount) -> (VIChatMO, oldIndex: Int) {

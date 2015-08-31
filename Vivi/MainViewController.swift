@@ -35,6 +35,11 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
                     if let imgData = accountMO?.avatar {
                         avaterView.image = NSImage(data: imgData)
                     }
+                } else {
+                    accountLabel.stringValue = "account"
+                    invisibleItem.hidden = true
+                    avaterView.image = nil
+                    presencePopUpButton.selectItem(presencePopUpButton.itemWithTitle("Offline"))
                 }
             }
         }
@@ -106,6 +111,7 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
     }
     
     // MARK: - Implement VIClientManagerDelegate
+    
     func managerDidAddClient(client: SWClient?) {
         // FIXME: The new client should not be the currentClient in multi-client situation.
         if let c = client {
