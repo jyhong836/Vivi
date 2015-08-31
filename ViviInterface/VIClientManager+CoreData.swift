@@ -35,6 +35,7 @@ extension VIClientManager {
     /// Call this when new enity should be added to client manager. When new VIClientMO is 
     /// created, use `canAddClientEnity` to make sure it's validated.
     public func loadFromEnity(clientMO: VIClientMO) {
+        // Load client entity data into SWClient.
         do {
             let client = try addClient(clientMO)
             if let cl = client {
@@ -44,6 +45,10 @@ extension VIClientManager {
                 
                 cl.roster.delegate = clientMO.roster!
                 cl.avatarDelegate = clientMO
+                
+                if let nickname = clientMO.nickname {
+                    cl.nickname = nickname
+                }
             }
             clientMO.enabled = NSNumber(bool: true)
         } catch VIClientManagerError.AccountNameConfilct {

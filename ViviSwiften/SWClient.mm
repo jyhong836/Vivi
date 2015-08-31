@@ -38,6 +38,7 @@
 
 #import <Swiften/Elements/Presence.h>
 #import <Swiften/Disco/ClientDiscoManager.h>
+#import <Swiften/Client/NickManagerImpl.h>
 
 #ifdef __INVISIBLE_PRESENCE__
 #ifndef SWIFTEN_INVISIBLE_PRESENCE
@@ -65,11 +66,26 @@ using namespace Swift;
 #endif // __XML_TRACER__
 }
 
+#pragma mark - Properties
+
 @synthesize managedObject;
 
 @synthesize account;
 @synthesize roster;
 @synthesize priority;
+@synthesize nickname;
+
+- (void)setNickname:(NSString *)aNickname
+{
+    client->getNickManager()->setOwnNick(NSString2std_str(aNickname));
+}
+
+- (NSString*)nickname
+{
+    return std_str2NSString(client->getNickManager()->getOwnNick());
+}
+
+#pragma mark - Connections
 
 @synthesize connectHandler;
 - (void)setConnectHandlerToNil
@@ -234,7 +250,7 @@ using namespace Swift;
     [self sendPresence: presenceType showType:showType status:status priority: priority];
 }
 
-#pragma mark Implement invisible presence(XEP-0018 or XEP-0126).
+#pragma mark - Implement invisible presence(XEP-0018 or XEP-0126).
 
 #ifdef __INVISIBLE_INVISIBILITY__
 /// Send visible or invisible list set request to sever, according to (BOOL)invisible property. (XEP-0126)
@@ -321,7 +337,7 @@ using namespace Swift;
     updateServerCapsHandler = nil;
 }
 
-#pragma mark Client status
+#pragma mark - Client status
 
 - (BOOL)isAvailable
 {
@@ -359,7 +375,7 @@ using namespace Swift;
     client->getDiscoManager()->setDiscoInfo(discoInfo);
 }
 
-#pragma mark ClientOptions
+#pragma mark - ClientOptions
 
 - (void)setManualHostname: (NSString*)manualHostname
 {

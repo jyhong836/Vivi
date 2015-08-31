@@ -221,4 +221,8 @@ public class VIClientManager: VIClientManagerProtocol {
             clientMO.addObserver(observer, forKeyPath: "unreadcount", options: NSKeyValueObservingOptions.New, context: nil)
         }
     }
+    
+    public func addUnreadCountObserver(observer: NSObject, forClient client: VIClientMO) {
+        client.addObserver(observer, forKeyPath: "unreadcount", options: NSKeyValueObservingOptions.New, context: nil)
+    }
 }

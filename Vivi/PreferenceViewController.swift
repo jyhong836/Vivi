@@ -16,6 +16,7 @@ class PreferenceViewController: NSViewController, AddAccountViewControllerDelega
 //    let defaults = NSUserDefaults.standardUserDefaults()
     let clientMgr = VIClientManager.sharedClientManager
 
+    @IBOutlet weak var descriptionTextField: NSTextField!
     @IBOutlet weak var accountTextField: NSTextField!
     @IBOutlet weak var passwordTextField: NSSecureTextField!
     @IBOutlet weak var domainTextField: NSTextField!
@@ -34,34 +35,18 @@ class PreferenceViewController: NSViewController, AddAccountViewControllerDelega
     }
     
     override func viewDidAppear() {
-        // FIXME: the client has not been selected?
-//        let entity = clientArrayController.selectedObjects[0] as! VIClientMO
-//        enableButton.state = (entity.enabled?.integerValue)!
-//        if enableButton.state == NSOnState {
-//            enableTextFields(false)
-//        }
     }
     
     @IBAction func enableChecked(sender: NSButton) {
         if sender.state == NSOnState {
-            let entity = clientArrayController.selectedObjects[0] as! VIClientMO
-            clientMgr.loadFromEnity(entity)
-            enableButton.state = (entity.enabled?.integerValue)!
-//            if enableButton.state == NSOnState {
-//                enableTextFields(false)
-//            }
+            let clientMO = clientArrayController.selectedObjects[0] as! VIClientMO
+            clientMgr.loadFromEnity(clientMO)
+            clientMgr.addUnreadCountObserver(NSApp.delegate as! AppDelegate, forClient: clientMO)
+            enableButton.state = (clientMO.enabled?.integerValue)!
         } else if sender.state == NSOffState {
             clientMgr.removeClient(clientMgr.getClient(withAccountName: accountTextField.stringValue))
-//            enableTextFields(true)
         }
     }
-    
-//    func enableTextFields(enabled: Bool) {
-//        accountTextField.enabled = enabled;
-//        passwordTextField.enabled = enabled;
-//        domainTextField.enabled = enabled;
-//        portTextField.enabled = enabled;
-//    }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addAccountSegue" {
@@ -70,13 +55,21 @@ class PreferenceViewController: NSViewController, AddAccountViewControllerDelega
         }
     }
     
-    func shouldAddAccount(account: SWAccount, password: String) {
+    func addAccount(account: SWAccount, password: String) {
 //        clientArrayController.add(self)
         let moc = clientMgr.managedObjectContext!
         let client = NSEntityDescription.insertNewObjectForEntityForName("Client", inManagedObjectContext: moc) as! VIClientMO
         client.accountname = account.getAccountString()
         client.password = password
         client.hostname = account.getDomainString()
+        client.accdescription = account.getDomainString()
         clientArrayController.addObject(client)
+    }
+    
+    @IBAction func accountTextChanged(sender: NSTextField) {
+        let clientMO = clientArrayController.selectedObjects.last as! VIClientMO
+        if clientMO.accdescription == nil {
+            clientMO.accdescription = SWAccount(accountName: sender.stringValue).getDomainString()
+        }
     }
 }

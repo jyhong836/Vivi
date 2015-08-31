@@ -17,10 +17,12 @@
         <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="chats" inverseEntity="Client" syncable="YES"/>
     </entity>
     <entity name="Client" representedClassName=".VIClientMO" syncable="YES">
+        <attribute name="accdescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="accountname" attributeType="String" regularExpressionString="^.[a-zA-Z0-9.]+@.[a-zA-Z0-9.]+$" indexed="YES" syncable="YES"/>
         <attribute name="canbeinvisible" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="enabled" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="hostname" optional="YES" attributeType="String" regularExpressionString=".[a-zA-Z0-9.]+" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" attributeType="Transformable" valueTransformerName="StringEncryptionTransformer" syncable="YES"/>
         <attribute name="port" attributeType="Integer 16" defaultValueString="5222" syncable="YES"/>
         <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -52,7 +54,7 @@
     <elements>
         <element name="Account" positionX="0" positionY="-216" width="128" height="133"/>
         <element name="Chat" positionX="180" positionY="-378" width="128" height="135"/>
-        <element name="Client" positionX="-20" positionY="-511" width="128" height="210"/>
+        <element name="Client" positionX="-20" positionY="-511" width="128" height="240"/>
         <element name="Group" positionX="-387" positionY="-225" width="128" height="88"/>
         <element name="Message" positionX="385" positionY="-279" width="128" height="105"/>
         <element name="Resource" positionX="-288" positionY="-81" width="128" height="75"/>

@@ -11,7 +11,7 @@ import ViviSwiften
 import ViviInterface
 
 protocol AddAccountViewControllerDelegate {
-    func shouldAddAccount(account: SWAccount, password: String)
+    func addAccount(account: SWAccount, password: String)
 }
 
 class AddAccountViewController: NSViewController {
@@ -44,7 +44,7 @@ class AddAccountViewController: NSViewController {
         }
         do {
             if let swaccount = try VIClientManager.sharedClientManager.canAddClientEnity(withAccountName: account!, andPasswd: password!) {
-                delegate?.shouldAddAccount(swaccount, password: password!)
+                delegate?.addAccount(swaccount, password: password!)
                 self.dismissViewController(self)
             } else {
                 showAlert("Account has existed")
