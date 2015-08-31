@@ -741,7 +741,7 @@
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cPK-zQ-RDv" userLabel="Presence Pop Up Button">
                                                         <rect key="frame" x="54" y="3" width="82" height="19"/>
-                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="5A1AEF8D-B5F0-4C5C-89D9-2666F0FB63CB" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
+                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="D0A5454D-A9AE-44DC-8E00-70D134FB612B" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                             <menu key="menu" id="P30-Lt-lYY">
@@ -1507,15 +1507,25 @@ MgA3AEEARwBQAFcAXABkAHkAewB9AH8AgQCJAJAAlQCgAKMApQCnAKkArgC5AMIAygDNANYA2wDoAOwA
                                             <action selector="accountTextChanged:" target="ZTq-eb-EqD" id="OeX-OW-fuY"/>
                                         </connections>
                                     </textField>
+                                    <imageView translatesAutoresizingMaskIntoConstraints="NO" id="YUi-Hk-dmy" userLabel="File Transfer Image View">
+                                        <rect key="frame" x="427" y="21" width="13" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="13" id="bza-0l-rEz"/>
+                                        </constraints>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="fa-file-o" id="bTy-tZ-XCf"/>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="C2h-bc-9oP" firstAttribute="top" secondItem="rBT-9z-q3O" secondAttribute="bottom" constant="3" id="DoB-Rg-kzr"/>
+                                    <constraint firstItem="YUi-Hk-dmy" firstAttribute="bottom" secondItem="rBT-9z-q3O" secondAttribute="bottom" id="HYl-mw-o92"/>
                                     <constraint firstAttribute="height" constant="60" id="Kma-pL-4VM"/>
                                     <constraint firstItem="C2h-bc-9oP" firstAttribute="leading" secondItem="xb6-Of-oR6" secondAttribute="leading" constant="10" id="Rho-Vp-9Gk"/>
+                                    <constraint firstItem="3Cx-Qe-OBe" firstAttribute="leading" secondItem="YUi-Hk-dmy" secondAttribute="trailing" constant="9" id="RpJ-EC-s5d"/>
                                     <constraint firstItem="rBT-9z-q3O" firstAttribute="leading" secondItem="xb6-Of-oR6" secondAttribute="leading" constant="10" id="Sgs-fA-nro"/>
                                     <constraint firstItem="rBT-9z-q3O" firstAttribute="top" secondItem="xb6-Of-oR6" secondAttribute="top" constant="20" id="e7b-4D-Jri"/>
                                     <constraint firstAttribute="trailing" secondItem="3Cx-Qe-OBe" secondAttribute="trailing" constant="20" id="eKa-XN-W2E"/>
                                     <constraint firstItem="3Cx-Qe-OBe" firstAttribute="top" secondItem="xb6-Of-oR6" secondAttribute="top" constant="20" id="iss-eH-HsO"/>
+                                    <constraint firstItem="YUi-Hk-dmy" firstAttribute="top" secondItem="3Cx-Qe-OBe" secondAttribute="top" id="to1-CV-AUi"/>
                                 </constraints>
                             </visualEffectView>
                         </subviews>
@@ -1590,7 +1600,7 @@ MgA3AEEARwBQAFcAXABkAHkAewB9AH8AgQCJAJAAlQCgAKMApQCnAKkArgC5AMIAygDNANYA2wDoAOwA
         </scene>
     </scenes>
     <resources>
-        <image name="5A1AEF8D-B5F0-4C5C-89D9-2666F0FB63CB" width="1" height="1">
+        <image name="D0A5454D-A9AE-44DC-8E00-70D134FB612B" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -1652,6 +1662,7 @@ AAAAAAAAAAAAAAAAAAozA
         <image name="NSUser" width="32" height="32"/>
         <image name="NSUserGuest" width="32" height="32"/>
         <image name="OutMessageBuble" width="39" height="26"/>
+        <image name="fa-file-o" width="21" height="23"/>
         <image name="fa-warning-circle" width="23" height="23"/>
         <sound name="Morse"/>
     </resources>

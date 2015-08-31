@@ -514,24 +514,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="292" height="180"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fF9-BE-aHS">
-                                <rect key="frame" x="27" y="106" width="56" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="cM2-F3-PL2">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fF9-BE-aHS">
+                                <rect key="frame" x="57" y="98" width="59" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account:" id="cM2-F3-PL2">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ad-5g-MJz">
-                                <rect key="frame" x="27" y="61" width="65" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Password" id="Vxx-ti-Bn6">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8ad-5g-MJz">
+                                <rect key="frame" x="47" y="60" width="69" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Password:" id="Vxx-ti-Bn6">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ct5-jz-dpc" userLabel="Account Text Field">
-                                <rect key="frame" x="122" y="103" width="150" height="22"/>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ct5-jz-dpc" userLabel="Account Text Field">
+                                <rect key="frame" x="122" y="95" width="120" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="node@domain" drawsBackground="YES" id="TjY-8e-6JL">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -545,8 +545,8 @@
                                     </binding>
                                 </connections>
                             </textField>
-                            <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dym-Lk-RWi" userLabel="Password Text Field">
-                                <rect key="frame" x="122" y="58" width="150" height="22"/>
+                            <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dym-Lk-RWi" userLabel="Password Text Field">
+                                <rect key="frame" x="122" y="57" width="120" height="22"/>
                                 <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="password" drawsBackground="YES" usesSingleLineMode="YES" id="yrO-Su-D6F">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -563,8 +563,8 @@
                                     </binding>
                                 </connections>
                             </secureTextField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNh-es-Dgu">
-                                <rect key="frame" x="53" y="13" width="83" height="32"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eNh-es-Dgu">
+                                <rect key="frame" x="53" y="11" width="83" height="32"/>
                                 <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wFl-E9-dQc">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -576,8 +576,8 @@ Gw
                                     <action selector="dismissController:" target="lMY-01-P78" id="4Da-mR-GEy"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9lD-Or-Osm">
-                                <rect key="frame" x="156" y="13" width="83" height="32"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9lD-Or-Osm">
+                                <rect key="frame" x="156" y="11" width="83" height="32"/>
                                 <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5AC-3y-85Y">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -589,8 +589,8 @@ DQ
                                     <action selector="btnAddClicked:" target="lMY-01-P78" id="vbe-hW-dFH"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7hM-1c-a4J">
-                                <rect key="frame" x="20" y="148" width="163" height="17"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7hM-1c-a4J">
+                                <rect key="frame" x="18" y="143" width="163" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Add a new chat account" usesSingleLineMode="YES" id="PWJ-0g-P8W">
                                     <font key="font" metaFont="systemBold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -598,6 +598,25 @@ DQ
                                 </textFieldCell>
                             </textField>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="Ct5-jz-dpc" firstAttribute="leading" secondItem="Dym-Lk-RWi" secondAttribute="leading" id="3xr-Op-yOq"/>
+                            <constraint firstItem="7hM-1c-a4J" firstAttribute="leading" secondItem="qyH-tM-6Sr" secondAttribute="leading" constant="20" symbolic="YES" id="BhJ-nA-Mi9"/>
+                            <constraint firstItem="eNh-es-Dgu" firstAttribute="top" secondItem="Dym-Lk-RWi" secondAttribute="bottom" constant="18" id="C4B-az-V66"/>
+                            <constraint firstItem="8ad-5g-MJz" firstAttribute="trailing" secondItem="fF9-BE-aHS" secondAttribute="trailing" id="CPb-gD-CJn"/>
+                            <constraint firstAttribute="bottom" secondItem="eNh-es-Dgu" secondAttribute="bottom" constant="18" id="DHu-Ll-2WN"/>
+                            <constraint firstItem="Dym-Lk-RWi" firstAttribute="leading" secondItem="8ad-5g-MJz" secondAttribute="trailing" constant="8" id="Dmh-vL-AUf"/>
+                            <constraint firstItem="eNh-es-Dgu" firstAttribute="baseline" secondItem="9lD-Or-Osm" secondAttribute="baseline" id="ER9-dG-8zr"/>
+                            <constraint firstItem="9lD-Or-Osm" firstAttribute="centerX" secondItem="Dym-Lk-RWi" secondAttribute="centerX" constant="15.5" id="Eyi-hF-Del"/>
+                            <constraint firstItem="7hM-1c-a4J" firstAttribute="top" secondItem="qyH-tM-6Sr" secondAttribute="top" constant="20" symbolic="YES" id="JOS-jb-tgw"/>
+                            <constraint firstAttribute="trailing" secondItem="9lD-Or-Osm" secondAttribute="trailing" constant="59" id="XSr-Yc-QhX"/>
+                            <constraint firstItem="Ct5-jz-dpc" firstAttribute="trailing" secondItem="Dym-Lk-RWi" secondAttribute="trailing" id="fIM-ie-LPT"/>
+                            <constraint firstItem="8ad-5g-MJz" firstAttribute="centerY" secondItem="Dym-Lk-RWi" secondAttribute="centerY" id="fca-g9-MuY"/>
+                            <constraint firstItem="9lD-Or-Osm" firstAttribute="leading" secondItem="eNh-es-Dgu" secondAttribute="trailing" constant="32" id="g7h-oa-kRI"/>
+                            <constraint firstItem="fF9-BE-aHS" firstAttribute="leading" secondItem="qyH-tM-6Sr" secondAttribute="leading" constant="59" id="nm2-QT-WAj"/>
+                            <constraint firstAttribute="trailing" secondItem="Ct5-jz-dpc" secondAttribute="trailing" constant="50" id="rgn-PV-po9"/>
+                            <constraint firstItem="Ct5-jz-dpc" firstAttribute="top" secondItem="7hM-1c-a4J" secondAttribute="bottom" constant="26" id="uoo-6s-iIy"/>
+                            <constraint firstItem="fF9-BE-aHS" firstAttribute="centerY" secondItem="Ct5-jz-dpc" secondAttribute="centerY" id="zgk-dO-MUA"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="zsA-xs-bb6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
