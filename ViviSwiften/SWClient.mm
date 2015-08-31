@@ -85,18 +85,7 @@ using namespace Swift;
     return std_str2NSString(client->getNickManager()->getOwnNick());
 }
 
-#pragma mark - Connections
-
-@synthesize connectHandler;
-- (void)setConnectHandlerToNil
-{
-    connectHandler = nil;
-}
-@synthesize disconnectHandler;
-- (void)setDisconnectHandlerToNil
-{
-    disconnectHandler = nil;
-}
+#pragma mark - Init and dealloc
 
 - (id)initWithAccount: (SWAccount*)aAccount
              password: (NSString*)aPasswd
@@ -129,9 +118,9 @@ using namespace Swift;
 
 - (void)dealloc
 {
-//    NSLog(@"delete SWClient %@", [account getAccountString]);
-//    if (client->isActive()) {
-//        client->disconnect();
+    //    NSLog(@"delete SWClient %@", [account getAccountString]);
+    //    if (client->isActive()) {
+    //        client->disconnect();
     //    }
 #ifdef __INVISIBLE_INVISIBILITY__
     client->removePayloadSerializer(&invisibleListPayloadSerializer);
@@ -143,12 +132,21 @@ using namespace Swift;
 #endif // __XML_TRACER__
 }
 
-- (SWAccount*)getAccount
+#pragma mark - Connections
+
+@synthesize connectHandler;
+- (void)setConnectHandlerToNil
 {
-    return account;
+    connectHandler = nil;
+}
+@synthesize disconnectHandler;
+- (void)setDisconnectHandlerToNil
+{
+    disconnectHandler = nil;
 }
 
-// MARK: Wrap the method of Swift::Client
+#pragma mark Wrap the method of Swift::Client
+
 /*!
  * @brief Connect the client account to the server.
  */
@@ -177,6 +175,8 @@ using namespace Swift;
     client->disconnect();
     disconnectHandler = handler;
 }
+
+#pragma mark - Send stanza
 
 - (Message::ref)createSwiftMessage: (SWAccount*)targetAccount
                            Message: (NSString*)message
@@ -318,6 +318,8 @@ using namespace Swift;
     }
 }
 
+#pragma mark Server caps
+
 @synthesize updateServerCapsHandler;
 @synthesize hasInitializedServerCaps;
 
@@ -349,6 +351,11 @@ using namespace Swift;
     return client->isActive();
 }
 
+#pragma mark - Set client attributes
+
+/*!
+ * Set client software name, version and OS.
+ */
 - (void)setSoftwareName: (NSString*)name
          currentVersion: (NSString*)version
               currentOS: (NSString*)os
@@ -356,12 +363,18 @@ using namespace Swift;
     client->setSoftwareVersion(NSString2std_str(name), NSString2std_str(version), NSString2std_str(os));
 }
 
+/*!
+ * Set client software name and version.
+ */
 - (void)setSoftwareName: (NSString*)name
          currentVersion: (NSString*)version
 {
     client->setSoftwareVersion(NSString2std_str(name), NSString2std_str(version));
 }
 
+/*!
+ * Set disoInfo of client with all supported features.
+ */
 - (void)setDiscoInfo: (NSString*)clientName
             capsNode: (NSString*)node
             features: (NSArray<NSString*>*)features
@@ -377,11 +390,17 @@ using namespace Swift;
 
 #pragma mark - ClientOptions
 
+/*!
+ * @brief Set manual host name of server, like www.xx.com or 192.168.0.1, etc.
+ */
 - (void)setManualHostname: (NSString*)manualHostname
 {
     options.manualHostname = NSString2std_str(manualHostname);
 }
 
+/*!
+ * @brief Set maunal port. By default port would be 5222.
+ */
 - (void)setManualPort:(int)manualPort {
     options.manualPort = manualPort;
 }

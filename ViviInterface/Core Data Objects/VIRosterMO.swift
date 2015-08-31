@@ -40,7 +40,7 @@ public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
     }
     
     public func roster(roster: SWXMPPRoster!, didAddAccount account: SWAccount!) {
-        NSLog("roster did add account: \(account.getAccountString())")
+        NSLog("roster did add account: \(account.accountString)")
         do {
             try VIAccountMO.addAccount(account, managedObjectContext: self.managedObjectContext!)
         } catch {
@@ -49,7 +49,7 @@ public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
     }
     
     public func roster(roster: SWXMPPRoster!, didRemoveAccount account: SWAccount!) {
-        NSLog("roster did remove account: \(account.getAccountString())")
+        NSLog("roster did remove account: \(account.accountString)")
         VIAccountMO.removeAccount(account, managedObjectContext: self.managedObjectContext!)
     }
     

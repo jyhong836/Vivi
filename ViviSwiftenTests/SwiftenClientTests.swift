@@ -48,13 +48,13 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         let idx = 0
         let client1 = createClient(idx)
         let account = client1.account
-        XCTAssertEqual(account.getAccountString(), "jyhong@xmpp.jp", "Account string \"\(account.getAccountString())\" not correspond to setting \"jyhong@xmpp.jp\"")
-        XCTAssertEqual(account.getDomainString(), "xmpp.jp", "Account domain not correspond to setting \"xmpp.jp\"")
+        XCTAssertEqual(account.accountString, "jyhong@xmpp.jp", "Account string \"\(account.accountString)\" not correspond to setting \"jyhong@xmpp.jp\"")
+        XCTAssertEqual(account.domainString, "xmpp.jp", "Account domain not correspond to setting \"xmpp.jp\"")
         XCTAssertEqual(account.resources[0] as? String, "testResource", "Account resource not correspond")
-        XCTAssertEqual(account.getResourceString(), "", "Account resource not correspond")
+        XCTAssertEqual(account.resourceString, "", "Account resource not correspond")
         account.setResourceIndex(0)
-        XCTAssertEqual(account.getResourceString(), "testResource", "Account resource not correspond")
-        XCTAssertEqual(account.getNodeString(), "jyhong", "Account resource  not correspond")
+        XCTAssertEqual(account.resourceString, "testResource", "Account resource not correspond")
+        XCTAssertEqual(account.nodeString, "jyhong", "Account resource  not correspond")
         // TODO: Add test for password
     }
     
@@ -108,8 +108,7 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         
         client1.connect()
         waitForExpectationsWithTimeout(50, handler: nil)
-        XCTAssertTrue(client1.isAvailable(), "client1 should have been connected")
-        
+        XCTAssertTrue(client1.isAvailable, "client1 should have been connected")
         
         // test client disconnecting
         clientConnectExpectation = self.expectationWithDescription("test client disconnecting")
@@ -122,7 +121,7 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         // FIXME: Client disconnect sometimes go wrong with EXC_BAD_ACCESS. Although can be fixed with check NSZombieEnabled.
         client1.disconnect()
         waitForExpectationsWithTimeout(50, handler: nil)
-        XCTAssertTrue(!client1.isAvailable(), "client1 should have been disconnected")
+        XCTAssertTrue(!client1.isAvailable, "client1 should have been disconnected")
     }
     
     func testTwoClientConnect() {
@@ -209,10 +208,10 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
     }
     
     func connectToClient(client: SWClient) {
-        let clientConnectExpectation = self.expectationWithDescription("Fail to connect to \(client.account.getAccountString())")
+        let clientConnectExpectation = self.expectationWithDescription("Fail to connect to \(client.account.accountString)")
         _clientDidConnect = {(c: SWClient!)->Void in
             XCTAssertEqual(c, client, "connected client not equal to expected")
-            print("connected to \(client.account.getAccountString())")
+            print("connected to \(client.account.accountString)")
             clientConnectExpectation.fulfill()
         }
         client.connect()

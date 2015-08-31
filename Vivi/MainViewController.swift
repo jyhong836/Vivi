@@ -27,11 +27,11 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
             if viewLoaded {
                 updateButtonStates()
                 if currentClient != nil {
-                    accountLabel.stringValue = (currentClient!.account.getAccountString())!
+                    accountLabel.stringValue = (currentClient!.account.accountString)!
                     let clientMO = currentClient!.managedObject as! VIClientMO
                     invisibleItem.hidden = !(clientMO.canbeinvisible!.boolValue)
                     
-                    let accountMO = VIAccountMO.getAccount(currentClient!.account.getNodeString(), domain: currentClient!.account.getDomainString(), managedObjectContext: VICoreDataController.shared.managedObjectContext)
+                    let accountMO = VIAccountMO.getAccount(currentClient!.account.nodeString, domain: currentClient!.account.domainString, managedObjectContext: VICoreDataController.shared.managedObjectContext)
                     if let imgData = accountMO?.avatar {
                         avaterView.image = NSImage(data: imgData)
                     }
@@ -92,15 +92,15 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
     // MARK: - Implementations for VSClientDelegate
     
     func clientDidConnect(client: SWClient!) {
-        NSLog("client(\(client.account.getAccountString())) did connect")
+        NSLog("client(\(client.account.accountString)) did connect")
     }
     
     func clientDidDisconnect(client: SWClient!, errorCode code: Int32) {
-        NSLog("client(\(client.account.getAccountString())) did disconnect: (\(SWClientErrorType(rawValue: code)))")
+        NSLog("client(\(client.account.accountString)) did disconnect: (\(SWClientErrorType(rawValue: code)))")
     }
     
     func clientDidReceiveMessage(client: SWClient!, fromAccount account: SWAccount!, inContent content: String!) {
-        NSLog("client(\(client.account.getAccountString())) did receive message from \(account.getAccountString()): \(content)")
+        NSLog("client(\(client.account.accountString)) did receive message from \(account.accountString): \(content)")
     }
     
     // MARK: - Implementations for VIChatDelegate
@@ -223,7 +223,7 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
         if title == "Offline" {
             // Try to disconnect client to server
             if let c = currentClient {
-                if !c.isActive() {
+                if !c.isActive {
                     return
                 }
                 
@@ -245,7 +245,7 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
         } else {
             // Try to connect client to server
             if let c = currentClient {
-                if c.isAvailable() {
+                if c.isAvailable {
                     sendPresence(title!)
                     return
                 }

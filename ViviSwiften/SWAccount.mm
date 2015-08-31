@@ -17,13 +17,16 @@ using namespace Swift;
 
 @synthesize jid;
 
+/*!
+ * @param accountName must be convertible to ASCII C String, or raise Exception.
+ */
 - (id)initWithAccountName: (NSString *)account
 {
     if (self = [super init]) {
         resources = [[NSMutableArray<NSString*> alloc] init];
         jid = new JID(NSString2std_str(account));
         if (!jid->isBare()) {
-            [self addResource: [self getResourceString]];
+            [self addResource: self.resourceString];
             std::string bareID = jid->toBare().toString();
             delete jid;
             jid = new JID(bareID);
@@ -33,15 +36,20 @@ using namespace Swift;
     return self;
 }
 
-/// FIXME: This is not safe. The JID used to init may not be released
-/// later.
+/*!
+ * @brief Init with jid. 
+ *
+ * It will guarantee jid to be bare, and store resource to list if exists.
+ */
 - (id)initWithJID: (JID*)ajid
 {
+    /// FIXME: This is not safe. The JID used to init may not be released
+    /// later.
     if (self = [super init]) {
         resources = [[NSMutableArray<NSString*> alloc] init];
         jid = ajid;
         if (!jid->isBare()) {
-            [self addResource: [self getResourceString]];
+            [self addResource: self.resourceString];
             std::string bareID = jid->toBare().toString();
             delete jid;
             jid = new JID(bareID);
@@ -56,8 +64,12 @@ using namespace Swift;
     delete jid;
 }
 
-// MARK: Wrap JID
-- (BOOL) valid
+#pragma mark - Wrap JID functions
+
+/*!
+ * @brief Validate JID.
+ */
+- (BOOL)valid
 {
     if (jid->isValid())
         return YES;
@@ -67,6 +79,11 @@ using namespace Swift;
 
 @synthesize resources;
 
+/*!
+ * @brief Add resource string to the end of resource list.
+ *
+ * @return The index of added resource.
+ */
 - (NSInteger)addResource: (NSString*)resource
 {
     [resources addObject: resource];
@@ -74,11 +91,12 @@ using namespace Swift;
 }
 
 /*!
- * Set used resource index.
+ * @brief Set used resource index.
+ *
  * The default resource index is -1, which means there is
  * no resource used.
  *
- * Important: the index should between 0(include) and 
+ * :Important: the index should between 0(include) and
  * resources count, or will cause an runtime assert.
  */
 - (void)setResourceIndex: (NSInteger)index
@@ -93,7 +111,8 @@ using namespace Swift;
 }
 
 /*!
- * Set used resource index to defualt(-1).
+ * @brief Set used resource index to defualt(-1).
+ *
  * The default resource index is -1, which means there is
  * no resource used.
  */
@@ -105,29 +124,30 @@ using namespace Swift;
     jid = newjid;
 }
 
-// MARK: Account string access
-- (NSString*)getAccountString
+#pragma mark - Account string access
+
+- (NSString*)accountString
 {
     return std_str2NSString(jid->toBare().toString());
 }
 
-- (NSString*)getFullAccountString
+- (NSString*)fullAccountString
 {
     return std_str2NSString(jid->toString());
 }
 
-- (NSString*)getResourceString
+- (NSString*)resourceString
 {
     // TODO: test what if the getResource return empty?
     return std_str2NSString(jid->getResource());
 }
 
-- (NSString*)getNodeString
+- (NSString*)nodeString
 {
     return std_str2NSString(jid->getNode());
 }
 
-- (NSString*)getDomainString
+- (NSString*)domainString
 {
     return std_str2NSString(jid->getDomain());
 }

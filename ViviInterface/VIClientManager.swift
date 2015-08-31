@@ -92,7 +92,7 @@ public class VIClientManager: VIClientManagerProtocol {
         
         let swaccount = SWAccount(accountName: account)
         if clientList.contains( { (c: SWClient) -> Bool in
-            c.account.getAccountString() == swaccount.getAccountString()
+            c.account.accountString == swaccount.accountString
         }) {
             NSLog("attempt to add conflicted client: \(account)")
             throw VIClientManagerError.AccountNameConfilct
@@ -124,7 +124,7 @@ public class VIClientManager: VIClientManagerProtocol {
         
         clientList.append(newClient)
         delegate?.managerDidAddClient(newClient)
-        NSLog("added client: \(newClient.account.getAccountString())")
+        NSLog("added client: \(newClient.account.accountString)")
         return newClient
     }
     
@@ -140,7 +140,7 @@ public class VIClientManager: VIClientManagerProtocol {
         
         clientList.append(newClient)
         delegate?.managerDidAddClient(newClient)
-        NSLog("added client: \(newClient.account.getAccountString())")
+        NSLog("added client: \(newClient.account.accountString)")
         return newClient
     }
     
@@ -153,7 +153,7 @@ public class VIClientManager: VIClientManagerProtocol {
             return
         } else {
             if let i = clientList.indexOf(client!) {
-                if client!.isActive() {
+                if client!.isActive {
                     client!.disconnectWithHandler({ (errcode) -> Void in
                         self.clientList.removeAtIndex(i)
                         self.delegate?.managerDidRemoveClient(client)
@@ -186,7 +186,7 @@ public class VIClientManager: VIClientManagerProtocol {
         }
         let account = SWAccount(accountName: name)
         for c in clientList {
-            if c.account.getAccountString() == account.getAccountString() {
+            if c.account.accountString == account.accountString {
                 return c
             }
         }

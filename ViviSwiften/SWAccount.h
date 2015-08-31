@@ -14,12 +14,8 @@ namespace Swift {
 @interface SWAccount : NSObject
 #ifdef __cplusplus
 @property (readonly, nonatomic) Swift::JID* jid;
-#else
-@property (readonly, nonatomic) void* jid;
 #endif
-/*!
- * @param accountName must be convertible to ASCII C String, or raise Exception.
- */
+
 - (id)initWithAccountName: (NSString *)account;
 #ifdef __cplusplus
 - (id)initWithJID: (Swift::JID*)ajid;
@@ -27,11 +23,11 @@ namespace Swift {
 - (void)dealloc;
 
 @property (nonatomic, readonly)BOOL valid;
-- (NSString*)getAccountString;
+@property (nonatomic, readonly)NSString* accountString;
 //- (NSString*)getFullAccountString;
-- (NSString*)getResourceString;
-- (NSString*)getNodeString;
-- (NSString*)getDomainString;
+@property (nonatomic, readonly)NSString* resourceString;
+@property (nonatomic, readonly)NSString* nodeString;
+@property (nonatomic, readonly)NSString* domainString;
 
 @property NSMutableArray<NSString*> *resources;
 - (NSInteger)addResource: (NSString*)resource;

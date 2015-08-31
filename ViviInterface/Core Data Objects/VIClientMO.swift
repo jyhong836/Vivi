@@ -56,8 +56,8 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
         for element in self.chats! {
             let chat = element as! VIChatMO
             if chat.buddy != nil &&
-                chat.buddy!.node == buddy.getNodeString() &&
-                chat.buddy!.domain == buddy.getDomainString() {
+                chat.buddy!.node == buddy.nodeString &&
+                chat.buddy!.domain == buddy.domainString {
                 return chat
             }
         }
@@ -70,7 +70,7 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
         } else {
             let moc = self.managedObjectContext
             do {
-                let buddyMO = try VIAccountMO.addAccount(buddy.getNodeString(), domain: buddy.getDomainString(), managedObjectContext: moc!)
+                let buddyMO = try VIAccountMO.addAccount(buddy.nodeString, domain: buddy.domainString, managedObjectContext: moc!)
                 
                 let newChat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: moc!) as! VIChatMO
                 newChat.buddy = buddyMO
@@ -163,14 +163,14 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
     }
     
     public func clientDidReceivePresence(client: SWClient!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow showType: Int32, currentStatus status: String!) {
-        NSLog("client(\(client.account.getAccountString())) did receive presence from \(account.getAccountString())/\(account.getResourceString()): \(SWPresenceType(rawValue: presenceType)?.toString()), \(SWPresenceShowType(rawValue: showType)?.toString()), \(status))")
+        NSLog("client(\(client.account.accountString)) did receive presence from \(account.accountString)/\(account.resourceString): \(SWPresenceType(rawValue: presenceType)?.toString()), \(SWPresenceShowType(rawValue: showType)?.toString()), \(status))")
         print("* Resource *")
         for res in account.resources {
             print("+ \(res)")
         }
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
             do {
-                let accountMO = try VIAccountMO.addAccount(account.getNodeString(), domain: account.getDomainString(), managedObjectContext: self.managedObjectContext!)
+                let accountMO = try VIAccountMO.addAccount(account.nodeString, domain: account.domainString, managedObjectContext: self.managedObjectContext!)
                 
                 if let presence = SWPresenceType(rawValue: presenceType) {
                     accountMO.presence = presence
@@ -193,7 +193,7 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
     // MARK: - Conform avatar delegate
     
     public func account(account: SWAccount!, didChangeAvatar avatarData: NSData!) {
-        if let accountMO = VIAccountMO.getAccount(account.getNodeString(), domain: account.getDomainString(), managedObjectContext: self.managedObjectContext!) {
+        if let accountMO = VIAccountMO.getAccount(account.nodeString, domain: account.domainString, managedObjectContext: self.managedObjectContext!) {
             accountMO.avatar = avatarData
         }
     }

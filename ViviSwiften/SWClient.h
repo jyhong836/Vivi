@@ -29,6 +29,8 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
  */
 @interface SWClient : NSObject
 
+#pragma mark - Properties
+
 /// Bind NSManagedObject to SWClient.
 @property (nonatomic) id<VSClientControllerProtocol> managedObject;
 
@@ -39,12 +41,8 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
 
 @property (nonatomic) id<VSAvatarDelegate> avatarDelegate;
 @property (nonatomic) id<VSClientDelegate> delegate;
-/// Set through connectWithHandler.
-@property (readonly, nonatomic) VSConnectionHandler connectHandler;
-/// Set through disconnectWithHandler.
-@property (readonly, nonatomic) VSConnectionHandler disconnectHandler;
-- (void)setConnectHandlerToNil;
-- (void)setDisconnectHandlerToNil;
+
+#pragma mark - Init and delloc
 
 /*!
  * @brief Init SWClient with SWAccount
@@ -54,7 +52,9 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
 - (id)initWithAccount: (SWAccount*)aAccount
              password: (NSString*)aPasswd
             eventLoop: (SWEventLoop*)aEventLoop;
-//- (void)dealloc;
+- (void)dealloc;
+
+#pragma mark - Connections
 
 - (void)connect;
 /// Connect and invoke handler when success. Handler will be invoked after delegate.
@@ -62,6 +62,16 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
 - (void)disconnect;
 /// Connect and invoke handler when success. Handler will be invoked after delegate.
 - (void)disconnectWithHandler: (VSConnectionHandler)handler;
+
+/// Set through connectWithHandler.
+@property (readonly, nonatomic) VSConnectionHandler connectHandler;
+/// Set through disconnectWithHandler.
+@property (readonly, nonatomic) VSConnectionHandler disconnectHandler;
+- (void)setConnectHandlerToNil;
+- (void)setDisconnectHandlerToNil;
+
+#pragma mark - Send stanza
+
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
                      Message: (NSString*)message;
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
@@ -71,7 +81,7 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
             showType: (int)showType
               status: (NSString*)status;
 
-#pragma mark Invisible presence
+#pragma mark - Invisible presence
 
 /*! 
  * @brief Active or inactive invisible state.
@@ -85,23 +95,37 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
  * presence.
  */
 @property (nonatomic)BOOL invisible;
-/// Check if client able to be invisible. Call after client
-/// update server caps.
+/*! 
+ * @brief Check if client able to be invisible. Call after client
+ * update server caps. (read-only)
+ */
 @property (nonatomic, readonly)BOOL canBeInvisible;
-
+/*!
+ * @brief Check if client has initialize server caps. (read-only)
+ * 
+ * Call before ask for caps of features.
+ */
 @property (nonatomic, readonly)BOOL hasInitializedServerCaps;
+
 - (void)updateServerCapsWithHandler: (VSUpdateServerCapsHandler)handler;
 @property (nonatomic, readonly)VSUpdateServerCapsHandler updateServerCapsHandler;
 - (void)setUpdateServerCapsHandlerToNil;
 
-/// Checks whether the client is connected to the server, and stanzas can be sent.
-- (BOOL)isAvailable;
+#pragma mark - Client status
+
+/*! 
+ * Checks whether the client is connected to the server, and stanzas
+ * can be sent. (read-only)
+ */
+@property (nonatomic, readonly)BOOL isAvailable;
 /*!
- * @brief Checks whether the client is active.
+ * @brief Checks whether the client is active. (read-only)
  *
  * A client is active when it is connected or connecting to the server.
  */
-- (BOOL)isActive;
+@property (nonatomic, readonly)BOOL isActive;
+
+#pragma mark - Set client attributes
 
 - (void)setSoftwareName: (NSString*)name
          currentVersion: (NSString*)version
@@ -112,10 +136,8 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
             capsNode: (NSString*)node
             features: (NSArray<NSString*>*)features;
 
-// MARK: ClientOptions
+#pragma mark - ClientOptions
 @property (nonatomic, readwrite) NSString* manualHostname;
-- (void)setManualHostname: (NSString*)manualHostname;
 @property (nonatomic, readwrite) int manualPort;
-- (void)setManualPort:(int)manualPort;
 
 @end

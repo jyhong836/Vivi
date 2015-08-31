@@ -59,17 +59,17 @@ class PreferenceViewController: NSViewController, AddAccountViewControllerDelega
 //        clientArrayController.add(self)
         let moc = clientMgr.managedObjectContext!
         let client = NSEntityDescription.insertNewObjectForEntityForName("Client", inManagedObjectContext: moc) as! VIClientMO
-        client.accountname = account.getAccountString()
+        client.accountname = account.accountString
         client.password = password
-        client.hostname = account.getDomainString()
-        client.accdescription = account.getDomainString()
+        client.hostname = account.domainString
+        client.accdescription = account.domainString
         clientArrayController.addObject(client)
     }
     
     @IBAction func accountTextChanged(sender: NSTextField) {
         let clientMO = clientArrayController.selectedObjects.last as! VIClientMO
         if clientMO.accdescription == nil {
-            clientMO.accdescription = SWAccount(accountName: sender.stringValue).getDomainString()
+            clientMO.accdescription = SWAccount(accountName: sender.stringValue).domainString
         }
     }
 }

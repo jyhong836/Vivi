@@ -54,8 +54,8 @@ class VIClientMOTests: XCTestCase {
         XCTAssertEqual(client?.chatCount, 1, "chat count error")
         XCTAssertNotNil(client!.chatAtIndex(0), "chat should have been added at index 0")
         XCTAssertTrue(client == chat.owner!, "client should be new chat's owner")
-        XCTAssertEqual(chat.buddy!.node, swaccount.getNodeString(), "node error")
-        XCTAssertEqual(chat.buddy!.domain, swaccount.getDomainString(), "domain error")
+        XCTAssertEqual(chat.buddy!.node, swaccount.nodeString, "node error")
+        XCTAssertEqual(chat.buddy!.domain, swaccount.domainString, "domain error")
         
         XCTAssertEqual(client?.getChatWithBuddy(swaccount), chat, "get chat not correspond")
         
