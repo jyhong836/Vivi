@@ -58,7 +58,22 @@ swclient(swclient)
 SWClientAdapter::~SWClientAdapter()
 {
     // FIXME: Deconstruct SWClientAdapter.
-//    NSLog(@"** Deconstruct SWClientAdapter **");
+    //    NSLog(@"** Deconstruct SWClientAdapter **");
+    // Connect signals to client slots
+    this->onConnected.disconnect(boost::bind(&SWClientAdapter::onConnectedSlot, this));
+    this->onMessageReceived.disconnect(boost::bind(&SWClientAdapter::onMessageReceivedSlot, this, _1));
+    this->onPresenceReceived.disconnect(boost::bind(&SWClientAdapter::onPresenceReceivedSlot, this, _1));
+    this->onDisconnected.disconnect(boost::bind(&SWClientAdapter::onDisconnectedSlot, this, _1));
+    
+    // Connect signals to roster slots
+    this->getRoster()->onJIDAdded.disconnect(boost::bind(&SWClientAdapter::rosterOnJIDAddedSlot, this, _1));
+    this->getRoster()->onJIDRemoved.disconnect(boost::bind(&SWClientAdapter::rosterOnJIDRemovedSlot, this, _1));
+    this->getRoster()->onJIDUpdated.disconnect(boost::bind(&SWClientAdapter::rosterOnJIDUpdatedSlot, this, _1, _2, _3));
+    this->getRoster()->onRosterCleared.disconnect(boost::bind(&SWClientAdapter::rosterOnRosterClearedSlot, this));
+    this->getRoster()->onInitialRosterPopulated.disconnect(boost::bind(&SWClientAdapter::rosterOnInitialRosterPopulatedSlot, this));
+    
+    // Connect singals to avatar slots
+    this->getAvatarManager()->onAvatarChanged.disconnect(boost::bind(&SWClientAdapter::clientOnJIDAvatarChanged, this, _1));
 }
 
 #pragma mark - Request server caps DiscoInfo
