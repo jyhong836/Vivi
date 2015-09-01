@@ -6,8 +6,10 @@
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 
-#ifndef SWIFT_EXPERIMENTAL_FT
-#error require file transfer function of Swiften compiled.
+#ifdef __cplusplus
+    #ifndef SWIFT_EXPERIMENTAL_FT
+    #error require file transfer function of Swiften compiled.
+    #endif
 #endif
 
 #ifdef __cplusplus
@@ -17,6 +19,9 @@ namespace Swift {
 #endif
 
 @class SWAccount;
+@class SWFileTransfer;
+
+typedef void (^VSIncomingFileTransferHandler)(SWFileTransfer*);
 
 @interface SWFileTransferManager : NSObject
 
@@ -24,7 +29,10 @@ namespace Swift {
 - (id)initWithFileTransferManager: (Swift::FileTransferManager*) aFtManager;
 #endif
 
-- (void)sendFileTo: (SWAccount*)account
-          filename: (NSString*)filename;
+- (SWFileTransfer*)sendFileTo: (SWAccount*)account
+                     filename: (NSString*)filename
+                   desciption: (NSString*)desciption;
+
+@property (nonatomic, readonly)VSIncomingFileTransferHandler incomingFileTransferHandler;
 
 @end

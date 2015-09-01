@@ -8,7 +8,10 @@
 
 #import "SWFileTransferManager.h"
 #import "SWAccount.h"
+#import "SWFileTransfer.h"
+#import <Swiften/Base/boost_bsignals.h>
 #import <Swiften/FileTransfer/FileTransferManager.h>
+#import <Swiften/FileTransfer/FileReadBytestream.h>
 
 using namespace Swift;
 
@@ -25,12 +28,21 @@ using namespace Swift;
     return self;
 }
 
-- (void)sendFileTo: (SWAccount*)account
-          filename: (NSString*)filename
+- (SWFileTransfer*)sendFileTo: (SWAccount*)account
+                             filename: (NSString*)filename
+                           desciption: (NSString*)desciption
 {
     [NSException raise: @"UnimplementException" format: @"Not implemented function: sendFileTo"];
-//    OutgoingFileTransfer::ref oft = ftManager->createOutgoingFileTransfer(account.jid, <#const boost::filesystem::path &filepath#>, <#const std::string &description#>, <#boost::shared_ptr<ReadBytestream> bytestream#>);
-    // TODO: add sending task to list.
+    std::string fnamestr = NSString2std_str(filename);
+    boost::shared_ptr<FileReadBytestream> fileReadStream = boost::make_shared<FileReadBytestream>(boost::filesystem::path(fnamestr));
+    
+    OutgoingFileTransfer::ref outgongTransfer = ftManager->createOutgoingFileTransfer(*(account.jid), boost::filesystem::path(fnamestr), NSString2std_str(desciption), fileReadStream);
+    if (outgongTransfer) {
+        return [[SWFileTransfer alloc] initWithFileTransfer: outgongTransfer];
+    } else {
+        [NSException raise: @"FileTransferNotSupported" format: @"File transfer not supported"];
+        return nil;
+    }
 }
 
 @end

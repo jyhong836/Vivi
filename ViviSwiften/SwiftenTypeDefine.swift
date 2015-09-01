@@ -97,3 +97,8 @@ public enum SWClientErrorType: Int32, ErrorType {
     case InvalidCertificatePurposeError, CertificatePathLengthExceededError, InvalidCertificateSignatureError, InvalidCAError
     case InvalidServerIdentityError, RevokedError, RevocationCheckFailedError
 }
+
+public enum SWFileTransferStateType: Int32 {
+    case Initial, WaitingForStart, Negotiating, WaitingForAccept,
+    Transferring, Canceled, Failed, Finished
+}

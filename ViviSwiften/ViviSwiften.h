@@ -29,5 +29,7 @@ FOUNDATION_EXPORT const unsigned char ViviSwiftenVersionString[];
 #import <ViviSwiften/SWAccount.h>
 #import <ViviSwiften/SWXMPPRoster.h>
 #import <ViviSwiften/SWRosterItem.h>
+#import <ViviSwiften/SWFileTransferManager.h>
+#import <ViviSwiften/SWFileTransfer.h>
 
 #import <ViviSwiften/ViviSwiftenDefines.h>
