@@ -47,9 +47,11 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
 #pragma mark - Init and delloc
 
 /*!
- * @brief Init SWClient with SWAccount
+ * @brief Init SWClient with SWAccount. By default, the resource at index 0
+ * of SWAccount would be used.
  *
- * @param password must be convertible to ASCII C String, or raise Exception.
+ * @param account must has at least one resource, else raise exception.
+ * @param password must be convertible to ASCII C String, else raise Exception.
  */
 - (id)initWithAccount: (SWAccount*)aAccount
              password: (NSString*)aPasswd

@@ -96,6 +96,13 @@ using namespace Swift;
 {
     if (self = [super init]) {
         account = aAccount;
+        if (account.resources.count < 1) {
+            [NSException raise: @"NoResourceException" format: @"There is no available resource for client account."];
+        } else {
+            // set default resource.
+            [account setResourceIndex: 0];
+        }
+        
         passwd = aPasswd;
         client = boost::make_shared<SWClientAdapter>(
                                                      account,
@@ -116,7 +123,7 @@ using namespace Swift;
         tracer = new ClientXMLTracer(&*client);
 #endif // __XML_TRACER__
         
-        fileTransferManager = [[SWFileTransferManager alloc] initWithFileTransferManager: boost::shared_ptr<FileTransferManager>(client->getFileTransferManager())];
+        fileTransferManager = [[SWFileTransferManager alloc] initWithFileTransferManager: client->getFileTransferManager()];
     }
     return self;
 }

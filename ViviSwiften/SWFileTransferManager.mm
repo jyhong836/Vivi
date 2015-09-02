@@ -19,10 +19,10 @@
 using namespace Swift;
 
 @implementation SWFileTransferManager {
-    boost::shared_ptr<FileTransferManager> ftManager;
+    FileTransferManager* ftManager;
 }
 
-- (id)initWithFileTransferManager: (boost::shared_ptr<FileTransferManager>) aFtManager
+- (id)initWithFileTransferManager: (FileTransferManager*) aFtManager
 {
     if (self = [super init]) {
         ftManager = aFtManager;
@@ -34,7 +34,6 @@ using namespace Swift;
                      filename: (NSString*)filename
                    desciption: (NSString*)desciption
 {
-    [NSException raise: @"UnimplementException" format: @"Not implemented function: sendFileTo"];
     std::string fnamestr = NSString2std_str(filename);
     boost::shared_ptr<FileReadBytestream> fileReadStream = boost::make_shared<FileReadBytestream>(boost::filesystem::path(fnamestr));
     

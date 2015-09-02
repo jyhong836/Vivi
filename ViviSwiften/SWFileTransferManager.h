@@ -27,7 +27,7 @@ namespace Swift {
 @interface SWFileTransferManager : NSObject
 
 #ifdef __cplusplus
-- (id)initWithFileTransferManager: (boost::shared_ptr<Swift::FileTransferManager>) aFtManager;
+- (id)initWithFileTransferManager: (Swift::FileTransferManager*) aFtManager;
 #endif
 
 - (SWFileTransfer*)sendFileTo: (SWAccount*)account

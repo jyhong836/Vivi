@@ -162,9 +162,6 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         let client1 = createClient(0)
         let client2 = createClient(1)
         
-        client1.delegate = self
-        client2.delegate = self
-        
         let c1string = "Hello from client 1"
         let c2string = "Hi from client 2"
         let endstring = "END"
@@ -194,6 +191,7 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         connectToClient(client2)
         
         clientConnectExpectation = self.expectationWithDescription("test client1 and client2 message exchange")
+        print("sending message to \(client2.account.accountString) \(client2.account.resourceString)")
         client1.sendMessageToAccount(client2.account, message: c1string)
         
         waitForExpectationsWithTimeout(20, handler: nil)

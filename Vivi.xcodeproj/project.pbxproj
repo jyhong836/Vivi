@@ -64,6 +64,7 @@
 		CDACF3711B96E3680010969D /* VSFileTransferDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = CDACF3701B96E3680010969D /* VSFileTransferDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDACF3741B96EB420010969D /* SWFileTransferManagerAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDACF3721B96EB420010969D /* SWFileTransferManagerAdapter.mm */; settings = {ASSET_TAGS = (); }; };
 		CDACF3751B96EB420010969D /* SWFileTransferManagerAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = CDACF3731B96EB420010969D /* SWFileTransferManagerAdapter.h */; settings = {ASSET_TAGS = (); }; };
+		CDACF3771B9706420010969D /* FileTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDACF3761B9706420010969D /* FileTransferTests.swift */; settings = {ASSET_TAGS = (); }; };
 		CDB2E5D61B8AC9B900677775 /* InvisibleListPayload.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5D41B8AC9B900677775 /* InvisibleListPayload.hpp */; };
 		CDB2E5DD1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDB2E5DB1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm */; };
 		CDB2E5DE1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5DC1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp */; };
@@ -266,6 +267,7 @@
 		CDACF3701B96E3680010969D /* VSFileTransferDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSFileTransferDelegate.h; sourceTree = "<group>"; };
 		CDACF3721B96EB420010969D /* SWFileTransferManagerAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWFileTransferManagerAdapter.mm; sourceTree = "<group>"; };
 		CDACF3731B96EB420010969D /* SWFileTransferManagerAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWFileTransferManagerAdapter.h; sourceTree = "<group>"; };
+		CDACF3761B9706420010969D /* FileTransferTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTransferTests.swift; sourceTree = "<group>"; };
 		CDB2E5D41B8AC9B900677775 /* InvisibleListPayload.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisibleListPayload.hpp; sourceTree = "<group>"; };
 		CDB2E5DB1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InvisibleListPayloadSerializer.mm; sourceTree = "<group>"; };
 		CDB2E5DC1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisibleListPayloadSerializer.hpp; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 			children = (
 				CD88E35D1B60DA0E00E7E256 /* SwiftenClientTests.swift */,
 				CD4C3A5B1B6BC43D00C283E6 /* SWClientFactory.swift */,
+				CDACF3761B9706420010969D /* FileTransferTests.swift */,
 				CD88E3561B60D84E00E7E256 /* Info.plist */,
 			);
 			path = ViviSwiftenTests;
@@ -584,7 +587,7 @@
 			children = (
 				CDC49E451B5FFC3C00F5E6E6 /* Support Files */,
 				CDE658901B5E66D400290E34 /* ViviSwiften.h */,
-				CDE658C91B5E897300290E34 /* Swiften Adapter */,
+				CDE658C91B5E897300290E34 /* Swiften */,
 				CDE658BD1B5E70A600290E34 /* Protocol */,
 				CDEE68691B65311600D00EC7 /* Utils.mm */,
 				CDEE686B1B6531AF00D00EC7 /* Utils.h */,
@@ -606,7 +609,7 @@
 			name = Protocol;
 			sourceTree = "<group>";
 		};
-		CDE658C91B5E897300290E34 /* Swiften Adapter */ = {
+		CDE658C91B5E897300290E34 /* Swiften */ = {
 			isa = PBXGroup;
 			children = (
 				CDE658CA1B5E8B8000290E34 /* SWClient.h */,
@@ -621,7 +624,7 @@
 				CDACF35C1B95F7620010969D /* File Transfer */,
 				CDB2E5D21B8AC97200677775 /* Extension */,
 			);
-			name = "Swiften Adapter";
+			name = Swiften;
 			sourceTree = "<group>";
 		};
 		CDEE68A21B6545D800D00EC7 /* ViviInterface */ = {
@@ -1021,6 +1024,7 @@
 			files = (
 				CD4C3A5C1B6BC43D00C283E6 /* SWClientFactory.swift in Sources */,
 				CD88E35E1B60DA0E00E7E256 /* SwiftenClientTests.swift in Sources */,
+				CDACF3771B9706420010969D /* FileTransferTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
