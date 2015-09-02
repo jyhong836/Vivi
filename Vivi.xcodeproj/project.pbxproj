@@ -58,6 +58,12 @@
 		CDACF3531B94A42D0010969D /* SWFileTransferManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDACF3511B94A42D0010969D /* SWFileTransferManager.mm */; settings = {ASSET_TAGS = (); }; };
 		CDACF35A1B95ED800010969D /* SWFileTransfer.h in Headers */ = {isa = PBXBuildFile; fileRef = CDACF3581B95ED800010969D /* SWFileTransfer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDACF35B1B95ED800010969D /* SWFileTransfer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDACF3591B95ED800010969D /* SWFileTransfer.mm */; settings = {ASSET_TAGS = (); }; };
+		CDACF36B1B96A20E0010969D /* VSFileTransferManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = CDACF36A1B96A20E0010969D /* VSFileTransferManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDACF36E1B96DF8D0010969D /* SWFileTransferAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDACF36C1B96DF8D0010969D /* SWFileTransferAdapter.mm */; settings = {ASSET_TAGS = (); }; };
+		CDACF36F1B96DF8D0010969D /* SWFileTransferAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = CDACF36D1B96DF8D0010969D /* SWFileTransferAdapter.h */; settings = {ASSET_TAGS = (); }; };
+		CDACF3711B96E3680010969D /* VSFileTransferDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = CDACF3701B96E3680010969D /* VSFileTransferDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDACF3741B96EB420010969D /* SWFileTransferManagerAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDACF3721B96EB420010969D /* SWFileTransferManagerAdapter.mm */; settings = {ASSET_TAGS = (); }; };
+		CDACF3751B96EB420010969D /* SWFileTransferManagerAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = CDACF3731B96EB420010969D /* SWFileTransferManagerAdapter.h */; settings = {ASSET_TAGS = (); }; };
 		CDB2E5D61B8AC9B900677775 /* InvisibleListPayload.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5D41B8AC9B900677775 /* InvisibleListPayload.hpp */; };
 		CDB2E5DD1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDB2E5DB1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm */; };
 		CDB2E5DE1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5DC1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp */; };
@@ -254,6 +260,12 @@
 		CDACF3511B94A42D0010969D /* SWFileTransferManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWFileTransferManager.mm; sourceTree = "<group>"; };
 		CDACF3581B95ED800010969D /* SWFileTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWFileTransfer.h; sourceTree = "<group>"; };
 		CDACF3591B95ED800010969D /* SWFileTransfer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWFileTransfer.mm; sourceTree = "<group>"; };
+		CDACF36A1B96A20E0010969D /* VSFileTransferManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSFileTransferManagerDelegate.h; sourceTree = "<group>"; };
+		CDACF36C1B96DF8D0010969D /* SWFileTransferAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWFileTransferAdapter.mm; sourceTree = "<group>"; };
+		CDACF36D1B96DF8D0010969D /* SWFileTransferAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWFileTransferAdapter.h; sourceTree = "<group>"; };
+		CDACF3701B96E3680010969D /* VSFileTransferDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSFileTransferDelegate.h; sourceTree = "<group>"; };
+		CDACF3721B96EB420010969D /* SWFileTransferManagerAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWFileTransferManagerAdapter.mm; sourceTree = "<group>"; };
+		CDACF3731B96EB420010969D /* SWFileTransferManagerAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWFileTransferManagerAdapter.h; sourceTree = "<group>"; };
 		CDB2E5D41B8AC9B900677775 /* InvisibleListPayload.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisibleListPayload.hpp; sourceTree = "<group>"; };
 		CDB2E5DB1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InvisibleListPayloadSerializer.mm; sourceTree = "<group>"; };
 		CDB2E5DC1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisibleListPayloadSerializer.hpp; sourceTree = "<group>"; };
@@ -504,10 +516,27 @@
 			children = (
 				CDACF3501B94A42D0010969D /* SWFileTransferManager.h */,
 				CDACF3511B94A42D0010969D /* SWFileTransferManager.mm */,
+				CDACF3721B96EB420010969D /* SWFileTransferManagerAdapter.mm */,
+				CDACF3731B96EB420010969D /* SWFileTransferManagerAdapter.h */,
+				CDACF36A1B96A20E0010969D /* VSFileTransferManagerDelegate.h */,
 				CDACF3581B95ED800010969D /* SWFileTransfer.h */,
 				CDACF3591B95ED800010969D /* SWFileTransfer.mm */,
+				CDACF36C1B96DF8D0010969D /* SWFileTransferAdapter.mm */,
+				CDACF36D1B96DF8D0010969D /* SWFileTransferAdapter.h */,
+				CDACF3701B96E3680010969D /* VSFileTransferDelegate.h */,
 			);
 			name = "File Transfer";
+			sourceTree = "<group>";
+		};
+		CDACF3651B96A04A0010969D /* Roster */ = {
+			isa = PBXGroup;
+			children = (
+				CDC2EE981B6A444D00872623 /* SWXMPPRoster.h */,
+				CDC2EE991B6A444D00872623 /* SWXMPPRoster.mm */,
+				CD156DE51B823B0600EFC06F /* SWRosterItem.h */,
+				CD156DE61B823B0600EFC06F /* SWRosterItem.mm */,
+			);
+			name = Roster;
 			sourceTree = "<group>";
 		};
 		CDB2E5D21B8AC97200677775 /* Extension */ = {
@@ -588,10 +617,7 @@
 				CD72B2C81B5F6F5300BCFD2A /* SWEventLoop.mm */,
 				CD72B2CB1B5F7A9800BCFD2A /* SWAccount.h */,
 				CD72B2CC1B5F7A9800BCFD2A /* SWAccount.mm */,
-				CDC2EE981B6A444D00872623 /* SWXMPPRoster.h */,
-				CDC2EE991B6A444D00872623 /* SWXMPPRoster.mm */,
-				CD156DE51B823B0600EFC06F /* SWRosterItem.h */,
-				CD156DE61B823B0600EFC06F /* SWRosterItem.mm */,
+				CDACF3651B96A04A0010969D /* Roster */,
 				CDACF35C1B95F7620010969D /* File Transfer */,
 				CDB2E5D21B8AC97200677775 /* Extension */,
 			);
@@ -671,6 +697,7 @@
 				CD64B4491B8FE06C00FBEF9D /* VSAvatarDelegate.h in Headers */,
 				CDB2E5DE1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp in Headers */,
 				CD72B2C91B5F6F5300BCFD2A /* SWEventLoop.h in Headers */,
+				CDACF3751B96EB420010969D /* SWFileTransferManagerAdapter.h in Headers */,
 				CDACF35A1B95ED800010969D /* SWFileTransfer.h in Headers */,
 				CDEE686C1B6531AF00D00EC7 /* Utils.h in Headers */,
 				CDB2E5D61B8AC9B900677775 /* InvisibleListPayload.hpp in Headers */,
@@ -684,8 +711,11 @@
 				CDC49E441B5FF91500F5E6E6 /* ViviSwiften.pch in Headers */,
 				CD156DE71B823B0600EFC06F /* SWRosterItem.h in Headers */,
 				CDE658C11B5E71F300290E34 /* VSControllerProtocol.h in Headers */,
+				CDACF36B1B96A20E0010969D /* VSFileTransferManagerDelegate.h in Headers */,
+				CDACF36F1B96DF8D0010969D /* SWFileTransferAdapter.h in Headers */,
 				CDE658911B5E66D400290E34 /* ViviSwiften.h in Headers */,
 				CDDA21D91B6CEEDD00A94F8C /* ViviSwiftenDefines.h in Headers */,
+				CDACF3711B96E3680010969D /* VSFileTransferDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -998,6 +1028,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDACF3741B96EB420010969D /* SWFileTransferManagerAdapter.mm in Sources */,
 				CDE658D11B5EA70F00290E34 /* SWClientAdapter.mm in Sources */,
 				CD156DE81B823B0600EFC06F /* SWRosterItem.mm in Sources */,
 				CD72B2CE1B5F7A9800BCFD2A /* SWAccount.mm in Sources */,
@@ -1009,6 +1040,7 @@
 				CDB2E5E71B8AEB9E00677775 /* InvisibleActiveSerializer.mm in Sources */,
 				CDB2E5DD1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm in Sources */,
 				CDACF35B1B95ED800010969D /* SWFileTransfer.mm in Sources */,
+				CDACF36E1B96DF8D0010969D /* SWFileTransferAdapter.mm in Sources */,
 				CDC2EE931B674F4200872623 /* SwiftenTypeDefine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

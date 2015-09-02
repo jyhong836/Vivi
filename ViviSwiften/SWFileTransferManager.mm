@@ -9,6 +9,9 @@
 #import "SWFileTransferManager.h"
 #import "SWAccount.h"
 #import "SWFileTransfer.h"
+#import "VSFileTransferManagerDelegate.h"
+#import "SWFileTransferManagerAdapter.h"
+
 #import <Swiften/Base/boost_bsignals.h>
 #import <Swiften/FileTransfer/FileTransferManager.h>
 #import <Swiften/FileTransfer/FileReadBytestream.h>
@@ -16,11 +19,10 @@
 using namespace Swift;
 
 @implementation SWFileTransferManager {
-    FileTransferManager* ftManager;
+    boost::shared_ptr<FileTransferManager> ftManager;
 }
 
-
-- (id)initWithFileTransferManager: (Swift::FileTransferManager*) aFtManager
+- (id)initWithFileTransferManager: (boost::shared_ptr<FileTransferManager>) aFtManager
 {
     if (self = [super init]) {
         ftManager = aFtManager;
@@ -29,8 +31,8 @@ using namespace Swift;
 }
 
 - (SWFileTransfer*)sendFileTo: (SWAccount*)account
-                             filename: (NSString*)filename
-                           desciption: (NSString*)desciption
+                     filename: (NSString*)filename
+                   desciption: (NSString*)desciption
 {
     [NSException raise: @"UnimplementException" format: @"Not implemented function: sendFileTo"];
     std::string fnamestr = NSString2std_str(filename);

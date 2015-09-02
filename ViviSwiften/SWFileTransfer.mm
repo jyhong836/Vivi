@@ -7,6 +7,9 @@
 //
 
 #import "SWFileTransfer.h"
+#import "VSFileTransferDelegate.h"
+#import "SWFileTransferAdapter.h"
+
 #import <Swiften/FileTransfer/FileTransfer.h>
 #import <Swiften/FileTransfer/OutgoingFileTransfer.h>
 
@@ -14,12 +17,16 @@ using namespace Swift;
 
 @implementation SWFileTransfer {
     FileTransfer::ref fileTransfer;
+    SWFileTransferAdapter::ref adapter;
 }
+
+@synthesize delegate;
 
 - (id)initWithFileTransfer: (FileTransfer::ref)ft
 {
     if (self = [super init]) {
         fileTransfer = ft;
+        adapter = boost::shared_ptr<SWFileTransferAdapter>(new SWFileTransferAdapter(fileTransfer, self));
     }
     return self;
 }
@@ -46,21 +53,6 @@ using namespace Swift;
 - (void)start
 {
     boost::dynamic_pointer_cast<OutgoingFileTransfer>(fileTransfer)->start();
-}
-
-#pragma mark - handlers
-
-@synthesize processBytesHandler;
-@synthesize stateChangeHandler;
-@synthesize finishedHandler;
-
-- (void)setupHandlers: (VSFTProcessedBytesHandler)onProcessedBytes
-       onStateChanged: (VSFTSateChangeHandler) onStateChanged
-           onFinished: (VSFTFinishedHanlder) onFinished
-{
-    processBytesHandler = onProcessedBytes;
-    stateChangeHandler = onStateChanged;
-    finishedHandler = onFinished;
 }
 
 @end

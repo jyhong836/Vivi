@@ -40,6 +40,7 @@
 #import <Swiften/Elements/Presence.h>
 #import <Swiften/Disco/ClientDiscoManager.h>
 #import <Swiften/Client/NickManagerImpl.h>
+#import <Swiften/FileTransfer/FileTransferManager.h>
 
 #ifdef __INVISIBLE_PRESENCE__
 #ifndef SWIFTEN_INVISIBLE_PRESENCE
@@ -115,7 +116,7 @@ using namespace Swift;
         tracer = new ClientXMLTracer(&*client);
 #endif // __XML_TRACER__
         
-        fileTransferManager = [[SWFileTransferManager alloc] initWithFileTransferManager: client->getFileTransferManager()];
+        fileTransferManager = [[SWFileTransferManager alloc] initWithFileTransferManager: boost::shared_ptr<FileTransferManager>(client->getFileTransferManager())];
     }
     return self;
 }

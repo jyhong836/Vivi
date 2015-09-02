@@ -13,6 +13,8 @@
 #endif
 
 #ifdef __cplusplus
+#import <boost/shared_ptr.hpp>
+
 namespace Swift {
     class FileTransferManager;
 }
@@ -20,19 +22,18 @@ namespace Swift {
 
 @class SWAccount;
 @class SWFileTransfer;
-
-typedef void (^VSIncomingFileTransferHandler)(SWFileTransfer*);
+@protocol VSFileTransferManagerDelegate;
 
 @interface SWFileTransferManager : NSObject
 
 #ifdef __cplusplus
-- (id)initWithFileTransferManager: (Swift::FileTransferManager*) aFtManager;
+- (id)initWithFileTransferManager: (boost::shared_ptr<Swift::FileTransferManager>) aFtManager;
 #endif
 
 - (SWFileTransfer*)sendFileTo: (SWAccount*)account
                      filename: (NSString*)filename
                    desciption: (NSString*)desciption;
 
-@property (nonatomic, readonly)VSIncomingFileTransferHandler incomingFileTransferHandler;
+@property (nonatomic)id<VSFileTransferManagerDelegate> delegate;
 
 @end

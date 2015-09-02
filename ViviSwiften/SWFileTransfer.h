@@ -14,9 +14,7 @@ namespace Swift {
 }
 #endif
 
-typedef void (^VSFTProcessedBytesHandler)(int);
-typedef void (^VSFTSateChangeHandler)(int);
-typedef void (^VSFTFinishedHanlder)(int);
+@protocol VSFileTransferDelegate;
 
 @interface SWFileTransfer : NSObject
 
@@ -26,18 +24,9 @@ typedef void (^VSFTFinishedHanlder)(int);
 
 @property (nonatomic, readonly)NSString* filename;
 @property (nonatomic, readonly)unsigned long fileSizeInBytes;
+@property (nonatomic)id<VSFileTransferDelegate> delegate;
 
 - (void)cancel;
 - (void)start;
-
-#pragma mark - handlers
-
-@property (nonatomic, readonly)VSFTProcessedBytesHandler processBytesHandler;
-@property (nonatomic, readonly)VSFTSateChangeHandler stateChangeHandler;
-@property (nonatomic, readonly)VSFTFinishedHanlder finishedHandler;
-
-- (void)setupHandlers: (VSFTProcessedBytesHandler)onProcessedBytes
-       onStateChanged: (VSFTSateChangeHandler) onStateChanged
-           onFinished: (VSFTFinishedHanlder) onFinished;
 
 @end
