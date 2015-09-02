@@ -11,6 +11,13 @@
 
 @protocol VSFileTransferManagerDelegate <NSObject>
 
+/*!
+ * @brief handle the incoming file transfer.
+ *
+ * The transfer has to been stored in variable to avoid
+ * being released. Call [transfer acceptAsFile] to accept
+ * file and start tansfer.
+ */
 - (void)fileTransferManager: (SWFileTransferManager*)manager
         getIncomingTransfer: (SWIncomingFileTransfer*)transfer;
 

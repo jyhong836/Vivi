@@ -19,7 +19,7 @@ using namespace Swift;
 
 @implementation SWIncomingFileTransfer
 
-- (void)acceptFile: (NSString*)file
+- (void)acceptAsFile: (NSString*)file
 {
     std::string fnamestr = NSString2std_str(file);
     boost::filesystem::path filepath(fnamestr);

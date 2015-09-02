@@ -13,6 +13,9 @@ class FileTransferTests: XCTestCase, VSFileTransferManagerDelegate, VSFileTransf
     
     let testData = "test string"
     let testFile = "test.txt"
+    
+    var state: SWFileTransferStateType?
+    var inTransfer: SWIncomingFileTransfer?
 
     override func setUp() {
         super.setUp()
@@ -65,8 +68,6 @@ class FileTransferTests: XCTestCase, VSFileTransferManagerDelegate, VSFileTransf
         
         // test sending
         var hasCatchError = false
-        clientConnectExpectation = self.expectationWithDescription("test client sending file")
-        
         do {
             try client1.fileTransferManager.sendFileTo(client2.account, filename: "test_empty.txt", desciption: "test.txt file")
         } catch {
@@ -76,6 +77,7 @@ class FileTransferTests: XCTestCase, VSFileTransferManagerDelegate, VSFileTransf
                 hasCatchError = true
             }
         }
+        clientConnectExpectation = self.expectationWithDescription("test client sending file")
         var transfer: SWOutgoingFileTransfer? = nil
         do {
             transfer = try client1.fileTransferManager.sendFileTo(client2.account, filename: testFile, desciption: "test.txt file")
@@ -86,6 +88,9 @@ class FileTransferTests: XCTestCase, VSFileTransferManagerDelegate, VSFileTransf
         }
         XCTAssertTrue(hasCatchError, "should throw not found error")
         waitForExpectationsWithTimeout(50, handler: nil)
+        
+        clientConnectExpectation = self.expectationWithDescription("waiting for finishing")
+        waitForExpectationsWithTimeout(60, handler: nil)
         
         transfer?.cancel()
         
@@ -110,19 +115,22 @@ class FileTransferTests: XCTestCase, VSFileTransferManagerDelegate, VSFileTransf
     
     func fileTransferManager(manager: SWFileTransferManager!, getIncomingTransfer transfer: SWIncomingFileTransfer!) {
         NSLog("Received file: \(transfer.filename) from: \(transfer.sender.accountString) to: \(transfer.recipient.accountString)")
-        transfer.acceptFile(transfer.filename+".temp")
+        transfer.acceptAsFile(transfer.filename+".temp")
+        // :IMPORTANT: store transfer to avoid auto release.
+        inTransfer = transfer
         clientConnectExpectation?.fulfill()
     }
     
     func fileTransfer(filetransfer: SWFileTransfer!, finishedWithError errorCode: Int32) {
         print("finished")
+        if state != .Canceled {
+            clientConnectExpectation?.fulfill()
+        }
     }
     
     func fileTransfer(filetransfer: SWFileTransfer!, processedBytes bytes: Int) {
         print("processed bytes: \(bytes)")
     }
-    
-    var state: SWFileTransferStateType?
     
     func fileTransfer(filetransfer: SWFileTransfer!, stateChanged stateCode: Int32) {
         state = SWFileTransferStateType(rawValue: stateCode)

@@ -30,6 +30,13 @@ namespace Swift {
 - (id)initWithFileTransferManager: (Swift::FileTransferManager*) aFtManager;
 #endif
 
+/*!
+ * @brief Send file to account.
+ *
+ * Store SWOutgoingFileTransfer in some variable to avoid being
+ * released.
+ * Call [SWOutgoingFileTransfer start] to start transfer.
+ */
 - (SWOutgoingFileTransfer*)sendFileTo: (SWAccount*)account
                              filename: (NSString*)filename
                            desciption: (NSString*)desciption

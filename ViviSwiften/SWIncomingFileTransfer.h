@@ -12,7 +12,7 @@
 
 @interface SWIncomingFileTransfer : SWFileTransfer
 
-- (void)acceptFile: (NSString*)file;
+- (void)acceptAsFile: (NSString*)file;
 
 @property (nonatomic, readonly)SWAccount* sender;
 @property (nonatomic, readonly)SWAccount* recipient;
