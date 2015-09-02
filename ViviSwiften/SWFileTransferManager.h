@@ -21,7 +21,7 @@ namespace Swift {
 #endif
 
 @class SWAccount;
-@class SWFileTransfer;
+@class SWOutgoingFileTransfer;
 @protocol VSFileTransferManagerDelegate;
 
 @interface SWFileTransferManager : NSObject
@@ -30,9 +30,10 @@ namespace Swift {
 - (id)initWithFileTransferManager: (Swift::FileTransferManager*) aFtManager;
 #endif
 
-- (SWFileTransfer*)sendFileTo: (SWAccount*)account
-                     filename: (NSString*)filename
-                   desciption: (NSString*)desciption;
+- (SWOutgoingFileTransfer*)sendFileTo: (SWAccount*)account
+                             filename: (NSString*)filename
+                           desciption: (NSString*)desciption
+                                error: (NSError**)error;
 
 @property (nonatomic)id<VSFileTransferManagerDelegate> delegate;
 

@@ -7,20 +7,27 @@
 //
 
 #import "SWFileTransferManagerAdapter.h"
-#import "SWFileTransfer.h"
+#import "SWIncomingFileTransfer.h"
 #import "SWFileTransferManager.h"
 #import "VSFileTransferManagerDelegate.h"
 
+#import <boost/bind.hpp>
+
 using namespace Swift;
 
-SWFileTransferManagerAdapter::SWFileTransferManagerAdapter(boost::shared_ptr<FileTransferManager> signalProvider, SWFileTransferManager* slotProvider): signalProvider(signalProvider), slotProvider(slotProvider)
+SWFileTransferManagerAdapter::SWFileTransferManagerAdapter(FileTransferManager* signalProvider, SWFileTransferManager* slotProvider): signalProvider(signalProvider), slotProvider(slotProvider)
 {
-    
+    signalProvider->onIncomingFileTransfer.connect(boost::bind(&SWFileTransferManagerAdapter::handleIncomingFileTransfer, this, _1));
+}
+
+SWFileTransferManagerAdapter::~SWFileTransferManagerAdapter()
+{
+    signalProvider->onIncomingFileTransfer.disconnect(boost::bind(&SWFileTransferManagerAdapter::handleIncomingFileTransfer, this, _1));
 }
 
 void SWFileTransferManagerAdapter::handleIncomingFileTransfer(IncomingFileTransfer::ref incominTransfer)
 {
-    SWFileTransfer *swtf = [[SWFileTransfer alloc] initWithFileTransfer: incominTransfer];
+    SWIncomingFileTransfer *swtf = [[SWIncomingFileTransfer alloc] initWithFileTransfer: incominTransfer];
     if ([slotProvider.delegate respondsToSelector: @selector(fileTransferManager:getIncomingTransfer:)]) {
         [slotProvider.delegate fileTransferManager: slotProvider getIncomingTransfer: swtf];
     }

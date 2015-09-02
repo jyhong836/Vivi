@@ -18,8 +18,8 @@ namespace Swift {
     class SWFileTransferManagerAdapter {
         
     public:
-        SWFileTransferManagerAdapter(boost::shared_ptr<FileTransferManager> signalProvider, SWFileTransferManager* slotProvider);
-        typedef boost::shared_ptr<SWFileTransferManagerAdapter> ref;
+        SWFileTransferManagerAdapter(FileTransferManager* signalProvider, SWFileTransferManager* slotProvider);
+        ~SWFileTransferManagerAdapter();
         
     private:
         boost::shared_ptr<FileTransferManager> signalProvider;

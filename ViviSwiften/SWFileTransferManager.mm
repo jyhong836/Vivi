@@ -7,12 +7,15 @@
 //
 
 #import "SWFileTransferManager.h"
+#import "ViviSwiftenDefines.h"
 #import "SWAccount.h"
 #import "SWFileTransfer.h"
 #import "VSFileTransferManagerDelegate.h"
 #import "SWFileTransferManagerAdapter.h"
+#import "SWOutgoingFileTransfer.h"
 
 #import <Swiften/Base/boost_bsignals.h>
+#import <boost/filesystem.hpp>
 #import <Swiften/FileTransfer/FileTransferManager.h>
 #import <Swiften/FileTransfer/FileReadBytestream.h>
 
@@ -20,26 +23,38 @@ using namespace Swift;
 
 @implementation SWFileTransferManager {
     FileTransferManager* ftManager;
+    SWFileTransferManagerAdapter* adapter;
 }
 
 - (id)initWithFileTransferManager: (FileTransferManager*) aFtManager
 {
     if (self = [super init]) {
         ftManager = aFtManager;
+        adapter = new SWFileTransferManagerAdapter(aFtManager, self);
     }
     return self;
 }
 
-- (SWFileTransfer*)sendFileTo: (SWAccount*)account
+- (SWOutgoingFileTransfer*)sendFileTo: (SWAccount*)account
                      filename: (NSString*)filename
                    desciption: (NSString*)desciption
+                        error: (NSError**)error
 {
     std::string fnamestr = NSString2std_str(filename);
-    boost::shared_ptr<FileReadBytestream> fileReadStream = boost::make_shared<FileReadBytestream>(boost::filesystem::path(fnamestr));
+    boost::filesystem::path filepath(fnamestr);
     
-    OutgoingFileTransfer::ref outgongTransfer = ftManager->createOutgoingFileTransfer(*(account.jid), boost::filesystem::path(fnamestr), NSString2std_str(desciption), fileReadStream);
+    if (!boost::filesystem::exists(filepath)) {
+        if (error) {
+            *error = [NSError errorWithDomain: VSFTManagerErrorDomain code: VSFTManagerErrorFileNotFound userInfo: @{@"filename": filename}];
+            return nil;
+        }
+    }
+    
+    boost::shared_ptr<FileReadBytestream> fileReadStream = boost::make_shared<FileReadBytestream>(filepath);
+    
+    OutgoingFileTransfer::ref outgongTransfer = ftManager->createOutgoingFileTransfer(*(account.jid), filepath, NSString2std_str(desciption), fileReadStream);
     if (outgongTransfer) {
-        return [[SWFileTransfer alloc] initWithFileTransfer: outgongTransfer];
+        return [[SWOutgoingFileTransfer alloc] initWithFileTransfer:outgongTransfer];
     } else {
         [NSException raise: @"FileTransferNotSupported" format: @"File transfer not supported"];
         return nil;

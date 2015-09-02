@@ -24,6 +24,13 @@ SWFileTransferAdapter::SWFileTransferAdapter(FileTransfer::ref signalProvider, S
     signalProvider->onFinished.connect(boost::bind(&SWFileTransferAdapter::handleFinished, this, _1));
 }
 
+SWFileTransferAdapter::~SWFileTransferAdapter()
+{
+    signalProvider->onProcessedBytes.disconnect(boost::bind(&SWFileTransferAdapter::handleProcessedBytes, this, _1));
+    signalProvider->onStateChanged.disconnect(boost::bind(&SWFileTransferAdapter::handleStateChanged, this, _1));
+    signalProvider->onFinished.disconnect(boost::bind(&SWFileTransferAdapter::handleFinished, this, _1));
+}
+
 void SWFileTransferAdapter::handleProcessedBytes(size_t sz)
 {
     if ([slotProvider.delegate respondsToSelector: @selector(fileTransfer:processedBytes:)]) {

@@ -11,13 +11,11 @@
 #import "SWFileTransferAdapter.h"
 
 #import <Swiften/FileTransfer/FileTransfer.h>
-#import <Swiften/FileTransfer/OutgoingFileTransfer.h>
 
 using namespace Swift;
 
 @implementation SWFileTransfer {
-    FileTransfer::ref fileTransfer;
-    SWFileTransferAdapter::ref adapter;
+    SWFileTransferAdapter *adapter;
 }
 
 @synthesize delegate;
@@ -26,13 +24,14 @@ using namespace Swift;
 {
     if (self = [super init]) {
         fileTransfer = ft;
-        adapter = boost::shared_ptr<SWFileTransferAdapter>(new SWFileTransferAdapter(fileTransfer, self));
+        adapter = new SWFileTransferAdapter(fileTransfer, self);
     }
     return self;
 }
 
 - (void)dealloc
 {
+    delete adapter;
 }
 
 - (NSString*)filename
@@ -48,11 +47,6 @@ using namespace Swift;
 - (void)cancel
 {
     fileTransfer->cancel();
-}
-
-- (void)start
-{
-    boost::dynamic_pointer_cast<OutgoingFileTransfer>(fileTransfer)->start();
 }
 
 @end

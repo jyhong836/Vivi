@@ -8,7 +8,6 @@
 
 #ifdef __cplusplus
 #include <boost/shared_ptr.hpp>
-
 namespace Swift {
     class FileTransfer;
 }
@@ -16,7 +15,12 @@ namespace Swift {
 
 @protocol VSFileTransferDelegate;
 
-@interface SWFileTransfer : NSObject
+@interface SWFileTransfer : NSObject {
+#ifdef __cplusplus
+@protected
+    boost::shared_ptr<Swift::FileTransfer> fileTransfer;
+#endif
+}
 
 #ifdef __cplusplus
 - (id)initWithFileTransfer: (boost::shared_ptr<Swift::FileTransfer>)ft;
@@ -27,6 +31,5 @@ namespace Swift {
 @property (nonatomic)id<VSFileTransferDelegate> delegate;
 
 - (void)cancel;
-- (void)start;
 
 @end

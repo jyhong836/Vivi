@@ -7,11 +7,11 @@
 //
 
 @class SWFileTransferManager;
-@class SWFileTransfer;
+@class SWIncomingFileTransfer;
 
 @protocol VSFileTransferManagerDelegate <NSObject>
 
 - (void)fileTransferManager: (SWFileTransferManager*)manager
-        getIncomingTransfer: (SWFileTransfer*)transfer;
+        getIncomingTransfer: (SWIncomingFileTransfer*)transfer;
 
 @end
