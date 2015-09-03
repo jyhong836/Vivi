@@ -15,16 +15,18 @@ class InputViewController: NSViewController {
     var currentBuddy: SWAccount?
 
     @IBOutlet var inputTextView: NSTextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        inputTextView.importsGraphics = true
     }
     
     @IBAction func sendButtonClicked(sender: NSButton) {
         if let buddy = currentBuddy {
             if inputTextView.textStorage?.length > 0 {
                 currentClient?.sendMessageToAccount(buddy,
-                    message: inputTextView.textStorage?.string,
+                    message: transferTextStorage(inputTextView.textStorage!),
                     handler: { (errType) -> Void in
                     // TODO: Add notification here for error
 //                    if errType == VSClientErrorType.ClientUnavaliable {
@@ -37,5 +39,11 @@ class InputViewController: NSViewController {
                 )
             }
         }
+    }
+    
+    func transferTextStorage(storage: NSTextStorage) -> String {
+        let attachments = storage.attachments
+        NSLog("num of attachments: \(attachments.count)")
+        return storage.string
     }
 }
