@@ -13,6 +13,7 @@
 		CD156DE41B81FB0900EFC06F /* RosterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DE31B81FB0900EFC06F /* RosterViewController.swift */; };
 		CD156DE71B823B0600EFC06F /* SWRosterItem.h in Headers */ = {isa = PBXBuildFile; fileRef = CD156DE51B823B0600EFC06F /* SWRosterItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD156DE81B823B0600EFC06F /* SWRosterItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD156DE61B823B0600EFC06F /* SWRosterItem.mm */; };
+		CD1EBB9C1B99386F0043E1D8 /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1EBB9B1B99386F0043E1D8 /* InputTextView.swift */; settings = {ASSET_TAGS = (); }; };
 		CD36855C1B5E659500DFC78A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD36855B1B5E659500DFC78A /* AppDelegate.swift */; };
 		CD36855E1B5E659500DFC78A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD36855D1B5E659500DFC78A /* MainViewController.swift */; };
 		CD3685601B5E659500DFC78A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD36855F1B5E659500DFC78A /* Assets.xcassets */; };
@@ -213,6 +214,7 @@
 		CD156DE31B81FB0900EFC06F /* RosterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RosterViewController.swift; path = "View Controllers/RosterViewController.swift"; sourceTree = "<group>"; };
 		CD156DE51B823B0600EFC06F /* SWRosterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRosterItem.h; sourceTree = "<group>"; };
 		CD156DE61B823B0600EFC06F /* SWRosterItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWRosterItem.mm; sourceTree = "<group>"; };
+		CD1EBB9B1B99386F0043E1D8 /* InputTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 		CD3685581B5E659500DFC78A /* Vivi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vivi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD36855B1B5E659500DFC78A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CD36855D1B5E659500DFC78A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MainViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -584,6 +586,7 @@
 				CD8C647E1B6C83D200945529 /* InputViewController.swift */,
 				CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */,
 				CDACF3A51B988C420010969D /* NSTextStorage+Attachment.swift */,
+				CD1EBB9B1B99386F0043E1D8 /* InputTextView.swift */,
 			);
 			name = "Chat View";
 			sourceTree = "<group>";
@@ -1006,6 +1009,7 @@
 				CD156DE41B81FB0900EFC06F /* RosterViewController.swift in Sources */,
 				CD36855E1B5E659500DFC78A /* MainViewController.swift in Sources */,
 				CD0E72AB1B9023C1002F58E9 /* NSDataAvatarTransformer.swift in Sources */,
+				CD1EBB9C1B99386F0043E1D8 /* InputTextView.swift in Sources */,
 				CD8C647D1B6C6C3B00945529 /* SessionTableCellView.swift in Sources */,
 				CD8C647F1B6C83D200945529 /* InputViewController.swift in Sources */,
 				CD60BA4F1B6D304E008E077A /* ChatMessageViewController.swift in Sources */,

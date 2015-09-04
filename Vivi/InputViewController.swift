@@ -14,12 +14,13 @@ class InputViewController: NSViewController {
     var currentClient: SWClient?
     var currentBuddy: SWAccount?
 
-    @IBOutlet var inputTextView: NSTextView!
+    @IBOutlet var inputTextView: InputTextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        inputTextView.importsGraphics = true
+//        inputTextView.importsGraphics = true
+//        inputTextView.registerForDraggedTypes([NSFilenamesPboardType])
     }
     
     @IBAction func sendButtonClicked(sender: NSButton) {
@@ -34,16 +35,24 @@ class InputViewController: NSViewController {
 //                        NSLog("Attend to send message from unavalible client: %@", (self.currentClient?.account.getFullAccountString())!)
 //                    } else if errType == VSClientErrorType.None {
 //                    }
-                        self.inputTextView.textStorage?.setAttributedString( NSAttributedString(string: ""))
+                        self.inputTextView.textStorage?.setAttributedString(NSAttributedString(string: ""))
                     }
                 )
+                do {
+                    for filename in inputTextView.sendingFiles {
+                        NSLog("Sending file \(filename)")
+                        // TODO: send file
+//                        try currentClient?.fileTransferManager.sendFileTo(buddy, filename: filename, desciption: "")
+                    }
+                } catch {
+                    fatalError("Fail to send file: \(error)")
+                }
             }
         }
     }
     
     func transferTextStorage(storage: NSTextStorage) -> String {
-        let attachments = storage.attachments
-        NSLog("num of attachments: \(attachments.count)")
-        return storage.string
+        return storage.transferStringWithAttachments()
     }
+    
 }
