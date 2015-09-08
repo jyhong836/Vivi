@@ -190,6 +190,19 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
         }
     }
     
+    public func clientShouldTrustCerficiate(subject: String!) -> Bool {
+        let alert = NSAlert()
+        alert.messageText = "Untrusted certificate: \(subject)"
+        alert.addButtonWithTitle("Cancel")
+        alert.addButtonWithTitle("Trust")
+        let answer = alert.runModal()
+        if answer == NSAlertFirstButtonReturn {
+            return false
+        } else {
+            return true
+        }
+    }
+    
     // MARK: - Conform avatar delegate
     
     public func account(account: SWAccount!, didChangeAvatar avatarData: NSData!) {

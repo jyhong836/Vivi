@@ -20,6 +20,7 @@
 #import "SWXMPPRoster.h"
 #import "VSClientControllerProtocol.h"
 #import "SWFileTransferManager.h"
+#import "SWCertificateTrustChecker.h"
 
 #ifdef __INVISIBLE_INVISIBILITY__
     #import "InvisibleListPayload.hpp"
@@ -56,6 +57,7 @@ using namespace Swift;
     boost::shared_ptr<SWClientAdapter> client;
     ClientOptions options;
     NSString* passwd;
+    SWCertificateTrustChecker* certificateChecker;
 #ifdef __INVISIBLE_INVISIBILITY__
     InvisibleListPayloadSerializer invisibleListPayloadSerializer;
     InvisibleActiveSerializer invisibleActiveSerializer;
@@ -124,6 +126,11 @@ using namespace Swift;
 #endif // __XML_TRACER__
         
         fileTransferManager = [[SWFileTransferManager alloc] initWithFileTransferManager: client->getFileTransferManager()];
+        
+        certificateChecker = new SWCertificateTrustChecker(SWCertificateTrustChecker(^BOOL(NSString *subject) {
+            return [managedObject clientShouldTrustCerficiate: subject];
+        }));
+        client->setCertificateTrustChecker(certificateChecker);
     }
     return self;
 }
@@ -142,6 +149,7 @@ using namespace Swift;
 #ifdef __XML_TRACER__
     delete tracer;
 #endif // __XML_TRACER__
+    delete certificateChecker;
 }
 
 #pragma mark - Connections

@@ -32,5 +32,6 @@
                  currentPresence: (int)presenceType
                      currentShow: (int)showType
                    currentStatus: (NSString*)status;
+- (BOOL)clientShouldTrustCerficiate: (NSString*)subject;
 
 @end
