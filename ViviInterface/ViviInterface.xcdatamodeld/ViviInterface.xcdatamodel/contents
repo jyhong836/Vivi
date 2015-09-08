@@ -8,6 +8,11 @@
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Group" inverseName="buddies" inverseEntity="Group" syncable="YES"/>
         <relationship name="resources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Resource" inverseName="account" inverseEntity="Resource" syncable="YES"/>
     </entity>
+    <entity name="Attachment" representedClassName=".VIAttachmentMO" syncable="YES">
+        <attribute name="filename" attributeType="String" syncable="YES"/>
+        <attribute name="state" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="message" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="attachments" inverseEntity="Message" syncable="YES"/>
+    </entity>
     <entity name="Chat" representedClassName=".VIChatMO" syncable="YES">
         <attribute name="createdtime" attributeType="Date" syncable="YES"/>
         <attribute name="unreadcount" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
@@ -40,6 +45,7 @@
         <attribute name="content" attributeType="String" syncable="YES"/>
         <attribute name="direction" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" attributeType="Date" indexed="YES" syncable="YES"/>
+        <relationship name="attachments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Attachment" inverseName="message" inverseEntity="Attachment" syncable="YES"/>
         <relationship name="chat" maxCount="1" deletionRule="Nullify" destinationEntity="Chat" inverseName="messages" inverseEntity="Chat" syncable="YES"/>
     </entity>
     <entity name="Resource" representedClassName=".VIResourceMO" syncable="YES">
@@ -54,10 +60,11 @@
     <elements>
         <element name="Account" positionX="0" positionY="-216" width="128" height="133"/>
         <element name="Chat" positionX="180" positionY="-378" width="128" height="135"/>
-        <element name="Client" positionX="-20" positionY="-511" width="128" height="240"/>
+        <element name="Client" positionX="-20" positionY="-511" width="128" height="238"/>
         <element name="Group" positionX="-387" positionY="-225" width="128" height="88"/>
-        <element name="Message" positionX="385" positionY="-279" width="128" height="105"/>
+        <element name="Message" positionX="351" positionY="-333" width="128" height="118"/>
         <element name="Resource" positionX="-288" positionY="-81" width="128" height="75"/>
         <element name="Roster" positionX="-191" positionY="-342" width="128" height="75"/>
+        <element name="Attachment" positionX="349" positionY="-171" width="128" height="88"/>
     </elements>
 </model>

@@ -174,7 +174,7 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
         if notification.activationType == .Replied {
             let userinfo = notification.userInfo!
             currentClient?.sendMessageToAccount(SWAccount(accountName: userinfo["account"] as! String),
-                message: notification.response?.string)
+                context: (notification.response?.string)!)
         }
     }
     

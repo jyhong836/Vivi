@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 import ViviSwiften
 
-//@objc(Roster)
 public class VIRosterMO: NSManagedObject, VSXMPPRosterDelegate {
     
     public override func awakeFromInsert() {

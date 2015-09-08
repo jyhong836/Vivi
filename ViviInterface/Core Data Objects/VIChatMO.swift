@@ -13,7 +13,6 @@ public enum VIChatMessageDirection: Int {
     case From, To, WillTo, FailTo, None
 }
 
-//@objc(Chat)
 public class VIChatMO: NSManagedObject {
 
     public override func awakeFromInsert() {
@@ -64,13 +63,14 @@ public class VIChatMO: NSManagedObject {
     }
     
     /// Add a new message
-    public func addMessage(content: String, timestamp: NSDate, direction: VIChatMessageDirection) -> VIMessageMO {
+    public func addMessage(content: String, attachments: [String]?, timestamp: NSDate, direction: VIChatMessageDirection) -> VIMessageMO {
         let moc = self.managedObjectContext
         let message = NSEntityDescription.insertNewObjectForEntityForName("Message", inManagedObjectContext: moc!) as! VIMessageMO
         message.content = content
         message.timestamp = timestamp
         message.direction = NSNumber(integer: direction.rawValue)
         message.chat = self
+        message.addAttachments(attachments)
         
         addUnreadCount()
         

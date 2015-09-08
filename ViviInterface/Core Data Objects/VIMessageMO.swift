@@ -9,11 +9,21 @@
 import Foundation
 import CoreData
 
-//@objc(Message)
 public class VIMessageMO: NSManagedObject {
 
     func setDirection(dir: VIChatMessageDirection) {
         self.direction = NSNumber(integer: dir.rawValue)
+    }
+    
+    func addAttachments(filenames: [String]?) {
+        let moc = self.managedObjectContext
+        if filenames != nil {
+            for filename in filenames! {
+                let attachment = NSEntityDescription.insertNewObjectForEntityForName("Attachment", inManagedObjectContext: moc!) as! VIAttachmentMO
+                attachment.filename = filename
+                attachment.message = self
+            }
+        }
     }
     
 }

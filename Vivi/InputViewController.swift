@@ -27,7 +27,8 @@ class InputViewController: NSViewController {
         if let buddy = currentBuddy {
             if inputTextView.textStorage?.length > 0 {
                 currentClient?.sendMessageToAccount(buddy,
-                    message: transferTextStorage(inputTextView.textStorage!),
+                    context: transferTextStorage(inputTextView.textStorage!),
+                    attachments: inputTextView.sendingFiles,
                     handler: { (errType) -> Void in
                     // TODO: Add notification here for error
 //                    if errType == VSClientErrorType.ClientUnavaliable {
@@ -38,15 +39,15 @@ class InputViewController: NSViewController {
                         self.inputTextView.textStorage?.setAttributedString(NSAttributedString(string: ""))
                     }
                 )
-                do {
-                    for filename in inputTextView.sendingFiles {
-                        NSLog("Sending file \(filename)")
-                        // TODO: send file
-//                        try currentClient?.fileTransferManager.sendFileTo(buddy, filename: filename, desciption: "")
-                    }
-                } catch {
-                    fatalError("Fail to send file: \(error)")
-                }
+//                do {
+//                    for filename in inputTextView.sendingFiles {
+//                        NSLog("Sending file \(filename)")
+//                        // TODO: send file
+////                        try currentClient?.fileTransferManager.sendFileTo(buddy, filename: filename, desciption: "")
+//                    }
+//                } catch {
+//                    fatalError("Fail to send file: \(error)")
+//                }
             }
         }
     }

@@ -39,7 +39,7 @@ extension VIClientManager {
         do {
             let client = try addClient(clientMO)
             if let cl = client {
-                cl.manualHostname = clientMO.hostname
+                cl.manualHostname = clientMO.hostname!
                 cl.manualPort = (clientMO.port?.intValue)!
                 cl.priority = (clientMO.priority?.intValue)!
                 

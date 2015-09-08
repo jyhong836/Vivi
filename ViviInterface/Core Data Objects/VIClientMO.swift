@@ -17,7 +17,6 @@ public let VIClientChatDidSendMsgNotification = "VIClientChatDidSendMsgNotificat
 public let VIClientChatDidReceiveMsgNotification = "VIClientChatDidReceiveMsgNotification"
 public let VIClientDidReceivePresence = "VIClientDidReceivePresence"
 
-//@objc(Client)
 public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDelegate {
     
     override public func awakeFromInsert() {
@@ -126,15 +125,15 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
     // MARK: - Implement VSClientControllerProtocol
     let notificationCenter = NSNotificationCenter.defaultCenter()
     
-    public func clientWillSendMessageTo(receiver: SWAccount!, message: String!, timestamp date: NSDate!) -> AnyObject! {
+    public func clientWillSendMessageTo(receiver: SWAccount, message: String, attachments: [String]?, timestamp date: NSDate) -> AnyObject {
         let (lastchat, oldIndex) = updateChats(withBuddy: receiver)
-        let newMessage = lastchat.addMessage(message, timestamp: date, direction: .WillTo)
+        let newMessage = lastchat.addMessage(message, attachments: attachments, timestamp: date, direction: .WillTo)
         notificationCenter.postNotificationName(VIClientChatWillSendMsgNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
         
         return newMessage
     }
     
-    public func clientDidSendMessage(message: AnyObject!) {
+    public func clientDidSendMessage(message: AnyObject) {
         let msgMO = message as! VIMessageMO
         msgMO.setDirection(.To)
         
@@ -145,7 +144,7 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
         notificationCenter.postNotificationName(VIClientChatDidSendMsgNotification, object: lastchat, userInfo: ["chatIndex": chatIndex, "messageIndex": updatedIndex])
     }
     
-    public func clientFailSendMessage(message: AnyObject!, error: VSClientErrorType) {
+    public func clientFailSendMessage(message: AnyObject, error: VSClientErrorType) {
         let msgMO = message as! VIMessageMO
         msgMO.setDirection(.FailTo)
         
@@ -156,13 +155,14 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
         notificationCenter.postNotificationName(VIClientChatDidSendMsgNotification, object: lastchat, userInfo: ["chatIndex": chatIndex, "messageIndex": updatedIndex, "error": error.rawValue])
     }
     
-    public func clientDidReceivedMessageFrom(sender: SWAccount!, message: String!, timestamp date: NSDate!) {
+    public func clientDidReceivedMessageFrom(sender: SWAccount, message: String, timestamp date: NSDate) {
         let (lastchat, oldIndex) = updateChats(withBuddy: sender)
-        lastchat.addMessage(message, timestamp: date, direction: .From)
+        // TODO: need set up attachemnts from received message.
+        lastchat.addMessage(message, attachments: nil, timestamp: date, direction: .From)
         notificationCenter.postNotificationName(VIClientChatDidReceiveMsgNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
     }
     
-    public func clientDidReceivePresence(client: SWClient!, fromAccount account: SWAccount!, currentPresence presenceType: Int32, currentShow showType: Int32, currentStatus status: String!) {
+    public func clientDidReceivePresence(client: SWClient, fromAccount account: SWAccount, currentPresence presenceType: Int32, currentShow showType: Int32, currentStatus status: String) {
         NSLog("client(\(client.account.accountString)) did receive presence from \(account.accountString)/\(account.resourceString): \(SWPresenceType(rawValue: presenceType)?.toString()), \(SWPresenceShowType(rawValue: showType)?.toString()), \(status))")
         print("* Resource *")
         for res in account.resources {
@@ -190,7 +190,7 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
         }
     }
     
-    public func clientShouldTrustCerficiate(subject: String!) -> Bool {
+    public func clientShouldTrustCerficiate(subject: String) -> Bool {
         let alert = NSAlert()
         alert.messageText = "Untrusted certificate: \(subject)"
         alert.addButtonWithTitle("Cancel")

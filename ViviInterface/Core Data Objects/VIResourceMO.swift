@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-//@objc(Resource)
 public class VIResourceMO: NSManagedObject {
     
 }

@@ -11,12 +11,15 @@
 @class SWClient;
 @class SWAccount;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol VSClientControllerProtocol
 
 @required
 - (id)clientWillSendMessageTo: (SWAccount*)receiver
-                             message: (NSString*)message
-                           timestamp: (NSDate*)date;
+                      message: (NSString*)message
+                  attachments: (nullable NSArray<NSString*>*)filenames
+                    timestamp: (NSDate*)date;
 @required
 - (void)clientDidSendMessage: (id)message;
 
@@ -27,11 +30,15 @@
 - (void)clientDidReceivedMessageFrom: (SWAccount*)sender
                              message: (NSString*)message
                            timestamp: (NSDate*)date;
+@required
 - (void)clientDidReceivePresence: (SWClient*)client
                      fromAccount: (SWAccount*)account
                  currentPresence: (int)presenceType
                      currentShow: (int)showType
                    currentStatus: (NSString*)status;
+@required
 - (BOOL)clientShouldTrustCerficiate: (NSString*)subject;
 
 @end
+
+NS_ASSUME_NONNULL_END

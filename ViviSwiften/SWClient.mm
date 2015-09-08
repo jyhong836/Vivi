@@ -126,7 +126,7 @@ using namespace Swift;
 #endif // __XML_TRACER__
         
         fileTransferManager = [[SWFileTransferManager alloc] initWithFileTransferManager: client->getFileTransferManager()];
-        
+    
         certificateChecker = new SWCertificateTrustChecker(SWCertificateTrustChecker(^BOOL(NSString *subject) {
             return [managedObject clientShouldTrustCerficiate: subject];
         }));
@@ -209,37 +209,18 @@ using namespace Swift;
     return swmsg;
 }
 
-/*!
- * @brief Send message to specific account.
- */
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
-                     Message: (NSString*)message
-{
-    Message::ref swmsg = [self createSwiftMessage: targetAccount
-                                          Message: message];
-    NSDate* timestamp = [NSDate date]; // FIXME: timestamp should be provided by Swiften
-    id msgObject = [managedObject clientWillSendMessageTo: targetAccount
-                                         message: message
-                                       timestamp: timestamp];
-    if (client->isAvailable()) {
-        client->sendMessage(swmsg);
-        [managedObject clientDidSendMessage: msgObject];
-    } else {
-        [managedObject clientFailSendMessage: msgObject
-                                             error: VSClientErrorTypeClientUnavaliable];
-    }
-}
-
-- (void)sendMessageToAccount: (SWAccount*)targetAccount
-                     Message: (NSString*)message
+                     context: (NSString*)context
+                 attachments: (nullable NSArray<NSString*>*)filenames
                      handler: (VSSendMessageHandler)handler
 {
     Message::ref swmsg = [self createSwiftMessage: targetAccount
-                                          Message: message];
+                                          Message: context];
     NSDate* timestamp = [NSDate date]; // FIXME: timestamp should be provided by Swiften
     id msgObject = [managedObject clientWillSendMessageTo: targetAccount
-                                                               message: message
-                                                             timestamp: timestamp];
+                                                  message: context
+                                              attachments: filenames
+                                                timestamp: timestamp];
     if (client->isAvailable()) {
         client->sendMessage(swmsg);
         [managedObject clientDidSendMessage: msgObject];
@@ -249,6 +230,28 @@ using namespace Swift;
                                        error: VSClientErrorTypeClientUnavaliable];
         handler(VSClientErrorTypeClientUnavaliable);
     }
+}
+
+/*!
+ * @brief Send message to specific account.
+ */
+- (void)sendMessageToAccount: (SWAccount*)targetAccount
+                     context: (NSString*)context
+{
+    [self sendMessageToAccount: targetAccount
+                       context: context
+                   attachments: nil
+                       handler: nil];
+}
+
+- (void)sendMessageToAccount: (SWAccount*)targetAccount
+                     context: (NSString*)context
+                     handler: (VSSendMessageHandler)handler
+{
+    [self sendMessageToAccount: targetAccount
+                       context: context
+                   attachments: nil
+                       handler: handler];
 }
 
 - (void)sendPresence: (int)presenceType

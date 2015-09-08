@@ -113,6 +113,8 @@ class FileTransferTests: XCTestCase, VSFileTransferManagerDelegate, VSFileTransf
         
     }
     
+    // MARK: - VSFileTransferManagerDelegate
+    
     func fileTransferManager(manager: SWFileTransferManager!, getIncomingTransfer transfer: SWIncomingFileTransfer!) {
         NSLog("Received file: \(transfer.filename) from: \(transfer.sender.accountString) to: \(transfer.recipient.accountString)")
         transfer.acceptAsFile(transfer.filename+".temp")
@@ -120,6 +122,8 @@ class FileTransferTests: XCTestCase, VSFileTransferManagerDelegate, VSFileTransf
         inTransfer = transfer
         clientConnectExpectation?.fulfill()
     }
+    
+    // MARK: - VSFileTransferDelegate
     
     func fileTransfer(filetransfer: SWFileTransfer!, finishedWithError errorCode: Int32) {
         print("finished")

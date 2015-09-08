@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 import ViviSwiften
 
-//@objc(Account)
 public class VIAccountMO: NSManagedObject {
     
     public override func awakeFromInsert() {

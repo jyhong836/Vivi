@@ -35,7 +35,7 @@ namespace Swift {
  *
  * Store SWOutgoingFileTransfer in some variable to avoid being
  * released.
- * Call [SWOutgoingFileTransfer start] to start transfer.
+ * Call SWOutgoingFileTransfer method `start` to start transfer.
  */
 - (SWOutgoingFileTransfer*)sendFileTo: (SWAccount*)account
                              filename: (NSString*)filename

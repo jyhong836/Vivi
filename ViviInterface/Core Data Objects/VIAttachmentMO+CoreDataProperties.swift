@@ -1,5 +1,5 @@
 //
-//  VIMessageMO+CoreDataProperties.swift
+//  VIAttachmentMO+CoreDataProperties.swift
 //  Vivi
 //
 //  Created by Junyuan Hong on 9/8/15.
@@ -12,12 +12,10 @@
 import Foundation
 import CoreData
 
-public extension VIMessageMO {
+public extension VIAttachmentMO {
 
-    @NSManaged var content: String?
-    @NSManaged var direction: NSNumber?
-    @NSManaged var timestamp: NSDate?
-    @NSManaged var chat: VIChatMO?
-    @NSManaged var attachments: NSSet?
+    @NSManaged var filename: String?
+    @NSManaged var state: NSNumber?
+    @NSManaged var message: VIMessageMO?
 
 }

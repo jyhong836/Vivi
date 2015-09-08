@@ -117,7 +117,7 @@ public class VIClientManager: VIClientManagerProtocol {
         let resIdx = swaccount.addResource(managedObject.resource)
         swaccount.setResourceIndex(resIdx)
         
-        let newClient = SWClient(account: swaccount, password: password, eventLoop: eventLoop)
+        let newClient = SWClient(account: swaccount, password: password!, eventLoop: eventLoop)
         newClient.managedObject = managedObject
         
         //        newClient.chatListController = VIChatListController(owner: newClient.account)

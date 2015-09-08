@@ -18,7 +18,9 @@
 
 typedef void (^VSConnectionHandler)(int);
 typedef void (^VSSendMessageHandler)(VSClientErrorType);
-typedef void (^VSUpdateServerCapsHandler)(NSString*);
+typedef void (^VSUpdateServerCapsHandler)(NSString* _Nullable);
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  * @brief A Objective-C adapter for Swift::Client.
@@ -77,9 +79,13 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
 #pragma mark - Send stanza
 
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
-                     Message: (NSString*)message;
+                     context: (NSString*)context
+                 attachments: (nullable NSArray<NSString*>*)filenames
+                     handler: (nullable VSSendMessageHandler)handler;
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
-                     Message: (NSString*)message
+                     context: (NSString*)context;
+- (void)sendMessageToAccount: (SWAccount*)targetAccount
+                     context: (NSString*)context
                      handler: (VSSendMessageHandler)handler;
 - (void)sendPresence: (int)presenceType
             showType: (int)showType
@@ -145,3 +151,5 @@ typedef void (^VSUpdateServerCapsHandler)(NSString*);
 @property (nonatomic, readwrite) int manualPort;
 
 @end
+
+NS_ASSUME_NONNULL_END
