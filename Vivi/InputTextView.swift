@@ -37,14 +37,13 @@ class InputTextView: NSTextView {
     }
     
     func appendFileAttachment(named name: String) {
-        let fileImage = NSWorkspace.sharedWorkspace().iconForFile(name)
-        let imgcell = NSTextAttachmentCell(imageCell: fileImage)
-        
         let attachment = NSTextAttachment()
-        attachment.attachmentCell = imgcell
         
         do {
             let fileWrapper = try NSFileWrapper(URL: NSURL(fileURLWithPath: name), options: NSFileWrapperReadingOptions.Immediate)
+            let imgcell = TextAttachmentFileCell(fileWrapper: fileWrapper)
+            attachment.attachmentCell = imgcell
+            imgcell.filename = fileWrapper.preferredFilename!
             attachment.fileWrapper = fileWrapper
             sendingFiles.append(name)
         } catch {

@@ -37,6 +37,7 @@ class InputViewController: NSViewController {
 //                    } else if errType == VSClientErrorType.None {
 //                    }
                         self.inputTextView.textStorage?.setAttributedString(NSAttributedString(string: ""))
+                        self.inputTextView.sendingFiles = []
                     }
                 )
 //                do {
