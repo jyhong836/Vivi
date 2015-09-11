@@ -156,10 +156,17 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
     }
     
     public func clientDidReceivedMessageFrom(sender: SWAccount, message: String, timestamp date: NSDate) {
-        let (lastchat, oldIndex) = updateChats(withBuddy: sender)
-        // TODO: need set up attachemnts from received message.
-        lastchat.addMessage(message, attachments: nil, timestamp: date, direction: .From)
-        notificationCenter.postNotificationName(VIClientChatDidReceiveMsgNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
+        if sender.nodeString.isEmpty && !sender.domainString.isEmpty {
+            let alert = NSAlert()
+            alert.messageText = "Message from domain: \"\(sender.domainString)\""
+            alert.addButtonWithTitle("OK")
+            alert.runModal()
+        } else {
+            let (lastchat, oldIndex) = updateChats(withBuddy: sender)
+            // TODO: need set up attachemnts from received message.
+            lastchat.addMessage(message, attachments: nil, timestamp: date, direction: .From)
+            notificationCenter.postNotificationName(VIClientChatDidReceiveMsgNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])
+        }
     }
     
     public func clientDidReceivePresence(client: SWClient, fromAccount account: SWAccount, currentPresence presenceType: Int32, currentShow showType: Int32, currentStatus status: String) {
