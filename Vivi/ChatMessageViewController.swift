@@ -122,7 +122,37 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     // MARK: Implementations for NSTableViewDelegate
     
     func configureCell(cell: MessageTableCellView, row: Int) -> MessageTableCellView {
-        cell.textField?.stringValue = (currentChat?.messageAtIndex(row)?.content)!
+        let content = (currentChat?.messageAtIndex(row)?.content)!
+        let attributedContent = NSMutableAttributedString(string: content)
+        do {
+            let regexp = try NSRegularExpression(pattern: "\\[[^]]+\\]", options: NSRegularExpressionOptions(rawValue: 0))
+            let contentRange = NSMakeRange(0, attributedContent.length)
+            let matches = regexp.matchesInString(content, options: NSMatchingOptions(rawValue: 0), range: contentRange)
+            for match in matches.reverse() {
+                let range = match.range
+                var bareRange = range
+                bareRange.location += 1
+                bareRange.length -= 2
+                
+                let attachment = NSTextAttachment()
+                
+                do {
+                    let filename = attributedContent.attributedSubstringFromRange(bareRange).string
+                    let fileWrapper = try NSFileWrapper(URL: NSURL(fileURLWithPath: filename), options: NSFileWrapperReadingOptions.Immediate) // .Immediate will cause error when file not exists.
+                    // TODO: Check if file exists.
+                    // TODO: Store the filename for file accessing later.
+                    let filecell = TextAttachmentFileCell(fileWrapper: fileWrapper)
+                    attachment.attachmentCell = filecell
+                    attachment.fileWrapper = fileWrapper
+                    attributedContent.replaceCharactersInRange(range, withAttributedString: NSAttributedString(attachment: attachment))
+                } catch {
+                    fatalError("Fail to create file wrapper: \(error)")
+                }
+            }
+        } catch {
+            fatalError("Fail to create regular expression: \(error)")
+        }
+        cell.textField?.attributedStringValue = attributedContent
         return cell
     }
     

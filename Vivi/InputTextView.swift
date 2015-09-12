@@ -43,7 +43,6 @@ class InputTextView: NSTextView {
             let fileWrapper = try NSFileWrapper(URL: NSURL(fileURLWithPath: name), options: NSFileWrapperReadingOptions.Immediate)
             let imgcell = TextAttachmentFileCell(fileWrapper: fileWrapper)
             attachment.attachmentCell = imgcell
-            imgcell.filename = fileWrapper.preferredFilename!
             attachment.fileWrapper = fileWrapper
             sendingFiles.append(name)
         } catch {
