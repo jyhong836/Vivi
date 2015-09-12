@@ -210,15 +210,15 @@ using namespace Swift;
 }
 
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
-                     context: (NSString*)context
+                     content: (NSString*)content
                  attachments: (nullable NSArray<NSString*>*)filenames
                      handler: (VSSendMessageHandler)handler
 {
     Message::ref swmsg = [self createSwiftMessage: targetAccount
-                                          Message: context];
+                                          Message: content];
     NSDate* timestamp = [NSDate date]; // FIXME: timestamp should be provided by Swiften
     id msgObject = [managedObject clientWillSendMessageTo: targetAccount
-                                                  message: context
+                                                  message: content
                                               attachments: filenames
                                                 timestamp: timestamp];
     if (client->isAvailable()) {
@@ -236,20 +236,20 @@ using namespace Swift;
  * @brief Send message to specific account.
  */
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
-                     context: (NSString*)context
+                     content: (NSString*)content
 {
     [self sendMessageToAccount: targetAccount
-                       context: context
+                       content: content
                    attachments: nil
                        handler: nil];
 }
 
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
-                     context: (NSString*)context
+                     content: (NSString*)content
                      handler: (VSSendMessageHandler)handler
 {
     [self sendMessageToAccount: targetAccount
-                       context: context
+                       content: content
                    attachments: nil
                        handler: handler];
 }

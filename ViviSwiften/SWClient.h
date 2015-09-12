@@ -79,13 +79,13 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Send stanza
 
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
-                     context: (NSString*)context
+                     content: (NSString*)content
                  attachments: (nullable NSArray<NSString*>*)filenames
                      handler: (nullable VSSendMessageHandler)handler;
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
-                     context: (NSString*)context;
+                     content: (NSString*)content;
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
-                     context: (NSString*)context
+                     content: (NSString*)content
                      handler: (VSSendMessageHandler)handler;
 - (void)sendPresence: (int)presenceType
             showType: (int)showType

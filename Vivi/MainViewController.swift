@@ -159,7 +159,7 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
         // init user notification
         NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
         notification.title = "Account"
-        notification.informativeText = "message context"
+        notification.informativeText = "message content"
         notification.soundName = NSUserNotificationDefaultSoundName
         notification.hasReplyButton = true
         //        notification.otherButtonTitle = "Ignore"
@@ -174,7 +174,7 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
         if notification.activationType == .Replied {
             let userinfo = notification.userInfo!
             currentClient?.sendMessageToAccount(SWAccount(accountName: userinfo["account"] as! String),
-                context: (notification.response?.string)!)
+                content: (notification.response?.string)!)
         }
     }
     

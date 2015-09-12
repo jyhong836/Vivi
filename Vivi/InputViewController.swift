@@ -27,7 +27,7 @@ class InputViewController: NSViewController {
         if let buddy = currentBuddy {
             if inputTextView.textStorage?.length > 0 {
                 currentClient?.sendMessageToAccount(buddy,
-                    context: transferTextStorage(inputTextView.textStorage!),
+                    content: transferTextStorage(inputTextView.textStorage!),
                     attachments: inputTextView.sendingFiles,
                     handler: { (errType) -> Void in
                     // TODO: Add notification here for error
