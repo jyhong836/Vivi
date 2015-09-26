@@ -26,4 +26,21 @@ public class VIMessageMO: NSManagedObject {
         }
     }
     
+    // TODO: handle the confilcted filename
+    public func attachmentWithName(filename: String) -> VIAttachmentMO? {
+        for att in attachments! {
+            if let a = att as? VIAttachmentMO {
+                do {
+                    let fw = try NSFileWrapper(URL: NSURL(fileURLWithPath: a.filename!), options: NSFileWrapperReadingOptions.Immediate)
+                    if a.filename == filename || fw.preferredFilename == filename {
+                        return a
+                    }
+                } catch {
+                    fatalError("Fail to create file wrapper: \(error)")
+                }
+            }
+        }
+        return nil
+    }
+    
 }

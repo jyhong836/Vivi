@@ -122,7 +122,8 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     // MARK: Implementations for NSTableViewDelegate
     
     func configureCell(cell: MessageTableCellView, row: Int) -> MessageTableCellView {
-        let content = (currentChat?.messageAtIndex(row)?.content)!
+        let msg = (currentChat?.messageAtIndex(row))!
+        let content = msg.content!
         let attributedContent = NSMutableAttributedString(string: content)
         do {
             let regexp = try NSRegularExpression(pattern: "\\[[^]]+\\]", options: NSRegularExpressionOptions(rawValue: 0))
@@ -138,7 +139,8 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
                 
                 do {
                     let filename = attributedContent.attributedSubstringFromRange(bareRange).string
-                    let fileWrapper = try NSFileWrapper(URL: NSURL(fileURLWithPath: filename), options: NSFileWrapperReadingOptions.Immediate) // .Immediate will cause error when file not exists.
+                    let fullFilename = msg.attachmentWithName(filename)!.filename!
+                    let fileWrapper = try NSFileWrapper(URL: NSURL(fileURLWithPath: fullFilename), options: NSFileWrapperReadingOptions.Immediate) // .Immediate will cause error when file not exists.
                     // TODO: Check if file exists.
                     // TODO: Store the filename for file accessing later.
                     let filecell = TextAttachmentFileCell(fileWrapper: fileWrapper)
