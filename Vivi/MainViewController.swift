@@ -268,6 +268,9 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
                             let alert = NSAlert()
                             alert.addButtonWithTitle("OK")
                             alert.messageText = "Error: \(err)"
+                            if err == SWClientErrorType.AuthenticationFailedError {
+                                alert.messageText = "Authentication failed. Please check your password or account."
+                            }
                             alert.runModal()
                             sender.selectItemWithTitle("Offline")
                         }

@@ -12,6 +12,8 @@ import ViviInterface
 
 class TextAttachmentFileCell: NSTextAttachmentCell, VSFileTransferDelegate {
     
+    var fullFilename = ""
+    
     private var filenameAttributedString = NSAttributedString(string: "null")
     var filename: String {
         get {

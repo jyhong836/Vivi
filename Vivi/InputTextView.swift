@@ -12,7 +12,17 @@ class InputTextView: NSTextView {
     
     // FIXME: file name may be conflicted.
     /// Files to be sent.
-    var sendingFiles: [String] = []
+    var sendingFiles: [String] {
+        get {
+            var files = [String]()
+            for attachment in self.textStorage!.attachments {
+                if let filecell = attachment.attachmentCell as? TextAttachmentFileCell {
+                    files.append(filecell.fullFilename)
+                }
+            }
+            return files
+        }
+    }
 
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)
@@ -42,9 +52,9 @@ class InputTextView: NSTextView {
         do {
             let fileWrapper = try NSFileWrapper(URL: NSURL(fileURLWithPath: name), options: NSFileWrapperReadingOptions.Immediate)
             let imgcell = TextAttachmentFileCell(fileWrapper: fileWrapper)
+            imgcell.fullFilename = name
             attachment.attachmentCell = imgcell
             attachment.fileWrapper = fileWrapper
-            sendingFiles.append(name)
         } catch {
             fatalError("Fail to create file wrapper: \(error)")
         }

@@ -27,35 +27,29 @@ class InputViewController: NSViewController {
         if let buddy = currentBuddy {
             if inputTextView.textStorage?.length > 0 {
                 currentClient?.sendMessageToAccount(buddy,
-                    content: transferTextStorage(inputTextView.textStorage!),
+                    content: inputTextView.textStorage!.transferedStringWithAttachments(),
                     attachments: inputTextView.sendingFiles,
                     handler: { (nserr) -> Void in
                         if let nserror = nserr {
                             let err = VSClientErrorType(rawValue: nserror.code)!
                             // process errors
                             switch err {
-                            case VSClientErrorType.FileNotFound:
+                            case .FileNotFound:
                                 fatalError("Not found file")
-                            case VSClientErrorType.FileTransferNotSupport:
+                            case .FileTransferNotSupport:
                                 let alert = NSAlert()
-                                alert.messageText = "Not suport file transfer."
+                                alert.messageText = "Not support file transfer."
                                 alert.runModal()
                             default:
                                 self.inputTextView.textStorage?.setAttributedString(NSAttributedString(string: ""))
-                                self.inputTextView.sendingFiles = []
                             }
                         } else {
                             self.inputTextView.textStorage?.setAttributedString(NSAttributedString(string: ""))
-                            self.inputTextView.sendingFiles = []
                         }
                     }
                 )
             }
         }
-    }
-    
-    func transferTextStorage(storage: NSTextStorage) -> String {
-        return storage.transferStringWithAttachments()
     }
     
 }
