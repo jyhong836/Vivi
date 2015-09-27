@@ -1,5 +1,5 @@
 //
-//  Roster.swift
+//  VIRosterMO.swift
 //  Vivi
 //
 //  Created by Junyuan Hong on 8/11/15.

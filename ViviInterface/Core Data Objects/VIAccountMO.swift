@@ -1,5 +1,5 @@
 //
-//  Account.swift
+//  VIAccountMO.swift
 //  Vivi
 //
 //  Created by Junyuan Hong on 8/11/15.

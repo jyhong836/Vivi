@@ -1,5 +1,5 @@
 //
-//  CorDataController.swift
+//  VICoreDataController.swift
 //  Vivi
 //
 //  Created by Junyuan Hong on 8/19/15.
@@ -39,7 +39,7 @@ public class VICoreDataController {
     
     public lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle(identifier: "cn.edu.ustc.ViviInterface")!.URLForResource("ViviInterface", withExtension: "momd")!
+        let modelURL = NSBundle(identifier: "com.jyhong.ViviInterface")!.URLForResource("ViviInterface", withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
         }()
     

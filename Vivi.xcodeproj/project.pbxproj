@@ -1276,7 +1276,7 @@
 				INFOPLIST_FILE = Vivi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.Vivi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyhong.Vivi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1290,7 +1290,7 @@
 				INFOPLIST_FILE = Vivi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.Vivi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyhong.Vivi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1395,7 +1395,7 @@
 				OTHER_CFLAGS = "$(SWIFTEN_C_FLAGS)";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.ViviSwiften;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyhong.ViviSwiften;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFTEN_C_FLAGS = "-DSWIFTEN_STATIC -DBOOST_ALL_NO_LIB -DBOOST_SYSTEM_NO_DEPRECATED -DBOOST_SIGNALS_NO_DEPRECATION_WARNING -DSWIFT_EXPERIMENTAL_FT";
@@ -1432,7 +1432,7 @@
 				OTHER_CFLAGS = "$(SWIFTEN_C_FLAGS)";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.ViviSwiften;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyhong.ViviSwiften;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFTEN_C_FLAGS = "-DSWIFTEN_STATIC -DBOOST_ALL_NO_LIB -DBOOST_SYSTEM_NO_DEPRECATED -DBOOST_SIGNALS_NO_DEPRECATION_WARNING -DSWIFT_EXPERIMENTAL_FT";
@@ -1456,7 +1456,7 @@
 				INFOPLIST_FILE = ViviInterface/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.ViviInterface;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyhong.ViviInterface;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1477,7 +1477,7 @@
 				INFOPLIST_FILE = ViviInterface/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.ustc.ViviInterface;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyhong.ViviInterface;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";

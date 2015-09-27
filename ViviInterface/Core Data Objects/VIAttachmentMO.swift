@@ -1,5 +1,5 @@
 //
-//  Attachment.swift
+//  VIAttachmentMO.swift
 //  Vivi
 //
 //  Created by Junyuan Hong on 9/8/15.
