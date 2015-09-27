@@ -230,10 +230,10 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         if let errcode = userInfo["error"] as? Int {
             let error = VSClientErrorType(rawValue: errcode)!
             switch (error) {
-            case .ClientUnavaliable:
-                let alert = NSAlert()
-                alert.messageText = "Please log in before sending message."
-                alert.runModal()
+//            case .ClientUnavaliable:
+//                let alert = NSAlert()
+//                alert.messageText = "Please log in before sending message."
+//                alert.runModal()
             case .Unknown:
                 fallthrough
             default:

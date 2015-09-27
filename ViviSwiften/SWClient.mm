@@ -215,8 +215,13 @@ using namespace Swift;
 - (void)sendMessageToAccount: (SWAccount*)targetAccount
                      content: (NSString*)content
                  attachments: (nullable NSArray<NSString*>*)filenames
-                     handler: (VSSendMessageHandler)handler
+                     handler: (VSSendMessageHandler)handler // FIXME: It's more suitable to use NSError** instead of hanlder
 {
+    if (!client->isAvailable()) {
+        NSError *error = [NSError errorWithDomain: VSClientErrorTypeDomain code: VSClientErrorTypeClientUnavaliable userInfo: nil];
+        handler(error);
+        return;
+    }
     Message::ref swmsg = [self createSwiftMessage: targetAccount
                                           Message: content];
     NSDate* timestamp = [NSDate date]; // FIXME: timestamp should be provided by Swiften
@@ -238,16 +243,16 @@ using namespace Swift;
                                                   message: content
                                               attachments: fileTansfers
                                                 timestamp: timestamp];
-    if (client->isAvailable()) {
+//    if (client->isAvailable()) {
         client->sendMessage(swmsg);
         [managedObject clientDidSendMessage: msgObject];
         handler(nil);
-    } else {
-        [managedObject clientFailSendMessage: msgObject
-                                       error: VSClientErrorTypeClientUnavaliable];
-        NSError *error = [NSError errorWithDomain: VSClientErrorTypeDomain code: VSClientErrorTypeClientUnavaliable userInfo: nil];
-        handler(error);
-    }
+//    } else {
+//        [managedObject clientFailSendMessage: msgObject
+//                                       error: VSClientErrorTypeClientUnavaliable];
+//        NSError *error = [NSError errorWithDomain: VSClientErrorTypeDomain code: VSClientErrorTypeClientUnavaliable userInfo: nil];
+//        handler(error);
+//    }
 }
 
 /*!
