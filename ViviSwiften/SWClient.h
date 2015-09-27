@@ -17,7 +17,7 @@
 #import "ViviSwiftenDefines.h"
 
 typedef void (^VSConnectionHandler)(int);
-typedef void (^VSSendMessageHandler)(VSClientErrorType);
+typedef void (^VSSendMessageHandler)(NSError* _Nullable);
 typedef void (^VSUpdateServerCapsHandler)(NSString* _Nullable);
 
 NS_ASSUME_NONNULL_BEGIN

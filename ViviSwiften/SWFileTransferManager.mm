@@ -45,7 +45,7 @@ using namespace Swift;
     
     if (!boost::filesystem::exists(filepath)) {
         if (error) {
-            *error = [NSError errorWithDomain: VSFTManagerErrorDomain code: VSFTManagerErrorFileNotFound userInfo: @{@"filename": filename}];
+            *error = [NSError errorWithDomain: VSClientErrorTypeDomain code: VSClientErrorTypeFileNotFound userInfo: @{@"filename": filename}];
             return nil;
         }
     }
@@ -56,7 +56,10 @@ using namespace Swift;
     if (outgongTransfer) {
         return [[SWOutgoingFileTransfer alloc] initWithFileTransfer:outgongTransfer];
     } else {
-        [NSException raise: @"FileTransferNotSupported" format: @"File transfer not supported"];
+        if (error) {
+            *error = [NSError errorWithDomain: VSClientErrorTypeDomain code: VSClientErrorTypeFileTransferNotSupport userInfo: @{@"account": account}];
+            return nil;
+        }
         return nil;
     }
 }

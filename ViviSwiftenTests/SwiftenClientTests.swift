@@ -78,11 +78,11 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
     func verifyImplement(client: SWClient!) {
         let connectSelector = "clientDidConnect:"
         let disconnectSelector = "clientDidDisconnect:errorCode:"
-        if !client.delegate.respondsToSelector( Selector(connectSelector)) {
+        if !client.delegate!.respondsToSelector( Selector(connectSelector)) {
             let e = NSException(name:"NotImplement", reason:"Unimplement or incorrectly implementat \(connectSelector)", userInfo:nil)
             e.raise()
         }
-        if !client.delegate.respondsToSelector( Selector(disconnectSelector)) {
+        if !client.delegate!.respondsToSelector( Selector(disconnectSelector)) {
             let e = NSException(name:"NotImplement", reason:"Unimplement or incorrectly implementat \(disconnectSelector)", userInfo:nil)
             e.raise()
         }
@@ -170,13 +170,13 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         _clientDidReceiveMessage = {(c: SWClient!, a: SWAccount!, msg: String!)->Void in
             if c == client1 {
                 if msg == c2string {
-                    c.sendMessageToAccount(client2.account, message: endstring)
+                    c.sendMessageToAccount(client2.account, content: endstring)
                 } else {
                     XCTFail("Receive unexpected message: \(msg)")
                 }
             } else if c == client2 {
                 if msg == c1string {
-                    c.sendMessageToAccount(client1.account, message: c2string)
+                    c.sendMessageToAccount(client1.account, content: c2string)
                 } else if msg == endstring {
                     clientConnectExpectation?.fulfill()
                 } else {
@@ -192,7 +192,7 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         
         clientConnectExpectation = self.expectationWithDescription("test client1 and client2 message exchange")
         print("sending message to \(client2.account.accountString) \(client2.account.resourceString)")
-        client1.sendMessageToAccount(client2.account, message: c1string)
+        client1.sendMessageToAccount(client2.account, content: c1string)
         
         waitForExpectationsWithTimeout(20, handler: nil)
         

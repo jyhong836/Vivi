@@ -226,7 +226,12 @@ using namespace Swift;
     for (NSString *fn in filenames) {
         NSError *error;
         SWOutgoingFileTransfer *oft = [fileTransferManager sendFileTo:targetAccount filename:fn desciption:@"" error: &error];
-        [fileTansfers addObject: oft];
+        if (oft) {
+            [fileTansfers addObject: oft];
+        } else {
+            handler(error);
+            return;
+        }
     }
     
     id msgObject = [managedObject clientWillSendMessageTo: targetAccount
@@ -236,11 +241,12 @@ using namespace Swift;
     if (client->isAvailable()) {
         client->sendMessage(swmsg);
         [managedObject clientDidSendMessage: msgObject];
-        handler(VSClientErrorTypeNone);
+        handler(nil);
     } else {
         [managedObject clientFailSendMessage: msgObject
                                        error: VSClientErrorTypeClientUnavaliable];
-        handler(VSClientErrorTypeClientUnavaliable);
+        NSError *error = [NSError errorWithDomain: VSClientErrorTypeDomain code: VSClientErrorTypeClientUnavaliable userInfo: nil];
+        handler(error);
     }
 }
 

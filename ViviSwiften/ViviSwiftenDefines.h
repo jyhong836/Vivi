@@ -11,15 +11,13 @@
 
 #import <ViviSwiften/ViviSwiften-Swift.h>
 
-typedef SWIFT_ENUM(NSInteger, VSFTManagerError) {
-    VSFTManagerErrorFileNotFound,
-};
-static NSString* const VSFTManagerErrorDomain = @"ViviSwiften.VSFTManagerError";
-
-typedef NS_ENUM(NSInteger, VSClientErrorType) {
+typedef SWIFT_ENUM(NSInteger, VSClientErrorType) {
     VSClientErrorTypeNone,
     VSClientErrorTypeUnknown,
-    VSClientErrorTypeClientUnavaliable
+    VSClientErrorTypeClientUnavaliable,
+    VSClientErrorTypeFileNotFound,
+    VSClientErrorTypeFileTransferNotSupport,
 };
+static NSString* const VSClientErrorTypeDomain = @"ViviSwiften.VSClientErrorType";
 
 #endif /* ViviSwiftenDefines_h */

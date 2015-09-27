@@ -29,26 +29,27 @@ class InputViewController: NSViewController {
                 currentClient?.sendMessageToAccount(buddy,
                     content: transferTextStorage(inputTextView.textStorage!),
                     attachments: inputTextView.sendingFiles,
-                    handler: { (errType) -> Void in
-                    // TODO: Add notification here for error
-//                    if errType == VSClientErrorType.ClientUnavaliable {
-//                        // TODO: Add notification here for error
-//                        NSLog("Attend to send message from unavalible client: %@", (self.currentClient?.account.getFullAccountString())!)
-//                    } else if errType == VSClientErrorType.None {
-//                    }
-                        self.inputTextView.textStorage?.setAttributedString(NSAttributedString(string: ""))
-                        self.inputTextView.sendingFiles = []
+                    handler: { (nserr) -> Void in
+                        if let nserror = nserr {
+                            let err = VSClientErrorType(rawValue: nserror.code)!
+                            // process errors
+                            switch err {
+                            case VSClientErrorType.FileNotFound:
+                                fatalError("Not found file")
+                            case VSClientErrorType.FileTransferNotSupport:
+                                let alert = NSAlert()
+                                alert.messageText = "Not suport file transfer."
+                                alert.runModal()
+                            default:
+                                self.inputTextView.textStorage?.setAttributedString(NSAttributedString(string: ""))
+                                self.inputTextView.sendingFiles = []
+                            }
+                        } else {
+                            self.inputTextView.textStorage?.setAttributedString(NSAttributedString(string: ""))
+                            self.inputTextView.sendingFiles = []
+                        }
                     }
                 )
-//                do {
-//                    for filename in inputTextView.sendingFiles {
-//                        NSLog("Sending file \(filename)")
-//                        // TODO: send file
-////                        try currentClient?.fileTransferManager.sendFileTo(buddy, filename: filename, desciption: "")
-//                    }
-//                } catch {
-//                    fatalError("Fail to send file: \(error)")
-//                }
             }
         }
     }
