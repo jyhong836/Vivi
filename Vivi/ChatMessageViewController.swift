@@ -126,6 +126,7 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         let content = msg.content!
         let attributedContent = NSMutableAttributedString(string: content)
         do {
+            // Search [file name] pattern
             let regexp = try NSRegularExpression(pattern: "\\[[^]]+\\]", options: NSRegularExpressionOptions(rawValue: 0))
             let contentRange = NSMakeRange(0, attributedContent.length)
             let matches = regexp.matchesInString(content, options: NSMatchingOptions(rawValue: 0), range: contentRange)
@@ -135,17 +136,23 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
                 bareRange.location += 1
                 bareRange.length -= 2
                 
-                let attachment = NSTextAttachment()
-                
                 do {
+                    // init file path
                     let filename = attributedContent.attributedSubstringFromRange(bareRange).string
-                    let fullFilename = msg.attachmentWithName(filename)!.filename!
+                    let attachmentMO = msg.attachmentWithName(filename)
+                    guard attachmentMO != nil else {
+                        fatalError("Not found attachment with file name: \(filename)")
+                    }
+                    let fullFilename = attachmentMO!.filename!
                     let fileWrapper = try NSFileWrapper(URL: NSURL(fileURLWithPath: fullFilename), options: NSFileWrapperReadingOptions.Immediate) // .Immediate will cause error when file not exists.
-                    // TODO: Check if file exists.
-                    // TODO: Store the filename for file accessing later.
+                    
+                    let attachment = NSTextAttachment()
                     let filecell = TextAttachmentFileCell(fileWrapper: fileWrapper)
+                    attachmentMO!.fileTransfer!.delegate = filecell
+                    filecell.attachmentMO = attachmentMO
                     attachment.attachmentCell = filecell
                     attachment.fileWrapper = fileWrapper
+                    
                     attributedContent.replaceCharactersInRange(range, withAttributedString: NSAttributedString(attachment: attachment))
                 } catch {
                     fatalError("Fail to create file wrapper: \(error)")

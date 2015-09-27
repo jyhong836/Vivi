@@ -42,6 +42,6 @@ namespace Swift {
                            desciption: (NSString*)desciption
                                 error: (NSError**)error;
 
-@property (nonatomic)id<VSFileTransferManagerDelegate> delegate;
+@property (nonatomic, weak)id<VSFileTransferManagerDelegate> delegate;
 
 @end

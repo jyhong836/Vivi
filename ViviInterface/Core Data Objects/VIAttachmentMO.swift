@@ -12,7 +12,7 @@ import ViviSwiften
 
 public class VIAttachmentMO: NSManagedObject {
     
-    var fileTransfer: SWFileTransfer? {
+    public var fileTransfer: SWFileTransfer? {
         didSet {
             if let ft = fileTransfer {
                 filename = ft.filename

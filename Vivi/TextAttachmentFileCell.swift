@@ -7,8 +7,10 @@
 //
 
 import Cocoa
+import ViviSwiften
+import ViviInterface
 
-class TextAttachmentFileCell: NSTextAttachmentCell {
+class TextAttachmentFileCell: NSTextAttachmentCell, VSFileTransferDelegate {
     
     private var filenameAttributedString = NSAttributedString(string: "null")
     var filename: String {
@@ -54,6 +56,8 @@ class TextAttachmentFileCell: NSTextAttachmentCell {
         filesizeAttributedString.drawAtPoint(filesizeBaselineOffsetAtRect(cellFrame))
     }
     
+    // MARK: - Geometry of cell
+    
     override func cellSize() -> NSSize {
         var size = super.cellSize()
         
@@ -91,4 +95,25 @@ class TextAttachmentFileCell: NSTextAttachmentCell {
         return NSMakePoint(rect.origin.x + rect.width/2 - size.width/2, rect.origin.y + rect.height)
     }
     
+    // MARK: - Conform to VSFileTransferDelegate protocol
+    
+    var attachmentMO: VIAttachmentMO?
+    var fileTransfer: SWFileTransfer? {
+        get {
+            return attachmentMO?.fileTransfer
+        }
+    }
+    
+    func fileTransfer(filetransfer: SWFileTransfer!, processedBytes bytes: Int) {
+        NSLog("attachment(\(filename) processed \(bytes) bytes)")
+    }
+    
+    func fileTransfer(filetransfer: SWFileTransfer!, stateChanged stateCode: Int32) {
+        NSLog("attachment(\(filename) state changed to \(stateCode)")
+        attachmentMO?.state = NSNumber(int: stateCode)
+    }
+    
+    func fileTransfer(filetransfer: SWFileTransfer!, finishedWithError errorCode: Int32) {
+        NSLog("attachment(\(filename) failed with error \(errorCode)")
+    }
 }

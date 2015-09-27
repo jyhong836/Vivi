@@ -18,7 +18,7 @@ namespace Swift {
 
 @interface SWXMPPRoster : NSObject
 
-@property (nonatomic) id<VSXMPPRosterDelegate> delegate;
+@property (nonatomic, weak) id<VSXMPPRosterDelegate> delegate;
 
 #ifdef __cplusplus
 - (id)init: (Swift::XMPPRoster*)aRoster;

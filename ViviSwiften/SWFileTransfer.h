@@ -28,7 +28,7 @@ namespace Swift {
 
 @property (nonatomic, readonly)NSString* filename;
 @property (nonatomic, readonly)unsigned long fileSizeInBytes;
-@property (nonatomic)id<VSFileTransferDelegate> delegate;
+@property (nonatomic, weak)id<VSFileTransferDelegate> delegate;
 
 - (void)cancel;
 

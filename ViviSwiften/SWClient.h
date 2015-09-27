@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) SWFileTransferManager* fileTransferManager;
 
 @property (nonatomic) id<VSAvatarDelegate> avatarDelegate;
-@property (nonatomic) id<VSClientDelegate> delegate;
+@property (nonatomic, weak) id<VSClientDelegate> delegate;
 
 #pragma mark - Init and delloc
 
