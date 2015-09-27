@@ -36,9 +36,9 @@ using namespace Swift;
 }
 
 - (SWOutgoingFileTransfer*)sendFileTo: (SWAccount*)account
-                     filename: (NSString*)filename
-                   desciption: (NSString*)desciption
-                        error: (NSError**)error
+                             filename: (NSString*)filename
+                           desciption: (NSString*)desciption
+                                error: (NSError**)error
 {
     std::string fnamestr = NSString2std_str(filename);
     boost::filesystem::path filepath(fnamestr);

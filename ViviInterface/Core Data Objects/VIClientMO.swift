@@ -125,7 +125,7 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
     // MARK: - Implement VSClientControllerProtocol
     let notificationCenter = NSNotificationCenter.defaultCenter()
     
-    public func clientWillSendMessageTo(receiver: SWAccount, message: String, attachments: [String]?, timestamp date: NSDate) -> AnyObject {
+    public func clientWillSendMessageTo(receiver: SWAccount, message: String, attachments: [SWFileTransfer]?, timestamp date: NSDate) -> AnyObject {
         let (lastchat, oldIndex) = updateChats(withBuddy: receiver)
         let newMessage = lastchat.addMessage(message, attachments: attachments, timestamp: date, direction: .WillTo)
         notificationCenter.postNotificationName(VIClientChatWillSendMsgNotification, object: lastchat, userInfo: ["oldIndex": oldIndex])

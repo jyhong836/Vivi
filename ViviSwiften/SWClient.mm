@@ -20,6 +20,9 @@
 #import "SWXMPPRoster.h"
 #import "VSClientControllerProtocol.h"
 #import "SWFileTransferManager.h"
+#import "SWFileTransfer.h"
+#import "SWOutgoingFileTransfer.h"
+#import "SWIncomingFileTransfer.h"
 #import "SWCertificateTrustChecker.h"
 
 #ifdef __INVISIBLE_INVISIBILITY__
@@ -217,9 +220,18 @@ using namespace Swift;
     Message::ref swmsg = [self createSwiftMessage: targetAccount
                                           Message: content];
     NSDate* timestamp = [NSDate date]; // FIXME: timestamp should be provided by Swiften
+    
+    // set up file transfers
+    NSMutableArray<SWFileTransfer*>* fileTansfers;
+    for (NSString *fn in filenames) {
+        NSError *error;
+        SWOutgoingFileTransfer *oft = [fileTransferManager sendFileTo:targetAccount filename:fn desciption:@"" error: &error];
+        [fileTansfers addObject: oft];
+    }
+    
     id msgObject = [managedObject clientWillSendMessageTo: targetAccount
                                                   message: content
-                                              attachments: filenames
+                                              attachments: fileTansfers
                                                 timestamp: timestamp];
     if (client->isAvailable()) {
         client->sendMessage(swmsg);

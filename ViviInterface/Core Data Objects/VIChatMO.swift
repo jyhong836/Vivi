@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import ViviSwiften
 
 public enum VIChatMessageDirection: Int {
     case From, To, WillTo, FailTo, None
@@ -63,7 +64,7 @@ public class VIChatMO: NSManagedObject {
     }
     
     /// Add a new message
-    public func addMessage(content: String, attachments: [String]?, timestamp: NSDate, direction: VIChatMessageDirection) -> VIMessageMO {
+    public func addMessage(content: String, attachments: [SWFileTransfer]?, timestamp: NSDate, direction: VIChatMessageDirection) -> VIMessageMO {
         let moc = self.managedObjectContext
         let message = NSEntityDescription.insertNewObjectForEntityForName("Message", inManagedObjectContext: moc!) as! VIMessageMO
         message.content = content

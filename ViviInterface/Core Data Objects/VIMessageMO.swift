@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import ViviSwiften
 
 public class VIMessageMO: NSManagedObject {
 
@@ -15,12 +16,12 @@ public class VIMessageMO: NSManagedObject {
         self.direction = NSNumber(integer: dir.rawValue)
     }
     
-    func addAttachments(filenames: [String]?) {
+    func addAttachments(fileTransfers: [SWFileTransfer]?) {
         let moc = self.managedObjectContext
-        if filenames != nil {
-            for filename in filenames! {
+        if fileTransfers != nil {
+            for fileTransfer in fileTransfers! {
                 let attachment = NSEntityDescription.insertNewObjectForEntityForName("Attachment", inManagedObjectContext: moc!) as! VIAttachmentMO
-                attachment.filename = filename
+                attachment.fileTransfer = fileTransfer
                 attachment.message = self
             }
         }

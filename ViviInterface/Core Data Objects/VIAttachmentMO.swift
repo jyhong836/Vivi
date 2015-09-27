@@ -8,8 +8,17 @@
 
 import Foundation
 import CoreData
+import ViviSwiften
 
 public class VIAttachmentMO: NSManagedObject {
+    
+    var fileTransfer: SWFileTransfer? {
+        didSet {
+            if let ft = fileTransfer {
+                filename = ft.filename
+            }
+        }
+    }
 
     public override func awakeFromInsert() {
         // TODO: Use custom state number.

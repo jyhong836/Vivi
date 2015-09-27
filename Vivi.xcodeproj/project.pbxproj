@@ -405,7 +405,6 @@
 			children = (
 				CDB593781B90599D004703EA /* AvatarView.swift */,
 				CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */,
-				CD60BA501B6DB30F008E077A /* MessageTableCellView.swift */,
 				CD0E72AA1B9023C1002F58E9 /* NSDataAvatarTransformer.swift */,
 			);
 			name = "UI Assets";
@@ -600,6 +599,7 @@
 				CDACF3A51B988C420010969D /* NSTextStorage+Attachment.swift */,
 				CD1EBB9B1B99386F0043E1D8 /* InputTextView.swift */,
 				CDA0C4411BA16FD500C6BBB6 /* TextAttachmentFileCell.swift */,
+				CD60BA501B6DB30F008E077A /* MessageTableCellView.swift */,
 			);
 			name = "Chat View";
 			sourceTree = "<group>";

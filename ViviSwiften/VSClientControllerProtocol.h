@@ -10,6 +10,7 @@
 
 @class SWClient;
 @class SWAccount;
+@class SWFileTransfer;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @required
 - (id)clientWillSendMessageTo: (SWAccount*)receiver
                       message: (NSString*)message
-                  attachments: (nullable NSArray<NSString*>*)filenames
+                  attachments: (nullable NSArray<SWFileTransfer*>*)filenames
                     timestamp: (NSDate*)date;
 @required
 - (void)clientDidSendMessage: (id)message;
