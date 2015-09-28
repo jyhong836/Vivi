@@ -2,7 +2,7 @@
 //  VIAccountMO+CoreDataProperties.swift
 //  Vivi
 //
-//  Created by Junyuan Hong on 8/28/15.
+//  Created by Junyuan Hong on 9/28/15.
 //  Copyright © 2015 Junyuan Hong. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,9 +14,12 @@ import CoreData
 
 public extension VIAccountMO {
 
+    @NSManaged var avatar: NSData?
     @NSManaged var domain: String?
     @NSManaged var node: String?
-    @NSManaged var avatar: NSData?
+    /// Before your set resouce, you have to add it to resources by 
+    /// calling addResource.
+    @NSManaged var resource: String?
     @NSManaged var chat: VIChatMO?
     @NSManaged var groups: NSSet?
     @NSManaged var resources: NSSet?

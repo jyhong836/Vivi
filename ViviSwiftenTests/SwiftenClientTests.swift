@@ -48,13 +48,10 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         let idx = 0
         let client1 = createClient(idx)
         let account = client1.account
-        XCTAssertEqual(account.accountString, "jyhong@xmpp.jp", "Account string \"\(account.accountString)\" not correspond to setting \"jyhong@xmpp.jp\"")
-        XCTAssertEqual(account.domainString, "xmpp.jp", "Account domain not correspond to setting \"xmpp.jp\"")
-        XCTAssertEqual(account.resources[0] as? String, "testResource", "Account resource not correspond")
-        XCTAssertEqual(account.resourceString, "", "Account resource not correspond")
-        account.setResourceIndex(0)
-        XCTAssertEqual(account.resourceString, "testResource", "Account resource not correspond")
-        XCTAssertEqual(account.nodeString, "jyhong", "Account resource  not correspond")
+        XCTAssertEqual(account.string, "jyhong@xmpp.jp/testResource", "Account string \"\(account.string)\" not correspond to setting \"jyhong@xmpp.jp/testResource\"")
+        XCTAssertEqual(account.domain, "xmpp.jp", "Account domain not correspond to setting \"xmpp.jp\"")
+        XCTAssertEqual(account.resource, "testResource", "Account resource not correspond")
+        XCTAssertEqual(account.node, "jyhong", "Account resource  not correspond")
         // TODO: Add test for password
     }
     
@@ -191,7 +188,7 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
         connectToClient(client2)
         
         clientConnectExpectation = self.expectationWithDescription("test client1 and client2 message exchange")
-        print("sending message to \(client2.account.accountString) \(client2.account.resourceString)")
+        print("sending message to \(client2.account.string) \(client2.account.resource)")
         client1.sendMessageToAccount(client2.account, content: c1string)
         
         waitForExpectationsWithTimeout(20, handler: nil)
@@ -206,10 +203,10 @@ class SwiftenClientTests: XCTestCase, VSClientDelegate {
     }
     
     func connectToClient(client: SWClient) {
-        let clientConnectExpectation = self.expectationWithDescription("Fail to connect to \(client.account.accountString)")
+        let clientConnectExpectation = self.expectationWithDescription("Fail to connect to \(client.account.string)")
         _clientDidConnect = {(c: SWClient!)->Void in
             XCTAssertEqual(c, client, "connected client not equal to expected")
-            print("connected to \(client.account.accountString)")
+            print("connected to \(client.account.string)")
             clientConnectExpectation.fulfill()
         }
         client.connect()

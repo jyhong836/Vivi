@@ -61,6 +61,7 @@ class ClientManagerTests: XCTestCase {
         return true
     }
     
+    /// Include confict test
     func addClientWithMethod(method addClient: (index: Int)throws->SWClient?) {
         XCTAssertEqual(
             clientMgr.clientCount,

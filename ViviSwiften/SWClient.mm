@@ -101,11 +101,8 @@ using namespace Swift;
 {
     if (self = [super init]) {
         account = aAccount;
-        if (account.resources.count < 1) {
+        if (account.bare) {
             [NSException raise: @"NoResourceException" format: @"There is no available resource for client account."];
-        } else {
-            // set default resource.
-            [account setResourceIndex: 0];
         }
         
         passwd = aPasswd;
@@ -246,7 +243,9 @@ using namespace Swift;
 //    if (client->isAvailable()) {
         client->sendMessage(swmsg);
         [managedObject clientDidSendMessage: msgObject];
+    if (handler) {
         handler(nil);
+    }
 //    } else {
 //        [managedObject clientFailSendMessage: msgObject
 //                                       error: VSClientErrorTypeClientUnavaliable];

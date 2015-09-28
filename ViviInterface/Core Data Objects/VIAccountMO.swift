@@ -15,9 +15,20 @@ public class VIAccountMO: NSManagedObject {
     public override func awakeFromInsert() {
         groups = NSSet()
         resources = NSSet()
+        resource = ""
     }
     
-    public var accountString: String {
+    public var string: String {
+        get {
+            if resource!.isEmpty {
+                return "\(node!)@\(domain!)"
+            } else {
+                return "\(node!)@\(domain!)/\(resource!)"
+            }
+        }
+    }
+    
+    public var bareString: String {
         get {
             return "\(node!)@\(domain!)"
         }
@@ -27,12 +38,14 @@ public class VIAccountMO: NSManagedObject {
     
     public var swaccount: SWAccount? {
         get {
-            return SWAccount(accountName: accountString)
+            return SWAccount(accountName: string)
         }
-        set {
-            self.node = newValue?.nodeString
-            self.domain = newValue?.domainString
-        }
+//        set {
+//            self.node = newValue?.node
+//            self.domain = newValue?.domain
+////            for resource in newValue
+//            NSEntityDescription.insertNewObjectForEntityForName("Resource", inManagedObjectContext: self.managedObjectContext!)
+//        }
     }
     
     /// Get existed group.
@@ -57,14 +70,18 @@ public class VIAccountMO: NSManagedObject {
     /// Add new account or get existed account. Entity will be
     /// validated immediately, throw relevant error when failed 
     /// and delete the entity from managedObjectContext.
+    ///
     /// - Parameter node: Account node string.
     /// - Parameter domain: Account domain string.
+    /// - Parameter resource: Account resource string.
     /// - Parameter managedObjectContext: NSManagedObjectContext
     /// for core data.
     /// - Throws: addAccount will call account.validateForInsert(),
     /// and throw relevant NSError after delete invalidate account.
-    public static func addAccount(node: String, domain: String, managedObjectContext moc: NSManagedObjectContext) throws -> VIAccountMO {
+    public static func addAccount(node: String, domain: String, resource: String, managedObjectContext moc: NSManagedObjectContext) throws -> VIAccountMO {
+        // search for existed account
         if let existedAccount = getAccount(node, domain: domain, managedObjectContext: moc) {
+            existedAccount.addResource(resource)
             return existedAccount
         } else {
             let account = NSEntityDescription.insertNewObjectForEntityForName("Account", inManagedObjectContext: moc) as! VIAccountMO
@@ -76,24 +93,29 @@ public class VIAccountMO: NSManagedObject {
                 moc.deleteObject(account)
                 throw error
             }
+            account.addResource(resource)
             return account
         }
     }
     
     /// Add new account or get existed account. Entity will be
     /// validated immediately, throw relevant error when failed
-    /// and delete the entity from managedObjectContext.
+    /// and delete the entity from managedObjectContext. If account
+    /// has existed, only add resource to the account, but do not
+    /// change the account default resource. Asign value to 
+    /// resource attribute to change default resource.
+    ///
     /// - Parameter swaccount: SWAccount stored relevant messages.
     /// - Parameter managedObjectContext: NSManagedObjectContext
     /// for core data.
     /// - Throws: addAccount will call account.validateForInsert(),
     /// and throw relevant NSError after delete invalidate account.
     public static func addAccount(swaccount: SWAccount, managedObjectContext moc: NSManagedObjectContext) throws -> VIAccountMO {
-        return try addAccount(swaccount.nodeString, domain: swaccount.domainString, managedObjectContext: moc)
+        return try addAccount(swaccount.node, domain: swaccount.domain, resource: swaccount.resource, managedObjectContext: moc)
     }
     
     /// Try to remove account. If account does not exist in core
-    /// data, return without do anything.
+    /// data, just return.
     public static func removeAccount(node: String, domain: String, managedObjectContext moc: NSManagedObjectContext) {
         if let account = getAccount(node, domain: domain, managedObjectContext: moc) {
             moc.deleteObject(account)
@@ -103,7 +125,7 @@ public class VIAccountMO: NSManagedObject {
     /// Try to remove account. If account does not exist in core
     /// data, return without do anything.
     public static func removeAccount(swaccount: SWAccount, managedObjectContext moc: NSManagedObjectContext) {
-        removeAccount(swaccount.nodeString, domain: swaccount.domainString, managedObjectContext: moc)
+        removeAccount(swaccount.node, domain: swaccount.domain, managedObjectContext: moc)
     }
     
     // MARK: - Group accessors
@@ -119,7 +141,7 @@ public class VIAccountMO: NSManagedObject {
         return false
     }
     
-    /// Return true, if add new group to account.
+    /// Return true, if add new group set to account.
     func addGroup(newGroup: VIGroupMO) -> Bool {
         if existGroup(newGroup) {
             return false
@@ -135,5 +157,33 @@ public class VIAccountMO: NSManagedObject {
     public var presence: SWPresenceType = SWPresenceType.Unavailable
     public var presenceshow: SWPresenceShowType = SWPresenceShowType.None
     public var status: String = ""
+    
+    // MARK: Resource accessors
+    
+    /// Return true if exist resource.
+    func existResource(name: String) -> Bool {
+        for element in self.resources! {
+            let resource = element as! VIResourceMO
+            if (resource.name == name) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    /// Return true, if add new resource to account. Use static method 
+    /// `addAccount` to add resource to existed account instead of this
+    /// method. Set default resource by asigning value to resource later,
+    /// if you'd like to change the resource.
+    func addResource(name: String) -> Bool {
+        if existResource(name) {
+            return false
+        } else {
+            let resource = NSEntityDescription.insertNewObjectForEntityForName("Resource", inManagedObjectContext: self.managedObjectContext!) as! VIResourceMO
+            resource.name = name
+            resource.account = self
+            return true
+        }
+    }
     
 }

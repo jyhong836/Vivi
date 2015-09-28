@@ -209,7 +209,7 @@ void SWClientAdapter::onMessageReceivedSlot(Message::ref msg)
 
 void SWClientAdapter::onPresenceReceivedSlot(Presence::ref pres)
 {
-    SWAccount* account = [[SWAccount alloc] initWithAccountName: std_str2NSString(pres->getFrom().toString())];
+    SWAccount* account = [[SWAccount alloc] initWithJID: pres->getFrom()];
     NSString* status = std_str2NSString(pres->getStatus());
     [swclient.managedObject clientDidReceivePresence: swclient
                                          fromAccount: account

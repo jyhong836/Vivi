@@ -92,7 +92,7 @@ public class VIClientManager: VIClientManagerProtocol {
         
         let swaccount = SWAccount(accountName: account)
         if clientList.contains( { (c: SWClient) -> Bool in
-            c.account.accountString == swaccount.accountString
+            c.account.string == swaccount.string
         }) {
             NSLog("attempt to add conflicted client: \(account)")
             throw VIClientManagerError.AccountNameConfilct
@@ -114,8 +114,8 @@ public class VIClientManager: VIClientManagerProtocol {
         let accountname = managedObject.accountname
         let password = managedObject.password
         let swaccount = try validateAccount(accountname, passwd: password)
-        let resIdx = swaccount.addResource(managedObject.resource)
-        swaccount.setResourceIndex(resIdx)
+//        let resIdx = swaccount.addResource(managedObject.resource)
+//        swaccount.setResourceIndex(resIdx)
         
         let newClient = SWClient(account: swaccount, password: password!, eventLoop: eventLoop)
         newClient.managedObject = managedObject
@@ -124,7 +124,7 @@ public class VIClientManager: VIClientManagerProtocol {
         
         clientList.append(newClient)
         delegate?.managerDidAddClient(newClient)
-        NSLog("added client: \(newClient.account.accountString)")
+        NSLog("added client: \(newClient.account.string)")
         return newClient
     }
     
@@ -140,7 +140,7 @@ public class VIClientManager: VIClientManagerProtocol {
         
         clientList.append(newClient)
         delegate?.managerDidAddClient(newClient)
-        NSLog("added client: \(newClient.account.accountString)")
+        NSLog("added client: \(newClient.account.string)")
         return newClient
     }
     
@@ -186,7 +186,7 @@ public class VIClientManager: VIClientManagerProtocol {
         }
         let account = SWAccount(accountName: name)
         for c in clientList {
-            if c.account.accountString == account.accountString {
+            if c.account.string == account.string {
                 return c
             }
         }

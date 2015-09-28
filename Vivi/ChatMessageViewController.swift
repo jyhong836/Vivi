@@ -253,8 +253,8 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
             if let buddy = chat.buddy {
                 let account = buddy.swaccount!
                 self.buddyNameTextField.stringValue =
-                "\(account.nodeString)(\(buddy.presence.parseWithShow(buddy.presenceshow, andStatus: buddy.status)!))"
-                self.accountTextField.stringValue = account.accountString
+                "\(account.node)(\(buddy.presence.parseWithShow(buddy.presenceshow, andStatus: buddy.status)!))"
+                self.accountTextField.stringValue = account.string
                 accountTextField.editable = false
             } else {
                 self.buddyNameTextField.stringValue = "New Chat"

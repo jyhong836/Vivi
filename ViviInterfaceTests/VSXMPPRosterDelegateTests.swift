@@ -67,9 +67,9 @@ class VSXMPPRosterDelegateTests: XCTestCase {
         }
         if let roster = instance as? VIRosterMO {
             do {
-                try VIAccountMO.addAccount(node+"1", domain: domain, managedObjectContext: moc!)
+                try VIAccountMO.addAccount(node+"1", domain: domain, resource: "", managedObjectContext: moc!)
                 XCTAssertNotNil(VIAccountMO.getAccount(node+"1", domain: domain, managedObjectContext: moc!), "account should have been added")
-                let account = try VIAccountMO.addAccount(node, domain: domain, managedObjectContext: moc!)
+                let account = try VIAccountMO.addAccount(node, domain: domain, resource: "", managedObjectContext: moc!)
                 XCTAssertNotNil(VIAccountMO.getAccount(node, domain: domain, managedObjectContext: moc!), "account should have been added")
                 roster.roster(nil, didRemoveAccount: account.swaccount)
                 XCTAssertNil(VIAccountMO.getAccount(node, domain: domain, managedObjectContext: moc!), "account should have been removed")

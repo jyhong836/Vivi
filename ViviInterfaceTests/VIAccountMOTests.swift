@@ -31,7 +31,7 @@ class VIAccountMOTests: XCTestCase {
         var testnode = "te#st.no@de"
         var testdomain = "test.domain"
         do {
-            try VIAccountMO.addAccount(testnode, domain: testdomain, managedObjectContext: moc!)
+            try VIAccountMO.addAccount(testnode, domain: testdomain, resource: "", managedObjectContext: moc!)
         } catch {
             hasCatchError = true
         }
@@ -41,7 +41,7 @@ class VIAccountMOTests: XCTestCase {
         hasCatchError = false
         testdomain = "test.dom#ain"
         do {
-            try VIAccountMO.addAccount(testnode, domain: testdomain, managedObjectContext: moc!)
+            try VIAccountMO.addAccount(testnode, domain: testdomain, resource: "", managedObjectContext: moc!)
         } catch {
             hasCatchError = true
         }
@@ -50,7 +50,7 @@ class VIAccountMOTests: XCTestCase {
         testnode = "test.node"
         testdomain = "test.domain"
         do {
-            try VIAccountMO.addAccount(testnode, domain: testdomain, managedObjectContext: moc!)
+            try VIAccountMO.addAccount(testnode, domain: testdomain, resource: "", managedObjectContext: moc!)
         } catch {
             XCTFail("catch unexpected error: \(error)")
         }
@@ -66,8 +66,8 @@ class VIAccountMOTests: XCTestCase {
         let testnode = "test.node"
         let testdomain = "test.domain"
         do {
-            let a1 = try VIAccountMO.addAccount(testnode, domain: testdomain, managedObjectContext: moc!)
-            let a2 = try VIAccountMO.addAccount(testnode, domain: testdomain, managedObjectContext: moc!)
+            let a1 = try VIAccountMO.addAccount(testnode, domain: testdomain, resource: "", managedObjectContext: moc!)
+            let a2 = try VIAccountMO.addAccount(testnode, domain: testdomain, resource: "", managedObjectContext: moc!)
             XCTAssertEqual(a1, a2, "two accounts should be the same one.")
             let aget = VIAccountMO.getAccount(testnode, domain: testdomain, managedObjectContext: moc!)
             XCTAssertEqual(a1, aget, "two accounts should be the same one.")
@@ -80,7 +80,7 @@ class VIAccountMOTests: XCTestCase {
         let testnode = "test.node"
         let testdomain = "test.domain"
         do {
-            let account = try VIAccountMO.addAccount(testnode, domain: testdomain, managedObjectContext: moc!)
+            let account = try VIAccountMO.addAccount(testnode, domain: testdomain, resource: "", managedObjectContext: moc!)
             let group = NSEntityDescription.insertNewObjectForEntityForName("Group", inManagedObjectContext: moc!) as! VIGroupMO
             XCTAssertTrue(account.addGroup(group), "should be new group")
             XCTAssertNotNil(group.buddies, "group's buddies should not be nil")

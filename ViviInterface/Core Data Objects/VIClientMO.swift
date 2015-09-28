@@ -19,6 +19,7 @@ public let VIClientDidReceivePresence = "VIClientDidReceivePresence"
 
 public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDelegate {
     
+    // FIXME: when disable client, the swclient will not be set to nil. This will cause some error.
     public weak var swclient: SWClient?
     
     override public func awakeFromInsert() {
@@ -57,8 +58,8 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
         for element in self.chats! {
             let chat = element as! VIChatMO
             if chat.buddy != nil &&
-                chat.buddy!.node == buddy.nodeString &&
-                chat.buddy!.domain == buddy.domainString {
+                chat.buddy!.node == buddy.node &&
+                chat.buddy!.domain == buddy.domain {
                 return chat
             }
         }
@@ -71,7 +72,7 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
         } else {
             let moc = self.managedObjectContext
             do {
-                let buddyMO = try VIAccountMO.addAccount(buddy.nodeString, domain: buddy.domainString, managedObjectContext: moc!)
+                let buddyMO = try VIAccountMO.addAccount(buddy.node, domain: buddy.domain, resource: buddy.resource, managedObjectContext: moc!)
                 
                 let newChat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: moc!) as! VIChatMO
                 newChat.buddy = buddyMO
@@ -158,9 +159,9 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
     }
     
     public func clientDidReceivedMessageFrom(sender: SWAccount, message: String, timestamp date: NSDate) {
-        if sender.nodeString.isEmpty && !sender.domainString.isEmpty {
+        if sender.node.isEmpty && !sender.domain.isEmpty {
             let alert = NSAlert()
-            alert.messageText = "Message from domain: \"\(sender.domainString)\""
+            alert.messageText = "Message from domain: \"\(sender.domain)\""
             alert.addButtonWithTitle("OK")
             alert.runModal()
         } else {
@@ -172,14 +173,14 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
     }
     
     public func clientDidReceivePresence(client: SWClient, fromAccount account: SWAccount, currentPresence presenceType: Int32, currentShow showType: Int32, currentStatus status: String) {
-        NSLog("client(\(client.account.accountString)) did receive presence from \(account.accountString)/\(account.resourceString): \(SWPresenceType(rawValue: presenceType)?.toString()), \(SWPresenceShowType(rawValue: showType)?.toString()), \(status))")
-        print("* Resource *")
-        for res in account.resources {
-            print("+ \(res)")
-        }
+        NSLog("client(\(client.account.string)) did receive presence from \(account.string)/\(account.resource): \(SWPresenceType(rawValue: presenceType)?.toString()), \(SWPresenceShowType(rawValue: showType)?.toString()), \(status))")
+        print("* Resource: \(account.resource)")
+//        for res in account.resources {
+//            print("+ \(res)")
+//        }
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
             do {
-                let accountMO = try VIAccountMO.addAccount(account.nodeString, domain: account.domainString, managedObjectContext: self.managedObjectContext!)
+                let accountMO = try VIAccountMO.addAccount(account.node, domain: account.domain, resource: account.resource, managedObjectContext: self.managedObjectContext!)
                 
                 if let presence = SWPresenceType(rawValue: presenceType) {
                     accountMO.presence = presence
@@ -215,7 +216,7 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
     // MARK: - Conform avatar delegate
     
     public func account(account: SWAccount!, didChangeAvatar avatarData: NSData!) {
-        if let accountMO = VIAccountMO.getAccount(account.nodeString, domain: account.domainString, managedObjectContext: self.managedObjectContext!) {
+        if let accountMO = VIAccountMO.getAccount(account.node, domain: account.domain, managedObjectContext: self.managedObjectContext!) {
             accountMO.avatar = avatarData
         }
     }

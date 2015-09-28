@@ -26,46 +26,28 @@ namespace Swift {
  *
  * It will guarantee jid to be bare, and store resource to list if exists.
  */
-- (id)initWithJID: (Swift::JID*)ajid;
+- (id)initWithJID: (const Swift::JID&)ajid;
 #endif
 - (void)dealloc;
+
+- (SWAccount*)toBare;
 
 /*!
  * @brief Validate JID.
  */
 @property (nonatomic, readonly)BOOL valid;
+@property (nonatomic, readonly)BOOL bare;
 /*!
  * @brief Account string with preseted resource. By default there
  * is no resource. (read-only)
  */
-@property (nonatomic, readonly)NSString* accountString;
-@property (nonatomic, readonly)NSString* resourceString;
-@property (nonatomic, readonly)NSString* nodeString;
-@property (nonatomic, readonly)NSString* domainString;
-
-@property NSMutableArray<NSString*> *resources;
+@property (nonatomic, readonly)NSString* string;
 /*!
- * @brief Add resource string to the end of resource list.
- *
- * @return The index of added resource.
+ * @brief Account string without resource. (read-only)
  */
-- (NSInteger)addResource: (NSString*)resource;
-/*!
- * @brief Set which resource will be used by account.
- *
- * The default resource index is -1, which means there is
- * no resource used.
- *
- * IMPORTANT the index should between -1(include) and
- * resources count, else will cause an runtime assert.
- */
-- (void)setResourceIndex: (NSInteger)index;
-/*!
- * @brief Set resource index to defualt(-1).
- *
- * The default resource index is -1, which means there is
- * no resource used.
- */
-- (void)resetResourceIndex;
+@property (nonatomic, readonly)NSString* bareString;
+@property (nonatomic, readonly)NSString* resource;
+@property (nonatomic, readonly)NSString* node;
+@property (nonatomic, readonly)NSString* domain;
 
 @end

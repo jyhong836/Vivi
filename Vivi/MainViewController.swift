@@ -27,11 +27,11 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
             if viewLoaded {
                 updateButtonStates()
                 if currentClient != nil {
-                    accountLabel.stringValue = (currentClient!.account.accountString)!
+                    accountLabel.stringValue = (currentClient!.account.string)!
                     let clientMO = currentClient!.managedObject as! VIClientMO
                     invisibleItem.hidden = !(clientMO.canbeinvisible!.boolValue)
                     
-                    let accountMO = VIAccountMO.getAccount(currentClient!.account.nodeString, domain: currentClient!.account.domainString, managedObjectContext: VICoreDataController.shared.managedObjectContext)
+                    let accountMO = VIAccountMO.getAccount(currentClient!.account.node, domain: currentClient!.account.domain, managedObjectContext: VICoreDataController.shared.managedObjectContext)
                     if let imgData = accountMO?.avatar {
                         avaterView.image = NSImage(data: imgData)
                     }
@@ -92,15 +92,15 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
     // MARK: - Implementations for VSClientDelegate
     
     func clientDidConnect(client: SWClient!) {
-        NSLog("client(\(client.account.accountString)) did connect")
+        NSLog("client(\(client.account.string)) did connect")
     }
     
     func clientDidDisconnect(client: SWClient!, errorCode code: Int32) {
-        NSLog("client(\(client.account.accountString)) did disconnect: (\(SWClientErrorType(rawValue: code)))")
+        NSLog("client(\(client.account.string)) did disconnect: (\(SWClientErrorType(rawValue: code)))")
     }
     
     func clientDidReceiveMessage(client: SWClient!, fromAccount account: SWAccount!, inContent content: String!) {
-        NSLog("client(\(client.account.accountString)) did receive message from \(account.accountString): \(content)")
+        NSLog("client(\(client.account.string)) did receive message from \(account.string): \(content)")
     }
     
     // MARK: - Implementations for VIChatDelegate
@@ -148,9 +148,9 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
     // MARK: User notification
     /// Deliver new message user notification in screen.
     private func deliverNewMessageNotification(chat: VIChatMO) {
-        notification.title = chat.buddy!.accountString
+        notification.title = chat.buddy!.string
         notification.informativeText = chat.lastMessage
-        notification.userInfo = ["account": chat.buddy!.accountString]
+        notification.userInfo = ["account": chat.buddy!.string]
         NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
     }
     

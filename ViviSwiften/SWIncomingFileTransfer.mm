@@ -32,7 +32,6 @@ using namespace Swift;
 {
     const JID &jid = boost::dynamic_pointer_cast<IncomingFileTransfer>(fileTransfer)->getSender();
     SWAccount* account = [[SWAccount alloc] initWithAccountName: std_str2NSString(jid.toString())];
-    [account setResourceIndex: 0];
     return account;
 }
 
@@ -40,7 +39,6 @@ using namespace Swift;
 {
     const JID &jid = boost::dynamic_pointer_cast<IncomingFileTransfer>(fileTransfer)->getRecipient();
     SWAccount* account = [[SWAccount alloc] initWithAccountName: std_str2NSString(jid.toString())];
-    [account setResourceIndex: 0];
     return account;
 }
 

@@ -46,10 +46,10 @@ class VSClientControllerProtocolTests: XCTestCase {
             isReceivedNotification = true
         })
         
-        let receiver = SWAccount(accountName: "test account")
+        let receiver = SWAccount(accountName: "test@account")
         let message = "test message"
         let date = NSDate()
-        let newMessage = instance?.clientWillSendMessageTo(receiver, message: message, timestamp: date)
+        let newMessage = instance?.clientWillSendMessageTo(receiver, message: message, attachments: nil, timestamp: date)
         if instance is VIClientMO {
             XCTAssertTrue(newMessage is VIMessageMO, "newMessage should be VIMessageMO")
             let messageMO = newMessage as! VIMessageMO
@@ -87,12 +87,12 @@ class VSClientControllerProtocolTests: XCTestCase {
             isReceivedNotification = true
         })
         
-        let receiver = SWAccount(accountName: "test account")
+        let receiver = SWAccount(accountName: "test@account")
         let message = "test message"
         let date = NSDate()
-        let newMessage = instance?.clientWillSendMessageTo(receiver, message: message, timestamp: date)
+        let newMessage = instance?.clientWillSendMessageTo(receiver, message: message, attachments: nil, timestamp: date)
         
-        instance?.clientDidSendMessage(newMessage)
+        instance?.clientDidSendMessage(newMessage!)
         
         if newMessage is VIMessageMO {
             XCTAssertEqual((newMessage as! VIMessageMO).direction, VIChatMessageDirection.To.rawValue, "wrong direction")
@@ -122,12 +122,12 @@ class VSClientControllerProtocolTests: XCTestCase {
             isReceivedNotification = true
         })
         
-        let receiver = SWAccount(accountName: "test account")
+        let receiver = SWAccount(accountName: "test@account")
         let message = "test message"
         let date = NSDate()
-        let newMessage = instance?.clientWillSendMessageTo(receiver, message: message, timestamp: date)
+        let newMessage = instance?.clientWillSendMessageTo(receiver, message: message, attachments: nil, timestamp: date)
         
-        instance?.clientFailSendMessage(newMessage, error: VSClientErrorType.ClientUnavaliable)
+        instance?.clientFailSendMessage(newMessage!, error: VSClientErrorType.ClientUnavaliable)
         
         if newMessage is VIMessageMO {
             XCTAssertEqual((newMessage as! VIMessageMO).direction, VIChatMessageDirection.FailTo.rawValue, "wrong direction")
@@ -151,7 +151,7 @@ class VSClientControllerProtocolTests: XCTestCase {
             isReceivedNotification = true
         })
         
-        let sender = SWAccount(accountName: "test account")
+        let sender = SWAccount(accountName: "test@account")
         let message = "test message"
         let date = NSDate()
         instance?.clientDidReceivedMessageFrom(sender, message: message, timestamp: date)

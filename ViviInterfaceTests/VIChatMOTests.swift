@@ -36,11 +36,12 @@ class VIChatMOTests: XCTestCase {
     
     func testAddMessages() {
         let chat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: moc!) as! VIChatMO
+        chat.owner = (NSEntityDescription.insertNewObjectForEntityForName("Client", inManagedObjectContext: moc!) as! VIClientMO)
         let messageContent0 = "test1"
-        chat.addMessage(messageContent0, timestamp: NSDate(), direction: .To)
+        chat.addMessage(messageContent0, attachments: nil, timestamp: NSDate(), direction: .To)
         let messageTime = NSDate()
         let messageContent = "test message"
-        let message = chat.addMessage(messageContent, timestamp: messageTime, direction: .To)
+        let message = chat.addMessage(messageContent, attachments: nil, timestamp: messageTime, direction: .To)
         XCTAssertEqual(chat.messageCount, 2, "there should have one messsage")
         XCTAssertEqual(chat.messageAtIndex(1), message, "index 0 should be inserted message")
         XCTAssertEqual(chat.indexOfMessage(message), 1, "message should at index 0")
