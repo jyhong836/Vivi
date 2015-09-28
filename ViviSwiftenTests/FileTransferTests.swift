@@ -69,24 +69,42 @@ class FileTransferTests: XCTestCase, VSFileTransferManagerDelegate, VSFileTransf
         // test sending
         var hasCatchError = false
         do {
+            // test to send not existed file.
             try client1.fileTransferManager.sendFileTo(client2.account, filename: "test_empty.txt", desciption: "test.txt file")
         } catch {
             let nserror = error as NSError
-            XCTAssertEqual(nserror.domain, VSFTManagerErrorDomain, "unexpected error")
-            if nserror.domain == VSFTManagerErrorDomain {
+            XCTAssertEqual(nserror.domain, VSClientErrorTypeDomain, "unexpected error")
+            if nserror.domain == VSClientErrorTypeDomain {
                 hasCatchError = true
             }
         }
-        clientConnectExpectation = self.expectationWithDescription("test client sending file")
-        var transfer: SWOutgoingFileTransfer? = nil
+        XCTAssertTrue(hasCatchError, "should throw 'file not found' error")
+        
+        hasCatchError = false
         do {
+            // test send file without resource
+            client2.account.resetResourceIndex()
+            try client1.fileTransferManager.sendFileTo(client2.account, filename: testFile, desciption: "test.txt file")
+        } catch {
+            let nserror = error as NSError
+            XCTAssertEqual(nserror.domain, VSClientErrorTypeDomain, "unexpected error")
+            if nserror.domain == VSClientErrorTypeDomain {
+                hasCatchError = true
+            }
+        }
+        XCTAssertTrue(hasCatchError, "should throw 'not support file transfer' error")
+        
+        clientConnectExpectation = self.expectationWithDescription("test client sending file")
+        var transfer: SWOutgoingFileTransfer?
+        do {
+            // test to send file
+            client2.account.setResourceIndex(0)
             transfer = try client1.fileTransferManager.sendFileTo(client2.account, filename: testFile, desciption: "test.txt file")
             transfer!.delegate = self
             transfer!.start()
         } catch {
-            print("\(error)")
+            print("unexpected error: \(error)")
         }
-        XCTAssertTrue(hasCatchError, "should throw not found error")
         waitForExpectationsWithTimeout(50, handler: nil)
         
         clientConnectExpectation = self.expectationWithDescription("waiting for finishing")

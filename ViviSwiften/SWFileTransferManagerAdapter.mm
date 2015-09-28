@@ -25,9 +25,9 @@ SWFileTransferManagerAdapter::~SWFileTransferManagerAdapter()
     signalProvider->onIncomingFileTransfer.disconnect(boost::bind(&SWFileTransferManagerAdapter::handleIncomingFileTransfer, this, _1));
 }
 
-void SWFileTransferManagerAdapter::handleIncomingFileTransfer(IncomingFileTransfer::ref incominTransfer)
+void SWFileTransferManagerAdapter::handleIncomingFileTransfer(IncomingFileTransfer::ref incomingTransfer)
 {
-    SWIncomingFileTransfer *swtf = [[SWIncomingFileTransfer alloc] initWithFileTransfer: incominTransfer];
+    SWIncomingFileTransfer *swtf = [[SWIncomingFileTransfer alloc] initWithFileTransfer: incomingTransfer];
     if ([slotProvider.delegate respondsToSelector: @selector(fileTransferManager:getIncomingTransfer:)]) {
         [slotProvider.delegate fileTransferManager: slotProvider getIncomingTransfer: swtf];
     }
