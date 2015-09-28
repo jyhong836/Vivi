@@ -123,6 +123,7 @@
 		CDF2122B1B629B3C0031913D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF2122A1B629B3C0031913D /* SystemConfiguration.framework */; };
 		CDF2122E1B629B490031913D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF2122C1B629B490031913D /* Security.framework */; };
 		CDF2122F1B629B490031913D /* SecurityInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF2122D1B629B490031913D /* SecurityInterface.framework */; };
+		CDFB7FD01BB8EE3C00AD8BF4 /* EntityCapsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB7FCF1BB8EE3C00AD8BF4 /* EntityCapsTests.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -335,6 +336,7 @@
 		CDF2122C1B629B490031913D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CDF2122D1B629B490031913D /* SecurityInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityInterface.framework; path = System/Library/Frameworks/SecurityInterface.framework; sourceTree = SDKROOT; };
 		CDF2E0AF1B79C92A00B0329E /* ViviInterface 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ViviInterface 2.xcdatamodel"; sourceTree = "<group>"; };
+		CDFB7FCF1BB8EE3C00AD8BF4 /* EntityCapsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityCapsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -500,6 +502,7 @@
 				CD88E35D1B60DA0E00E7E256 /* SwiftenClientTests.swift */,
 				CD4C3A5B1B6BC43D00C283E6 /* SWClientFactory.swift */,
 				CDACF3761B9706420010969D /* FileTransferTests.swift */,
+				CDFB7FCF1BB8EE3C00AD8BF4 /* EntityCapsTests.swift */,
 				CD88E3561B60D84E00E7E256 /* Info.plist */,
 			);
 			path = ViviSwiftenTests;
@@ -1064,6 +1067,7 @@
 				CD4C3A5C1B6BC43D00C283E6 /* SWClientFactory.swift in Sources */,
 				CD88E35E1B60DA0E00E7E256 /* SwiftenClientTests.swift in Sources */,
 				CDACF3771B9706420010969D /* FileTransferTests.swift in Sources */,
+				CDFB7FD01BB8EE3C00AD8BF4 /* EntityCapsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

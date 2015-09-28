@@ -24,7 +24,7 @@
 #import <Swiften/Elements/Presence.h>
 #import <Swiften/Network/NetworkFactories.h>
 
-//#import <Swiften/Disco/EntityCapsProvider.h>
+#import <Swiften/Disco/EntityCapsProvider.h>
 #import <Swiften/Disco/GetDiscoInfoRequest.h>
 #import <Swiften/Avatars/AvatarManagerImpl.h>
 
@@ -51,8 +51,11 @@ swclient(swclient)
     this->getRoster()->onRosterCleared.connect(boost::bind(&SWClientAdapter::rosterOnRosterClearedSlot, this));
     this->getRoster()->onInitialRosterPopulated.connect(boost::bind(&SWClientAdapter::rosterOnInitialRosterPopulatedSlot, this));
     
-    // Connect singals to avatar slots
+    // Connect signals to avatar slots
     this->getAvatarManager()->onAvatarChanged.connect(boost::bind(&SWClientAdapter::clientOnJIDAvatarChanged, this, _1));
+    
+    // Connect signals to caps slots
+    this->getEntityCapsProvider()->onCapsChanged.connect(boost::bind(&SWClientAdapter::onCapsChangedSlot, this, _1));
 }
 
 SWClientAdapter::~SWClientAdapter()
@@ -111,6 +114,18 @@ void SWClientAdapter::printFeatures()
     if (serverDiscInfo_) {
         printf("** Discovered server features **\n");
         for (auto feature: serverDiscInfo_->getFeatures()) {
+            printf("%s\n", feature.c_str());
+        }
+        printf("*** END ***\n");
+    }
+}
+
+void SWClientAdapter::printFeatures(const JID& jid)
+{
+    DiscoInfo::ref info = getEntityCapsProvider()->getCaps(jid);
+    if (info) {
+        printf("** Discovered entity info **\n");
+        for (auto feature: info->getFeatures()) {
             printf("%s\n", feature.c_str());
         }
         printf("*** END ***\n");
@@ -251,4 +266,11 @@ void SWClientAdapter::clientOnJIDAvatarChanged(const JID& jid)
     
     if ([swclient.avatarDelegate respondsToSelector: @selector(account:didChangeAvatar:)])
         [swclient.avatarDelegate account: account didChangeAvatar:nsdata];
+}
+
+#pragma mark - CapsProivder slots
+
+void SWClientAdapter::onCapsChangedSlot(const JID& jid)
+{
+    this->printFeatures(jid);
 }

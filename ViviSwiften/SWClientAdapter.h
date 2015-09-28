@@ -49,7 +49,8 @@ namespace Swift
     private:
         DiscoInfo::ref serverDiscInfo_;
         void onServerDiscoInfoReceivedSlot(boost::shared_ptr<DiscoInfo> discoInfo, ErrorPayload::ref err);
-        void printFeatures();
+        void printFeatures(); // print server features
+        void printFeatures(const JID& jid); // print account features
     public:
         bool hasInitializedServerDiscoInfo();
         bool serverHasFeature(const std::string &feature);
@@ -68,7 +69,14 @@ namespace Swift
         
     private:
         void clientOnJIDAvatarChanged(const JID& jid);
+        
+#pragma mark - CapsProivder slots
+        
+    private:
+        void onCapsChangedSlot(const JID& jid);
+        
     };
+    
 }
 
 #endif // !define(__cplusplus)
