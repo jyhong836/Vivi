@@ -38,8 +38,8 @@ namespace Swift {
 @property (nonatomic, readonly)BOOL valid;
 @property (nonatomic, readonly)BOOL bare;
 /*!
- * @brief Account string with preseted resource. By default there
- * is no resource. (read-only)
+ * @brief Account string with resource. By default there is no 
+ * resource. (read-only)
  */
 @property (nonatomic, readonly)NSString* string;
 /*!

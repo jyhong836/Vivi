@@ -50,7 +50,7 @@
         <relationship name="chat" maxCount="1" deletionRule="Nullify" destinationEntity="Chat" inverseName="messages" inverseEntity="Chat" syncable="YES"/>
     </entity>
     <entity name="Resource" representedClassName=".VIResourceMO" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String" minValueString="1" regularExpressionString=".[a-zA-Z0-9._-]+" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" minValueString="1" syncable="YES"/>
         <relationship name="account" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="resources" inverseEntity="Account" syncable="YES"/>
     </entity>
     <entity name="Roster" representedClassName=".VIRosterMO" syncable="YES">
@@ -65,7 +65,7 @@
         <element name="Client" positionX="-20" positionY="-511" width="128" height="238"/>
         <element name="Group" positionX="-387" positionY="-225" width="128" height="88"/>
         <element name="Message" positionX="351" positionY="-333" width="128" height="118"/>
-        <element name="Resource" positionX="-288" positionY="-81" width="128" height="75"/>
+        <element name="Resource" positionX="-288" positionY="-81" width="128" height="73"/>
         <element name="Roster" positionX="-191" positionY="-342" width="128" height="75"/>
     </elements>
 </model>

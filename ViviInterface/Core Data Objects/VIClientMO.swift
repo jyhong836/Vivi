@@ -173,7 +173,7 @@ public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDe
     }
     
     public func clientDidReceivePresence(client: SWClient, fromAccount account: SWAccount, currentPresence presenceType: Int32, currentShow showType: Int32, currentStatus status: String) {
-        NSLog("client(\(client.account.string)) did receive presence from \(account.string)/\(account.resource): \(SWPresenceType(rawValue: presenceType)?.toString()), \(SWPresenceShowType(rawValue: showType)?.toString()), \(status))")
+        NSLog("client(\(client.account.string)) did receive presence from \(account.string): \(SWPresenceType(rawValue: presenceType)?.toString()), \(SWPresenceShowType(rawValue: showType)?.toString()), \(status))")
         print("* Resource: \(account.resource)")
 //        for res in account.resources {
 //            print("+ \(res)")
