@@ -110,6 +110,9 @@ NS_ASSUME_NONNULL_BEGIN
  * update server caps. (read-only)
  */
 @property (nonatomic, readonly)BOOL canBeInvisible;
+
+#pragma mark - Caps
+
 /*!
  * @brief Check if client has initialize server caps. (read-only)
  * 
@@ -120,6 +123,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateServerCapsWithHandler: (VSUpdateServerCapsHandler)handler;
 @property (nonatomic, readonly)VSUpdateServerCapsHandler updateServerCapsHandler;
 - (void)setUpdateServerCapsHandlerToNil;
+
+/*!
+ * Set disoInfo of client with all supported features.
+ */
+- (void)setDiscoInfo: (NSString*)clientName
+            capsNode: (NSString*)node
+            features: (NSArray<NSString*>*)features;
 
 #pragma mark - Client status
 
@@ -142,9 +152,6 @@ NS_ASSUME_NONNULL_BEGIN
               currentOS: (NSString*)os;
 - (void)setSoftwareName: (NSString*)name
          currentVersion: (NSString*)version;
-- (void)setDiscoInfo: (NSString*)clientName
-            capsNode: (NSString*)node
-            features: (NSArray<NSString*>*)features;
 
 #pragma mark - ClientOptions
 @property (nonatomic, readwrite) NSString* manualHostname;

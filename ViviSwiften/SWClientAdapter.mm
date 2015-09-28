@@ -97,7 +97,7 @@ void SWClientAdapter::requestServerDiscoInfo()
 }
 
 void SWClientAdapter::onServerDiscoInfoReceivedSlot(boost::shared_ptr<DiscoInfo> discoInfo, ErrorPayload::ref err) {
-    NSLog(@"receive DiscoInfo");
+    NSLog(@"receive server DiscoInfo");
     this->serverDiscInfo_ = discoInfo;
     if (swclient.updateServerCapsHandler) {
         if (err) {

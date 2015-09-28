@@ -124,8 +124,7 @@ class MainViewController: NSViewController, VSClientDelegate, SessionViewControl
                 let appName = infoDict[String(kCFBundleNameKey)] as! String
                 let appVer = infoDict[String("CFBundleShortVersionString")] as! String
                 c.setSoftwareName(appName, currentVersion: appVer)
-                // TODO: uncomment this line to setup discoInfo.
-//                c.setDiscoInfo(appName, capsNode: "http://jyhong836.github.io/Vivi/", features: ["urn:xmpp:jingle:1"])
+                c.setDiscoInfo(appName, capsNode: "http://vivi.jyhong.com", features: ["urn:xmpp:jingle:1"])
             }
             
             // TODO: remove test code

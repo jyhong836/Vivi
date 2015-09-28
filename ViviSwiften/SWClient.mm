@@ -364,7 +364,7 @@ using namespace Swift;
     }
 }
 
-#pragma mark Server caps
+#pragma mark Caps
 
 @synthesize updateServerCapsHandler;
 @synthesize hasInitializedServerCaps;
@@ -383,6 +383,19 @@ using namespace Swift;
 - (void)setUpdateServerCapsHandlerToNil
 {
     updateServerCapsHandler = nil;
+}
+
+- (void)setDiscoInfo: (NSString*)clientName
+            capsNode: (NSString*)node
+            features: (NSArray<NSString*>*)features
+{
+    DiscoInfo discoInfo;
+    discoInfo.addIdentity(DiscoInfo::Identity(NSString2std_str(clientName)));
+    for (NSString* feature in features) {
+        discoInfo.addFeature(NSString2std_str(feature));
+    }
+    client->getDiscoManager()->setCapsNode(NSString2std_str(node));
+    client->getDiscoManager()->setDiscoInfo(discoInfo);
 }
 
 #pragma mark - Client status
@@ -416,22 +429,6 @@ using namespace Swift;
          currentVersion: (NSString*)version
 {
     client->setSoftwareVersion(NSString2std_str(name), NSString2std_str(version));
-}
-
-/*!
- * Set disoInfo of client with all supported features.
- */
-- (void)setDiscoInfo: (NSString*)clientName
-            capsNode: (NSString*)node
-            features: (NSArray<NSString*>*)features
-{
-    DiscoInfo discoInfo;
-    discoInfo.addIdentity(DiscoInfo::Identity(NSString2std_str(clientName)));
-    for (NSString* feature in features) {
-        discoInfo.addFeature(NSString2std_str(feature));
-    }
-    client->getDiscoManager()->setCapsNode(NSString2std_str(node));
-    client->getDiscoManager()->setDiscoInfo(discoInfo);
 }
 
 #pragma mark - ClientOptions

@@ -8,11 +8,22 @@
 
 import Cocoa
 import ViviSwiften
+import ViviInterface
 
 class InputViewController: NSViewController {
     
-    var currentClient: SWClient?
-    var currentBuddy: SWAccount?
+    var currentChat: VIChatMO?
+    
+    var currentClient: SWClient? {
+        get {
+            return currentChat?.owner?.swclient
+        }
+    }
+    var currentBuddy: SWAccount? {
+        get {
+            return currentChat?.buddy?.swaccount
+        }
+    }
 
     @IBOutlet var inputTextView: InputTextView!
     

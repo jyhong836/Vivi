@@ -19,6 +19,8 @@ public let VIClientDidReceivePresence = "VIClientDidReceivePresence"
 
 public class VIClientMO: NSManagedObject, VSClientControllerProtocol, VSAvatarDelegate {
     
+    public weak var swclient: SWClient?
+    
     override public func awakeFromInsert() {
         self.enabled = NSNumber(bool: false)
         self.chats = NSOrderedSet()

@@ -14,14 +14,15 @@ class ChatViewController: NSViewController {
     
     var currentClient: SWClient? {
         didSet {
-            inputViewController?.currentClient = currentClient
+//            inputViewController?.currentClient = currentClient
         }
     }
     var currentChat: VIChatMO? {
         didSet {
             // FIXME: Should pass swaccount or accountmo？
-            inputViewController?.currentBuddy = currentChat?.buddy?.swaccount
+//            inputViewController?.currentBuddy = currentChat?.buddy?.swaccount
             chatMessageViewController?.currentChat = currentChat
+            inputViewController?.currentChat = currentChat
         }
     }
     
@@ -36,7 +37,7 @@ class ChatViewController: NSViewController {
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "InputViewSegue" {
             inputViewController = segue.destinationController as? InputViewController
-            inputViewController?.currentClient = currentClient
+//            inputViewController?.currentClient = currentClient
         } else if segue.identifier == "ChatMessageViewSegue" {
             chatMessageViewController = segue.destinationController as? ChatMessageViewController
         }
