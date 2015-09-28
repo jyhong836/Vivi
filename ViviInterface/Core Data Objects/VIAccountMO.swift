@@ -15,15 +15,14 @@ public class VIAccountMO: NSManagedObject {
     public override func awakeFromInsert() {
         groups = NSSet()
         resources = NSSet()
-        resource = ""
     }
     
     public var string: String {
         get {
-            if resource!.isEmpty {
-                return "\(node!)@\(domain!)"
+            if let res = resource {
+                return "\(node!)@\(domain!)/\(res)"
             } else {
-                return "\(node!)@\(domain!)/\(resource!)"
+                return "\(node!)@\(domain!)"
             }
         }
     }
@@ -78,10 +77,13 @@ public class VIAccountMO: NSManagedObject {
     /// for core data.
     /// - Throws: addAccount will call account.validateForInsert(),
     /// and throw relevant NSError after delete invalidate account.
+    /// And the resource will also be validated.
     public static func addAccount(node: String, domain: String, resource: String, managedObjectContext moc: NSManagedObjectContext) throws -> VIAccountMO {
         // search for existed account
         if let existedAccount = getAccount(node, domain: domain, managedObjectContext: moc) {
-            existedAccount.addResource(resource)
+            if !resource.isEmpty {
+                try existedAccount.addResource(resource)
+            }
             return existedAccount
         } else {
             let account = NSEntityDescription.insertNewObjectForEntityForName("Account", inManagedObjectContext: moc) as! VIAccountMO
@@ -93,7 +95,9 @@ public class VIAccountMO: NSManagedObject {
                 moc.deleteObject(account)
                 throw error
             }
-            account.addResource(resource)
+            if !resource.isEmpty {
+                try account.addResource(resource)
+            }
             return account
         }
     }
@@ -175,13 +179,19 @@ public class VIAccountMO: NSManagedObject {
     /// `addAccount` to add resource to existed account instead of this
     /// method. Set default resource by asigning value to resource later,
     /// if you'd like to change the resource.
-    func addResource(name: String) -> Bool {
+    func addResource(name: String) throws -> Bool {
         if existResource(name) {
             return false
         } else {
             let resource = NSEntityDescription.insertNewObjectForEntityForName("Resource", inManagedObjectContext: self.managedObjectContext!) as! VIResourceMO
             resource.name = name
             resource.account = self
+            do {
+                try resource.validateForInsert()
+            } catch {
+                self.managedObjectContext!.deleteObject(resource)
+                throw error
+            }
             return true
         }
     }

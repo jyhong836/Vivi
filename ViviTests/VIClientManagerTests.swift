@@ -61,41 +61,54 @@ class ClientManagerTests: XCTestCase {
         return true
     }
     
-    /// Include confict test
-    func addClientWithMethod(method addClient: (index: Int)throws->SWClient?) {
-        XCTAssertEqual(
-            clientMgr.clientCount,
-            0,
-            "Client count is not zero at begining"
-        )
-        var shouldCatchConflictError = false
-        var hasCatchConflictError = false
-        do {
-            let client1 = try addClient(index: 0)
-            if !assertAddedClientNotNil(client1, expectedClientCount: 1, expectedCurrentIndex: 0, message: "Can't add client, addClient will return nil") {
-                return
+    func testAddClientWithAccountName() {
+        /// Include confict test
+        func addClientWithMethod(method addClient: (index: Int)throws->SWClient?) {
+            XCTAssertEqual(
+                clientMgr.clientCount,
+                0,
+                "Client count is not zero at begining"
+            )
+            var shouldCatchConflictError = false
+            var hasCatchConflictError = false
+            do {
+                let client1 = try addClient(index: 0)
+                if !assertAddedClientNotNil(client1, expectedClientCount: 1, expectedCurrentIndex: 0, message: "Can't add client, addClient will return nil") {
+                    return
+                }
+                let client2 = try addClient(index: 1)
+                if !assertAddedClientNotNil(client2, expectedClientCount: 2, expectedCurrentIndex: 1, message: "Can't add client, addClient will return nil") {
+                    return
+                }
+                
+                // add duplicated client
+                shouldCatchConflictError = true
+                try addClient(index: 1)
+            } catch VIClientManagerError.AccountNameConfilct {
+                hasCatchConflictError = true
+            } catch {
+                XCTFail("Throw unexpected error")
             }
-            let client2 = try addClient(index: 1)
-            if !assertAddedClientNotNil(client2, expectedClientCount: 2, expectedCurrentIndex: 1, message: "Can't add client, addClient will return nil") {
-                return
+            if shouldCatchConflictError {
+                XCTAssertTrue(hasCatchConflictError, "Add conflict client didn't throw AccountNameConfilct Error")
+            } else {
+                XCTAssertFalse(hasCatchConflictError, "Throw unexpected AccountNameConfilct Error")
             }
             
-            // add duplicated client
-            shouldCatchConflictError = true
-            try addClient(index: 1)
-        } catch VIClientManagerError.AccountNameConfilct {
-            hasCatchConflictError = true
-        } catch {
-            XCTFail("Throw unexpected error")
+            do {
+                shouldCatchConflictError = true
+                // confilct without resource
+                try clientMgr.addClient(withAccountName: "jyhong@xmpp.jp", andPasswd: "xx")
+            } catch VIClientManagerError.AccountNameConfilct {
+                hasCatchConflictError = true
+            } catch {
+                XCTFail("Throw unexpected error")
+            }
+            if shouldCatchConflictError {
+                XCTAssertTrue(hasCatchConflictError, "Add conflict client didn't throw AccountNameConfilct Error")
+            }
         }
-        if shouldCatchConflictError {
-            XCTAssertTrue(hasCatchConflictError, "Add conflict client didn't throw AccountNameConfilct Error")
-        } else {
-            XCTAssertFalse(hasCatchConflictError, "Throw unexpected AccountNameConfilct Error")
-        }
-    }
-    
-    func testAddClientWithAccountName() {
+        
         addClientWithMethod(method: addClientWithName)
     }
     

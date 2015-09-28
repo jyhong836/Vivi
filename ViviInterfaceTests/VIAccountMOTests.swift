@@ -96,4 +96,21 @@ class VIAccountMOTests: XCTestCase {
         }
     }
 
+    func testAddEmptyResource() {
+        var hasCatchError = false
+        do {
+            let testnode = "test.node"
+            let testdomain = "test.domain"
+            let account = try VIAccountMO.addAccount(testnode, domain: testdomain, resource: "", managedObjectContext: moc!)
+            do {
+                try account.addResource("")
+            } catch {
+                hasCatchError = true
+            }
+            XCTAssertTrue(hasCatchError, "should catch error for empty resource")
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
+    
 }

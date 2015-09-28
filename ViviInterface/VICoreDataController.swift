@@ -90,7 +90,7 @@ public class VICoreDataController {
             if failError != nil {
                 dict[NSUnderlyingErrorKey] = failError
             }
-            let error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+            let error = NSError(domain: "Vivi_ERROR_DOMAIN", code: 9999, userInfo: dict)
             NSApplication.sharedApplication().presentError(error)
             abort()
         } else {

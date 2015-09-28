@@ -14,7 +14,7 @@ import CoreData
 
 public extension VIClientMO {
 
-    @NSManaged var accountname: String?
+    @NSManaged var accountname: String? // should be bare string
     @NSManaged var accdescription: String?
     @NSManaged var nickname: String?
     @NSManaged var canbeinvisible: NSNumber?

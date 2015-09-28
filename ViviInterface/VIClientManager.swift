@@ -92,7 +92,7 @@ public class VIClientManager: VIClientManagerProtocol {
         
         let swaccount = SWAccount(accountName: account)
         if clientList.contains( { (c: SWClient) -> Bool in
-            c.account.string == swaccount.string
+            c.account.bareString == swaccount.bareString
         }) {
             NSLog("attempt to add conflicted client: \(account)")
             throw VIClientManagerError.AccountNameConfilct
@@ -113,7 +113,8 @@ public class VIClientManager: VIClientManagerProtocol {
     func addClient(managedObject: VIClientMO) throws -> SWClient? {
         let accountname = managedObject.accountname
         let password = managedObject.password
-        let swaccount = try validateAccount(accountname, passwd: password)
+        let resource = managedObject.resource
+        let swaccount = try validateAccount(accountname!+"/"+resource!, passwd: password)
 //        let resIdx = swaccount.addResource(managedObject.resource)
 //        swaccount.setResourceIndex(resIdx)
         
@@ -180,13 +181,14 @@ public class VIClientManager: VIClientManagerProtocol {
         clientList.removeAll()
     }
     
+    /// Get client with same bare account string.
     public func getClient(withAccountName name: String) -> SWClient? {
         if !name.canBeConvertedToEncoding(NSString.defaultCStringEncoding()) {
             return nil
         }
         let account = SWAccount(accountName: name)
         for c in clientList {
-            if c.account.string == account.string {
+            if c.account.bareString == account.bareString {
                 return c
             }
         }

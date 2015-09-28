@@ -59,7 +59,10 @@ class PreferenceViewController: NSViewController, AddAccountViewControllerDelega
 //        clientArrayController.add(self)
         let moc = clientMgr.managedObjectContext!
         let client = NSEntityDescription.insertNewObjectForEntityForName("Client", inManagedObjectContext: moc) as! VIClientMO
-        client.accountname = account.string
+        if !account.bare {
+            client.resource = account.resource
+        }
+        client.accountname = account.bareString
         client.password = password
         client.hostname = account.domain
         client.accdescription = account.domain
