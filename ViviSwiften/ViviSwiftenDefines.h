@@ -17,6 +17,7 @@ typedef SWIFT_ENUM(NSInteger, VSClientErrorType) {
     VSClientErrorTypeClientUnavaliable,
     VSClientErrorTypeFileNotFound,
     VSClientErrorTypeFileTransferNotSupport,
+    VSClientErrorTypePresenceUnavailable,
 };
 static NSString* const VSClientErrorTypeDomain = @"ViviSwiften.VSClientErrorType";
 

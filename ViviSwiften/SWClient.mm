@@ -220,9 +220,12 @@ using namespace Swift;
                  attachments: (nullable NSArray<NSString*>*)filenames
                      handler: (VSSendMessageHandler)handler // FIXME: It's more suitable to use NSError** instead of hanlder
 {
+    NSError* error;
+    
     if (!client->isAvailable()) {
-        NSError *error = [NSError errorWithDomain: VSClientErrorTypeDomain code: VSClientErrorTypeClientUnavaliable userInfo: nil];
-        handler(error);
+        error = [NSError errorWithDomain:VSClientErrorTypeDomain code:VSClientErrorTypeClientUnavaliable userInfo:@{NSLocalizedDescriptionKey: @"Could not send message when not log in.", NSLocalizedFailureReasonErrorKey: @"Client is disconnected.", NSLocalizedRecoverySuggestionErrorKey: @"Log in and try again."}];
+        if (handler)
+            handler(error);
         return;
     }
     Message::ref swmsg = [self createSwiftMessage: targetAccount
@@ -231,21 +234,26 @@ using namespace Swift;
     
     // set up file transfers
     NSMutableArray<SWFileTransfer*>* fileTansfers = nil;
-    if (filenames) {
+    if (filenames && filenames.count > 0) {
         // get receipient that support file transfer
-        SWAccount* fullReceipient = [self highestPriorityAccountSupportingFileTransfer:targetAccount];
+        SWAccount* fullReceipient = [self highestPriorityAccountSupportingFileTransfer:targetAccount
+                                     error:&error];
         if (fullReceipient) {
             fileTansfers = [NSMutableArray array];
             for (NSString *fn in filenames) {
-                NSError *error;
                 SWOutgoingFileTransfer *oft = [fileTransferManager sendFileTo:fullReceipient /* targetAccount */ filename:fn desciption:@"" error:&error];
                 if (oft) {
                     [fileTansfers addObject: oft];
                 } else {
-                    handler(error);
+                    if (handler)
+                        handler(error);
                     return;
                 }
             }
+        } else {
+            if (handler)
+                handler(error);
+            return;
         }
     }
     
@@ -254,8 +262,8 @@ using namespace Swift;
                                               attachments: fileTansfers
                                                 timestamp: timestamp];
 //    if (client->isAvailable()) {
-        client->sendMessage(swmsg);
-        [managedObject clientDidSendMessage: msgObject];
+    client->sendMessage(swmsg);
+    [managedObject clientDidSendMessage: msgObject];
     if (handler) {
         handler(nil);
     }
@@ -311,12 +319,18 @@ using namespace Swift;
 #pragma mark - File transfer support
 
 - (SWAccount*)highestPriorityAccountSupportingFileTransfer: (SWAccount*)bareAccount
+                                                     error: (NSError**)error
 {
 #if _PRES_EXP_ == 1
     std::vector<Presence::ref> presences = client->getPresenceOracle()->getAllPresence(*bareAccount.jid);
     
     JID fullReceipientJID = *bareAccount.jid;
     int aPriority = INT_MIN;
+    
+    if (presences.size() == 0) {
+        *error = [NSError errorWithDomain:VSClientErrorTypeDomain code:VSClientErrorTypePresenceUnavailable userInfo:@{NSLocalizedDescriptionKey: @"Could not send file without resource, or when account presence is not received.", NSLocalizedFailureReasonErrorKey: @"No resource is specified, and no presence available for searching for avaible resource.", NSLocalizedRecoverySuggestionErrorKey: @"Try again, when the chat buddy is avaible. Or you can try to remove the file."}];
+        return nil;
+    }
     
     //iterate over them
     for (Presence::ref pres: presences) {
@@ -341,6 +355,8 @@ using namespace Swift;
         }
     }
     if (fullReceipientJID.isBare()) {
+        // TODO: throw error here
+        assert(false);
         return nil;
     } else {
         return [[SWAccount alloc] initWithJID:fullReceipientJID];

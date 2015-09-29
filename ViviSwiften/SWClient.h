@@ -93,7 +93,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - File transfer support
 
-- (SWAccount*)highestPriorityAccountSupportingFileTransfer: (SWAccount*)bareAccount;
+/*!
+ * @brief Get highest priority account that supports file transfer.
+ *
+ * Support file transfer means account with resource meet Swiften's 
+ * requirement including more than one JingleFeature to support file
+ * transfer, or only one `DiscoInfo::JingleFeature`.
+ *
+ * @param bareAccount Account withouth resource.
+ * @return Return account supporting file transfer, else return nil.
+ */
+- (SWAccount*)highestPriorityAccountSupportingFileTransfer: (SWAccount*)bareAccount
+                                                     error: (NSError**)error;
 
 #pragma mark - Invisible presence
 

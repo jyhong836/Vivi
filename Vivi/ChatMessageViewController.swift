@@ -148,7 +148,7 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
                     
                     let attachment = NSTextAttachment()
                     let filecell = TextAttachmentFileCell(fileWrapper: fileWrapper)
-                    attachmentMO!.fileTransfer!.delegate = filecell
+                    attachmentMO!.fileTransfer?.delegate = filecell
                     filecell.attachmentMO = attachmentMO
                     attachment.attachmentCell = filecell
                     attachment.fileWrapper = fileWrapper

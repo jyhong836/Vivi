@@ -45,7 +45,7 @@ using namespace Swift;
     
     if (!boost::filesystem::exists(filepath)) {
         if (error) {
-            *error = [NSError errorWithDomain: VSClientErrorTypeDomain code: VSClientErrorTypeFileNotFound userInfo: @{@"filename": filename}];
+            *error = [NSError errorWithDomain:VSClientErrorTypeDomain code:VSClientErrorTypeFileNotFound userInfo:@{NSLocalizedDescriptionKey: @"Fail to send file, for file not found.", NSLocalizedFailureReasonErrorKey: @"File not exists.", NSLocalizedRecoverySuggestionErrorKey: [NSString stringWithFormat:@"Remove file %s, and try again", filepath.filename().c_str()]}];
             return nil;
         }
     }
@@ -58,7 +58,7 @@ using namespace Swift;
                                                            filepath: filename];
     } else {
         if (error) {
-            *error = [NSError errorWithDomain: VSClientErrorTypeDomain code: VSClientErrorTypeFileTransferNotSupport userInfo: @{@"account": account}];
+            *error = [NSError errorWithDomain:VSClientErrorTypeDomain code:VSClientErrorTypeFileTransferNotSupport userInfo:@{NSLocalizedDescriptionKey: @"Fail to init outgoing file transfer.", NSLocalizedFailureReasonErrorKey: @"Fail to create outgoing file transfer.", NSLocalizedRecoverySuggestionErrorKey: @"The file transfer feature may not be supported by target client. Try to remove file from message."}];
             return nil;
         }
         return nil;

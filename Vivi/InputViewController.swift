@@ -45,18 +45,10 @@ class InputViewController: NSViewController {
                             let err = VSClientErrorType(rawValue: nserror.code)!
                             // process errors
                             switch err {
-                            case .ClientUnavaliable:
-                                let alert = NSAlert()
-                                alert.messageText = "Please log in before sending message."
-                                alert.runModal()
-                            case .FileNotFound:
-                                fatalError("Not found file")
-                            case .FileTransferNotSupport:
-                                let alert = NSAlert()
-                                alert.messageText = "Not support file transfer."
-                                alert.runModal()
-                            default:
+                            case .None:
                                 self.inputTextView.textStorage?.setAttributedString(NSAttributedString(string: ""))
+                            default:
+                                sender.presentError(nserror)
                             }
                         } else {
                             self.inputTextView.textStorage?.setAttributedString(NSAttributedString(string: ""))
