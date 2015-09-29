@@ -46,6 +46,12 @@
 #import <Swiften/Client/NickManagerImpl.h>
 #import <Swiften/FileTransfer/FileTransferManager.h>
 
+#define _PRES_EXP_ 1
+#if _PRES_EXP_ == 1
+#include <Swiften/Presence/PresenceOracle.h>
+#include <Swiften/Disco/EntityCapsManager.h>
+#endif
+
 #ifdef __INVISIBLE_PRESENCE__
 #ifndef SWIFTEN_INVISIBLE_PRESENCE
 #warning Attempt to use invisible presence, while it's not implemented in Swiften.
@@ -224,15 +230,22 @@ using namespace Swift;
     NSDate* timestamp = [NSDate date]; // FIXME: timestamp should be provided by Swiften
     
     // set up file transfers
-    NSMutableArray<SWFileTransfer*>* fileTansfers;
-    for (NSString *fn in filenames) {
-        NSError *error;
-        SWOutgoingFileTransfer *oft = [fileTransferManager sendFileTo:targetAccount filename:fn desciption:@"" error: &error];
-        if (oft) {
-            [fileTansfers addObject: oft];
-        } else {
-            handler(error);
-            return;
+    NSMutableArray<SWFileTransfer*>* fileTansfers = nil;
+    if (filenames) {
+        // get receipient that support file transfer
+        SWAccount* fullReceipient = [self highestPriorityAccountSupportingFileTransfer:targetAccount];
+        if (fullReceipient) {
+            fileTansfers = [NSMutableArray array];
+            for (NSString *fn in filenames) {
+                NSError *error;
+                SWOutgoingFileTransfer *oft = [fileTransferManager sendFileTo:fullReceipient /* targetAccount */ filename:fn desciption:@"" error:&error];
+                if (oft) {
+                    [fileTansfers addObject: oft];
+                } else {
+                    handler(error);
+                    return;
+                }
+            }
         }
     }
     
@@ -293,6 +306,48 @@ using namespace Swift;
               status: (NSString*)status
 {
     [self sendPresence: presenceType showType:showType status:status priority: priority];
+}
+
+#pragma mark - File transfer support
+
+- (SWAccount*)highestPriorityAccountSupportingFileTransfer: (SWAccount*)bareAccount
+{
+#if _PRES_EXP_ == 1
+    std::vector<Presence::ref> presences = client->getPresenceOracle()->getAllPresence(*bareAccount.jid);
+    
+    JID fullReceipientJID = *bareAccount.jid;
+    int aPriority = INT_MIN;
+    
+    //iterate over them
+    for (Presence::ref pres: presences) {
+        if (pres->getPriority() > aPriority) {
+            // look up caps from the jid
+            NSLog(@"priority: %d, from %s", pres->getPriority(), pres->getFrom().toString().c_str());
+            DiscoInfo::ref info = client->getEntityCapsProvider()->getCaps(pres->getFrom());
+            
+            if (info) {
+                if (info->hasFeature(DiscoInfo::JingleFeature)
+                    && info->hasFeature(DiscoInfo::JingleFTFeature)
+                    && (info->hasFeature(DiscoInfo::JingleTransportsIBBFeature) || info->hasFeature(DiscoInfo::JingleTransportsS5BFeature))) {
+                    NSLog(@"has full ft features");
+                    aPriority = pres->getPriority();
+                    fullReceipientJID = pres->getFrom();
+                } else if (info->hasFeature(DiscoInfo::JingleFeature)) {
+                    NSLog(@"has partial ft features");
+                    aPriority = pres->getPriority();
+                    fullReceipientJID = pres->getFrom();
+                }
+            }
+        }
+    }
+    if (fullReceipientJID.isBare()) {
+        return nil;
+    } else {
+        return [[SWAccount alloc] initWithJID:fullReceipientJID];
+    }
+#else
+    return nil;
+#endif
 }
 
 #pragma mark - Implement invisible presence(XEP-0018 or XEP-0126).

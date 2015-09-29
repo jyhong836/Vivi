@@ -19,12 +19,25 @@ using namespace Swift;
 }
 
 @synthesize delegate;
+@synthesize filepath;
 
 - (id)initWithFileTransfer: (FileTransfer::ref)ft
 {
     if (self = [super init]) {
         fileTransfer = ft;
         adapter = new SWFileTransferAdapter(fileTransfer, self);
+        filepath = std_str2NSString(ft->getFileName());
+    }
+    return self;
+}
+
+- (id)initWithFileTransfer: (FileTransfer::ref)ft
+                  filepath: (NSString*)aFilepath
+{
+    if (self = [super init]) {
+        fileTransfer = ft;
+        adapter = new SWFileTransferAdapter(fileTransfer, self);
+        filepath = aFilepath;
     }
     return self;
 }

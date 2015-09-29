@@ -91,6 +91,10 @@ NS_ASSUME_NONNULL_BEGIN
             showType: (int)showType
               status: (NSString*)status;
 
+#pragma mark - File transfer support
+
+- (SWAccount*)highestPriorityAccountSupportingFileTransfer: (SWAccount*)bareAccount;
+
 #pragma mark - Invisible presence
 
 /*! 

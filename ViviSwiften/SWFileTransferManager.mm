@@ -54,7 +54,8 @@ using namespace Swift;
     
     OutgoingFileTransfer::ref outgongTransfer = ftManager->createOutgoingFileTransfer(*(account.jid), filepath, NSString2std_str(desciption), fileReadStream);
     if (outgongTransfer) {
-        return [[SWOutgoingFileTransfer alloc] initWithFileTransfer:outgongTransfer];
+        return [[SWOutgoingFileTransfer alloc] initWithFileTransfer:outgongTransfer
+                                                           filepath: filename];
     } else {
         if (error) {
             *error = [NSError errorWithDomain: VSClientErrorTypeDomain code: VSClientErrorTypeFileTransferNotSupport userInfo: @{@"account": account}];

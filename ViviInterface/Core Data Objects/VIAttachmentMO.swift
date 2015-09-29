@@ -15,7 +15,7 @@ public class VIAttachmentMO: NSManagedObject {
     public var fileTransfer: SWFileTransfer? {
         didSet {
             if let ft = fileTransfer {
-                filename = ft.filename
+                filename = ft.filepath
             }
         }
     }
