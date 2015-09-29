@@ -589,7 +589,7 @@ DQ
                                     <action selector="btnAddClicked:" target="lMY-01-P78" id="vbe-hW-dFH"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7hM-1c-a4J">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7hM-1c-a4J">
                                 <rect key="frame" x="18" y="143" width="163" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Add a new chat account" usesSingleLineMode="YES" id="PWJ-0g-P8W">
                                     <font key="font" metaFont="systemBold"/>

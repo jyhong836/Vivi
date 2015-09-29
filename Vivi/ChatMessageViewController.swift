@@ -50,7 +50,7 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         }
     }
     
-    // MARK: Notification configures
+    // MARK: - Notification configures
     
     let notificationCenter = NSNotificationCenter.defaultCenter()
     let mainQueue = NSOperationQueue.mainQueue()
@@ -87,6 +87,7 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
     }
     
     // MARK: API for update chat table view
+    
     /// Call when chat did update message at index. This will only reload one message cell view.
     private func chatDidUpdateMessageAtIndex(index: Int) {
         if currentChat != nil {
@@ -96,7 +97,8 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         }
     }
     
-    /// Call when chat add one message, this will update chat table view.
+    /// Call when chat add one message, this method will insert new message
+    /// cell view and update chat table view.
     private func chatDidAddMessage() {
         if currentChat != nil {
 //                self.messageTableView.beginUpdates()
@@ -109,59 +111,22 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         }
     }
     
-    // MARK: Implementations for NSTableViewDataSource
+    // MARK: - Message table view cell.
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        if let chat = currentChat {
-            return chat.messageCount
-        } else {
-            return 0
-        }
-    }
-    
-    // MARK: Implementations for NSTableViewDelegate
-    
+    /// Configure table cell with message in given row.
     func configureCell(cell: MessageTableCellView, row: Int) -> MessageTableCellView {
         let msg = (currentChat?.messageAtIndex(row))!
         let content = msg.content!
-        let attributedContent = NSMutableAttributedString(string: content)
-        do {
-            // Search [file name] pattern
-            let regexp = try NSRegularExpression(pattern: "\\[[^]]+\\]", options: NSRegularExpressionOptions(rawValue: 0))
-            let contentRange = NSMakeRange(0, attributedContent.length)
-            let matches = regexp.matchesInString(content, options: NSMatchingOptions(rawValue: 0), range: contentRange)
-            for match in matches.reverse() {
-                let range = match.range
-                var bareRange = range
-                bareRange.location += 1
-                bareRange.length -= 2
-                
-                do {
-                    // init file path
-                    let filename = attributedContent.attributedSubstringFromRange(bareRange).string
-                    let attachmentMO = msg.attachmentWithName(filename)
-                    guard attachmentMO != nil else {
-                        fatalError("Not found attachment with file name: \(filename)")
-                    }
-                    let fullFilename = attachmentMO!.filename!
-                    let fileWrapper = try NSFileWrapper(URL: NSURL(fileURLWithPath: fullFilename), options: NSFileWrapperReadingOptions.Immediate) // .Immediate will cause error when file not exists.
-                    
-                    let attachment = NSTextAttachment()
-                    let filecell = TextAttachmentFileCell(fileWrapper: fileWrapper)
-                    attachmentMO!.fileTransfer?.delegate = filecell
-                    filecell.attachmentMO = attachmentMO
-                    attachment.attachmentCell = filecell
-                    attachment.fileWrapper = fileWrapper
-                    
-                    attributedContent.replaceCharactersInRange(range, withAttributedString: NSAttributedString(attachment: attachment))
-                } catch {
-                    fatalError("Fail to create file wrapper: \(error)")
-                }
+        
+        cell.textField?.attributedStringValue = NSMutableAttributedString(content: content,
+            attachmentMOWithName: { filename in msg.attachmentWithName(filename) },
+            filecellWithWrapper: {
+                (fileWrapper: NSFileWrapper) -> TextAttachmentFileCell in
+                let filecell = TextAttachmentFileCell(fileWrapper: fileWrapper)
+                filecell.canStartTransfer = true
+                return filecell
             }
-        } catch {
-            fatalError("Fail to create regular expression: \(error)")
-        }
-        cell.textField?.attributedStringValue = attributedContent
+        )
         return cell
     }
     
@@ -190,6 +155,18 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         return cell
     }
     
+    // MARK: - Implementations for NSTableViewDataSource
+    
+    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+        if let chat = currentChat {
+            return chat.messageCount
+        } else {
+            return 0
+        }
+    }
+    
+    // MARK: - Implementations for NSTableViewDelegate
+    
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         var cell: MessageTableCellView? = messageCellViewForDir(directionOfRow(row), inTableView: tableView)
         if let cl = cell {
@@ -217,7 +194,7 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         return VIChatMessageDirection(rawValue: (currentChat?.messageAtIndex(row)?.direction?.integerValue)!)!
     }
     
-    // MARK: Notification receivers
+    // MARK: - Notification receivers
     
     func chatWillSendMessage(notification: NSNotification) {
         chatDidAddMessage()

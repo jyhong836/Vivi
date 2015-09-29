@@ -106,6 +106,9 @@ class TextAttachmentFileCell: NSTextAttachmentCell, VSFileTransferDelegate {
         }
     }
     
+    /// Start file transfer
+    var canStartTransfer = false
+    
     func fileTransfer(filetransfer: SWFileTransfer!, processedBytes bytes: Int) {
         NSLog("attachment(\(filename) processed \(bytes) bytes)")
     }

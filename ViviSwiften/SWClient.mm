@@ -328,6 +328,7 @@ using namespace Swift;
     int aPriority = INT_MIN;
     
     if (presences.size() == 0) {
+        // TODO: Can I send offline file?
         *error = [NSError errorWithDomain:VSClientErrorTypeDomain code:VSClientErrorTypePresenceUnavailable userInfo:@{NSLocalizedDescriptionKey: @"Could not send file without resource, or when account presence is not received.", NSLocalizedFailureReasonErrorKey: @"No resource is specified, and no presence available for searching for avaible resource.", NSLocalizedRecoverySuggestionErrorKey: @"Try again, when the chat buddy is avaible. Or you can try to remove the file."}];
         return nil;
     }
@@ -355,8 +356,7 @@ using namespace Swift;
         }
     }
     if (fullReceipientJID.isBare()) {
-        // TODO: throw error here
-        assert(false);
+        *error = [NSError errorWithDomain:VSClientErrorTypeDomain code:VSClientErrorTypeFileTransferNotSupport userInfo:@{NSLocalizedDescriptionKey: @"Your friend's client do not support file transfer or he/she can not receive file now(may be offline).", NSLocalizedFailureReasonErrorKey: @"No resource supporting file transfer found.", NSLocalizedRecoverySuggestionErrorKey: @"Try to remove the file and send message again."}];
         return nil;
     } else {
         return [[SWAccount alloc] initWithJID:fullReceipientJID];
