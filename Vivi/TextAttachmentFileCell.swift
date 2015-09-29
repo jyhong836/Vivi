@@ -35,6 +35,8 @@ class TextAttachmentFileCell: NSTextAttachmentCell, VSFileTransferDelegate {
     
     let stringHorizontalSpace = CGFloat(3)
     
+    var startIcon = NSImage(named: "fa-play-circle-o")
+    
     init(fileWrapper wrapper: NSFileWrapper) {
         super.init(imageCell: wrapper.icon!)//NSWorkspace.sharedWorkspace().iconForFile(wrapper.preferredFilename!))
         if !wrapper.regularFile {
@@ -56,6 +58,10 @@ class TextAttachmentFileCell: NSTextAttachmentCell, VSFileTransferDelegate {
         
         filenameAttributedString.drawAtPoint(filenameBaselineOffsetAtRect(cellFrame))
         filesizeAttributedString.drawAtPoint(filesizeBaselineOffsetAtRect(cellFrame))
+        
+        if canStartTransfer { // TODO: add judgement: "&& hasStarted"
+            startIcon?.drawInRect(iconRect(cellFrame))
+        }
     }
     
     // MARK: - Geometry of cell
@@ -97,6 +103,15 @@ class TextAttachmentFileCell: NSTextAttachmentCell, VSFileTransferDelegate {
         return NSMakePoint(rect.origin.x + rect.width/2 - size.width/2, rect.origin.y + rect.height)
     }
     
+    func iconRect(rect: NSRect) -> NSRect {
+        var iRect = rect
+        let iconWidth = CGFloat(20)
+        let iconHeight = CGFloat(20)
+        iRect.size = NSSize(width: iconWidth, height: iconHeight)
+        iRect.origin = NSPoint(x: rect.origin.x + (rect.width - iconWidth)/2, y: rect.origin.y + (rect.height - iconHeight)/2)
+        return iRect
+    }
+    
     // MARK: - Conform to VSFileTransferDelegate protocol
     
     var attachmentMO: VIAttachmentMO?
@@ -116,6 +131,7 @@ class TextAttachmentFileCell: NSTextAttachmentCell, VSFileTransferDelegate {
     func fileTransfer(filetransfer: SWFileTransfer!, stateChanged stateCode: Int32) {
         NSLog("attachment(\(filename) state changed to \(stateCode)")
         attachmentMO?.state = NSNumber(int: stateCode)
+        
     }
     
     func fileTransfer(filetransfer: SWFileTransfer!, finishedWithError errorCode: Int32) {
