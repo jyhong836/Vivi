@@ -11,6 +11,8 @@ import ViviInterface
 import MMMarkdown
 
 extension NSMutableAttributedString {
+    
+    // MARK: - Text attachment transform
 
     var attachments: [NSTextAttachment] {
         get {
@@ -118,11 +120,19 @@ extension NSMutableAttributedString {
         }
     }
     
+    // MARK: - Markdown and HTML transform
+    
+    /// Create attributed string from markdown string.
     convenience init(markdownString string: String) throws {
         let informationHTML = try MMMarkdown.HTMLStringWithMarkdown(string, extensions: MMMarkdownExtensions.GitHubFlavored)
         
         let informationData = informationHTML.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         try self.init(data: informationData!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+    }
+    
+    func htmlString() throws -> String? {
+        let htmlData = try self.dataFromRange(NSMakeRange(0, self.length), documentAttributes: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType])
+        return String(data: htmlData, encoding: NSUTF8StringEncoding)
     }
     
 }

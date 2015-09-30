@@ -9,10 +9,10 @@
 #import "Utils.h"
 
 const char* NSString2std_str(NSString *nsstr) {
-    if (![nsstr canBeConvertedToEncoding:[NSString defaultCStringEncoding]]) {
+    if (![nsstr canBeConvertedToEncoding:CCHAR_ENCODING]) {
         NSLog(@"\"%@\" can not be converted to c string", nsstr);
 //        assert(false);
         [NSException raise:@"NotBeConvertedNSString" format:@"\"%@\" can not be converted to c string", nsstr];
     }
-    return [nsstr cStringUsingEncoding: [NSString defaultCStringEncoding]];
+    return [nsstr cStringUsingEncoding:CCHAR_ENCODING];
 }

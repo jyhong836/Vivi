@@ -739,9 +739,9 @@
                                                             <action selector="rosterButtonClicked:" target="XfG-lQ-9wD" id="XLi-nR-fxM"/>
                                                         </connections>
                                                     </button>
-                                                    <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cPK-zQ-RDv" userLabel="Presence Pop Up Button">
+                                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cPK-zQ-RDv" userLabel="Presence Pop Up Button">
                                                         <rect key="frame" x="54" y="3" width="85" height="19"/>
-                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="1FD054D8-5173-4B3A-8B69-9098E7FA9D20" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
+                                                        <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" image="5F79702B-FB32-48F6-9EF1-DE845836B754" imagePosition="left" alignment="left" scrollable="YES" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="noArrow" id="U20-0O-Jjl" userLabel="Offline">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                             <menu key="menu" id="P30-Lt-lYY">
@@ -1241,47 +1241,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="489" height="99"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cG-T7-Ikp">
-                                <rect key="frame" x="6" y="32" width="477" height="62"/>
-                                <clipView key="contentView" copiesOnScroll="NO" id="3Th-Xg-hiA">
-                                    <rect key="frame" x="1" y="1" width="475" height="60"/>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xL8-jf-cpb">
+                                <rect key="frame" x="20" y="34" width="449" height="45"/>
+                                <clipView key="contentView" id="fmw-uV-8qU">
+                                    <rect key="frame" x="1" y="1" width="447" height="43"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" linkDetection="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Saa-LZ-Rgy" customClass="InputTextView" customModule="Vivi" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="475" height="60"/>
+                                        <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="b4N-Sn-sWa" customClass="InputTextView" customModule="Vivi" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="447" height="43"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="475" height="60"/>
-                                            <size key="maxSize" width="477" height="10000000"/>
-                                            <attributedString key="textStorage">
-                                                <fragment content="Message">
-                                                    <attributes>
-                                                        <font key="NSFont" size="12" name="Helvetica"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
+                                            <size key="minSize" width="447" height="43"/>
+                                            <size key="maxSize" width="472" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="475" height="60"/>
-                                            <size key="maxSize" width="477" height="10000000"/>
-                                            <allowedInputSourceLocales>
-                                                <string>NSAllRomanInputSourcesLocaleIdentifier</string>
-                                            </allowedInputSourceLocales>
+                                            <size key="minSize" width="447" height="43"/>
+                                            <size key="maxSize" width="472" height="10000000"/>
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="BWU-UZ-fdQ">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="LZY-Ze-zMI">
                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="X0s-2x-u94">
-                                    <rect key="frame" x="460" y="1" width="16" height="60"/>
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="8zv-yQ-8Am">
+                                    <rect key="frame" x="432" y="1" width="16" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KcA-ZZ-Kpf">
-                                <rect key="frame" x="383" y="-2" width="106" height="32"/>
+                                <rect key="frame" x="369" y="-1" width="106" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="94" id="Wuz-KZ-X0Y"/>
                                 </constraints>
@@ -1294,21 +1283,21 @@ DQ
                                     <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="sendButtonClicked:" target="ZEo-nO-VUa" id="DiC-eE-Fmh"/>
+                                    <action selector="sendButtonClicked:" target="ZEo-nO-VUa" id="3L5-GM-AT5"/>
                                 </connections>
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="KcA-ZZ-Kpf" secondAttribute="bottom" constant="5" id="6Cg-Hr-gzK"/>
-                            <constraint firstAttribute="trailing" secondItem="2cG-T7-Ikp" secondAttribute="trailing" constant="6" id="NN0-gv-CNX"/>
-                            <constraint firstAttribute="bottom" secondItem="2cG-T7-Ikp" secondAttribute="bottom" constant="32" id="b2e-XW-0Nz"/>
-                            <constraint firstItem="2cG-T7-Ikp" firstAttribute="leading" secondItem="Egi-df-pNO" secondAttribute="leading" constant="6" id="hyK-Op-ObH"/>
-                            <constraint firstAttribute="trailing" secondItem="KcA-ZZ-Kpf" secondAttribute="trailing" constant="6" id="ipa-P3-mRf"/>
-                            <constraint firstItem="2cG-T7-Ikp" firstAttribute="top" secondItem="Egi-df-pNO" secondAttribute="top" constant="5" id="ydS-cy-HD9"/>
+                            <constraint firstAttribute="bottom" secondItem="KcA-ZZ-Kpf" secondAttribute="bottom" constant="6" id="6Cg-Hr-gzK"/>
+                            <constraint firstItem="xL8-jf-cpb" firstAttribute="top" secondItem="Egi-df-pNO" secondAttribute="top" constant="20" symbolic="YES" id="6nT-pM-qg1"/>
+                            <constraint firstItem="xL8-jf-cpb" firstAttribute="trailing" secondItem="KcA-ZZ-Kpf" secondAttribute="trailing" id="N3K-Wf-NsS"/>
+                            <constraint firstAttribute="trailing" secondItem="KcA-ZZ-Kpf" secondAttribute="trailing" constant="20" id="ipa-P3-mRf"/>
+                            <constraint firstItem="KcA-ZZ-Kpf" firstAttribute="top" secondItem="xL8-jf-cpb" secondAttribute="bottom" constant="7" id="vhz-MK-jOq"/>
+                            <constraint firstItem="xL8-jf-cpb" firstAttribute="leading" secondItem="Egi-df-pNO" secondAttribute="leading" constant="20" symbolic="YES" id="xcb-qN-0xK"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="inputTextView" destination="Saa-LZ-Rgy" id="eMd-db-hos"/>
+                        <outlet property="inputTextView" destination="b4N-Sn-sWa" id="t2G-xe-8To"/>
                     </connections>
                 </viewController>
                 <customObject id="w5z-WM-0Fo" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1600,7 +1589,7 @@ MgA3AEEARwBQAFcAXABkAHkAewB9AH8AgQCJAJAAlQCgAKMApQCnAKkArgC5AMIAygDNANYA2wDoAOwA
         </scene>
     </scenes>
     <resources>
-        <image name="1FD054D8-5173-4B3A-8B69-9098E7FA9D20" width="1" height="1">
+        <image name="5F79702B-FB32-48F6-9EF1-DE845836B754" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

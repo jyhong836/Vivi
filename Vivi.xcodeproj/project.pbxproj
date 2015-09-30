@@ -75,7 +75,7 @@
 		CDACF37D1B97487F0010969D /* SWIncomingFileTransfer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDACF37B1B97487F0010969D /* SWIncomingFileTransfer.mm */; settings = {ASSET_TAGS = (); }; };
 		CDACF3801B974CFD0010969D /* SWOutgoingFileTransfer.h in Headers */ = {isa = PBXBuildFile; fileRef = CDACF37E1B974CFD0010969D /* SWOutgoingFileTransfer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDACF3811B974CFD0010969D /* SWOutgoingFileTransfer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDACF37F1B974CFD0010969D /* SWOutgoingFileTransfer.mm */; settings = {ASSET_TAGS = (); }; };
-		CDACF3A61B988C420010969D /* NSTextStorage+Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDACF3A51B988C420010969D /* NSTextStorage+Attachment.swift */; settings = {ASSET_TAGS = (); }; };
+		CDACF3A61B988C420010969D /* NSMutableAttributedString+Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDACF3A51B988C420010969D /* NSMutableAttributedString+Attachment.swift */; settings = {ASSET_TAGS = (); }; };
 		CDB2E5D61B8AC9B900677775 /* InvisibleListPayload.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5D41B8AC9B900677775 /* InvisibleListPayload.hpp */; };
 		CDB2E5DD1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDB2E5DB1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm */; };
 		CDB2E5DE1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CDB2E5DC1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp */; };
@@ -292,7 +292,7 @@
 		CDACF37B1B97487F0010969D /* SWIncomingFileTransfer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWIncomingFileTransfer.mm; sourceTree = "<group>"; };
 		CDACF37E1B974CFD0010969D /* SWOutgoingFileTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWOutgoingFileTransfer.h; sourceTree = "<group>"; };
 		CDACF37F1B974CFD0010969D /* SWOutgoingFileTransfer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWOutgoingFileTransfer.mm; sourceTree = "<group>"; };
-		CDACF3A51B988C420010969D /* NSTextStorage+Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+Attachment.swift"; sourceTree = "<group>"; };
+		CDACF3A51B988C420010969D /* NSMutableAttributedString+Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Attachment.swift"; sourceTree = "<group>"; };
 		CDB2E5D41B8AC9B900677775 /* InvisibleListPayload.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisibleListPayload.hpp; sourceTree = "<group>"; };
 		CDB2E5DB1B8ACD8100677775 /* InvisibleListPayloadSerializer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InvisibleListPayloadSerializer.mm; sourceTree = "<group>"; };
 		CDB2E5DC1B8ACD8100677775 /* InvisibleListPayloadSerializer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InvisibleListPayloadSerializer.hpp; sourceTree = "<group>"; };
@@ -411,10 +411,29 @@
 			isa = PBXGroup;
 			children = (
 				CDB593781B90599D004703EA /* AvatarView.swift */,
-				CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */,
 				CD0E72AA1B9023C1002F58E9 /* NSDataAvatarTransformer.swift */,
 			);
 			name = "UI Assets";
+			sourceTree = "<group>";
+		};
+		CD12940A1BBC1799005A1046 /* Message Table View */ = {
+			isa = PBXGroup;
+			children = (
+				CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */,
+				CDACF3A51B988C420010969D /* NSMutableAttributedString+Attachment.swift */,
+				CDA0C4411BA16FD500C6BBB6 /* TextAttachmentFileCell.swift */,
+				CD60BA501B6DB30F008E077A /* MessageTableCellView.swift */,
+			);
+			name = "Message Table View";
+			sourceTree = "<group>";
+		};
+		CD12940B1BBC17C3005A1046 /* Input View */ = {
+			isa = PBXGroup;
+			children = (
+				CD8C647E1B6C83D200945529 /* InputViewController.swift */,
+				CD1EBB9B1B99386F0043E1D8 /* InputTextView.swift */,
+			);
+			name = "Input View";
 			sourceTree = "<group>";
 		};
 		CD36854F1B5E659500DFC78A = {
@@ -593,6 +612,7 @@
 		CDC174971B7114E80081F6D4 /* Session View */ = {
 			isa = PBXGroup;
 			children = (
+				CD8C647C1B6C6C3B00945529 /* SessionTableCellView.swift */,
 				CD4C3A531B6B489B00C283E6 /* SessionViewController.swift */,
 			);
 			name = "Session View";
@@ -602,12 +622,8 @@
 			isa = PBXGroup;
 			children = (
 				CD8C64801B6C84E900945529 /* ChatViewController.swift */,
-				CD8C647E1B6C83D200945529 /* InputViewController.swift */,
-				CD60BA4E1B6D304E008E077A /* ChatMessageViewController.swift */,
-				CDACF3A51B988C420010969D /* NSTextStorage+Attachment.swift */,
-				CD1EBB9B1B99386F0043E1D8 /* InputTextView.swift */,
-				CDA0C4411BA16FD500C6BBB6 /* TextAttachmentFileCell.swift */,
-				CD60BA501B6DB30F008E077A /* MessageTableCellView.swift */,
+				CD12940B1BBC17C3005A1046 /* Input View */,
+				CD12940A1BBC1799005A1046 /* Message Table View */,
 			);
 			name = "Chat View";
 			sourceTree = "<group>";
@@ -1028,7 +1044,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDACF3A61B988C420010969D /* NSTextStorage+Attachment.swift in Sources */,
+				CDACF3A61B988C420010969D /* NSMutableAttributedString+Attachment.swift in Sources */,
 				CD60BA511B6DB30F008E077A /* MessageTableCellView.swift in Sources */,
 				CDC174941B7102610081F6D4 /* MainWindowController.swift in Sources */,
 				CD156DE41B81FB0900EFC06F /* RosterViewController.swift in Sources */,

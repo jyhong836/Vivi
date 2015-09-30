@@ -9,10 +9,12 @@
 #ifndef Utils_h
 #define Utils_h
 
+#define CCHAR_ENCODING NSUTF8StringEncoding //[NSString defaultCStringEncoding]
+
 /*!
  * NSString* std_str2NSString(std::string)
  */
-#define std_str2NSString(std_str) [NSString stringWithCString:(std_str).c_str() encoding:[NSString defaultCStringEncoding]]
+#define std_str2NSString(std_str) [NSString stringWithCString:(std_str).c_str() encoding:CCHAR_ENCODING]
 
 const char* NSString2std_str(NSString *nsstr);
 

@@ -5,16 +5,16 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "1D12CABD0ECA8C57182B23910BA057491F14B9CC" : 0,
-    "3F92C1E3398A0654926CD43790891793B4FAA1CB" : 0
+    "8E756A5F3B3088D21C2995D34B375B49B53EB485" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CEB14BB1-F92B-47BF-9848-32A8B83DB74B",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "1D12CABD0ECA8C57182B23910BA057491F14B9CC" : "Vivi\/",
-    "3F92C1E3398A0654926CD43790891793B4FAA1CB" : "Vivi\/SwiftXMPP\/"
+    "8E756A5F3B3088D21C2995D34B375B49B53EB485" : "Vivi\/MMMarkdown\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Vivi",
-  "DVTSourceControlWorkspaceBlueprintVersion" : 203,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Vivi.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Vivi.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:jyhong836\/Vivi.git",
@@ -22,9 +22,9 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1D12CABD0ECA8C57182B23910BA057491F14B9CC"
     },
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/swift.im\/swift",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:mdiep\/MMMarkdown.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3F92C1E3398A0654926CD43790891793B4FAA1CB"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8E756A5F3B3088D21C2995D34B375B49B53EB485"
     }
   ]
 }
