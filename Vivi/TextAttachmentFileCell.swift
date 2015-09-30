@@ -137,4 +137,19 @@ class TextAttachmentFileCell: NSTextAttachmentCell, VSFileTransferDelegate {
     func fileTransfer(filetransfer: SWFileTransfer!, finishedWithError errorCode: Int32) {
         NSLog("attachment(\(filename) failed with error \(errorCode)")
     }
+    
+    // MARK: - track mouse
+    override func trackMouse(theEvent: NSEvent, inRect cellFrame: NSRect, ofView controlView: NSView?, atCharacterIndex charIndex: Int, untilMouseUp flag: Bool) -> Bool {
+        NSLog("tracking")
+        return true
+    }
+    
+    override func trackMouse(theEvent: NSEvent, inRect cellFrame: NSRect, ofView controlView: NSView?, untilMouseUp flag: Bool) -> Bool {
+        return true
+    }
+    
+//    override func wantsToTrackMouse() -> Bool {
+//        return true
+//    }
+    
 }
