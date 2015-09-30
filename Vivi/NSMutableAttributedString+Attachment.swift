@@ -13,10 +13,10 @@ import MMMarkdown
 extension NSMutableAttributedString {
     
     // MARK: - Text attachment transform
-
-    var attachments: [NSTextAttachment] {
+    
+    var attachmentIndexs: [Int] {
         get {
-            var attachments: [NSTextAttachment] = []
+            var attachmentIndexs: [Int] = []
             
             let strRange = NSMakeRange(0, self.length)
             if strRange.length > 0 {
@@ -24,16 +24,27 @@ extension NSMutableAttributedString {
                 repeat {
                     var effectiveRange = NSRange()
                     let attributes = self.attributesAtIndex(index, longestEffectiveRange: &effectiveRange, inRange: strRange)
-                    if let attachment = attributes[NSAttachmentAttributeName] as? NSTextAttachment {
-                        attachments.append(attachment)
-//                        self.replaceCharactersInRange(effectiveRange, withAttributedString: NSAttributedString(string: "[\(attachment.fileWrapper!.preferredFilename)]"))
+                    if attributes[NSAttachmentAttributeName] is NSTextAttachment {
+                        attachmentIndexs.append(index)
                     }
                     index = effectiveRange.location + effectiveRange.length
                 } while (index < strRange.length)
             }
             
-            return attachments
+            return attachmentIndexs
         }
+    }
+    
+    /// Get attachment at index. Return nil if not found.
+    func attachmentAtIndex(index: Int) -> NSTextAttachment? {
+        let strRange = NSMakeRange(0, self.length)
+        if strRange.length > 0 {
+            let attributes = self.attributesAtIndex(index, longestEffectiveRange: nil, inRange: strRange)
+            if let att = attributes[NSAttachmentAttributeName] as? NSTextAttachment {
+                return att
+            }
+        }
+        return nil
     }
     
     /// Transfer string stored with attachments. All attachments will be
@@ -42,21 +53,20 @@ extension NSMutableAttributedString {
         let transferedStorage = NSTextStorage(attributedString: self)
         let strRange = NSMakeRange(0, transferedStorage.length)
         if strRange.length > 0 {
-            var index = 0
-            repeat {
-                var effectiveRange = NSRange()
-                let attributes = transferedStorage.attributesAtIndex(index, longestEffectiveRange: &effectiveRange, inRange: strRange)
-                if let attachment = attributes[NSAttachmentAttributeName] as? NSTextAttachment {
-                    guard attachment.fileWrapper != nil else {
-                        fatalError("not found fileWrapper in attachment")
-                    }
-                    guard attachment.fileWrapper!.preferredFilename != nil else {
-                        fatalError("not found preferredFilename in attachment.fileWrapper")
-                    }
-                    transferedStorage.replaceCharactersInRange(effectiveRange, withAttributedString: NSAttributedString(string: "[\(attachment.fileWrapper!.preferredFilename!)]"))
+            let attIdxs = attachmentIndexs;
+            
+            for idx in attIdxs.reverse() {
+                if let att = attachmentAtIndex(idx) {
+                    // TODO: Uncomment this, if error occures with attachment file wrapper.
+//                    guard att.fileWrapper != nil else {
+//                        fatalError("not found fileWrapper in attachment")
+//                    }
+//                    guard att.fileWrapper!.preferredFilename != nil else {
+//                        fatalError("not found preferredFilename in attachment.fileWrapper")
+//                    }
+                    transferedStorage.replaceCharactersInRange(NSMakeRange(idx, 1), withAttributedString: NSAttributedString(string: "[\(att.fileWrapper!.preferredFilename!)]"))
                 }
-                index = effectiveRange.location + effectiveRange.length
-            } while (index < strRange.length)
+            }
         }
         
         return transferedStorage.string

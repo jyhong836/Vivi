@@ -15,7 +15,8 @@ class InputTextView: NSTextView {
     var sendingFiles: [String] {
         get {
             var files = [String]()
-            for attachment in self.textStorage!.attachments {
+            for attIdx in self.textStorage!.attachmentIndexs {
+                let attachment = self.textStorage!.attachmentAtIndex(attIdx)!
                 if let filecell = attachment.attachmentCell as? TextAttachmentFileCell {
                     files.append(filecell.fullFilename)
                 }
