@@ -1,3 +1,6 @@
 [submodule "SwiftXMPP"]
 	path = SwiftXMPP
 url=git@github.com:jyhong836/swift.git
+[submodule "MMMarkdown"]
+	path = MMMarkdown
+	url = git@github.com:mdiep/MMMarkdown.git

@@ -8,6 +8,7 @@
 
 import Cocoa
 import ViviInterface
+import MMMarkdown
 
 extension NSMutableAttributedString {
 
@@ -115,6 +116,13 @@ extension NSMutableAttributedString {
                 self.replaceCharactersInRange(matchedRange, withAttributedString: NSAttributedString(attachment: attachment))
             }
         }
+    }
+    
+    convenience init(markdownString string: String) throws {
+        let informationHTML = try MMMarkdown.HTMLStringWithMarkdown(string, extensions: MMMarkdownExtensions.GitHubFlavored)
+        
+        let informationData = informationHTML.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        try self.init(data: informationData!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
     }
     
 }

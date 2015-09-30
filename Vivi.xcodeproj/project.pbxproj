@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CD0932181B5F9757007ACB22 /* VSClientDelegateProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0932171B5F9757007ACB22 /* VSClientDelegateProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD0E72AB1B9023C1002F58E9 /* NSDataAvatarTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0E72AA1B9023C1002F58E9 /* NSDataAvatarTransformer.swift */; settings = {ASSET_TAGS = (); }; };
+		CD1294081BBC1148005A1046 /* MMMarkdown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1294071BBC1148005A1046 /* MMMarkdown.framework */; };
+		CD1294091BBC1166005A1046 /* MMMarkdown.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CD1294071BBC1148005A1046 /* MMMarkdown.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CD156DDB1B81F40E00EFC06F /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */; };
 		CD156DE41B81FB0900EFC06F /* RosterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD156DE31B81FB0900EFC06F /* RosterViewController.swift */; };
 		CD156DE71B823B0600EFC06F /* SWRosterItem.h in Headers */ = {isa = PBXBuildFile; fileRef = CD156DE51B823B0600EFC06F /* SWRosterItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -205,6 +207,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				CD1294091BBC1166005A1046 /* MMMarkdown.framework in Embed Frameworks */,
 				CDEE68B71B6545D800D00EC7 /* ViviInterface.framework in Embed Frameworks */,
 				CDE658A41B5E66D400290E34 /* ViviSwiften.framework in Embed Frameworks */,
 			);
@@ -216,6 +219,7 @@
 /* Begin PBXFileReference section */
 		CD0932171B5F9757007ACB22 /* VSClientDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSClientDelegateProtocol.h; sourceTree = "<group>"; };
 		CD0E72AA1B9023C1002F58E9 /* NSDataAvatarTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataAvatarTransformer.swift; sourceTree = "<group>"; };
+		CD1294071BBC1148005A1046 /* MMMarkdown.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMMarkdown.framework; path = "../../Library/Developer/Xcode/DerivedData/Vivi-ajsxeyrustwkdtaafkwqilmpiyjj/Build/Products/Debug/MMMarkdown.framework"; sourceTree = "<group>"; };
 		CD156DD91B81F40E00EFC06F /* MainSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		CD156DE31B81FB0900EFC06F /* RosterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RosterViewController.swift; path = "View Controllers/RosterViewController.swift"; sourceTree = "<group>"; };
 		CD156DE51B823B0600EFC06F /* SWRosterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRosterItem.h; sourceTree = "<group>"; };
@@ -344,6 +348,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD1294081BBC1148005A1046 /* MMMarkdown.framework in Frameworks */,
 				CDEE68B61B6545D800D00EC7 /* ViviInterface.framework in Frameworks */,
 				CDE658A31B5E66D400290E34 /* ViviSwiften.framework in Frameworks */,
 			);
@@ -697,6 +702,7 @@
 		CDF2123A1B62A69D0031913D /* Linked Libraries and Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD1294071BBC1148005A1046 /* MMMarkdown.framework */,
 				CDF2123B1B62A7F70031913D /* Swiften Related */,
 				CDF2123C1B62A8100031913D /* Public Frameworks */,
 			);
