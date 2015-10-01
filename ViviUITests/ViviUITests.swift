@@ -9,8 +9,9 @@
 import Foundation
 import XCTest
 
+@available(OSX 10.11, *)
 class ViviUITests: XCTestCase {
-        
+    
     override func setUp() {
         super.setUp()
         
@@ -27,9 +28,16 @@ class ViviUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testConnect() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+        let windowsQuery = XCUIApplication().windows
+        let popUpButton = windowsQuery.childrenMatchingType(.SplitGroup).element.childrenMatchingType(.SplitGroup).element.childrenMatchingType(.PopUpButton).element
+        popUpButton.click()
+        windowsQuery.menuItems["Online"].click()
+        popUpButton.click()
+        windowsQuery.menuItems["Offline"].click()
     }
     
 }
