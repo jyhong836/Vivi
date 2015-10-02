@@ -118,16 +118,23 @@ class ChatMessageViewController: NSViewController, NSTableViewDelegate, NSTableV
         let msg = (currentChat?.messageAtIndex(row))!
         let content = msg.content!
         
-        cell.textField?.attributedStringValue = NSMutableAttributedString(content: content,
-            attachmentMOWithName: { filename in msg.attachmentWithName(filename) },
-            filecellWithWrapper: {
-                (fileWrapper: NSFileWrapper) -> TextAttachmentFileCell in
-                let filecell = TextAttachmentFileCell(fileWrapper: fileWrapper)
-                filecell.canStartTransfer = true
-                return filecell
-            }
-        )
-        return cell
+        do {
+            // create from markdown formatted string
+            let astr =  try NSMutableAttributedString(markdownString: content)
+            astr.transformAttachmentString(
+                attachmentMOWithName: { filename in msg.attachmentWithName(filename) },
+                filecellWithWrapper: {
+                    (fileWrapper: NSFileWrapper) -> TextAttachmentFileCell in
+                    let filecell = TextAttachmentFileCell(fileWrapper: fileWrapper)
+                    filecell.canStartTransfer = true
+                    return filecell
+                }
+            )
+            cell.textField?.attributedStringValue = astr
+            return cell
+        } catch {
+            fatalError("Fail to create attributed string from markdown string: \(error)")
+        }
     }
     
     func messageCellViewForDir(dir: VIChatMessageDirection?, inTableView tableView: NSTableView) -> MessageTableCellView? {

@@ -10,6 +10,9 @@ import Cocoa
 import ViviInterface
 import MMMarkdown
 
+/// :NOTE: It seems UTF-8 doesn't work, it's the problem of MMMarkdown.
+let MarkdownStringEncoding = NSUnicodeStringEncoding
+
 extension NSMutableAttributedString {
     
     // MARK: - Text attachment transform
@@ -130,19 +133,42 @@ extension NSMutableAttributedString {
         }
     }
     
+    /// Transform attachment string, like [file], to NSTextAttachment.
+    ///
+    /// - parameter attachmentMOWithName: Get VIAttachmentMO through filename.
+    ///     - parameter filename: the file name in file token, like [file name].
+    ///     - return: VIAttachmentMO to provide full path of file
+    /// - parameter filecellWithWrapper: Get TextAttachmentFileCell through file wrapper.
+    ///     - parameter fileWrapper: the file wrapper is used for init file cell.
+    func transformAttachmentString(attachmentMOWithName attachmentMOWithName: (filename: String)->VIAttachmentMO?, filecellWithWrapper: (fileWrapper: NSFileWrapper)->TextAttachmentFileCell) {
+        matchPattern("\\[[^]]+\\]") { (matchedRange) -> Void in
+            var bareRange = matchedRange
+            bareRange.location += 1
+            bareRange.length -= 2
+            
+            let filename = self.attributedSubstringFromRange(bareRange).string
+            
+            if let attachmentMO = attachmentMOWithName(filename: filename) {
+                // found corresponding file name
+                let attachment = self.createAttachmentFromManagedObject(attachmentMO, filecellWithWrapper: filecellWithWrapper)
+                self.replaceCharactersInRange(matchedRange, withAttributedString: NSAttributedString(attachment: attachment))
+            }
+        }
+    }
+    
     // MARK: - Markdown and HTML transform
     
     /// Create attributed string from markdown string.
     convenience init(markdownString string: String) throws {
         let informationHTML = try MMMarkdown.HTMLStringWithMarkdown(string, extensions: MMMarkdownExtensions.GitHubFlavored)
         
-        let informationData = informationHTML.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        let informationData = informationHTML.dataUsingEncoding(MarkdownStringEncoding, allowLossyConversion: false)
         try self.init(data: informationData!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
     }
     
     func htmlString() throws -> String? {
         let htmlData = try self.dataFromRange(NSMakeRange(0, self.length), documentAttributes: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType])
-        return String(data: htmlData, encoding: NSUTF8StringEncoding)
+        return String(data: htmlData, encoding: MarkdownStringEncoding)
     }
     
 }
